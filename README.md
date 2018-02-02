@@ -38,8 +38,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Astrid Neumann** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Jens Rømer** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Astrid Neumann** - *Initial work* - [Astrids homepage](www.slices.dk)
+* **Jens Rømer** - *Initial work* - [Jens' homepage](...)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
