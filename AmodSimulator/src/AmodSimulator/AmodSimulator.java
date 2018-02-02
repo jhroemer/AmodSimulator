@@ -1,16 +1,20 @@
 package AmodSimulator;
 
 import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.stream.file.FileSource;
+import org.graphstream.stream.file.FileSourceDGS;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
-    private static String graphPath = "small-1.dgs";
-    private static boolean IS_VISUAL = false;
+    private static String graphPath = "data/graphs/small-1.dgs";
+     static boolean IS_VISUAL = false;
 
     public static void main(String[] args) {
         String styleSheet = parseStylesheet(styleSheetPath);
@@ -19,7 +23,31 @@ public class AmodSimulator {
         graph.display();
         graph.addAttribute("ui.stylesheet", styleSheet);
 
-        //todo runSimulation(graph)
+        //todo:
+        /*
+        for (i < timestep) {
+            tick(graph);
+            sleep();
+        }
+        */
+
+
+        /*
+        Graph g = new MultiGraph("test");
+        FileSource fs = new FileSourceDGS() {
+        };
+
+        fs.addSink(g);
+
+        try {
+            fs.readAll(graphPath);
+        } catch( IOException e) {
+        } finally {
+            fs.removeSink(g);
+        }
+
+        graph.display();
+        */
 
     }
 
