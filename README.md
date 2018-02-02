@@ -38,8 +38,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Astrid Neumann** - *Initial work* - [Astrids homepage](www.slices.dk)
-* **Jens Rømer** - *Initial work* - [Jens' homepage](...)
+* **Astrid Neumann** - *Initial work* - [Linkedin](https://www.linkedin.com/in/astrid-neumann-46693224/)
+* **Jens Rømer** - *Initial work* - [Linkedin](...)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
