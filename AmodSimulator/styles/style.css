@@ -1,0 +1,39 @@
+node {
+    size: 15px;
+    fill-color: #777;
+    text-size: 15px;
+    z-index: 5;
+}
+
+edge {
+    shape: line;
+    fill-color: #222;
+    arrow-size: 10px, 6px;
+    z-index: 0;
+}
+
+sprite {
+    size: 10px;
+}
+
+sprite.occupied {
+    fill-color: #980010;
+    z-index: 10;
+}
+
+sprite.unoccupied {
+    fill-color: #00881b;
+    z-index: 10;
+}
+
+sprite.location {
+    fill-color: #d1e000;
+    shape: arrow;
+    size: 15px;
+}
+
+sprite.destination {
+    fill-color: #e0850b;
+    shape: arrow;
+    size: 15px;
+}

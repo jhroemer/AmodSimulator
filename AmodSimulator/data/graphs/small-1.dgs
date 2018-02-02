@@ -1,0 +1,53 @@
+DGS004
+null 0 0
+an "A"
+cn "A"  "ui.label":"A"
+an "B"
+cn "B"  "ui.label":"B"
+an "E"
+cn "E"  "ui.label":"E"
+an "D"
+cn "D"  "ui.label":"D"
+an "F"
+cn "F"  "ui.label":"F"
+an "C"
+cn "C"  "ui.label":"C"
+an "G"
+cn "G"  "ui.label":"G"
+an "H"
+cn "H"  "ui.label":"H"
+an "I"
+cn "I"  "ui.label":"I"
+ae "AB" "A"  "B"
+ce "AB"  "ui.label":"AB"
+ce "AB"  "length":500
+ae "AE" "A"  "E"
+ce "AE"  "ui.label":"AE"
+ce "AE"  "length":500
+ae "DA" "D"  "A"
+ce "DA"  "ui.label":"DA"
+ce "DA"  "length":500
+ae "EF" "E"  "F"
+ce "EF"  "ui.label":"EF"
+ce "EF"  "length":500
+ae "FC" "F"  "C"
+ce "FC"  "ui.label":"FC"
+ce "FC"  "length":500
+ae "CB" "C"  "B"
+ce "CB"  "ui.label":"CB"
+ce "CB"  "length":500
+ae "BF" "B"  "F"
+ce "BF"  "ui.label":"BF"
+ce "BF"  "length":500
+ae "GC" "G"  "C"
+ce "GC"  "ui.label":"GC"
+ce "GC"  "length":500
+ae "FH" "F"  "H"
+ce "FH"  "ui.label":"FH"
+ce "FH"  "length":500
+ae "GH" "G"  "H"
+ce "GH"  "ui.label":"GH"
+ce "GH"  "length":500
+ae "IH" "I"  "H"
+ce "IH"  "ui.label":"IH"
+ce "IH"  "length":500
