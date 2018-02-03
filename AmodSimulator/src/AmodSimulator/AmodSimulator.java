@@ -19,9 +19,9 @@ public class AmodSimulator {
     public static void main(String[] args) {
         String styleSheet = parseStylesheet(styleSheetPath);
 
-        Graph graph = parseGraph(graphPath);
-        graph.display();
+        Graph graph = parseGraph("test", graphPath);
         graph.addAttribute("ui.stylesheet", styleSheet);
+
 
         //todo:
         /*
@@ -31,31 +31,37 @@ public class AmodSimulator {
         }
         */
 
+        graph.display();
 
-        /*
-        Graph g = new MultiGraph("test");
+
+
+
+    }
+
+    /**
+     * Constructs a <Code>Graph</Code> from an dgs-file
+     * @param fileId Id to give the graph
+     * @param filePath path to a file containing a graph in dgs-format
+     * @return
+     */
+    public static Graph parseGraph(String fileId, String filePath) {
+        Graph graph = new MultiGraph(fileId);
         FileSource fs = new FileSourceDGS() {
         };
 
-        fs.addSink(g);
+        fs.addSink(graph);
 
         try {
-            fs.readAll(graphPath);
+            fs.readAll(filePath);
         } catch( IOException e) {
         } finally {
-            fs.removeSink(g);
+            fs.removeSink(graph);
         }
 
-        graph.display();
-        */
-
+        return graph;
     }
 
-    public static Graph parseGraph(String file) {
-        //TODO construct graph from dgs file
-        return null;
-    }
-
+    
     /**
      * Method that parses a stylesheet to use with the graph
      * @param path path to the CSS file
