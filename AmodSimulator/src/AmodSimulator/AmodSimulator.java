@@ -14,34 +14,37 @@ public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/small-1.dgs";
-     static boolean IS_VISUAL = false;
+    private static int timesteps = 100;
+    static boolean IS_VISUAL = false;
 
     public static void main(String[] args) {
-        String styleSheet = parseStylesheet(styleSheetPath);
 
+        String styleSheet = parseStylesheet(styleSheetPath);
         Graph graph = parseGraph("test", graphPath);
         graph.addAttribute("ui.stylesheet", styleSheet);
 
-
-        //todo:
-        /*
-        for (i < timestep) {
+        for (int i = 0; i < timesteps; i++) {
             tick(graph);
-            sleep();
+            //sleep(); //todo: How to make it sleep?
         }
-        */
 
         graph.display();
-
-
-
 
     }
 
     /**
+     *
+     * @param graph
+     */
+    private static void tick(Graph graph) {
+        //todo Everything that happens in each timestep
+    }
+
+
+    /**
      * Constructs a <Code>Graph</Code> from an dgs-file
-     * @param fileId Id to give the graph
-     * @param filePath path to a file containing a graph in dgs-format
+     * @param fileId    Id to give the graph
+     * @param filePath  Path to a file containing a graph in dgs-format
      * @return
      */
     public static Graph parseGraph(String fileId, String filePath) {
@@ -61,11 +64,11 @@ public class AmodSimulator {
         return graph;
     }
 
-    
+
     /**
      * Method that parses a stylesheet to use with the graph
-     * @param path path to the CSS file
-     * @return String containing the stylesheet
+     * @param path      path to the CSS file
+     * @return String   containing the stylesheet
      */
     private static String parseStylesheet(String path) {
         String styleSheet = "";
