@@ -27,9 +27,6 @@ public class AmodSimulator {
         TripPlanner.init(graph);
         graph.display();
         SpriteManager sman = new SpriteManager(graph);
-        for (Edge edge : graph.getEdgeSet()) {
-            edge.setAttribute("layout.weight", 1.0);
-        }
 
         if (IS_VISUAL) {
             String styleSheet = parseStylesheet(styleSheetPath);
@@ -49,13 +46,14 @@ public class AmodSimulator {
 
         for (int i = 0; i < timesteps; i++) {
             tick(graph);
-            if (v1.getCurrentRequest() != null) v1.advance();
-            System.out.println("Vehicle is on edge: " + v1.getCurrentEdge().getId());
-            System.out.println("Sprite is on edge:  " + s.getAttachment().getId() + " \n");
-            if (!v1.getCurrentEdge().getId().equals(s.getAttachment().getId())) {
-                System.out.println("--- Vehicle and Sprite departed");
-                System.exit(0);
-            }
+            v1.advance();
+            if (v1.getCurrentRequest() == null) break;
+            //System.out.println("Vehicle is on edge: " + v1.getCurrentEdge().getId());
+            //System.out.println("Sprite is on edge:  " + s.getAttachment().getId() + " \n");
+            //if (!v1.getCurrentEdge().getId().equals(s.getAttachment().getId())) {
+            //    System.out.println("--- Vehicle and Sprite departed");
+            //    System.exit(0);
+            //}
             sleep(); //todo: How to make it sleep?
         }
 

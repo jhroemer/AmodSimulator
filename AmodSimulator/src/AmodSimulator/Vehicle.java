@@ -95,14 +95,21 @@ public class Vehicle extends Observable{
 
 
         while (!finished) {
-            //System.out.println("\tNot finished. Status = " + status);
+            //System.out.println("Not finished. Status = " + status);
             if (this.status == IDLE) {
                 currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
                 setStatus(MOVING_TOWARDS_REQUEST);
                 event = ADVANCE_NEW_EDGE;
             }
 //            System.out.println("pathweight: " + currentPath.getPathWeight("layout.weight"));
+
             double pathLength = currentPath.getPathWeight("layout.weight");
+
+            //System.out.println("| Whats left of currentPath:");
+            //for (Edge e : currentPath.getEdgeSet()) {
+            //    System.out.println("| \tEdge "+ e.getId()+ ", weight = " + e.getAttribute("layout.weight"));
+            //}
+
 
             if (this.status == MOVING_TOWARDS_REQUEST) {
                 if (currentEdgeDist < pathLength) {
@@ -111,11 +118,15 @@ public class Vehicle extends Observable{
                 } else {
                     lastNode = requests.get(0).getOrigin();
                     currentEdgeDist -= pathLength;
+                    currentPath = TripPlanner.getPath(lastNode,requests.get(0).getDestination()); //Astrid: Dette var den manglende linie
                     setStatus(OCCUPIED);
                 }
 
 
             } else if (this.status == OCCUPIED) {
+                //System.out.println("currentEdgeDist = " + currentEdgeDist);
+                //System.out.println("pathLength = " + pathLength);
+                //System.out.println("currentPath = " + currentPath);
                 if (currentEdgeDist < pathLength) {
                     traverse();
                     finished = true;
@@ -170,7 +181,12 @@ public class Vehicle extends Observable{
      */
     private void traverse() {
         while (currentEdgeDist >= (double) currentPath.getEdgePath().get(0).getAttribute("layout.weight")) {
+            //System.out.println("--------------current path before remove: " + currentPath);
+            //System.out.println("--------------current EdgeSet before remove: " + currentPath.getEdgeSet());
             Edge e = currentPath.getEdgePath().remove(0);
+            //System.out.println("--------------removed edge: " + e.getId());
+            //System.out.println("--------------current path after remove: " + currentPath);
+            //System.out.println("--------------current EdgeSet after remove: " + currentPath.getEdgeSet());
             lastNode = e.getOpposite(lastNode);
             currentEdgeDist -= (double) e.getAttribute("layout.weight");
             this.event = ADVANCE_NEW_EDGE;

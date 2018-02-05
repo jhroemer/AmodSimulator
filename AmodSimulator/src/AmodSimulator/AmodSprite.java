@@ -26,21 +26,21 @@ public class AmodSprite extends Sprite implements Observer{
 
         Vehicle veh = (Vehicle) observable;
 
-        System.out.println("Called VehicleEvent = " + o);
+        //System.out.println("Called VehicleEvent = " + o);
 
         switch ((VehicleEvent) o) {
             //case TRIP_STARTED:
             //case PICKED_UP:
             case ADVANCE_NEW_EDGE:
                 attachToEdge(veh.getCurrentEdge().getId());
-                System.out.println("attaching to edge " + veh.getCurrentEdge().getId());
+                //System.out.println("attaching to edge " + veh.getCurrentEdge().getId());
             case ADVANCE_SAME_EDGE:
                 setPosition(calcPositionPercent(veh));
-                System.out.println("sets position to " + calcPositionPercent(veh));
+                //System.out.println("sets position to " + calcPositionPercent(veh));
                 break;
             case TRIP_COMPLETED: //todo NB: Should only be used when the vehicle has no more trips
                 attachToNode(veh.getLastNode().getId());
-                System.out.println("attached to: " + this.getAttachment().getId() + " and position is: " + calcPositionPercent(veh));
+                //System.out.println("attached to: " + this.getAttachment().getId() + " and position is: " + calcPositionPercent(veh));
                 setPosition(0.0);
                 break;
         }
