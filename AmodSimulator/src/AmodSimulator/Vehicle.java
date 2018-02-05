@@ -7,7 +7,9 @@ import org.graphstream.graph.Path;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import static AmodSimulator.VehicleEvent.*;
+import static AmodSimulator.VehicleEvent.ADVANCE_NEW_EDGE;
+import static AmodSimulator.VehicleEvent.ADVANCE_SAME_EDGE;
+import static AmodSimulator.VehicleEvent.TRIP_COMPLETED;
 import static AmodSimulator.VehicleStatus.*;
 
 public class Vehicle extends Observable{
@@ -80,29 +82,90 @@ public class Vehicle extends Observable{
             e.printStackTrace();
         }
 
-        VehicleStatus status = null;
-        VehicleEvent event = null;
-
         currentEdgeDist += speed;
+        //VehicleStatus status = null;
+        VehicleEvent event = ADVANCE_SAME_EDGE;
+        boolean finished = false;
 
-        if (this.status == IDLE) {
+
+        while (!finished) {
+            if (this.status == IDLE) {
+                currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
+                setStatus(MOVING_TOWARDS_REQUEST);
+            }
+
+            double pathLength = currentPath.getPathWeight("layout.weight");
+
+            if (this.status == MOVING_TOWARDS_REQUEST) {
+                if (currentEdgeDist < pathLength) {
+                    traverse(event);
+                    finished = true;
+                } else {
+                    lastNode = requests.get(0).getOrigin();
+                    currentEdgeDist -= pathLength;
+                    setStatus(OCCUPIED);
+                }
 
 
-            currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
+            } else if (this.status == OCCUPIED) {
+                if (currentEdgeDist < pathLength) {
+                    traverse(event);
+                    finished = true;
+                } else {
+                    lastNode = requests.get(0).getDestination();
+                    requests.remove(0);
+                    if (requests.isEmpty()) {
+                        setStatus(IDLE);
+                        currentEdgeDist = 0.0;
+                        event = TRIP_COMPLETED;
+                        finished = true;
+                    } else {
+                        currentEdgeDist -= pathLength;
+                        setStatus(MOVING_TOWARDS_REQUEST);
+                    }
+                }
+            }
         }
 
-        TRIP_STARTED:
-        ADVANCE_NEW_EDGE:
-        ADVANCE_SAME_EDGE:
-        PICKED_UP:
-        TRIP_COMPLETED:
-        //todo
+
+        /*
+            if (currentPath.empty()) { //todo test if the method empty() returns what we believe
+                if (this.status == MOVING_TOWARDS_REQUEST) {
+                    currentPath = TripPlanner.getPath(lastNode, requests.get(0).getDestination());
+                    this.status = OCCUPIED;
+                }
+                else if (this.status == OCCUPIED) {
+                    requests.remove(0);
+                    if (requests.isEmpty()) {
+                        this.status = IDLE;
+                        currentEdgeDist = 0.0;
+                    }
+                    else {
+                        currentPath = TripPlanner.getPath(lastNode,requests.get(0).getOrigin());
+                        this.status = MOVING_TOWARDS_REQUEST;
+                    }
+
+                }
+            }
+        */
 
         if (AmodSimulator.IS_VISUAL) {
             setChanged();
             notifyObservers(event);
         }
-        return status;
+        return this.status;
+    }
+
+    /**
+     * Only to be called when currentEdgeDist is less than total length of the current path.
+     */
+    private void traverse(VehicleEvent event) {
+        while (currentEdgeDist >= (double) currentPath.getEdgePath().get(0).getAttribute("layout.weight")) {
+            Edge e = currentPath.getEdgePath().remove(0);
+            lastNode = e.getOpposite(lastNode);
+            currentEdgeDist -= (double) e.getAttribute("layout.weight");
+            event = ADVANCE_NEW_EDGE;
+        }
     }
 
 
