@@ -7,7 +7,9 @@ import java.util.Observer;
 
 public class AmodSprite extends Sprite implements Observer{
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(Observable observable, Object o) {
         Vehicle veh = (Vehicle) observable;
