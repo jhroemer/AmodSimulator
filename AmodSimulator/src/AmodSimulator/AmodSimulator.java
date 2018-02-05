@@ -40,7 +40,8 @@ public class AmodSimulator {
             e.setAttribute("layout.weight", 1.0);
         }
 
-        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), sman.addSprite("s1", AmodSprite.class));
+        AmodSprite s = sman.addSprite("s1", AmodSprite.class);
+        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s); //sman.addSprite("s1", AmodSprite.class));
         Request r1 = new Request(1, graph.getNode("I"), graph.getNode("D"));
         v1.addRequest(r1);
 
@@ -49,7 +50,12 @@ public class AmodSimulator {
         for (int i = 0; i < timesteps; i++) {
             tick(graph);
             if (v1.getCurrentRequest() != null) v1.advance();
-            System.out.println("on edge: " + v1.getCurrentEdge().getId());
+            System.out.println("Vehicle is on edge: " + v1.getCurrentEdge().getId());
+            System.out.println("Sprite is on edge:  " + s.getAttachment().getId() + " \n");
+            if (!v1.getCurrentEdge().getId().equals(s.getAttachment().getId())) {
+                System.out.println("--- Vehicle and Sprite departed");
+                System.exit(0);
+            }
             sleep(); //todo: How to make it sleep?
         }
 
@@ -118,6 +124,6 @@ public class AmodSimulator {
      * Makes thread sleep
      */
     protected static void sleep() {
-        try { Thread.sleep(250); } catch (Exception e) {}
+        try { Thread.sleep(100); } catch (Exception e) {}
     }
 }

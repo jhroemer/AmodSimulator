@@ -25,8 +25,10 @@ public class Vehicle extends Observable{
     private Path currentPath;
     private Node lastNode; // hvis isActive == false, så position = lastNode
     private double currentEdgeDist;
-    private double speed = 0.01; //distance per timestep
+    private double speed = 0.07; //distance per timestep
 
+    //Astrid: prøver lige at flytte VehicleEvent som bruges i advance herop
+    private VehicleEvent event = ADVANCE_SAME_EDGE;
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
@@ -77,7 +79,7 @@ public class Vehicle extends Observable{
      *
      */
     public VehicleStatus advance() { //todo consider implementing using Enum VehicleStatus
-        System.out.println("In advance()");
+        //System.out.println("In advance()");
 
 
         if (requests.isEmpty()) try {
@@ -88,14 +90,13 @@ public class Vehicle extends Observable{
 
         currentEdgeDist += speed;
         //VehicleStatus status = null;
-        VehicleEvent event = ADVANCE_SAME_EDGE;
+        //VehicleEvent event = ADVANCE_SAME_EDGE;
         boolean finished = false;
 
 
         while (!finished) {
-            System.out.println("\tNot finished. Status = " + status);
+            //System.out.println("\tNot finished. Status = " + status);
             if (this.status == IDLE) {
-                event = ADVANCE_NEW_EDGE;
                 currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
                 setStatus(MOVING_TOWARDS_REQUEST);
                 event = ADVANCE_NEW_EDGE;
@@ -105,7 +106,7 @@ public class Vehicle extends Observable{
 
             if (this.status == MOVING_TOWARDS_REQUEST) {
                 if (currentEdgeDist < pathLength) {
-                    traverse(event);
+                    traverse();
                     finished = true;
                 } else {
                     lastNode = requests.get(0).getOrigin();
@@ -116,7 +117,7 @@ public class Vehicle extends Observable{
 
             } else if (this.status == OCCUPIED) {
                 if (currentEdgeDist < pathLength) {
-                    traverse(event);
+                    traverse();
                     finished = true;
                 } else {
                     lastNode = requests.get(0).getDestination();
@@ -160,18 +161,19 @@ public class Vehicle extends Observable{
             setChanged();
             notifyObservers(event);
         }
+        event = ADVANCE_SAME_EDGE; //putting event back to it's start status
         return this.status;
     }
 
     /**
      * Only to be called when currentEdgeDist is less than total length of the current path.
      */
-    private void traverse(VehicleEvent event) {
+    private void traverse() {
         while (currentEdgeDist >= (double) currentPath.getEdgePath().get(0).getAttribute("layout.weight")) {
             Edge e = currentPath.getEdgePath().remove(0);
             lastNode = e.getOpposite(lastNode);
             currentEdgeDist -= (double) e.getAttribute("layout.weight");
-            event = ADVANCE_NEW_EDGE;
+            this.event = ADVANCE_NEW_EDGE;
         }
     }
 
