@@ -14,7 +14,7 @@ public class AmodSprite extends Sprite implements Observer{
     public void update(Observable observable, Object o) {
 
         if (o instanceof VehicleStatus) {
-            setAttribute("ui.class", o);
+            setAttribute("ui.class", "occupied");
             return;
         }
 
@@ -27,9 +27,10 @@ public class AmodSprite extends Sprite implements Observer{
                 attachToEdge(veh.getCurrentEdge().getId());
             case ADVANCE_SAME_EDGE:
                 setPosition(calcPositionPercent(veh));
+//                System.out.println("attached to: " + this.getAttachment().getId() + " and position is: " + calcPositionPercent(veh));
                 break;
             case TRIP_COMPLETED: //todo NB: Should only be used when the vehicle has no more trips
-                attachToNode(veh.getCurrentRequest().getDestination().getId());
+                attachToNode(veh.getLastNode().getId());
                 setPosition(0.0);
                 break;
         }
