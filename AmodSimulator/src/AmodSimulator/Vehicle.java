@@ -25,7 +25,7 @@ public class Vehicle extends Observable{
     private Path currentPath;
     private Node lastNode; // hvis isActive == false, så position = lastNode
     private double currentEdgeDist;
-    private int speed = 1; //distance per timestep
+    private double speed = 0.1; //distance per timestep
 
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
@@ -43,7 +43,7 @@ public class Vehicle extends Observable{
         if (AmodSimulator.IS_VISUAL) {
             //this.sprite = sprite;
             sprite.setAttribute("ui.class", "idle");
-            sprite.addAttribute("ui.label", id); // todo label is positioned weirdly atm, should be fixed
+            //sprite.addAttribute("ui.label", id); // todo label is positioned weirdly atm, should be fixed
             addObserver(sprite);
         }
 
@@ -76,6 +76,9 @@ public class Vehicle extends Observable{
      *
      */
     public VehicleStatus advance() { //todo consider implementing using Enum VehicleStatus
+        System.out.println("In advance()");
+
+
         if (requests.isEmpty()) try {
             throw new Exception("advance() called on a vehicle with no request");
         } catch (Exception e) { //todo implement NoRequestException
@@ -89,7 +92,9 @@ public class Vehicle extends Observable{
 
 
         while (!finished) {
+            System.out.println("\tNot finished. Status = " + status);
             if (this.status == IDLE) {
+                event = ADVANCE_NEW_EDGE;
                 currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
                 setStatus(MOVING_TOWARDS_REQUEST);
             }
@@ -185,6 +190,14 @@ public class Vehicle extends Observable{
     }
 
     public Request getCurrentRequest() {
+        if (requests.isEmpty()) {
+            System.out.println("No requests");
+            return null;
+        }
         return requests.get(0);
+    }
+
+    public VehicleStatus getStatus(){
+        return status;
     }
 }

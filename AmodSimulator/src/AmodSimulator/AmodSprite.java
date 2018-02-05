@@ -5,6 +5,8 @@ import org.graphstream.ui.spriteManager.Sprite;
 import java.util.Observable;
 import java.util.Observer;
 
+import static AmodSimulator.VehicleStatus.*;
+
 public class AmodSprite extends Sprite implements Observer{
 
     /**
@@ -14,7 +16,11 @@ public class AmodSprite extends Sprite implements Observer{
     public void update(Observable observable, Object o) {
 
         if (o instanceof VehicleStatus) {
-            setAttribute("ui.class", o);
+            switch ((VehicleStatus) o) {
+                case IDLE: setAttribute("ui.class", "idle");
+                case MOVING_TOWARDS_REQUEST: setAttribute("ui.class", "moving");
+                case OCCUPIED: setAttribute("ui.class", "occupied");
+            }
             return;
         }
 
@@ -25,12 +31,17 @@ public class AmodSprite extends Sprite implements Observer{
             //case PICKED_UP:
             case ADVANCE_NEW_EDGE:
                 attachToEdge(veh.getCurrentEdge().getId());
+                System.out.println("attaching to edge " + veh.getCurrentEdge().getId());
             case ADVANCE_SAME_EDGE:
                 setPosition(calcPositionPercent(veh));
+                System.out.println("sets position to " + calcPositionPercent(veh));
                 break;
             case TRIP_COMPLETED: //todo NB: Should only be used when the vehicle has no more trips
-                attachToNode(veh.getCurrentRequest().getDestination().getId());
+                attachToNode(veh.getLastNode().getId());
+                System.out.println("attaching to node " + veh.getLastNode().getId());
+                //attachToNode(veh.getCurrentRequest().getDestination().getId()); //Astrid: Jeg har lige skiftet denne linie med den oven over
                 setPosition(0.0);
+                System.out.println("sets position to 0.0");
                 break;
         }
 

@@ -1,21 +1,25 @@
 package AmodSimulator;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
+import org.graphstream.ui.spriteManager.SpriteManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static AmodSimulator.VehicleStatus.IDLE;
+
 public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/small-1.dgs";
     private static int timesteps = 100;
-    static boolean IS_VISUAL = false;
+    static boolean IS_VISUAL = true;
 
     public static void main(String[] args) {
 
@@ -28,10 +32,23 @@ public class AmodSimulator {
             graph.display();
         }
 
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", 1.0);
+        }
 
+        SpriteManager sman = new SpriteManager(graph);
+        //AmodSprite s = new AmodSprite();
+        Vehicle v = new Vehicle("test", graph.getNode("A"), sman.addSprite("testsprite", AmodSprite.class));
+        Request r = new Request(1,graph.getNode("I"),graph.getNode("B"));
+        v.addRequest(r);
+
+        v.advance();
         for (int i = 0; i < timesteps; i++) {
+            while (v.getStatus() != IDLE) {
+                v.advance();
+            }
             tick(graph);
-            //sleep(); //todo: How to make it sleep?
+            sleep(); //todo: How to make it sleep?
         }
 
 
@@ -92,5 +109,12 @@ public class AmodSimulator {
         }
         if (styleSheet.equals("")) System.out.println("No stylesheet made"); //Todo make exception instead
         return styleSheet;
+    }
+
+    /**
+     * Makes thread sleep
+     */
+    protected static void sleep() {
+        try { Thread.sleep(5); } catch (Exception e) {}
     }
 }
