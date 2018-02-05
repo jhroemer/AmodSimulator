@@ -18,36 +18,38 @@ public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/small-1.dgs";
-    private static int timesteps = 100;
+    private static int timesteps = 10000000;
     static boolean IS_VISUAL = true;
 
     public static void main(String[] args) {
 
         Graph graph = parseGraph("test", graphPath);
         TripPlanner.init(graph);
+        graph.display();
+        SpriteManager sman = new SpriteManager(graph);
+        for (Edge edge : graph.getEdgeSet()) {
+            edge.setAttribute("layout.weight", 1.0);
+        }
 
         if (IS_VISUAL) {
             String styleSheet = parseStylesheet(styleSheetPath);
             graph.addAttribute("ui.stylesheet", styleSheet);
-            graph.display();
         }
 
         for (Edge e : graph.getEdgeSet()) {
             e.setAttribute("layout.weight", 1.0);
         }
 
-        SpriteManager sman = new SpriteManager(graph);
-        //AmodSprite s = new AmodSprite();
-        Vehicle v = new Vehicle("test", graph.getNode("A"), sman.addSprite("testsprite", AmodSprite.class));
-        Request r = new Request(1,graph.getNode("I"),graph.getNode("B"));
-        v.addRequest(r);
+        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), sman.addSprite("s1", AmodSprite.class));
+        Request r1 = new Request(1, graph.getNode("I"), graph.getNode("D"));
+        v1.addRequest(r1);
 
-        v.advance();
+        for (int j = 0; j < 50; j++) sleep();
+
         for (int i = 0; i < timesteps; i++) {
-            while (v.getStatus() != IDLE) {
-                v.advance();
-            }
             tick(graph);
+            if (v1.getCurrentRequest() != null) v1.advance();
+            System.out.println("on edge: " + v1.getCurrentEdge().getId());
             sleep(); //todo: How to make it sleep?
         }
 
@@ -61,6 +63,7 @@ public class AmodSimulator {
     private static void tick(Graph graph) {
         //todo Everything that happens in each timestep
     }
+
 
 
     /**
@@ -115,6 +118,6 @@ public class AmodSimulator {
      * Makes thread sleep
      */
     protected static void sleep() {
-        try { Thread.sleep(5); } catch (Exception e) {}
+        try { Thread.sleep(250); } catch (Exception e) {}
     }
 }

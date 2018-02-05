@@ -38,10 +38,8 @@ public class AmodSprite extends Sprite implements Observer{
                 break;
             case TRIP_COMPLETED: //todo NB: Should only be used when the vehicle has no more trips
                 attachToNode(veh.getLastNode().getId());
-                System.out.println("attaching to node " + veh.getLastNode().getId());
-                //attachToNode(veh.getCurrentRequest().getDestination().getId()); //Astrid: Jeg har lige skiftet denne linie med den oven over
+                //System.out.println("attached to: " + this.getAttachment().getId() + " and position is: " + calcPositionPercent(veh));
                 setPosition(0.0);
-                System.out.println("sets position to 0.0");
                 break;
         }
 

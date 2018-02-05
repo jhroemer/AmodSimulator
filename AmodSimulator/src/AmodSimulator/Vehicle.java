@@ -25,7 +25,7 @@ public class Vehicle extends Observable{
     private Path currentPath;
     private Node lastNode; // hvis isActive == false, så position = lastNode
     private double currentEdgeDist;
-    private double speed = 0.1; //distance per timestep
+    private double speed = 0.01; //distance per timestep
 
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
@@ -44,6 +44,8 @@ public class Vehicle extends Observable{
             //this.sprite = sprite;
             sprite.setAttribute("ui.class", "idle");
             //sprite.addAttribute("ui.label", id); // todo label is positioned weirdly atm, should be fixed
+            sprite.setPosition(0.0);
+            sprite.attachToNode(lastNode.getId());
             addObserver(sprite);
         }
 
@@ -56,7 +58,6 @@ public class Vehicle extends Observable{
     }
 
     public void addRequest(Request request) {
-
         requests.add(request);
     }
 
@@ -97,8 +98,9 @@ public class Vehicle extends Observable{
                 event = ADVANCE_NEW_EDGE;
                 currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
                 setStatus(MOVING_TOWARDS_REQUEST);
+                event = ADVANCE_NEW_EDGE;
             }
-
+//            System.out.println("pathweight: " + currentPath.getPathWeight("layout.weight"));
             double pathLength = currentPath.getPathWeight("layout.weight");
 
             if (this.status == MOVING_TOWARDS_REQUEST) {
@@ -172,7 +174,6 @@ public class Vehicle extends Observable{
             event = ADVANCE_NEW_EDGE;
         }
     }
-
 
     public Node getLastNode() {
         return lastNode;
