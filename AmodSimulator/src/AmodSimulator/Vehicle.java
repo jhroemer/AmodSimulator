@@ -7,26 +7,31 @@ import org.graphstream.graph.Path;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import static AmodSimulator.VehicleEvent.*;
+import static AmodSimulator.VehicleStatus.*;
+
 public class Vehicle extends Observable{
 
     private String id;
-    private AmodSprite sprite;
+    private VehicleStatus status;
+    //private AmodSprite sprite;
 
-    private boolean hasPassenger;
-    private boolean isActive;
+    //private boolean hasPassenger;
+    //private boolean isActive;
 
     private ArrayList<Request> requests;
     private Path currentPath;
     private Node lastNode; // hvis isActive == false, så position = lastNode
     private double currentEdgeDist;
-    private int speed = 1;
+    private int speed = 1; //distance per timestep
 
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
 
-        this.hasPassenger = false;
-        this.isActive = false;
+        //this.hasPassenger = false;
+        //this.isActive = false;
+        this.status = IDLE;
 
         this.requests = new ArrayList<>();
         this.lastNode = startNode;
@@ -34,21 +39,70 @@ public class Vehicle extends Observable{
         this.currentEdgeDist = 0;
 
         if (AmodSimulator.IS_VISUAL) {
-            this.sprite = sprite;
-            sprite.setAttribute("ui.class", "unoccupied");
+            //this.sprite = sprite;
+            sprite.setAttribute("ui.class", "idle");
             sprite.addAttribute("ui.label", id); // todo label is positioned weirdly atm, should be fixed
             addObserver(sprite);
         }
 
     }
 
+    public void setStatus(VehicleStatus status) {
+        this.status = status;
+        setChanged();
+        notifyObservers(status);
+    }
+
+    public void addRequest(Request request) {
+
+        requests.add(request);
+    }
+
+    private void popRequest() {
+        requests.remove(0);
+        currentPath = null;
+    }
+
+    private Path calcPath() {
+        //todo
+        return null;
+    }
 
 
-    public void advance() {
+    /**
+     * Should only run when vehicles have a current request
+     *
+     */
+    public VehicleStatus advance() { //todo consider implementing using Enum VehicleStatus
+        if (requests.isEmpty()) try {
+            throw new Exception("advance() called on a vehicle with no request");
+        } catch (Exception e) { //todo implement NoRequestException
+            e.printStackTrace();
+        }
+
+        VehicleStatus status = null;
+        VehicleEvent event = null;
+
+        currentEdgeDist += speed;
+
+        if (this.status == IDLE) {
+
+
+            currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
+        }
+
+        TRIP_STARTED:
+        ADVANCE_NEW_EDGE:
+        ADVANCE_SAME_EDGE:
+        PICKED_UP:
+        TRIP_COMPLETED:
         //todo
 
-        setChanged();
-        notifyObservers();
+        if (AmodSimulator.IS_VISUAL) {
+            setChanged();
+            notifyObservers(event);
+        }
+        return status;
     }
 
 

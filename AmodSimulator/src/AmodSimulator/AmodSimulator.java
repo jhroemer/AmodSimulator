@@ -19,16 +19,21 @@ public class AmodSimulator {
 
     public static void main(String[] args) {
 
-        String styleSheet = parseStylesheet(styleSheetPath);
         Graph graph = parseGraph("test", graphPath);
-        graph.addAttribute("ui.stylesheet", styleSheet);
+        TripPlanner.init(graph);
+
+        if (IS_VISUAL) {
+            String styleSheet = parseStylesheet(styleSheetPath);
+            graph.addAttribute("ui.stylesheet", styleSheet);
+            graph.display();
+        }
+
 
         for (int i = 0; i < timesteps; i++) {
             tick(graph);
             //sleep(); //todo: How to make it sleep?
         }
 
-        graph.display();
 
     }
 

@@ -4,17 +4,17 @@ import org.graphstream.graph.Node;
 
 public class Request {
     private int id;
-    private Node location;
+    private Node origin;
     private Node destination;
 
     public Request(int id, Node location, Node destination) {
         this.id = id;
-        this.location = location;
+        this.origin = location;
         this.destination = destination;
     }
 
-    public Node getLocation() {
-        return location;
+    public Node getOrigin() {
+        return origin;
     }
 
     public Node getDestination() {

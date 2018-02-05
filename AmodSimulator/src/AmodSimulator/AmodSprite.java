@@ -12,24 +12,23 @@ public class AmodSprite extends Sprite implements Observer{
      */
     @Override
     public void update(Observable observable, Object o) {
+
+        if (o instanceof VehicleStatus) {
+            setAttribute("ui.class", o);
+            return;
+        }
+
         Vehicle veh = (Vehicle) observable;
 
         switch ((VehicleEvent) o) {
-            case TRIP_STARTED:
-                //todo: is detach necessary?
-                setAttribute("ui.class","active");
+            //case TRIP_STARTED:
+            //case PICKED_UP:
             case ADVANCE_NEW_EDGE:
                 attachToEdge(veh.getCurrentEdge().getId());
             case ADVANCE_SAME_EDGE:
                 setPosition(calcPositionPercent(veh));
                 break;
-            case PICKED_UP:
-                setAttribute("ui.class","occupied");
-                attachToEdge(veh.getCurrentEdge().getId());
-                setPosition(calcPositionPercent(veh));
-                break;
-            case TRIP_COMPLETED:
-                setAttribute("ui.class","idle");
+            case TRIP_COMPLETED: //todo NB: Should only be used when the vehicle has no more trips
                 attachToNode(veh.getCurrentRequest().getDestination().getId());
                 setPosition(0.0);
                 break;
