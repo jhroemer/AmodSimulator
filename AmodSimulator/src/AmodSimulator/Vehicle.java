@@ -216,7 +216,15 @@ public class Vehicle extends Observable{
         return requests.get(0);
     }
 
+    public ArrayList<Request> getRequests() {
+        return requests;
+    }
+
     public VehicleStatus getStatus(){
         return status;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 }

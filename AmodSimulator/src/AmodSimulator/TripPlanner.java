@@ -17,7 +17,7 @@ public class TripPlanner {
     }
 
     public static void init(Graph graph) {
-        dijkstra = new Dijkstra(Dijkstra.Element.EDGE, null, "length");
+        dijkstra = new Dijkstra(Dijkstra.Element.EDGE, null, "layout.weight");
         dijkstra.init(graph);
     }
 }
