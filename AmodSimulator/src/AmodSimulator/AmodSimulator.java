@@ -39,7 +39,7 @@ public class AmodSimulator {
         AmodSprite s2 = sman.addSprite("s2", AmodSprite.class);
         Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s); //sman.addSprite("s1", AmodSprite.class));
         Request r1 = new Request(1, graph.getNode("I"), graph.getNode("D"));
-        Request r2 = new Request(2, graph.getNode("C"), graph.getNode("G"));
+        Request r2 = new Request(2, graph.getNode("G"), graph.getNode("D"));
         v1.addRequest(r1);
         Vehicle v2 = new Vehicle("v2", graph.getNode("B"), s2);
         v2.addRequest(r2);

@@ -93,6 +93,10 @@ public class Vehicle extends Observable{
         //VehicleEvent event = ADVANCE_SAME_EDGE;
         boolean finished = false;
 
+        // TODO: event should be set in a smarter way. Can we not e.g. check which edge is currentedge when we start
+        // todo: and if that has changed then we know that the sprite must attach to a new edge
+        // like so:
+        Edge oldCurrent = getCurrentEdge();
 
         while (!finished) {
             //System.out.println("Not finished. Status = " + status);
@@ -118,7 +122,7 @@ public class Vehicle extends Observable{
                 } else {
                     lastNode = requests.get(0).getOrigin();
                     currentEdgeDist -= pathLength;
-                    currentPath = TripPlanner.getPath(lastNode,requests.get(0).getDestination()); //Astrid: Dette var den manglende linie
+                    currentPath = TripPlanner.getPath(lastNode, requests.get(0).getDestination()); //Astrid: Dette var den manglende linie
                     setStatus(OCCUPIED);
                 }
 
@@ -128,6 +132,7 @@ public class Vehicle extends Observable{
                 //System.out.println("pathLength = " + pathLength);
                 //System.out.println("currentPath = " + currentPath);
                 if (currentEdgeDist < pathLength) {
+                    // todo: in some cases, for example when origin is reached, but traverse() doesn't move beyond the next edge, the event is not set to ADVANCE_NEW_EDGE
                     traverse();
                     finished = true;
                 } else {
@@ -167,6 +172,8 @@ public class Vehicle extends Observable{
                 }
             }
         */
+        // TODO: Jens proposal
+        if (oldCurrent != getCurrentEdge()) event = ADVANCE_NEW_EDGE;
 
         if (AmodSimulator.IS_VISUAL) {
             setChanged();
@@ -180,6 +187,8 @@ public class Vehicle extends Observable{
      * Only to be called when currentEdgeDist is less than total length of the current path.
      */
     private void traverse() {
+        // todo: what if vehicle has reached origin but hasn't moved far enough to go to a new edge?
+        // todo: then the event is not set yet and the sprite stays on the old edge
         while (currentEdgeDist >= (double) currentPath.getEdgePath().get(0).getAttribute("layout.weight")) {
             //System.out.println("--------------current path before remove: " + currentPath);
             //System.out.println("--------------current EdgeSet before remove: " + currentPath.getEdgeSet());

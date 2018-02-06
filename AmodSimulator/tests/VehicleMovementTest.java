@@ -65,7 +65,13 @@ public class VehicleMovementTest {
             graph.addEdge("FH", "F", "H");
             graph.addEdge("GH", "G", "H");
             graph.addEdge("IH", "I", "H");
-            for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 5.0);
+            for (Edge edge : graph.getEdgeSet()) {
+                if (edge == graph.getEdge("EF")) {
+                    edge.setAttribute("layout.weight", 3.0);
+                    continue;
+                }
+                edge.setAttribute("layout.weight", 5.0);
+            }
         }
 
         TripPlanner.init(graph);
@@ -123,9 +129,9 @@ public class VehicleMovementTest {
     @Test
     public void positionTest3() {
         setupGraph(3);
-        AmodSprite s = sman.addSprite("s1", AmodSprite.class);
+        AmodSprite s1 = sman.addSprite("s1", AmodSprite.class);
         AmodSprite s2 = sman.addSprite("s2", AmodSprite.class);
-        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s); //sman.addSprite("s1", AmodSprite.class));
+        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s1); //sman.addSprite("s1", AmodSprite.class));
         Vehicle v2 = new Vehicle("v2", graph.getNode("B"), s2);
         v1.setSpeed(2.0);
         v2.setSpeed(2.0);
@@ -136,21 +142,34 @@ public class VehicleMovementTest {
         List<Vehicle> vehicleList = new ArrayList<>();
         vehicleList.add(v1);
         vehicleList.add(v2);
-        Iterator<Vehicle> vehicleIterator = vehicleList.iterator();
 
         for (int i = 1; i < 501; i++) {
+            Iterator<Vehicle> vehicleIterator = vehicleList.iterator();
             while (vehicleIterator.hasNext()) {
                 Vehicle veh = vehicleIterator.next();
                 if (veh.getCurrentRequest() == null) vehicleIterator.remove();
                 else veh.advance();
             }
 
-            if (i == 2) assertEquals(graph.getEdge("CB"), s2.getAttachment());
-            if (i == 3) {
-                assertEquals(graph.getNode("C"), v2.getLastNode());     // fixme
-                assertEquals(graph.getEdge("GC"), s2.getAttachment());  // fixme
+            if (i == 2) {
+                assertEquals(graph.getEdge("AE"), s1.getAttachment());
+                assertEquals(graph.getEdge("CB"), s2.getAttachment());
             }
-
+            if (i == 3) {
+                // #1
+                assertEquals(0.33, s1.getX(), 0.01);
+                // #2
+                assertEquals(graph.getNode("C"), v2.getLastNode());
+                assertEquals(graph.getEdge("GC"), s2.getAttachment());
+                assertEquals(0.8, s2.getX(), 0.01);
+            }
+            if (i == 4) {
+                // #1
+                assertEquals(graph.getNode("F"), v1.getLastNode());
+                assertEquals(0.0, s1.getX(), 0.01);
+                // #2
+                assertEquals(0.4, s2.getX(), 0.01);
+            }
         }
     }
 
