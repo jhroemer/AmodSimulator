@@ -12,8 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static AmodSimulator.VehicleStatus.IDLE;
-
 public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
@@ -122,6 +120,6 @@ public class AmodSimulator {
      * Makes thread sleep
      */
     protected static void sleep() {
-        try { Thread.sleep(100); } catch (Exception e) {}
+        try { Thread.sleep(50); } catch (Exception e) {}
     }
 }

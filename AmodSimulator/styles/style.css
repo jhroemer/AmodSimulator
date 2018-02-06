@@ -17,7 +17,7 @@ sprite {
 }
 
 sprite.idle {
-    fill-color: #980479;
+    fill-color: #00881b;
     z-index: 10;
 }
 
@@ -27,7 +27,7 @@ sprite.occupied {
 }
 
 sprite.moving {
-    fill-color: #00881b;
+    fill-color: #e0c935;
     z-index: 10;
 }
 

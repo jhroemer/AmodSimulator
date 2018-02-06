@@ -25,7 +25,7 @@ public class Vehicle extends Observable{
     private Path currentPath;
     private Node lastNode; // hvis isActive == false, så position = lastNode
     private double currentEdgeDist;
-    private double speed = 0.07; //distance per timestep
+    private double speed = 0.02; //distance per timestep
 
     //Astrid: prøver lige at flytte VehicleEvent som bruges i advance herop
     private VehicleEvent event = ADVANCE_SAME_EDGE;

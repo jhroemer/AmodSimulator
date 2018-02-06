@@ -5,8 +5,6 @@ import org.graphstream.ui.spriteManager.Sprite;
 import java.util.Observable;
 import java.util.Observer;
 
-import static AmodSimulator.VehicleStatus.*;
-
 public class AmodSprite extends Sprite implements Observer{
 
     /**
@@ -18,8 +16,12 @@ public class AmodSprite extends Sprite implements Observer{
         if (o instanceof VehicleStatus) {
             switch ((VehicleStatus) o) {
                 case IDLE: setAttribute("ui.class", "idle");
+                break;
                 case MOVING_TOWARDS_REQUEST: setAttribute("ui.class", "moving");
+                break;
                 case OCCUPIED: setAttribute("ui.class", "occupied");
+                setAttribute("ui.label", "1");
+                break;
             }
             return;
         }

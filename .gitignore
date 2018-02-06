@@ -6,28 +6,29 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
+/AmodSimulator/.idea
+/AmodSimulator/.idea/**/workspace.xml
+/AmodSimulator/.idea/**/tasks.xml
+/AmodSimulator/.idea/dictionaries
 
 # Sensitive or high-churn files:
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.xml
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
+/AmodSimulator/.idea/**/dataSources/
+/AmodSimulator/.idea/**/dataSources.ids
+/AmodSimulator/.idea/**/dataSources.xml
+/AmodSimulator/.idea/**/dataSources.local.xml
+/AmodSimulator/.idea/**/sqlDataSources.xml
+/AmodSimulator/.idea/**/dynamic.xml
+/AmodSimulator/.idea/**/uiDesigner.xml
 
 # Gradle:
-.idea/**/gradle.xml
-.idea/**/libraries
+/AmodSimulator/.idea/**/gradle.xml
+/AmodSimulator/.idea/**/libraries
 
 # CMake
 cmake-build-debug/
 
 # Mongo Explorer plugin:
-.idea/**/mongoSettings.xml
+/AmodSimulator/.idea/**/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -35,16 +36,16 @@ cmake-build-debug/
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+/AmodSimulator/out/
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+/AmodSimulator/.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+/AmodSimulator/.idea/replstate.xml
 
 # Ruby plugin and RubyMine
 /.rakeTasks
