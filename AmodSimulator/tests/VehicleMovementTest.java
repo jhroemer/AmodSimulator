@@ -23,7 +23,8 @@ public class VehicleMovementTest {
 
     @Before
     public void setup() {
-       // some common thing to setup?
+        // some common thing to setup?
+        // TODO: should we split up the tests, so that some tests are only concerned with sprites?
     }
 
     /**
@@ -88,25 +89,38 @@ public class VehicleMovementTest {
     public void positionTest1() {
         setupGraph(1);
         AmodSprite s1 = sman.addSprite("s1", AmodSprite.class);
+        AmodSprite s2 = sman.addSprite("s2", AmodSprite.class);
         Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s1);
         Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"));
         v1.setSpeed(1.0);
         v1.addRequest(r1);
 
-        for (int i = 1; i < 9; i++) {
-            v1.advance();
+        Vehicle v2 = new Vehicle("v2", graph.getNode("A"), s2);
+        v2.addRequest(r1);
+        v2.setSpeed(8.0);
+
+        for (int i = 1; i < 10; i++) {
+            if (!v1.getRequests().isEmpty()) v1.advance();
+            if (!v2.getRequests().isEmpty()) v2.advance();
+
+            if (i == 1) {
+                assertEquals("v2 lastnode #1", "A", v2.getLastNode().getId());
+                assertEquals("v2 status check #1", IDLE, v2.getStatus());
+                assertEquals("v2 sprite last attachment", graph.getNode("A"), s2.getAttachment()); // fixme
+            }
+
             if (i == 2) {
                 assertEquals("v1 lastnode #1", "B", v1.getLastNode().getId());
-                assertEquals("Status check #1", MOVING_TOWARDS_REQUEST, v1.getStatus());
+                assertEquals("v1 status check #1", MOVING_TOWARDS_REQUEST, v1.getStatus());
             }
 
             if (i == 3) {
-                assertEquals("Sprite position #1", 0.5, s1.getX(), 0.01);
+                assertEquals("sprite s1 position #1", 0.5, s1.getX(), 0.01);
             }
         }
 
-        assertEquals("Sprite last attachment #2" ,"A", s1.getAttachment().getId());
-        assertEquals("V1 lastnode #2" ,"A", v1.getLastNode().getId());
+        assertEquals("sprite s1 last attachment #2" ,"A", s1.getAttachment().getId());
+        assertEquals("v1 lastnode #2" ,"A", v1.getLastNode().getId());
     }
 
     @Test
