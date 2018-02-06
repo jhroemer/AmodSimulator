@@ -10,56 +10,80 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static AmodSimulator.VehicleStatus.*;
 import static org.junit.Assert.assertEquals;
 
 public class VehicleMovementTest {
-    // #1
-    private Graph graph1;
-    // #2
-    private Graph graph2;
+    private Graph graph;
+    private SpriteManager sman;
 
     @Before
     public void setup() {
-        // is there something common to set up?
+       // some common thing to setup?
+    }
+
+    /**
+     * Method that sets up the graph, spritemanager and initializes the tripplanner
+     * @param no an int that decides which graph to initialize
+     */
+    private void setupGraph(int no) {
+        if (no == 0) return;
+        if (no == 1) {
+            graph = new MultiGraph("graph #1");
+            graph.setAutoCreate(true);
+            graph.setStrict(false);
+            graph.addEdge("AB", "A", "B");
+            graph.addEdge("CB", "C", "B");
+            for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 2.0);
+        }
+        else if (no == 2) {
+            graph = new MultiGraph("graph #2");
+            graph.setAutoCreate(true);
+            graph.setStrict(false);
+            graph.addEdge("AB", "A", "B");
+            graph.addEdge("CB", "C", "B");
+            graph.addEdge("DC", "D", "C");
+            graph.addEdge("EC", "C", "E");
+            for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 4.0);
+        }
+        else if (no == 3) {
+            graph = new MultiGraph("graph #3");
+            graph.setAutoCreate(true);
+            graph.setStrict(false);
+            graph.addEdge("AB", "A", "B");
+            graph.addEdge("AE", "A", "E");
+            graph.addEdge("DA", "D", "A");
+            graph.addEdge("EF", "E", "F");
+            graph.addEdge("FC", "F", "C");
+            graph.addEdge("CB", "C", "B");
+            graph.addEdge("BF", "B", "F");
+            graph.addEdge("GC", "G", "C");
+            graph.addEdge("FH", "F", "H");
+            graph.addEdge("GH", "G", "H");
+            graph.addEdge("IH", "I", "H");
+            for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 5.0);
+        }
+
+        TripPlanner.init(graph);
+        sman = new SpriteManager(graph);
     }
 
     @After
     public void tearDown() {
-        graph1 = null;
-        graph2 = null;
-    }
-
-    private void buildGraph1() {
-        // #1
-        graph1 = new MultiGraph("graph #1");
-        graph1.setAutoCreate(true);
-        graph1.setStrict(false);
-        graph1.addEdge("AB", "A", "B");
-        graph1.addEdge("CB", "C", "B");
-        for (Edge edge : graph1.getEdgeSet()) edge.setAttribute("layout.weight", 2.0);
-    }
-
-    private void buildGraph2() {
-        // #2
-        graph2 = new MultiGraph("graph #2");
-        graph2.setAutoCreate(true);
-        graph2.setStrict(false);
-        graph2.addEdge("AB", "A", "B");
-        graph2.addEdge("CB", "C", "B");
-        graph2.addEdge("DC", "D", "C");
-        graph2.addEdge("EC", "C", "E");
-        for (Edge edge : graph2.getEdgeSet()) edge.setAttribute("layout.weight", 4.0);
+        graph = null;
+        sman = null;
     }
 
     @Test
     public void positionTest1() {
-        buildGraph1();
-        TripPlanner.init(graph1);
-        SpriteManager sman = new SpriteManager(graph1);
+        setupGraph(1);
         AmodSprite s1 = sman.addSprite("s1", AmodSprite.class);
-        Vehicle v1 = new Vehicle("v1", graph1.getNode("A"), s1);
-        Request r1 = new Request(1, graph1.getNode("C"), graph1.getNode("A"));
+        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s1);
+        Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"));
         v1.setSpeed(1.0);
         v1.addRequest(r1);
 
@@ -81,13 +105,11 @@ public class VehicleMovementTest {
 
     @Test
     public void positionTest2() {
-        buildGraph2();
-        TripPlanner.init(graph2);
-        SpriteManager sman = new SpriteManager(graph2);
+        setupGraph(2);
         AmodSprite s2 = sman.addSprite("s2", AmodSprite.class);
-        Vehicle v2 = new Vehicle("v2", graph2.getNode("B"), s2);
+        Vehicle v2 = new Vehicle("v2", graph.getNode("B"), s2);
         v2.setSpeed(1.0);
-        Request r2 = new Request(2, graph2.getNode("E"), graph2.getNode("D"));
+        Request r2 = new Request(2, graph.getNode("E"), graph.getNode("D"));
         v2.addRequest(r2);
 
         for (int i = 1; i < 17; i++) {
@@ -99,27 +121,56 @@ public class VehicleMovementTest {
     }
 
     @Test
+    public void positionTest3() {
+        setupGraph(3);
+        AmodSprite s = sman.addSprite("s1", AmodSprite.class);
+        AmodSprite s2 = sman.addSprite("s2", AmodSprite.class);
+        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s); //sman.addSprite("s1", AmodSprite.class));
+        Vehicle v2 = new Vehicle("v2", graph.getNode("B"), s2);
+        v1.setSpeed(2.0);
+        v2.setSpeed(2.0);
+        Request r1 = new Request(1, graph.getNode("I"), graph.getNode("D"));
+        Request r2 = new Request(2, graph.getNode("C"), graph.getNode("G"));
+        v1.addRequest(r1);
+        v2.addRequest(r2);
+        List<Vehicle> vehicleList = new ArrayList<>();
+        vehicleList.add(v1);
+        vehicleList.add(v2);
+        Iterator<Vehicle> vehicleIterator = vehicleList.iterator();
+
+        for (int i = 1; i < 501; i++) {
+            while (vehicleIterator.hasNext()) {
+                Vehicle veh = vehicleIterator.next();
+                if (veh.getCurrentRequest() == null) vehicleIterator.remove();
+                else veh.advance();
+            }
+
+            if (i == 2) assertEquals(graph.getEdge("CB"), s2.getAttachment());
+            if (i == 3) {
+                assertEquals(graph.getNode("C"), v2.getLastNode());     // fixme
+                assertEquals(graph.getEdge("GC"), s2.getAttachment());  // fixme
+            }
+
+        }
+    }
+
+    @Test
     public void vehicleStatusTest1() {
-        buildGraph1();
-        TripPlanner.init(graph1);
-        SpriteManager sman = new SpriteManager(graph1);
+        setupGraph(1);
         AmodSprite s1 = sman.addSprite("s1", AmodSprite.class);
-        Vehicle v1 = new Vehicle("v2", graph1.getNode("B"), s1);
+        Vehicle v1 = new Vehicle("v2", graph.getNode("B"), s1);
         v1.setSpeed(1.0);
-        Request r1 = new Request(2, graph2.getNode("E"), graph2.getNode("D"));
-
-
+        Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"));
+        // todo finish this test / or is it too simple and redundant? Rather make test 2 the first test case?
     }
 
     @Test
     public void vehicleStatusTest2() {
-        buildGraph2();
-        TripPlanner.init(graph2);
-        SpriteManager sman = new SpriteManager(graph2);
+        setupGraph(2);
         AmodSprite s1 = sman.addSprite("s1", AmodSprite.class);
-        Vehicle v1 = new Vehicle("v2", graph2.getNode("B"), s1);
+        Vehicle v1 = new Vehicle("v2", graph.getNode("B"), s1);
         v1.setSpeed(1.0);
-        Request r1 = new Request(2, graph2.getNode("E"), graph2.getNode("D"));
+        Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"));
 
         assertEquals(true, v1.getRequests().isEmpty());
         v1.addRequest(r1);
@@ -132,5 +183,20 @@ public class VehicleMovementTest {
             if (i == 8) assertEquals(OCCUPIED, v1.getStatus());
              if (i == 16) assertEquals(IDLE, v1.getStatus());
         }
+    }
+
+    @Test
+    public void currentPathTest1() {
+
+    }
+
+    @Test
+    public void currentPathTest2() {
+
+    }
+
+    @Test
+    public void currentPathTest3() {
+
     }
 }
