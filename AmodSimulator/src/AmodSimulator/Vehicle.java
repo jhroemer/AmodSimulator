@@ -16,38 +16,23 @@ public class Vehicle extends Observable{
 
     private String id;
     private VehicleStatus status;
-    //private AmodSprite sprite;
-
-    //private boolean hasPassenger;
-    //private boolean isActive;
-
     private ArrayList<Request> requests;
     private Path currentPath;
-    private Node lastNode; // hvis isActive == false, så position = lastNode
+    private Node lastNode;
     private double currentEdgeDist;
     private double speed = 0.02; //distance per timestep
 
-    //Astrid: prøver lige at flytte VehicleEvent som bruges i advance herop
-    private VehicleEvent event = ADVANCE_SAME_EDGE;
-
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
-
-        //this.hasPassenger = false;
-        //this.isActive = false;
-        this.status = IDLE;
-
-        this.requests = new ArrayList<>();
-        this.lastNode = startNode;
-
-        this.currentEdgeDist = 0;
+        status = IDLE;
+        requests = new ArrayList<>();
+        lastNode = startNode;
+        currentEdgeDist = 0;
 
         if (AmodSimulator.IS_VISUAL) {
-            //this.sprite = sprite;
             sprite.setAttribute("ui.class", "idle");
-            //sprite.addAttribute("ui.label", id); // todo label is positioned weirdly atm, should be fixed
             sprite.setPosition(0.0);
-            sprite.attachToNode(lastNode.getId());
+            sprite.attachToNode(startNode.getId());
             addObserver(sprite);
         }
 
@@ -79,8 +64,6 @@ public class Vehicle extends Observable{
      *
      */
     public VehicleStatus advance() { //todo consider implementing using Enum VehicleStatus
-        //System.out.println("In advance()");
-
 
         if (requests.isEmpty()) try {
             throw new Exception("advance() called on a vehicle with no request");
@@ -89,31 +72,18 @@ public class Vehicle extends Observable{
         }
 
         currentEdgeDist += speed;
-        //VehicleStatus status = null;
-        //VehicleEvent event = ADVANCE_SAME_EDGE;
         boolean finished = false;
 
-        // TODO: event should be set in a smarter way. Can we not e.g. check which edge is currentedge when we start
-        // todo: and if that has changed then we know that the sprite must attach to a new edge
-        // like so:
         Edge oldCurrent = getCurrentEdge();
+        Request currentRequest = requests.get(0);
 
         while (!finished) {
-            //System.out.println("Not finished. Status = " + status);
             if (this.status == IDLE) {
                 currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
                 setStatus(MOVING_TOWARDS_REQUEST);
-                event = ADVANCE_NEW_EDGE;
             }
-//            System.out.println("pathweight: " + currentPath.getPathWeight("layout.weight"));
 
             double pathLength = currentPath.getPathWeight("layout.weight");
-
-            //System.out.println("| Whats left of currentPath:");
-            //for (Edge e : currentPath.getEdgeSet()) {
-            //    System.out.println("| \tEdge "+ e.getId()+ ", weight = " + e.getAttribute("layout.weight"));
-            //}
-
 
             if (this.status == MOVING_TOWARDS_REQUEST) {
                 if (currentEdgeDist < pathLength) {
@@ -122,17 +92,13 @@ public class Vehicle extends Observable{
                 } else {
                     lastNode = requests.get(0).getOrigin();
                     currentEdgeDist -= pathLength;
-                    currentPath = TripPlanner.getPath(lastNode, requests.get(0).getDestination()); //Astrid: Dette var den manglende linie
+                    currentPath = TripPlanner.getPath(lastNode, requests.get(0).getDestination());
                     setStatus(OCCUPIED);
                 }
 
 
             } else if (this.status == OCCUPIED) {
-                //System.out.println("currentEdgeDist = " + currentEdgeDist);
-                //System.out.println("pathLength = " + pathLength);
-                //System.out.println("currentPath = " + currentPath);
                 if (currentEdgeDist < pathLength) {
-                    // todo: in some cases, for example when origin is reached, but traverse() doesn't move beyond the next edge, the event is not set to ADVANCE_NEW_EDGE
                     traverse();
                     finished = true;
                 } else {
@@ -141,7 +107,6 @@ public class Vehicle extends Observable{
                     if (requests.isEmpty()) {
                         setStatus(IDLE);
                         currentEdgeDist = 0.0;
-                        event = TRIP_COMPLETED;
                         finished = true;
                     } else {
                         currentEdgeDist -= pathLength;
@@ -151,35 +116,18 @@ public class Vehicle extends Observable{
             }
         }
 
-
-        /*
-            if (currentPath.empty()) { //todo test if the method empty() returns what we believe
-                if (this.status == MOVING_TOWARDS_REQUEST) {
-                    currentPath = TripPlanner.getPath(lastNode, requests.get(0).getDestination());
-                    this.status = OCCUPIED;
-                }
-                else if (this.status == OCCUPIED) {
-                    requests.remove(0);
-                    if (requests.isEmpty()) {
-                        this.status = IDLE;
-                        currentEdgeDist = 0.0;
-                    }
-                    else {
-                        currentPath = TripPlanner.getPath(lastNode,requests.get(0).getOrigin());
-                        this.status = MOVING_TOWARDS_REQUEST;
-                    }
-
-                }
-            }
-        */
-        // TODO: Jens proposal
-        if (oldCurrent != getCurrentEdge()) event = ADVANCE_NEW_EDGE;
-
         if (AmodSimulator.IS_VISUAL) {
+            VehicleEvent event = ADVANCE_SAME_EDGE; //putting event back to it's start status
+
+            if (oldCurrent != getCurrentEdge()) {
+                event = ADVANCE_NEW_EDGE;
+            }
+            if (requests.isEmpty() || currentRequest != requests.get(0)) { // todo: test for nullpointer
+                event = TRIP_COMPLETED;
+            }
             setChanged();
             notifyObservers(event);
         }
-        event = ADVANCE_SAME_EDGE; //putting event back to it's start status
         return this.status;
     }
 
@@ -187,18 +135,10 @@ public class Vehicle extends Observable{
      * Only to be called when currentEdgeDist is less than total length of the current path.
      */
     private void traverse() {
-        // todo: what if vehicle has reached origin but hasn't moved far enough to go to a new edge?
-        // todo: then the event is not set yet and the sprite stays on the old edge
         while (currentEdgeDist >= (double) currentPath.getEdgePath().get(0).getAttribute("layout.weight")) {
-            //System.out.println("--------------current path before remove: " + currentPath);
-            //System.out.println("--------------current EdgeSet before remove: " + currentPath.getEdgeSet());
             Edge e = currentPath.getEdgePath().remove(0);
-            //System.out.println("--------------removed edge: " + e.getId());
-            //System.out.println("--------------current path after remove: " + currentPath);
-            //System.out.println("--------------current EdgeSet after remove: " + currentPath.getEdgeSet());
             lastNode = e.getOpposite(lastNode);
             currentEdgeDist -= (double) e.getAttribute("layout.weight");
-            this.event = ADVANCE_NEW_EDGE;
         }
     }
 
