@@ -72,6 +72,9 @@ public class RandomGraphGenerator {
 
         roadNetwork.display();
 
+        // TODO: currently the weights from the city-clusters are null
+        for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
+
     }
 
     /**
