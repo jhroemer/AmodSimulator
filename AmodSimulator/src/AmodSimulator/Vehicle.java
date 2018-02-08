@@ -21,6 +21,7 @@ public class Vehicle extends Observable{
     private Node lastNode;
     private double currentEdgeDist;
     private double speed = 0.002; //distance per timestep
+    private Request requestFromLastTick;
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
@@ -75,13 +76,13 @@ public class Vehicle extends Observable{
         boolean finished = false;
 
         Edge oldCurrent = getCurrentEdge();
-        Request currentRequest = requests.get(0);
 
         while (!finished) {
             if (this.status == IDLE) {
                 currentPath = TripPlanner.getPath(lastNode, requests.get(0).getOrigin());
                 setStatus(MOVING_TOWARDS_REQUEST);
             }
+
 
             double pathLength = currentPath.getPathWeight("layout.weight");
 
@@ -119,15 +120,17 @@ public class Vehicle extends Observable{
         if (AmodSimulator.IS_VISUAL) {
             VehicleEvent event = ADVANCE_SAME_EDGE; //putting event back to it's start status
 
-            if (oldCurrent != getCurrentEdge()) {
+            if (oldCurrent != getCurrentEdge() || requestFromLastTick != getCurrentRequest()) {
                 event = ADVANCE_NEW_EDGE;
             }
-            if (requests.isEmpty() || currentRequest != requests.get(0)) { // todo: test for nullpointer
+            if (requests.isEmpty()) { // todo: test for nullpointer
                 event = TRIP_COMPLETED;
             }
             setChanged();
             notifyObservers(event);
         }
+
+        requestFromLastTick = getCurrentRequest();
         return this.status;
     }
 
