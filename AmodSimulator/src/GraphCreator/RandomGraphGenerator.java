@@ -22,12 +22,12 @@ public class RandomGraphGenerator {
      * Builds a random graph that kinda resembles a rural areas with small cities
      */
     public static void countryGraph() {
-        int minCitySize = 5;
-        int maxCitySize = 50;
-        int minNumOfCities = 10;
-        int maxNumOfCities = 20;
-        double maxRoadLengthCity = 0.01;
-        double maxRoadLengthNetwork = 10;
+        int minCitySize = 1;
+        int maxCitySize = 10;
+        int minNumOfCities = 5;
+        int maxNumOfCities = 5;
+        double maxRoadLengthCity = 0.1;
+        double maxRoadLengthNetwork = 1;
         double connectednessCity = 5.7; //svarer til 0.3 probability i algs4 udgaven
         double connectednessNetwork = 3;
 
@@ -79,6 +79,7 @@ public class RandomGraphGenerator {
         // TODO: currently the weights from the city-clusters are null
         for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
 
+        Utility.saveCompleteGraph("random1", roadNetwork);
     }
 
     /**

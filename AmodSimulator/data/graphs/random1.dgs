@@ -1,0 +1,223 @@
+DGS004
+null 0 0
+an "0"
+an "1"
+an "2"
+an "3"
+an "4"
+an "0-7"
+an "0-1"
+an "0-2"
+an "0-3"
+an "0-4"
+an "0-5"
+an "0-6"
+an "1-5"
+an "1-1"
+an "1-2"
+an "1-3"
+an "1-4"
+an "2-5"
+an "2-1"
+an "2-2"
+an "2-3"
+an "2-4"
+an "3-6"
+an "3-1"
+an "3-2"
+an "3-3"
+an "3-4"
+an "3-5"
+an "4-5"
+an "4-1"
+an "4-2"
+an "4-3"
+an "4-4"
+ae "0_1" "0"  "1"
+ce "0_1"  "layout.weight":0.644803
+ae "0_2" "0"  "2"
+ce "0_2"  "layout.weight":0.804335
+ae "0_3" "0"  "3"
+ce "0_3"  "layout.weight":0.112964
+ae "1_2" "1"  "2"
+ce "1_2"  "layout.weight":0.663269
+ae "2_3" "2"  "3"
+ce "2_3"  "layout.weight":0.013529
+ae "2_4" "2"  "4"
+ce "2_4"  "layout.weight":0.251378
+ae "3_4" "3"  "4"
+ce "3_4"  "layout.weight":0.583490
+ae "0-6_7" "0-6"  "0-7"
+ce "0-6_7"  "layout.weight":0.085552
+ae "0-0_1" "0"  "0-1"
+ce "0-0_1"  "layout.weight":0.015652
+ae "0-0_2" "0"  "0-2"
+ce "0-0_2"  "layout.weight":0.051228
+ae "0-0_3" "0"  "0-3"
+ce "0-0_3"  "layout.weight":0.041362
+ae "0-0_4" "0"  "0-4"
+ce "0-0_4"  "layout.weight":0.020395
+ae "0-5_6" "0-5"  "0-6"
+ce "0-5_6"  "layout.weight":0.023297
+ae "0-1_3" "0-1"  "0-3"
+ce "0-1_3"  "layout.weight":0.097000
+ae "0-4_5" "0-4"  "0-5"
+ce "0-4_5"  "layout.weight":0.027938
+ae "0-1_5" "0-1"  "0-5"
+ce "0-1_5"  "layout.weight":0.038288
+ae "0-2_3" "0-2"  "0-3"
+ce "0-2_3"  "layout.weight":0.096447
+ae "0-3_5" "0-3"  "0-5"
+ce "0-3_5"  "layout.weight":0.052193
+ae "0-2_5" "0-2"  "0-5"
+ce "0-2_5"  "layout.weight":0.012897
+ae "0-4_6" "0-4"  "0-6"
+ce "0-4_6"  "layout.weight":0.003241
+ae "0-0_5" "0"  "0-5"
+ce "0-0_5"  "layout.weight":0.066242
+ae "0-1_6" "0-1"  "0-6"
+ce "0-1_6"  "layout.weight":0.073697
+ae "0-2_6" "0-2"  "0-6"
+ce "0-2_6"  "layout.weight":0.098487
+ae "0-3_6" "0-3"  "0-6"
+ce "0-3_6"  "layout.weight":0.002186
+ae "0-0_6" "0"  "0-6"
+ce "0-0_6"  "layout.weight":0.062090
+ae "0-1_7" "0-1"  "0-7"
+ce "0-1_7"  "layout.weight":0.091894
+ae "0-4_7" "0-4"  "0-7"
+ce "0-4_7"  "layout.weight":0.015677
+ae "0-5_7" "0-5"  "0-7"
+ce "0-5_7"  "layout.weight":0.050919
+ae "0-0_7" "0"  "0-7"
+ce "0-0_7"  "layout.weight":0.044648
+ae "1-4_5" "1-4"  "1-5"
+ce "1-4_5"  "layout.weight":0.018735
+ae "1-0_1" "1"  "1-1"
+ce "1-0_1"  "layout.weight":0.018755
+ae "1-0_2" "1"  "1-2"
+ce "1-0_2"  "layout.weight":0.076979
+ae "1-0_3" "1"  "1-3"
+ce "1-0_3"  "layout.weight":0.029556
+ae "1-0_4" "1"  "1-4"
+ce "1-0_4"  "layout.weight":0.078893
+ae "1-1_2" "1-1"  "1-2"
+ce "1-1_2"  "layout.weight":0.011808
+ae "1-1_3" "1-1"  "1-3"
+ce "1-1_3"  "layout.weight":0.015142
+ae "1-1_4" "1-1"  "1-4"
+ce "1-1_4"  "layout.weight":0.097433
+ae "1-1_5" "1-1"  "1-5"
+ce "1-1_5"  "layout.weight":0.023725
+ae "1-2_3" "1-2"  "1-3"
+ce "1-2_3"  "layout.weight":0.092444
+ae "1-2_4" "1-2"  "1-4"
+ce "1-2_4"  "layout.weight":0.026243
+ae "1-2_5" "1-2"  "1-5"
+ce "1-2_5"  "layout.weight":0.083445
+ae "1-3_4" "1-3"  "1-4"
+ce "1-3_4"  "layout.weight":0.056543
+ae "1-3_5" "1-3"  "1-5"
+ce "1-3_5"  "layout.weight":0.038385
+ae "1-0_5" "1"  "1-5"
+ce "1-0_5"  "layout.weight":0.083117
+ae "2-4_5" "2-4"  "2-5"
+ce "2-4_5"  "layout.weight":0.061084
+ae "2-0_1" "2"  "2-1"
+ce "2-0_1"  "layout.weight":0.090027
+ae "2-0_2" "2"  "2-2"
+ce "2-0_2"  "layout.weight":0.091174
+ae "2-0_3" "2"  "2-3"
+ce "2-0_3"  "layout.weight":0.076754
+ae "2-0_4" "2"  "2-4"
+ce "2-0_4"  "layout.weight":0.009948
+ae "2-1_2" "2-1"  "2-2"
+ce "2-1_2"  "layout.weight":0.045371
+ae "2-1_3" "2-1"  "2-3"
+ce "2-1_3"  "layout.weight":0.047164
+ae "2-1_4" "2-1"  "2-4"
+ce "2-1_4"  "layout.weight":0.006111
+ae "2-1_5" "2-1"  "2-5"
+ce "2-1_5"  "layout.weight":0.075004
+ae "2-2_3" "2-2"  "2-3"
+ce "2-2_3"  "layout.weight":0.071885
+ae "2-2_4" "2-2"  "2-4"
+ce "2-2_4"  "layout.weight":0.025738
+ae "2-2_5" "2-2"  "2-5"
+ce "2-2_5"  "layout.weight":0.043180
+ae "2-3_4" "2-3"  "2-4"
+ce "2-3_4"  "layout.weight":0.049948
+ae "2-3_5" "2-3"  "2-5"
+ce "2-3_5"  "layout.weight":0.096425
+ae "2-0_5" "2"  "2-5"
+ce "2-0_5"  "layout.weight":0.054681
+ae "3-5_6" "3-5"  "3-6"
+ce "3-5_6"  "layout.weight":0.085413
+ae "3-0_1" "3"  "3-1"
+ce "3-0_1"  "layout.weight":0.099815
+ae "3-0_2" "3"  "3-2"
+ce "3-0_2"  "layout.weight":0.093940
+ae "3-0_3" "3"  "3-3"
+ce "3-0_3"  "layout.weight":0.068737
+ae "3-0_4" "3"  "3-4"
+ce "3-0_4"  "layout.weight":0.057266
+ae "3-1_2" "3-1"  "3-2"
+ce "3-1_2"  "layout.weight":0.058491
+ae "3-1_3" "3-1"  "3-3"
+ce "3-1_3"  "layout.weight":0.057755
+ae "3-1_4" "3-1"  "3-4"
+ce "3-1_4"  "layout.weight":0.029054
+ae "3-1_5" "3-1"  "3-5"
+ce "3-1_5"  "layout.weight":0.084728
+ae "3-2_3" "3-2"  "3-3"
+ce "3-2_3"  "layout.weight":0.018308
+ae "3-2_4" "3-2"  "3-4"
+ce "3-2_4"  "layout.weight":0.059964
+ae "3-4_5" "3-4"  "3-5"
+ce "3-4_5"  "layout.weight":0.035147
+ae "3-3_4" "3-3"  "3-4"
+ce "3-3_4"  "layout.weight":0.064914
+ae "3-3_5" "3-3"  "3-5"
+ce "3-3_5"  "layout.weight":0.099865
+ae "3-0_5" "3"  "3-5"
+ce "3-0_5"  "layout.weight":0.021300
+ae "3-1_6" "3-1"  "3-6"
+ce "3-1_6"  "layout.weight":0.071355
+ae "3-2_6" "3-2"  "3-6"
+ce "3-2_6"  "layout.weight":0.092256
+ae "3-3_6" "3-3"  "3-6"
+ce "3-3_6"  "layout.weight":0.088541
+ae "3-4_6" "3-4"  "3-6"
+ce "3-4_6"  "layout.weight":0.035839
+ae "3-0_6" "3"  "3-6"
+ce "3-0_6"  "layout.weight":0.088779
+ae "4-4_5" "4-4"  "4-5"
+ce "4-4_5"  "layout.weight":0.085688
+ae "4-0_1" "4"  "4-1"
+ce "4-0_1"  "layout.weight":0.036618
+ae "4-0_2" "4"  "4-2"
+ce "4-0_2"  "layout.weight":0.058524
+ae "4-0_3" "4"  "4-3"
+ce "4-0_3"  "layout.weight":0.097460
+ae "4-0_4" "4"  "4-4"
+ce "4-0_4"  "layout.weight":0.002327
+ae "4-1_2" "4-1"  "4-2"
+ce "4-1_2"  "layout.weight":0.072642
+ae "4-1_3" "4-1"  "4-3"
+ce "4-1_3"  "layout.weight":0.032789
+ae "4-1_4" "4-1"  "4-4"
+ce "4-1_4"  "layout.weight":0.081446
+ae "4-1_5" "4-1"  "4-5"
+ce "4-1_5"  "layout.weight":0.058911
+ae "4-2_3" "4-2"  "4-3"
+ce "4-2_3"  "layout.weight":0.089901
+ae "4-2_4" "4-2"  "4-4"
+ce "4-2_4"  "layout.weight":0.098431
+ae "4-2_5" "4-2"  "4-5"
+ce "4-2_5"  "layout.weight":0.065301
+ae "4-3_4" "4-3"  "4-4"
+ce "4-3_4"  "layout.weight":0.005505
+ae "4-3_5" "4-3"  "4-5"
+ce "4-3_5"  "layout.weight":0.024310
+ae "4-0_5" "4"  "4-5"
+ce "4-0_5"  "layout.weight":0.039939
