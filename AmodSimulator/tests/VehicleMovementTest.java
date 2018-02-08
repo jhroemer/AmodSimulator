@@ -221,6 +221,30 @@ public class VehicleMovementTest {
     @Test
     public void currentPathTest1() {
 
+        // TODO : move into a new test called lastnode/attachment test
+        setupGraph(1);
+        AmodSprite s1 = sman.addSprite("s1", AmodSprite.class);
+        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s1);
+        v1.setSpeed(1.0);
+        Request r1 = new Request(1, graph.getNode("A"), graph.getNode("C"));
+        v1.addRequest(r1);
+
+        for (int i = 1; i < 10; i++) {
+            if (i == 5) v1.addRequest(new Request(2, graph.getNode("C"), graph.getNode("B")));
+
+            if (!v1.getRequests().isEmpty()) v1.advance();
+
+            if (i == 4) {
+                assertEquals(graph.getNode("C"), v1.getLastNode());
+                assertEquals(graph.getNode("C"), s1.getAttachment());
+                assertEquals(v1.getStatus(), IDLE);
+            }
+
+            if (i == 5) {
+                assertEquals(graph.getEdge("CB"), v1.getCurrentEdge());
+                assertEquals(graph.getEdge("CB"), s1.getAttachment());
+            }
+        }
     }
 
     @Test
