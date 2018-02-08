@@ -22,12 +22,12 @@ public class Vehicle extends Observable{
     private Node lastNode;
     private double currentEdgeDist;
     private double speed = 0.002; //distance per timestep
-    private Request requestFromLastTick;
 
     //info from last tick
     private Element lastElement;
     private int lastCurrentEdgeDist;
     private VehicleStatus lastStatus;
+    private Request lastRequest;
 
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
@@ -127,7 +127,7 @@ public class Vehicle extends Observable{
         if (AmodSimulator.IS_VISUAL) {
             VehicleEvent event = ADVANCE_SAME_EDGE; //putting event back to it's start status
 
-            if (oldCurrent != getCurrentEdge() || requestFromLastTick != getCurrentRequest()) {
+            if (oldCurrent != getCurrentEdge() || lastRequest != getCurrentRequest()) {
                 event = ADVANCE_NEW_EDGE;
             }
             if (requests.isEmpty()) { // todo: test for nullpointer
@@ -137,7 +137,7 @@ public class Vehicle extends Observable{
             notifyObservers(event);
         }
 
-        requestFromLastTick = getCurrentRequest();
+        lastRequest = getCurrentRequest();
         return this.status;
     }
 

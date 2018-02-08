@@ -19,8 +19,13 @@ public class AmodSimulator {
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/random1.dgs";
     private static int timesteps = 10000000;
-    private static int numVehicles = 1;
+    private static int numVehicles = 10;
     static boolean IS_VISUAL = true;
+    //private static List<Vehicle> activeVehicles;
+    //private static List<Vehicle> idleVehicles;
+    private static List<Vehicle> vehicles;
+    private static List<Request> requests;
+    private static Map<Integer,List<Vehicle>> ETAMap = new HashMap<>();
 
     public static void main(String[] args) {
 
@@ -34,32 +39,18 @@ public class AmodSimulator {
             graph.addAttribute("ui.stylesheet", styleSheet);
         }
 
-        List<Vehicle> vehicles = generateVehicles(graph, sman, numVehicles);
-        List<Request> requests = new ArrayList<>();
+        //activeVehicles = new ArrayList<>();
+        //idleVehicles = generateVehicles(graph, sman, numVehicles);
+        vehicles = generateVehicles(graph, sman, numVehicles);
+        requests = new ArrayList<>();
 
         for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
 
 
-        //for (int i = 0; i < timesteps; i++) {
-        while (true) {
-            requests.addAll(RequestGenerator.generateRequests(graph,0.01));
-            Iterator<Request> iterator = requests.iterator();
-            while (iterator.hasNext()) {
-                Request req = iterator.next();
-                for (Vehicle veh : vehicles) {
-                    if (veh.getStatus() == IDLE) {
-                        veh.addRequest(req);
-                        iterator.remove();
-                        break;
-                    }
-                }
-            }
-
-            for (Vehicle veh : vehicles) {
-                if (!veh.getRequests().isEmpty()) veh.advance();
-            }
-
-            tick(graph);
+        for (int i = 0; i < timesteps; i++) {
+        //while (true) {
+            tick(graph, i);
+            //if (IS_VISUAL) for (Vehicle veh : vehicles) veh.advance();
             sleep();
         }
 
@@ -79,7 +70,40 @@ public class AmodSimulator {
      *
      * @param graph
      */
-    private static void tick(Graph graph) {
+    private static void tick(Graph graph, int timestep) {
+        requests.addAll(RequestGenerator.generateRequests(graph,0.1));
+
+        /*
+        for (Vehicle veh : ETAMap.get(timestep)) {
+            veh.arrive();
+            if (veh has another request) {
+                veh.startRequest;
+                put på ETAMap
+            }
+            else idleVehicles.add(veh);
+        }
+
+
+        assign (idleVehicles, requests)
+        //idleVehicles += map.get(timestep)
+        */
+
+        Iterator<Request> iterator = requests.iterator();
+        while (iterator.hasNext()) {
+            Request req = iterator.next();
+            for (Vehicle veh : vehicles) {
+                if (veh.getStatus() == IDLE) {
+                    veh.addRequest(req);
+                    iterator.remove();
+                    break;
+                }
+            }
+        }
+
+        for (Vehicle veh : vehicles) {
+            if (!veh.getRequests().isEmpty()) veh.advance();
+        }
+
         //todo Everything that happens in each timestep
     }
 
