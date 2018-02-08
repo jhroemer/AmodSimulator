@@ -2,6 +2,7 @@ package AmodSimulator;
 
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
@@ -33,6 +34,10 @@ public class AmodSimulator {
         TripPlanner.init(graph);
         graph.display();
         SpriteManager sman = new SpriteManager(graph);
+
+        //todo: test if we can safe a lookup-table like this:
+        Map<Node,Map<Node,Double>> lookupTable = new HashMap<>();
+        graph.setAttribute("lookupTable", lookupTable);
 
         if (IS_VISUAL) {
             String styleSheet = parseStylesheet(styleSheetPath);
