@@ -19,7 +19,7 @@ public class AmodSimulator {
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/random1.dgs";
     private static int timesteps = 10000000;
-    private static int numVehicles = 10;
+    private static int numVehicles = 1;
     static boolean IS_VISUAL = true;
 
     public static void main(String[] args) {

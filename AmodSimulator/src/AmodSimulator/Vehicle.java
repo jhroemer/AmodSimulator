@@ -1,6 +1,7 @@
 package AmodSimulator;
 
 import org.graphstream.graph.Edge;
+import org.graphstream.graph.Element;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
@@ -21,6 +22,12 @@ public class Vehicle extends Observable{
     private Node lastNode;
     private double currentEdgeDist;
     private double speed = 0.002; //distance per timestep
+
+    //info from last tick
+    private Element lastElement;
+    private int lastCurrentEdgeDist;
+    private VehicleStatus lastStatus;
+
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
@@ -63,7 +70,7 @@ public class Vehicle extends Observable{
      * Should only run when vehicles have a current request
      *
      */
-    public VehicleStatus advance() { //todo consider implementing using Enum VehicleStatus
+    public VehicleStatus advance() {
 
         if (requests.isEmpty()) try {
             throw new Exception("advance() called on a vehicle with no request");
