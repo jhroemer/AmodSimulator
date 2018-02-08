@@ -1,6 +1,6 @@
 node {
     size: 15px;
-    fill-color: #777;
+    fill-color: #222;
     text-size: 15px;
     z-index: 5;
 }
