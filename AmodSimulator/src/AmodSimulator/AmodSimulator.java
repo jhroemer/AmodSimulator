@@ -10,10 +10,9 @@ import org.graphstream.ui.spriteManager.SpriteManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+
+import static AmodSimulator.VehicleStatus.IDLE;
 
 public class AmodSimulator {
 
@@ -36,34 +35,42 @@ public class AmodSimulator {
         }
 
         List<Vehicle> vehicles = generateVehicles(graph, sman, numVehicles);
+        List<Request> requests = new ArrayList<>();
+
+        for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
 
 
-        //for (int j = 0; j < 50; j++) sleep();
+        //for (int i = 0; i < timesteps; i++) {
+        while (true) {
+            requests.addAll(RequestGenerator.generateRequests(graph,0.01));
+            Iterator<Request> iterator = requests.iterator();
+            while (iterator.hasNext()) {
+                Request req = iterator.next();
+                for (Vehicle veh : vehicles) {
+                    if (veh.getStatus() == IDLE) {
+                        veh.addRequest(req);
+                        iterator.remove();
+                        break;
+                    }
+                }
+            }
 
-        /*
-        for (int i = 0; i < timesteps; i++) {
+            for (Vehicle veh : vehicles) {
+                if (!veh.getRequests().isEmpty()) veh.advance();
+            }
+
             tick(graph);
-            v1.advance();
-            v2.advance();
-            if (v1.getCurrentRequest() == null || v2.getCurrentRequest() == null) break;
-
-            //System.out.println("Vehicle is on edge: " + v1.getCurrentEdge().getId());
-            //System.out.println("Sprite is on edge:  " + s.getAttachment().getId() + " \n");
-            //if (!v1.getCurrentEdge().getId().equals(s.getAttachment().getId())) {
-            //    System.out.println("--- Vehicle and Sprite departed");
-            //    System.exit(0);
-            //}
             sleep();
-        }*/
+        }
 
 
     }
 
     private static List<Vehicle> generateVehicles(Graph graph, SpriteManager sman, int numVehicles) {
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        Random r = new Random(graph.getNodeCount());
+        Random r = new Random();
         for (int i = 0; i < numVehicles; i++) {
-            vehicles.add(new Vehicle("v" + i,graph.getNode(r.nextInt()), sman.addSprite("s1", AmodSprite.class)));
+            vehicles.add(new Vehicle("v" + i,graph.getNode(r.nextInt(graph.getNodeCount())), sman.addSprite("s" + i, AmodSprite.class)));
         }
         return vehicles;
     }

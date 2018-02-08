@@ -20,7 +20,7 @@ public class Vehicle extends Observable{
     private Path currentPath;
     private Node lastNode;
     private double currentEdgeDist;
-    private double speed = 0.02; //distance per timestep
+    private double speed = 0.002; //distance per timestep
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
