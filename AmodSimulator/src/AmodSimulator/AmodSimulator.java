@@ -10,13 +10,17 @@ import org.graphstream.ui.spriteManager.SpriteManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
-    private static String graphPath = "data/graphs/small-1.dgs";
+    private static String graphPath = "data/graphs/random1.dgs";
     private static int timesteps = 10000000;
+    private static int numVehicles = 10;
     static boolean IS_VISUAL = true;
 
     public static void main(String[] args) {
@@ -31,21 +35,12 @@ public class AmodSimulator {
             graph.addAttribute("ui.stylesheet", styleSheet);
         }
 
-        for (Edge e : graph.getEdgeSet()) {
-            e.setAttribute("layout.weight", 1.0);
-        }
+        List<Vehicle> vehicles = generateVehicles(graph, sman, numVehicles);
 
-        AmodSprite s = sman.addSprite("s1", AmodSprite.class);
-        AmodSprite s2 = sman.addSprite("s2", AmodSprite.class);
-        Vehicle v1 = new Vehicle("v1", graph.getNode("A"), s); //sman.addSprite("s1", AmodSprite.class));
-        Request r1 = new Request(1, graph.getNode("I"), graph.getNode("D"));
-        Request r2 = new Request(2, graph.getNode("G"), graph.getNode("D"));
-        v1.addRequest(r1);
-        Vehicle v2 = new Vehicle("v2", graph.getNode("B"), s2);
-        v2.addRequest(r2);
 
-        for (int j = 0; j < 50; j++) sleep();
+        //for (int j = 0; j < 50; j++) sleep();
 
+        /*
         for (int i = 0; i < timesteps; i++) {
             tick(graph);
             v1.advance();
@@ -59,9 +54,18 @@ public class AmodSimulator {
             //    System.exit(0);
             //}
             sleep();
+        }*/
+
+
+    }
+
+    private static List<Vehicle> generateVehicles(Graph graph, SpriteManager sman, int numVehicles) {
+        List<Vehicle> vehicles = new ArrayList<Vehicle>();
+        Random r = new Random(graph.getNodeCount());
+        for (int i = 0; i < numVehicles; i++) {
+            vehicles.add(new Vehicle("v" + i,graph.getNode(r.nextInt()), sman.addSprite("s1", AmodSprite.class)));
         }
-
-
+        return vehicles;
     }
 
     /**
