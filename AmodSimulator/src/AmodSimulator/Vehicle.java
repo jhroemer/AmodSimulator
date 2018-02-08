@@ -186,4 +186,11 @@ public class Vehicle extends Observable{
     public void setSpeed(double speed) {
         this.speed = speed;
     }
+
+    //////////NEW METHODS FOR NON-VISUAL EXPERIMENTS///////////////
+
+    public void arrive() {
+        System.out.println("arrive() is not implemented!");
+        //TODO should arrive set some more fields to the vehicles
+    }
 }

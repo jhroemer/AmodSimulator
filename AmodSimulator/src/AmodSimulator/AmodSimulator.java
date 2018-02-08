@@ -21,9 +21,9 @@ public class AmodSimulator {
     private static int timesteps = 10000000;
     private static int numVehicles = 10;
     static boolean IS_VISUAL = true;
-    //private static List<Vehicle> activeVehicles;
-    //private static List<Vehicle> idleVehicles;
-    private static List<Vehicle> vehicles;
+    private static List<Vehicle> activeVehicles;
+    private static List<Vehicle> idleVehicles;
+    //private static List<Vehicle> vehicles;
     private static List<Request> requests;
     private static Map<Integer,List<Vehicle>> ETAMap = new HashMap<>();
 
@@ -39,9 +39,9 @@ public class AmodSimulator {
             graph.addAttribute("ui.stylesheet", styleSheet);
         }
 
-        //activeVehicles = new ArrayList<>();
-        //idleVehicles = generateVehicles(graph, sman, numVehicles);
-        vehicles = generateVehicles(graph, sman, numVehicles);
+        activeVehicles = new ArrayList<>();
+        idleVehicles = generateVehicles(graph, sman, numVehicles);
+        //vehicles = generateVehicles(graph, sman, numVehicles);
         requests = new ArrayList<>();
 
         for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
@@ -70,11 +70,16 @@ public class AmodSimulator {
      *
      * @param graph
      */
-    private static void tick(Graph graph, int timestep) {
+    private static void tick(Graph graph, int timeStep) {
+
+        //adding requests for the current timestep
         requests.addAll(RequestGenerator.generateRequests(graph,0.1));
 
-        /*
-        for (Vehicle veh : ETAMap.get(timestep)) {
+        //adding the vehicles that become vacant in this timestep to idleVehicles
+
+
+        //TODO friday morning:
+        /*for (Vehicle veh : ETAMap.get(timeStep)) {
             veh.arrive();
             if (veh has another request) {
                 veh.startRequest;
@@ -85,9 +90,11 @@ public class AmodSimulator {
 
 
         assign (idleVehicles, requests)
-        //idleVehicles += map.get(timestep)
         */
+        //idleVehicles += map.get(timestep)
 
+
+        /* //following is from the old implementation:
         Iterator<Request> iterator = requests.iterator();
         while (iterator.hasNext()) {
             Request req = iterator.next();
@@ -103,6 +110,7 @@ public class AmodSimulator {
         for (Vehicle veh : vehicles) {
             if (!veh.getRequests().isEmpty()) veh.advance();
         }
+        */
 
         //todo Everything that happens in each timestep
     }
