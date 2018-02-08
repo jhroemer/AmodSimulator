@@ -53,7 +53,9 @@ public class RandomGraphGenerator {
                 roadNetwork.addNode(i + "-" + n.getId());
             }
             for (Edge e : city.getEachEdge()) {
+                double weight = e.getAttribute("layout.weight");
                 roadNetwork.addEdge(i + "-" + e.getId(),i + "-" + e.getSourceNode().getId(),i + "-" + e.getTargetNode().getId());
+                roadNetwork.getEdge(i + "-" + e.getId()).setAttribute("layout.weight", weight);
             }
 
             //merging a node from the city with a node from the original road network
@@ -64,8 +66,10 @@ public class RandomGraphGenerator {
             for (Edge e : mergeNodeCity.getEachEdge()) mergeEdges.add(e);
 
             for (Edge e : mergeEdges) {
+                double weight = e.getAttribute("layout.weight");
                 roadNetwork.removeEdge(e);
                 roadNetwork.addEdge(e.getId(), mergeNodeNetwork.getId(), e.getTargetNode().getId());
+                roadNetwork.getEdge(e.getId()).setAttribute("layout.weight", weight);
             }
             roadNetwork.removeNode(mergeNodeCity);
         }
