@@ -29,6 +29,12 @@ public class Vehicle extends Observable{
     private VehicleStatus lastStatus;
     private Request lastRequest;
 
+    // Fields relevant for visual-mode
+    private int startedAt;              // when did the current request start?
+    private int originTimestep;         // when do we reach the current origin-node?
+    private int destinationTimestep;    // when do we reach the current destination-node?
+    private Path pathToOrigin;          // the path from last vehicle position to origin-node
+    private Path pathToDestination;     // the path from origin-node to destination-node
 
     public Vehicle(String id, Node startNode, AmodSprite sprite) {
         this.id = id;
@@ -54,6 +60,7 @@ public class Vehicle extends Observable{
 
     public void addRequest(Request request) {
         requests.add(request);
+        request.setDestinationTime(5); // todo
     }
 
     private void popRequest() {
@@ -217,34 +224,49 @@ public class Vehicle extends Observable{
     }
 
     /**
-     * Should cal
+     *  findAttachment() only runs on vehicles that are in service.
+     *  therefore it will never find a node as an attachment.
+     *  If we're on the timestep when the vehicle is done, it will be on the idle list, and will be drawn at its nextDestination/nextNode field
      *
      * @return
      * @param timeStep current timestep in simulation
      */
-//    public SpritePosition findAttachment(int timeStep) {
-//        Path path = (timeStep <= originTimestep) ? pathToOrigin : pathToDestination;
-//        Element element = null;
-//        double position = 0.0;
-//
-//        double traversedSoFarBadNameIKnow = (timeStep - startedAt) * speed;
-//        for (Edge edge : path.getEdgeSet()) {
-//            double edgeLength = edge.getAttribute("layout.weight");
-//            if (traversedSoFarBadNameIKnow > edgeLength) {
-//                traversedSoFarBadNameIKnow -= edgeLength;
-//            }
-//            else {
-//                double positionPercent = convertToPercent(traversedSoFarBadNameIKnow);
-//                return new SpritePosition(edge, traversedSoFarBadNameIKnow);
-//            }
-//        }
-//        if (traversedSoFarBadNameIKnow >= 0.0 && path.equals(pathToDestination)) {
-//            return getCurrentRequest().getDestination();
-//        }
-//        return new SpritePosition(element, position);
-//    }
+    public SpritePosition findAttachment(int timeStep) {
+        Request currentRequest = requests.get(0);
 
-    public double findPosition(int timeStep) {
-        return 1.0;
+        // find current request
+        for (Request req : requests) {
+            if (timeStep > req.getDestinationTime()) continue;
+            currentRequest = req;
+            break;
+        }
+
+        Path path = (timeStep < currentRequest.getOriginTime()) ? currentRequest.getPathToOrigin() : currentRequest.getPathToDestination();
+
+        double traversedSoFar = (timeStep - startedAt) * speed;
+
+        // find out which element to attach to
+        for (Edge edge : path.getEdgeSet()) {
+            double edgeLength = edge.getAttribute("layout.weight");
+            if (traversedSoFar > edgeLength) {
+                traversedSoFar -= edgeLength;
+            }
+            else {
+                return new SpritePosition(edge, convertToPercent(path, edge, traversedSoFar));
+            }
+        }
+
+        System.out.println("THIS SHOULDN'T HAPPEN! REWORK-RAT WILL BE ANGRY!");
+        return null;
+    }
+
+    private double convertToPercent(Path path, Edge edge, double traversedSoFar) {
+        double percent = traversedSoFar / (double) edge.getAttribute("layout.weight");
+        // if the source node of the edge has a lower index in path than the target node, then convert to percent normally
+        if (path.getNodePath().indexOf(edge.getSourceNode()) < path.getNodePath().indexOf(edge.getTargetNode())) {
+            return percent;
+        }
+        // else the percent has to be reversed
+        else return 1.0 - percent;
     }
 }
