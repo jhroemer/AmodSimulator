@@ -94,11 +94,14 @@ public class AmodSimulator {
             addToETAMap(finishTime, veh);
         }
 
-        if (IS_VISUAL) drawSprites();
+        if (IS_VISUAL) drawSprites(timeStep);
     }
 
-    private static void drawSprites() {
+    private static void drawSprites(int timeStep) {
         // iterate over all vehicles and draw sprites
+        for (Vehicle veh : activeVehicles) {
+            
+        }
     }
 
     private static List<Vehicle> assign() {
