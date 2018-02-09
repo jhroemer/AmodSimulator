@@ -193,4 +193,12 @@ public class Vehicle extends Observable{
         System.out.println("arrive() is not implemented!");
         //TODO should arrive set some more fields to the vehicles
     }
+
+    /**
+     *
+     * @return true if vehicle has more requests
+     */
+    public boolean hasMoreRequests() {
+        return !requests.isEmpty();
+    }
 }

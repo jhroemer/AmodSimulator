@@ -1,6 +1,5 @@
 package AmodSimulator;
 
-import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
@@ -13,8 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-import static AmodSimulator.VehicleStatus.IDLE;
-
 public class AmodSimulator {
 
     private static String styleSheetPath = "styles/style.css";
@@ -24,7 +21,6 @@ public class AmodSimulator {
     static boolean IS_VISUAL = true;
     private static List<Vehicle> activeVehicles;
     private static List<Vehicle> idleVehicles;
-    //private static List<Vehicle> vehicles;
     private static List<Request> requests;
     private static Map<Integer,List<Vehicle>> ETAMap = new HashMap<>();
 
@@ -36,7 +32,7 @@ public class AmodSimulator {
         SpriteManager sman = new SpriteManager(graph);
 
         //todo: test if we can safe a lookup-table like this:
-        Map<Node,Map<Node,Double>> lookupTable = new HashMap<>();
+        Map<Node,Map<Node, Double>> lookupTable = new HashMap<>();
         graph.setAttribute("lookupTable", lookupTable);
 
         if (IS_VISUAL) {
@@ -46,7 +42,6 @@ public class AmodSimulator {
 
         activeVehicles = new ArrayList<>();
         idleVehicles = generateVehicles(graph, sman, numVehicles);
-        //vehicles = generateVehicles(graph, sman, numVehicles);
         requests = new ArrayList<>();
 
         for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
@@ -84,18 +79,18 @@ public class AmodSimulator {
 
 
         //TODO friday morning:
-        /*for (Vehicle veh : ETAMap.get(timeStep)) {
-            veh.arrive();
-            if (veh has another request) {
-                veh.startRequest;
-                put på ETAMap
+        for (Vehicle veh : ETAMap.getOrDefault(timeStep, new ArrayList<>())) {
+            // veh.arrive();
+            if (veh.hasMoreRequests()) {
+                veh.startRequest();
+                if (ETAMap.containsKey(timeStep)) ETAMap.get(timeStep).add(veh);
+                else ETAMap.put(timeStep, new Ar);
             }
             else idleVehicles.add(veh);
         }
 
+        assign (idleVehicles, requests);
 
-        assign (idleVehicles, requests)
-        */
         //idleVehicles += map.get(timestep)
 
 
