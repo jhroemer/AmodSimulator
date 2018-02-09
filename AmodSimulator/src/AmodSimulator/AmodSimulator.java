@@ -75,47 +75,56 @@ public class AmodSimulator {
         //adding requests for the current timestep
         requests.addAll(RequestGenerator.generateRequests(graph,0.1));
 
-        //adding the vehicles that become vacant in this timestep to idleVehicles
-
-
-        //TODO friday morning:
+        // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
         for (Vehicle veh : ETAMap.getOrDefault(timeStep, new ArrayList<>())) {
             // veh.arrive();
             if (veh.hasMoreRequests()) {
-                veh.startRequest();
-                if (ETAMap.containsKey(timeStep)) ETAMap.get(timeStep).add(veh);
-                else ETAMap.put(timeStep, new Ar);
+                int finishTime = veh.startRequest(timeStep);
+                addToETAMap(finishTime, veh);
             }
-            else idleVehicles.add(veh);
-        }
-
-        assign (idleVehicles, requests);
-
-        //idleVehicles += map.get(timestep)
-
-
-        /* //following is from the old implementation:
-        Iterator<Request> iterator = requests.iterator();
-        while (iterator.hasNext()) {
-            Request req = iterator.next();
-            for (Vehicle veh : vehicles) {
-                if (veh.getStatus() == IDLE) {
-                    veh.addRequest(req);
-                    iterator.remove();
-                    break;
-                }
+            else {
+                activeVehicles.remove(veh);
+                idleVehicles.add(veh);
             }
         }
 
-        for (Vehicle veh : vehicles) {
-            if (!veh.getRequests().isEmpty()) veh.advance();
+        List<Vehicle> assignedVehicles = assign();
+        for (Vehicle veh : assignedVehicles) {
+            int finishTime = veh.startRequest(timeStep);
+            addToETAMap(finishTime, veh);
         }
-        */
 
-        //todo Everything that happens in each timestep
+        if (IS_VISUAL) drawSprites();
+    }
+
+    private static void drawSprites() {
+        // iterate over all vehicles and draw sprites
+    }
+
+    private static List<Vehicle> assign() {
+        // assigning vehicles to requests
+        Iterator<Request> requestIterator = requests.iterator();
+        List<Vehicle> assignedVehicles = new ArrayList<>();
+        while (requestIterator.hasNext()) {
+            if (!idleVehicles.isEmpty()) {
+                Vehicle veh = idleVehicles.remove(0);
+                veh.addRequest(requestIterator.next());
+                assignedVehicles.add(veh);
+                activeVehicles.add(veh);
+            }
+        }
+        return assignedVehicles;
     }
 
 
+    private static void addToETAMap(int finishTime, Vehicle veh) {
+        if (ETAMap.containsKey(finishTime)) ETAMap.get(finishTime).add(veh);
+        else {
+            ArrayList<Vehicle> list = new ArrayList<Vehicle>();
+            list.add(veh);
+            ETAMap.put(finishTime, list);
+        }
+    }
 
     /**
      * Constructs a <Code>Graph</Code> from an dgs-file

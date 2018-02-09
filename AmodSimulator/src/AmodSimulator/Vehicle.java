@@ -201,4 +201,14 @@ public class Vehicle extends Observable{
     public boolean hasMoreRequests() {
         return !requests.isEmpty();
     }
+
+    /**
+     * Takes a timestep
+     *
+     * @param timeStep
+     * @return
+     */
+    public int startRequest(int timeStep) {
+        return 0;
+    }
 }
