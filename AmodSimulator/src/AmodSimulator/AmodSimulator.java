@@ -83,8 +83,7 @@ public class AmodSimulator {
                 addToETAMap(finishTime, veh);
             }
             else {
-                activeVehicles.remove(veh);
-                idleVehicles.add(veh);
+                makeIdle(veh);
             }
         }
 
@@ -92,6 +91,7 @@ public class AmodSimulator {
         for (Vehicle veh : assignedVehicles) {
             int finishTime = veh.startRequest(timeStep);
             addToETAMap(finishTime, veh);
+            makeActive(veh);
         }
 
         if (IS_VISUAL) drawSprites(timeStep);
@@ -127,6 +127,16 @@ public class AmodSimulator {
             list.add(veh);
             ETAMap.put(finishTime, list);
         }
+    }
+
+    private static void makeIdle(Vehicle veh) {
+        activeVehicles.remove(veh);
+        idleVehicles.add(veh);
+    }
+
+    private static void makeActive(Vehicle veh) {
+        idleVehicles.remove(veh);
+        activeVehicles.add(veh);
     }
 
     /**
