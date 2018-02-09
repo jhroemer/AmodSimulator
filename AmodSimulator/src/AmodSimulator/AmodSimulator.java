@@ -33,7 +33,7 @@ public class AmodSimulator {
         graph.display();
         sman = new SpriteManager(graph);
 
-        //todo: test if we can safe a lookup-table like this:
+        //todo: test if we can save a lookup-table like this:
         Map<Node,Map<Node, Double>> lookupTable = new HashMap<>();
         graph.setAttribute("lookupTable", lookupTable);
 
@@ -63,7 +63,8 @@ public class AmodSimulator {
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
         Random r = new Random();
         for (int i = 0; i < numVehicles; i++) {
-            vehicles.add(new Vehicle("v" + i,graph.getNode(r.nextInt(graph.getNodeCount())), sman.addSprite("s" + i, AmodSprite.class)));
+            vehicles.add(new Vehicle("v" + i,graph.getNode(r.nextInt(graph.getNodeCount()))));
+            sman.addSprite("v" + i);
         }
         return vehicles;
     }
@@ -79,20 +80,13 @@ public class AmodSimulator {
 
         // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
         for (Vehicle veh : ETAMap.getOrDefault(timeStep, new ArrayList<>())) {
-            // veh.arrive();
-            if (veh.hasMoreRequests()) {
-                int finishTime = veh.startRequest(timeStep);
-                addToETAMap(finishTime, veh);
-            }
-            else {
-                makeIdle(veh);
-            }
+            makeIdle(veh);
         }
 
         List<Vehicle> assignedVehicles = assign();
+
         for (Vehicle veh : assignedVehicles) {
-            int finishTime = veh.startRequest(timeStep);
-            addToETAMap(finishTime, veh);
+            addToETAMap(veh);
             makeActive(veh);
         }
 
@@ -129,7 +123,11 @@ public class AmodSimulator {
     }
 
 
-    private static void addToETAMap(int finishTime, Vehicle veh) {
+    private static void addToETAMap(Vehicle veh) {
+        //todo Should also delete if the vehicle is already on the Map
+        //todo (needs old finish time for this) but it is not necessary for
+        //todo the one-request version.
+        int finishTime = veh.getFinishTime();
         if (ETAMap.containsKey(finishTime)) ETAMap.get(finishTime).add(veh);
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();

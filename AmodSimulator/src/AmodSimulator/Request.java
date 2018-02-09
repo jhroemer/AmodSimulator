@@ -5,9 +5,14 @@ import org.graphstream.graph.Path;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
 public class Request {
+
+    //original info:
     private int id;
     private Node origin;
     private Node destination;
+
+    //info from setUp():
+    private int startTime;
     private int originTime;
     private int destinationTime;
     private int waitTime;
@@ -53,5 +58,22 @@ public class Request {
 
     public Path getPathToOrigin() {
         return pathToOrigin;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setUp(int startTime, Node source, double speed) {
+        this.startTime = startTime;
+
+        pathToOrigin = TripPlanner.getPath(source,origin);
+        pathToDestination = TripPlanner.getPath(origin,destination);
+
+        //originTime
+        //destinationTIme
+
+        //waitTime NB: waittime consists of both empty driving time AND time from requestgeneration and request assignment
+
     }
 }
