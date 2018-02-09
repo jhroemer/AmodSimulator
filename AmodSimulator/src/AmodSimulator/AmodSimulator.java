@@ -5,6 +5,7 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
+import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;
 
 import java.io.File;
@@ -23,13 +24,14 @@ public class AmodSimulator {
     private static List<Vehicle> idleVehicles;
     private static List<Request> requests;
     private static Map<Integer,List<Vehicle>> ETAMap = new HashMap<>();
+    private static SpriteManager sman;
 
     public static void main(String[] args) {
 
         Graph graph = parseGraph("test", graphPath);
         TripPlanner.init(graph);
         graph.display();
-        SpriteManager sman = new SpriteManager(graph);
+        sman = new SpriteManager(graph);
 
         //todo: test if we can safe a lookup-table like this:
         Map<Node,Map<Node, Double>> lookupTable = new HashMap<>();
@@ -100,7 +102,13 @@ public class AmodSimulator {
     private static void drawSprites(int timeStep) {
         // iterate over all vehicles and draw sprites
         for (Vehicle veh : activeVehicles) {
-            
+            SpritePosition spritePosition = veh.findAttachment(timeStep);
+            Sprite s = sman.getSprite(veh.getId());
+
+            if (spritePosition.getElement() instanceof Node) s.attachToNode(spritePosition.getElement().getId());
+            else s.attachToEdge(spritePosition.getElement().getId());
+
+            s.setPosition(spritePosition.getPosition());
         }
     }
 
@@ -108,13 +116,14 @@ public class AmodSimulator {
         // assigning vehicles to requests
         Iterator<Request> requestIterator = requests.iterator();
         List<Vehicle> assignedVehicles = new ArrayList<>();
+        int counter = 0; // FIXME: should be deleted at some point
         while (requestIterator.hasNext()) {
-            if (!idleVehicles.isEmpty()) {
-                Vehicle veh = idleVehicles.remove(0);
+            if (idleVehicles.size() > counter) {
+                Vehicle veh = idleVehicles.get(counter);
                 veh.addRequest(requestIterator.next());
                 assignedVehicles.add(veh);
-                activeVehicles.add(veh);
             }
+            counter++;
         }
         return assignedVehicles;
     }

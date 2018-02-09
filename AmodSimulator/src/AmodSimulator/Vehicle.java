@@ -211,4 +211,40 @@ public class Vehicle extends Observable{
     public int startRequest(int timeStep) {
         return 0;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Should cal
+     *
+     * @return
+     * @param timeStep current timestep in simulation
+     */
+//    public SpritePosition findAttachment(int timeStep) {
+//        Path path = (timeStep <= originTimestep) ? pathToOrigin : pathToDestination;
+//        Element element = null;
+//        double position = 0.0;
+//
+//        double traversedSoFarBadNameIKnow = (timeStep - startedAt) * speed;
+//        for (Edge edge : path.getEdgeSet()) {
+//            double edgeLength = edge.getAttribute("layout.weight");
+//            if (traversedSoFarBadNameIKnow > edgeLength) {
+//                traversedSoFarBadNameIKnow -= edgeLength;
+//            }
+//            else {
+//                double positionPercent = convertToPercent(traversedSoFarBadNameIKnow);
+//                return new SpritePosition(edge, traversedSoFarBadNameIKnow);
+//            }
+//        }
+//        if (traversedSoFarBadNameIKnow >= 0.0 && path.equals(pathToDestination)) {
+//            return getCurrentRequest().getDestination();
+//        }
+//        return new SpritePosition(element, position);
+//    }
+
+    public double findPosition(int timeStep) {
+        return 1.0;
+    }
 }
