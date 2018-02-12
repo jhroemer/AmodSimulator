@@ -20,7 +20,7 @@ public class AmodSimulator {
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/random1.dgs";
     private static int timesteps = 10000000;
-    private static int numVehicles = 10;
+    private static int numVehicles = 2;
     static boolean IS_VISUAL = false;
     private static List<Vehicle> activeVehicles;
     private static List<Vehicle> idleVehicles;
@@ -71,7 +71,7 @@ public class AmodSimulator {
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
         Random r = new Random();
         for (int i = 0; i < numVehicles; i++) {
-            vehicles.add(new Vehicle("v" + i,graph.getNode(r.nextInt(graph.getNodeCount()))));
+            vehicles.add(new Vehicle("v" + i, graph.getNode(r.nextInt(graph.getNodeCount()))));
             sman.addSprite("v" + i);
         }
         return vehicles;
@@ -92,12 +92,12 @@ public class AmodSimulator {
         }
 
         //adding requests for the current timestep
-        requests.addAll(RequestGenerator.generateRequests(graph,1, timeStep));
+        requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         List<Vehicle> assignedVehicles = assign();
 
         for (Vehicle veh : assignedVehicles) {
-            addToETAMap(veh);
+            addToVacancyMap(veh);
             makeActive(veh);
         }
 
@@ -138,7 +138,7 @@ public class AmodSimulator {
     private static List<Vehicle> assign() {
 
         List<Vehicle> assignedVehicles = new ArrayList<>();
-        int numToAssign = Math.min(idleVehicles.size(),requests.size());
+        int numToAssign = Math.min(idleVehicles.size(), requests.size());
 
         for (int i = 0; i < numToAssign; i++) {
             Vehicle veh = idleVehicles.get(i);
@@ -157,7 +157,7 @@ public class AmodSimulator {
     }
 
 
-    private static void addToETAMap(Vehicle veh) {
+    private static void addToVacancyMap(Vehicle veh) {
         //todo Should also delete if the vehicle is already on the Map
         //todo (needs old finish time for this) but it is not necessary for
         //todo the one-request version.
@@ -166,6 +166,7 @@ public class AmodSimulator {
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();
             list.add(veh);
+
             vacancyMap.put(finishTime, list);
         }
     }

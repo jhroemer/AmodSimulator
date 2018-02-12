@@ -69,7 +69,9 @@ public class Request {
     }
 
     public void setUp(int vehicleVacantTime, Node source, int speed) {
-        this.startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
+        // when does this request start being serviced
+        // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
+        startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
 
         pathToOrigin = TripPlanner.getPath(source, origin);
         pathToDestination = TripPlanner.getPath(origin, destination);
