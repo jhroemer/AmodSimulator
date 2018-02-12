@@ -20,7 +20,7 @@ public class AmodSimulator {
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
     private static int timesteps = 10000000;
-    private static int numVehicles = 2;
+    private static int numVehicles = 4;
     static boolean IS_VISUAL = false;
     private static List<Vehicle> activeVehicles;
     private static List<Vehicle> idleVehicles;
@@ -53,6 +53,21 @@ public class AmodSimulator {
         activeVehicles = new ArrayList<>();
         idleVehicles = generateVehicles(graph, sman, numVehicles);
         requests = new ArrayList<>();
+
+        //--------------------//
+        //generating controlled vehicles and requests
+        idleVehicles = new ArrayList<>();
+        idleVehicles.add(new Vehicle("v1", graph.getNode("A")));
+        idleVehicles.add(new Vehicle("v2", graph.getNode("F")));
+        sman.addSprite("v1");
+        sman.addSprite("v2");
+        requests.add(new Request(1,graph.getNode("B"),graph.getNode("F"),0));
+        requests.add(new Request(2,graph.getNode("E"),graph.getNode("A"),0));
+        requests.add(new Request(3,graph.getNode("F"),graph.getNode("D"),0));
+        requests.add(new Request(4,graph.getNode("A"),graph.getNode("B"),0));
+        requests.add(new Request(5,graph.getNode("C"),graph.getNode("D"),0));
+        requests.add(new Request(6,graph.getNode("D"),graph.getNode("C"),0));
+
 
         for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
 
@@ -90,10 +105,13 @@ public class AmodSimulator {
         // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
 
         if (PRINT && vacancyMap.containsKey(timeStep)) System.out.print("\nMaking idle: ");
+
         for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
             makeIdle(veh);
             if (PRINT) System.out.print(veh.getId() + ", ");
         }
+        vacancyMap.remove(timeStep);
+
         if (PRINT) System.out.println();
 
         //adding requests for the current timestep
@@ -170,7 +188,7 @@ public class AmodSimulator {
         //todo Should also delete if the vehicle is already on the Map
         //todo (needs old finish time for this) but it is not necessary for
         //todo the one-request version.
-        int vacancyTime = veh.getFinishTime() + 1;
+        int vacancyTime = veh.getVacantTime();
         if (vacancyMap.containsKey(vacancyTime)) vacancyMap.get(vacancyTime).add(veh);
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();

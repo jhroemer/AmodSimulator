@@ -14,7 +14,8 @@ public class Vehicle extends Observable{
     private ArrayList<Request> requests;
     private int speed = 5; //distance per timestep
     private Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
-    private int finishTime;
+    private int vacantTime;
+
     
     //summed info of vehicle
     private int emptyKilometersDriven;
@@ -26,7 +27,7 @@ public class Vehicle extends Observable{
         this.id = id;
         requests = new ArrayList<>();
         location = startNode;
-        finishTime = 0;
+        vacantTime = 0;
     }
 
     
@@ -37,10 +38,10 @@ public class Vehicle extends Observable{
             e.printStackTrace();
         }
 
-        request.setUp(finishTime, location, speed);
+        request.setUp(vacantTime, location, speed);
 
         location = request.getDestination();
-        finishTime = request.getDestinationTime();
+        vacantTime = request.getDestinationTime()+1;
         
         emptyKilometersDriven += (int) Math.round(request.getPathToOrigin().getPathWeight("layout.weight"));
         occupiedKilometersDriven += (int) Math.round(request.getPathToDestination().getPathWeight("layout.weight"));
@@ -166,8 +167,8 @@ public class Vehicle extends Observable{
         else return 1.0 - percent;
     }
 
-    public int getFinishTime() {
-        return finishTime;
+    public int getVacantTime() {
+        return vacantTime;
     }
 
     public void removeRequest() {

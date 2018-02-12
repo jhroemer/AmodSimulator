@@ -83,12 +83,12 @@ public class Request {
         originPathLength = (int) Math.round(pathToOrigin.getPathWeight("layout.weight"));
         destinationPathLength = (int) Math.round(pathToDestination.getPathWeight("layout.weight"));
 
-        originTime = vehicleVacantTime + (int) Math.floor(originPathLength / speed);
+        originTime = startTime + (int) Math.floor(originPathLength / speed);
         destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
 
         waitTime = originTime - generationTime;
 
 
-        if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + originTime);
+        if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
     }
 }
