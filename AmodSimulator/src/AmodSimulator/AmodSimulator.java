@@ -39,11 +39,6 @@ public class AmodSimulator {
 //        Map<Node, Map<Node, Integer>> lookupTable = new HashMap<>();
 //        graph.setAttribute("lookupTable", lookupTable);
 
-        // fixme : we should ensure this when building the graph already
-        //for (Edge e : graph.getEdgeSet()) {
-        //    if ((double) e.getAttribute("layout.weight") < 1.0) e.setAttribute("layout.weight", 1.0);
-        //}
-
         if (IS_VISUAL) {
             graph.display();
             String styleSheet = parseStylesheet(styleSheetPath);
@@ -54,13 +49,10 @@ public class AmodSimulator {
         idleVehicles = generateVehicles(graph, sman, numVehicles);
         requests = new ArrayList<>();
 
-        for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
-
+        for (int j = 0; j < 50; j++) sleep(); // Makes the simulation start after the graph is drawn.
 
         for (int i = 0; i < timesteps; i++) {
-        //while (true) {
             tick(graph, i);
-            //if (IS_VISUAL) for (Vehicle veh : vehicles) veh.advance();
             sleep();
         }
 
@@ -98,7 +90,7 @@ public class AmodSimulator {
         if (PRINT) System.out.println();
 
         //adding requests for the current timestep
-        requests.addAll(RequestGenerator.generateRequests(graph,0.3, timeStep));
+        requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         List<Vehicle> assignedVehicles = assign(timeStep);
 
