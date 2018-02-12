@@ -17,6 +17,7 @@ import java.util.*;
 
 public class AmodSimulator {
 
+    private static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/random1.dgs";
     private static int timesteps = 10000000;
@@ -86,10 +87,15 @@ public class AmodSimulator {
      * @param graph
      */
     private static void tick(Graph graph, int timeStep) {
+        if (PRINT) System.out.println("\n\n//////// TICK " + timeStep + "/////////");
         // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
+
+        if (PRINT && vacancyMap.containsKey(timeStep)) System.out.print("\nMaking idle: ");
         for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
             makeIdle(veh);
+            if (PRINT) System.out.print(veh.getId() + ", ");
         }
+        if (PRINT) System.out.println();
 
         //adding requests for the current timestep
         requests.addAll(RequestGenerator.generateRequests(graph,1, timeStep));
@@ -97,9 +103,11 @@ public class AmodSimulator {
         List<Vehicle> assignedVehicles = assign();
 
         for (Vehicle veh : assignedVehicles) {
-            addToETAMap(veh);
+            addToVacancyMap(veh);
             makeActive(veh);
         }
+
+        if (PRINT) printVacancyMap();
 
         if (IS_VISUAL) drawSprites(timeStep);
     }
@@ -139,10 +147,11 @@ public class AmodSimulator {
 
         List<Vehicle> assignedVehicles = new ArrayList<>();
         int numToAssign = Math.min(idleVehicles.size(),requests.size());
+        if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
 
         for (int i = 0; i < numToAssign; i++) {
             Vehicle veh = idleVehicles.get(i);
-            System.out.println("\tAssigning vehicle "+ veh.getId() + " to request " + requests.get(i).getId());
+            if (PRINT) System.out.println("\tVehicle "+ veh.getId() + " <-- request " + requests.get(i).getId());
             veh.serviceRequest(requests.get(i));
             assignedRequests.add(requests.get(i));
             assignedVehicles.add(veh);
@@ -157,16 +166,16 @@ public class AmodSimulator {
     }
 
 
-    private static void addToETAMap(Vehicle veh) {
+    private static void addToVacancyMap(Vehicle veh) {
         //todo Should also delete if the vehicle is already on the Map
         //todo (needs old finish time for this) but it is not necessary for
         //todo the one-request version.
-        int finishTime = veh.getFinishTime();
-        if (vacancyMap.containsKey(finishTime)) vacancyMap.get(finishTime).add(veh);
+        int vacancyTime = veh.getFinishTime() + 1;
+        if (vacancyMap.containsKey(vacancyTime)) vacancyMap.get(vacancyTime).add(veh);
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();
             list.add(veh);
-            vacancyMap.put(finishTime, list);
+            vacancyMap.put(vacancyTime, list);
         }
     }
 
@@ -234,5 +243,18 @@ public class AmodSimulator {
      */
     protected static void sleep() {
         try { Thread.sleep(50); } catch (Exception e) {}
+    }
+
+
+    public static void printVacancyMap() {
+        System.out.println("\n--- vacancyMap ---");
+        for (int i : vacancyMap.keySet()) {
+            System.out.print("  " + i + " --> ");
+            for (Vehicle v : vacancyMap.get(i)) {
+                System.out.print(v.getId() + ", ");
+            }
+            System.out.println();
+        }
+        System.out.println("\n------------------");
     }
 }

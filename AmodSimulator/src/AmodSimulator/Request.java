@@ -74,7 +74,7 @@ public class Request {
         pathToOrigin = TripPlanner.getPath(source, origin);
         pathToDestination = TripPlanner.getPath(origin, destination);
 
-        System.out.println("origin path weight is: " + pathToOrigin.getPathWeight("layout.weight"));
+        //System.out.println("origin path weight is: " + pathToOrigin.getPathWeight("layout.weight"));
         // fixme : sometimes path weights are rounded to 0 which makes stuff fail
         originPathLength = (int) Math.round(pathToOrigin.getPathWeight("layout.weight"));
         destinationPathLength = (int) Math.round(pathToDestination.getPathWeight("layout.weight"));
