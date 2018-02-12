@@ -49,7 +49,23 @@ public class AmodSimulator {
         idleVehicles = generateVehicles(graph, sman, numVehicles);
         requests = new ArrayList<>();
 
-        for (int j = 0; j < 50; j++) sleep(); // Makes the simulation start after the graph is drawn.
+        //--------------------//
+        //generating controlled vehicles and requests
+        idleVehicles = new ArrayList<>();
+        idleVehicles.add(new Vehicle("v1", graph.getNode("A")));
+        idleVehicles.add(new Vehicle("v2", graph.getNode("F")));
+        sman.addSprite("v1");
+        sman.addSprite("v2");
+        requests.add(new Request(1,graph.getNode("B"),graph.getNode("F"),0));
+        requests.add(new Request(2,graph.getNode("E"),graph.getNode("A"),0));
+        requests.add(new Request(3,graph.getNode("F"),graph.getNode("D"),0));
+        requests.add(new Request(4,graph.getNode("A"),graph.getNode("B"),0));
+        requests.add(new Request(5,graph.getNode("C"),graph.getNode("D"),0));
+        requests.add(new Request(6,graph.getNode("D"),graph.getNode("C"),0));
+
+
+        for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
+
 
         for (int i = 0; i < timesteps; i++) {
             tick(graph, i);
@@ -82,6 +98,7 @@ public class AmodSimulator {
         // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
 
         if (PRINT && vacancyMap.containsKey(timeStep)) System.out.print("\nMaking idle: ");
+
         for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
             makeIdle(veh);
             if (PRINT) System.out.print(veh.getId() + ", ");
@@ -163,7 +180,7 @@ public class AmodSimulator {
         //todo Should also delete if the vehicle is already on the Map
         //todo (needs old finish time for this) but it is not necessary for
         //todo the one-request version.
-        int vacancyTime = veh.getFinishTime() + 1;
+        int vacancyTime = veh.getVacantTime();
         if (vacancyMap.containsKey(vacancyTime)) vacancyMap.get(vacancyTime).add(veh);
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();
