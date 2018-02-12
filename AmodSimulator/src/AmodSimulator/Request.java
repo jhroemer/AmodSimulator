@@ -3,6 +3,8 @@ package AmodSimulator;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
+import static AmodSimulator.AmodSimulator.PRINT;
+
 // todo: in Fagnant & Kockelman requests also have a departure time
 public class Request {
 
@@ -76,7 +78,7 @@ public class Request {
         pathToOrigin = TripPlanner.getPath(source, origin);
         pathToDestination = TripPlanner.getPath(origin, destination);
 
-        System.out.println("origin path weight is: " + pathToOrigin.getPathWeight("layout.weight"));
+        //System.out.println("origin path weight is: " + pathToOrigin.getPathWeight("layout.weight"));
         // fixme : sometimes path weights are rounded to 0 which makes stuff fail
         originPathLength = (int) Math.round(pathToOrigin.getPathWeight("layout.weight"));
         destinationPathLength = (int) Math.round(pathToDestination.getPathWeight("layout.weight"));
@@ -85,5 +87,8 @@ public class Request {
         destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
 
         waitTime = originTime - generationTime;
+
+
+        if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + originTime);
     }
 }

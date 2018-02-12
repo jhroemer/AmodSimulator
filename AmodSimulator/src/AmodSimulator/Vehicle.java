@@ -12,7 +12,7 @@ public class Vehicle extends Observable{
 
     private String id;
     private ArrayList<Request> requests;
-    private int speed = 1; //distance per timestep
+    private int speed = 5; //distance per timestep
     private Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
     private int finishTime;
     
