@@ -17,9 +17,9 @@ import java.util.*;
 
 public class AmodSimulator {
 
-    private static final boolean PRINT = true;
+    static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
-    private static String graphPath = "data/graphs/random1.dgs";
+    private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
     private static int timesteps = 10000000;
     private static int numVehicles = 10;
     static boolean IS_VISUAL = false;
@@ -41,9 +41,9 @@ public class AmodSimulator {
 //        graph.setAttribute("lookupTable", lookupTable);
 
         // fixme : we should ensure this when building the graph already
-        for (Edge e : graph.getEdgeSet()) {
-            if ((double) e.getAttribute("layout.weight") < 1.0) e.setAttribute("layout.weight", 1.0);
-        }
+        //for (Edge e : graph.getEdgeSet()) {
+        //    if ((double) e.getAttribute("layout.weight") < 1.0) e.setAttribute("layout.weight", 1.0);
+        //}
 
         if (IS_VISUAL) {
 //            graph.display();

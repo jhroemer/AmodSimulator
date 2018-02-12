@@ -3,6 +3,8 @@ package AmodSimulator;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
+import static AmodSimulator.AmodSimulator.PRINT;
+
 // todo: in Fagnant & Kockelman requests also have a departure time
 public class Request {
 
@@ -83,5 +85,8 @@ public class Request {
         destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
 
         waitTime = originTime - generationTime;
+
+
+        if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + originTime);
     }
 }
