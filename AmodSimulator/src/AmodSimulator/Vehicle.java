@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 
-import static AmodSimulator.AmodSimulator.IS_VISUAL;
-
 public class Vehicle extends Observable{
 
     private String id;
@@ -32,14 +30,12 @@ public class Vehicle extends Observable{
     }
 
     
-    public int addRequest(Request request) {
+    public void serviceRequest(Request request) {
         if (!requests.isEmpty()) try {
             throw new Exception("Request added to a vehicle that already had a request!");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        requests.add(request);
 
         request.setUp(finishTime, location, speed);
 
@@ -49,14 +45,6 @@ public class Vehicle extends Observable{
         emptyKilometersDriven += (int) Math.round(request.getPathToOrigin().getPathWeight("layout.weight"));
         occupiedKilometersDriven += (int) Math.round(request.getPathToDestination().getPathWeight("layout.weight"));
         numRequestServiced++;
-        
-
-        if (IS_VISUAL) {
-            // todo Add info to request - is superfluous?
-        }
-        
-        //todo calc and return arrivaltime - return void instead
-        return 0;
     }
 
     public ArrayList<Request> getRequests() {
@@ -112,6 +100,7 @@ public class Vehicle extends Observable{
 
         while (requestIterator.hasNext()) {
             Request req = requestIterator.next();
+            // TODO : remember corner-case where a vehicle can service two requests within a timestep
             if (timeStep > req.getDestinationTime()) requests.remove(req);
             else {
                 currentRequest = req;
@@ -179,5 +168,13 @@ public class Vehicle extends Observable{
 
     public int getFinishTime() {
         return finishTime;
+    }
+
+    public void removeRequest() {
+        requests.remove(0);
+    }
+
+    public void addRequest(Request request) {
+        requests.add(request);
     }
 }

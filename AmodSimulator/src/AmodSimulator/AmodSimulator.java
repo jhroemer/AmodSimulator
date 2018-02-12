@@ -21,12 +21,13 @@ public class AmodSimulator {
     private static String graphPath = "data/graphs/random1.dgs";
     private static int timesteps = 10000000;
     private static int numVehicles = 10;
-    static boolean IS_VISUAL = true;
+    static boolean IS_VISUAL = false;
     private static List<Vehicle> activeVehicles;
     private static List<Vehicle> idleVehicles;
     private static List<Request> requests;
-    private static Map<Integer,List<Vehicle>> ETAMap = new HashMap<>();
+    private static Map<Integer,List<Vehicle>> vacancyMap = new HashMap<>();
     private static SpriteManager sman;
+    private static List<Request> assignedRequests = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -77,10 +78,18 @@ public class AmodSimulator {
     }
 
     /**
+     * What happens within a timestep:
+     * 1. Check which vehicles have been set to idle
+     * 2. Assign idle vehicles to requests
+     * 3.
      *
      * @param graph
      */
     private static void tick(Graph graph, int timeStep) {
+        // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
+        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
+            makeIdle(veh);
+        }
 
         //adding requests for the current timestep
         requests.addAll(RequestGenerator.generateRequests(graph,1, timeStep));
@@ -93,11 +102,6 @@ public class AmodSimulator {
         }
 
         if (IS_VISUAL) drawSprites(timeStep);
-
-        // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
-        for (Vehicle veh : ETAMap.getOrDefault(timeStep, new ArrayList<>())) {
-            makeIdle(veh);
-        }
     }
 
     private static void drawSprites(int timeStep) {
@@ -107,10 +111,6 @@ public class AmodSimulator {
             Sprite s = sman.getSprite(veh.getId());
             System.out.println("Spriteposition is: " + spritePosition);
             attachIfNeeded(s, spritePosition.getElement());
-
-//            if (spritePosition.getElement() instanceof Node) s.attachToNode(spritePosition.getElement().getId());
-//            else s.attachToEdge(spritePosition.getElement().getId());
-
             s.setPosition(spritePosition.getPosition());
             s.setAttribute("ui.class", spritePosition.getStatus());
         }
@@ -143,8 +143,10 @@ public class AmodSimulator {
         for (int i = 0; i < numToAssign; i++) {
             Vehicle veh = idleVehicles.get(i);
             System.out.println("\tAssigning vehicle "+ veh.getId() + " to request " + requests.get(i).getId());
-            veh.addRequest(requests.get(i));
+            veh.serviceRequest(requests.get(i));
+            assignedRequests.add(requests.get(i));
             assignedVehicles.add(veh);
+            if (IS_VISUAL) veh.addRequest(requests.get(i));
         }
 
         for (int i = 0; i < numToAssign; i++) {
@@ -160,17 +162,18 @@ public class AmodSimulator {
         //todo (needs old finish time for this) but it is not necessary for
         //todo the one-request version.
         int finishTime = veh.getFinishTime();
-        if (ETAMap.containsKey(finishTime)) ETAMap.get(finishTime).add(veh);
+        if (vacancyMap.containsKey(finishTime)) vacancyMap.get(finishTime).add(veh);
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();
             list.add(veh);
-            ETAMap.put(finishTime, list);
+            vacancyMap.put(finishTime, list);
         }
     }
 
     private static void makeIdle(Vehicle veh) {
         activeVehicles.remove(veh);
         idleVehicles.add(veh);
+        if (IS_VISUAL) veh.removeRequest();
     }
 
     private static void makeActive(Vehicle veh) {
