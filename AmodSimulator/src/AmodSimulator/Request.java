@@ -10,6 +10,7 @@ public class Request {
     private int id;
     private Node origin;
     private Node destination;
+    private final int generationTime;
 
     //info from setUp():
     private int startTime;
@@ -21,11 +22,14 @@ public class Request {
     // only for visuals
     private Path pathToOrigin;
     private Path pathToDestination;
+    private int originPathLength;
+    private int destinationPathLength;
 
-    public Request(int id, Node location, Node destination) {
+    public Request(int id, Node location, Node destination, int generationTime) {
         this.id = id;
         this.origin = location;
         this.destination = destination;
+        this.generationTime = generationTime;
     }
 
     public Node getOrigin() {
@@ -64,16 +68,18 @@ public class Request {
         return startTime;
     }
 
-    public void setUp(int startTime, Node source, double speed) {
+    public void setUp(int startTime, Node source, int speed) {
         this.startTime = startTime;
 
-        pathToOrigin = TripPlanner.getPath(source,origin);
-        pathToDestination = TripPlanner.getPath(origin,destination);
+        pathToOrigin = TripPlanner.getPath(source, origin);
+        pathToDestination = TripPlanner.getPath(origin, destination);
 
-        //originTime
-        //destinationTIme
+        originPathLength = (int) Math.round(pathToOrigin.getPathWeight("layout.weight"));
+        destinationPathLength = (int) Math.round(pathToDestination.getPathWeight("layout.weight"));
 
-        //waitTime NB: waittime consists of both empty driving time AND time from requestgeneration and request assignment
+        originTime = startTime + (int) Math.floor(originPathLength / speed);
+        destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
 
+        waitTime = originTime - generationTime;
     }
 }

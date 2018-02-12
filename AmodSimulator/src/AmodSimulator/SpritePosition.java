@@ -8,10 +8,12 @@ import org.graphstream.graph.Element;
 public class SpritePosition {
     private Element element;
     private double position;
+    private String status;
 
-    public SpritePosition(Element element, double position) {
+    public SpritePosition(Element element, double position, String status) {
         this.element = element;
         this.position = position;
+        this.status = status;
     }
 
     public Element getElement() {
@@ -20,5 +22,9 @@ public class SpritePosition {
 
     public double getPosition() {
         return position;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

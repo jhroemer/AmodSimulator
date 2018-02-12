@@ -17,7 +17,7 @@ public class RequestGenerator {
      * @param graph the graph we're working with
      * @param lambda average number of events per interval
      */
-    public static List<Request> generateRequests(Graph graph, double lambda) {
+    public static List<Request> generateRequests(Graph graph, double lambda, int timeStep) {
         List<Request> reqList = new ArrayList<>();
         Random r = new Random();
         int noOfRequests = getPoisson(lambda);
@@ -28,7 +28,7 @@ public class RequestGenerator {
 
             while (originNode.equals(destinationNode)) destinationNode = graph.getNode(r.nextInt(graph.getNodeCount()));
 
-            Request req = new Request(idCounter++, originNode, destinationNode);
+            Request req = new Request(idCounter++, originNode, destinationNode, timeStep);
             reqList.add(req);
         }
 

@@ -1,7 +1,6 @@
 package AmodSimulator;
 
 import org.graphstream.graph.Edge;
-import org.graphstream.graph.Element;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
@@ -14,13 +13,13 @@ public class Vehicle extends Observable{
 
     private String id;
     private ArrayList<Request> requests;
-    private double speed = 0.002; //distance per timestep
+    private int speed = 1; //distance per timestep
     private Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
     private int finishTime;
     
     //summed info of vehicle
-    private double emptyKilometersDriven;
-    private double occupiedKilometersDriven;
+    private int emptyKilometersDriven;
+    private int occupiedKilometersDriven;
     private int numRequestServiced;
     
 
@@ -40,13 +39,13 @@ public class Vehicle extends Observable{
         
         requests.add(request);
 
-        request.setUp(finishTime,location, speed);
+        request.setUp(finishTime, location, speed);
 
         location = request.getDestination();
         finishTime = request.getDestinationTime();
         
-        emptyKilometersDriven += request.getPathToOrigin().getPathWeight("layout.weight");
-        occupiedKilometersDriven += request.getPathToDestination().getPathWeight("layout.weight");
+        emptyKilometersDriven += (int) Math.round(request.getPathToOrigin().getPathWeight("layout.weight"));
+        occupiedKilometersDriven += (int) Math.round(request.getPathToDestination().getPathWeight("layout.weight"));
         numRequestServiced++;
         
         
@@ -62,7 +61,7 @@ public class Vehicle extends Observable{
         return requests;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
@@ -125,7 +124,8 @@ public class Vehicle extends Observable{
                 traversedSoFar -= edgeLength;
             }
             else {
-                return new SpritePosition(edge, convertToPercent(path, edge, traversedSoFar));
+                // todo : set status dynamically
+                return new SpritePosition(edge, convertToPercent(path, edge, traversedSoFar), "occupied");
             }
         }
 
