@@ -16,12 +16,12 @@ import java.util.*;
 
 public class AmodSimulator {
 
-    static final boolean PRINT = true;
+    static final boolean PRINT = false;
     private static String styleSheetPath = "styles/style.css";
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
     private static int timesteps = 10000000;
-    private static int numVehicles = 2;
-    static boolean IS_VISUAL = false;
+    private static int numVehicles = 10;
+    static boolean IS_VISUAL = true;
     private static List<Vehicle> activeVehicles;
     private static List<Vehicle> idleVehicles;
     private static List<Request> requests;
@@ -45,7 +45,7 @@ public class AmodSimulator {
         //}
 
         if (IS_VISUAL) {
-//            graph.display();
+            graph.display();
             String styleSheet = parseStylesheet(styleSheetPath);
             graph.addAttribute("ui.stylesheet", styleSheet);
         }
@@ -94,12 +94,13 @@ public class AmodSimulator {
             makeIdle(veh);
             if (PRINT) System.out.print(veh.getId() + ", ");
         }
+        vacancyMap.remove(timeStep);
         if (PRINT) System.out.println();
 
         //adding requests for the current timestep
-        requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
+        requests.addAll(RequestGenerator.generateRequests(graph,0.3, timeStep));
 
-        List<Vehicle> assignedVehicles = assign();
+        List<Vehicle> assignedVehicles = assign(timeStep);
 
         for (Vehicle veh : assignedVehicles) {
             addToVacancyMap(veh);
@@ -142,7 +143,7 @@ public class AmodSimulator {
 
     }
 
-    private static List<Vehicle> assign() {
+    private static List<Vehicle> assign(int timeStep) {
 
         List<Vehicle> assignedVehicles = new ArrayList<>();
 
