@@ -1,5 +1,6 @@
 package AmodSimulator;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Element;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -37,8 +38,13 @@ public class AmodSimulator {
 //        Map<Node, Map<Node, Integer>> lookupTable = new HashMap<>();
 //        graph.setAttribute("lookupTable", lookupTable);
 
+        // fixme : we should ensure this when building the graph already
+        for (Edge e : graph.getEdgeSet()) {
+            if ((double) e.getAttribute("layout.weight") < 1.0) e.setAttribute("layout.weight", 1.0);
+        }
+
         if (IS_VISUAL) {
-            graph.display();
+//            graph.display();
             String styleSheet = parseStylesheet(styleSheetPath);
             graph.addAttribute("ui.stylesheet", styleSheet);
         }
@@ -77,7 +83,7 @@ public class AmodSimulator {
     private static void tick(Graph graph, int timeStep) {
 
         //adding requests for the current timestep
-        requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
+        requests.addAll(RequestGenerator.generateRequests(graph,1, timeStep));
 
         List<Vehicle> assignedVehicles = assign();
 
@@ -99,7 +105,7 @@ public class AmodSimulator {
         for (Vehicle veh : activeVehicles) {
             SpritePosition spritePosition = veh.findAttachment(timeStep);
             Sprite s = sman.getSprite(veh.getId());
-
+            System.out.println("Spriteposition is: " + spritePosition);
             attachIfNeeded(s, spritePosition.getElement());
 
 //            if (spritePosition.getElement() instanceof Node) s.attachToNode(spritePosition.getElement().getId());
@@ -145,18 +151,6 @@ public class AmodSimulator {
             requests.remove(0);
         }
 
-//        // assigning vehicles to requests
-//        Iterator<Request> requestIterator = requests.iterator();
-//        List<Vehicle> assignedVehicles = new ArrayList<>();
-//        int counter = 0; // FIXME: should be deleted at some point
-//        while (requestIterator.hasNext()) {
-//            if (idleVehicles.size() > counter) {
-//                Vehicle veh = idleVehicles.get(counter);
-//                veh.addRequest(requestIterator.next());
-//                assignedVehicles.add(veh);
-//            }
-//            counter++;
-//        }
         return assignedVehicles;
     }
 

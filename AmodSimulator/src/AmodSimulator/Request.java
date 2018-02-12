@@ -68,16 +68,18 @@ public class Request {
         return startTime;
     }
 
-    public void setUp(int startTime, Node source, int speed) {
-        this.startTime = startTime;
+    public void setUp(int vehicleVacantTime, Node source, int speed) {
+        this.startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
 
         pathToOrigin = TripPlanner.getPath(source, origin);
         pathToDestination = TripPlanner.getPath(origin, destination);
 
+        System.out.println("origin path weight is: " + pathToOrigin.getPathWeight("layout.weight"));
+        // fixme : sometimes path weights are rounded to 0 which makes stuff fail
         originPathLength = (int) Math.round(pathToOrigin.getPathWeight("layout.weight"));
         destinationPathLength = (int) Math.round(pathToDestination.getPathWeight("layout.weight"));
 
-        originTime = startTime + (int) Math.floor(originPathLength / speed);
+        originTime = vehicleVacantTime + (int) Math.floor(originPathLength / speed);
         destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
 
         waitTime = originTime - generationTime;

@@ -5,6 +5,7 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 
 import static AmodSimulator.AmodSimulator.IS_VISUAL;
@@ -27,6 +28,7 @@ public class Vehicle extends Observable{
         this.id = id;
         requests = new ArrayList<>();
         location = startNode;
+        finishTime = 0;
     }
 
     
@@ -48,12 +50,12 @@ public class Vehicle extends Observable{
         occupiedKilometersDriven += (int) Math.round(request.getPathToDestination().getPathWeight("layout.weight"));
         numRequestServiced++;
         
-        
+
         if (IS_VISUAL) {
-            // todo Add info to request
+            // todo Add info to request - is superfluous?
         }
         
-        //todo calc and return arrivaltime
+        //todo calc and return arrivaltime - return void instead
         return 0;
     }
 
@@ -104,30 +106,62 @@ public class Vehicle extends Observable{
      * @param timeStep current timestep in simulation
      */
     public SpritePosition findAttachment(int timeStep) {
-        Request currentRequest = requests.get(0);
+        Request currentRequest = null;
 
-        // find current request
-        for (Request req : requests) {
-            if (timeStep > req.getDestinationTime()) continue;
-            currentRequest = req;
-            break;
+        Iterator<Request> requestIterator = requests.iterator();
+
+        while (requestIterator.hasNext()) {
+            Request req = requestIterator.next();
+            if (timeStep > req.getDestinationTime()) requests.remove(req);
+            else {
+                currentRequest = req;
+                break;
+            }
+            if (requests.isEmpty()) {
+                return new SpritePosition(location, 0.0, "idle");
+            }
         }
 
-        Path path = (timeStep < currentRequest.getOriginTime()) ? currentRequest.getPathToOrigin() : currentRequest.getPathToDestination();
+//        Path path = (timeStep < currentRequest.getOriginTime()) ? currentRequest.getPathToOrigin() : currentRequest.getPathToDestination();
 
-        double traversedSoFar = (timeStep - currentRequest.getStartTime()) * speed;
+        Path path;
+        String status;
+        System.out.println("current request is: " + currentRequest);
+        if (timeStep < currentRequest.getOriginTime()) {
+            path = currentRequest.getPathToOrigin();
+            status = "moving";
+        }
+        else {
+            path = currentRequest.getPathToDestination();
+            status = "occupied";
+        }
+
+        // FIXME: traversedSoFar is sometimes larger than the last edge, which shouldn't happen.
+        int traversedSoFar = (timeStep - currentRequest.getStartTime()) * speed;
+        traversedSoFar += speed; // because the current timestep is also counted
+        int edgeLength = 0;
+        Edge currentEdge = null;
+
+        if (traversedSoFar > path.getPathWeight("layout.weight")) {
+            System.out.println("HEY: traversedSoFar: " + traversedSoFar + " path weight: " + path.getPathWeight("layout.weight"));
+        }
 
         // find out which element to attach to
         for (Edge edge : path.getEdgeSet()) {
-            double edgeLength = edge.getAttribute("layout.weight");
-            if (traversedSoFar > edgeLength) {
+            currentEdge = edge;
+            edgeLength = (int) Math.round((double) edge.getAttribute("layout.weight"));
+            if (traversedSoFar >= edgeLength) {
                 traversedSoFar -= edgeLength;
             }
             else {
-                // todo : set status dynamically
-                return new SpritePosition(edge, convertToPercent(path, edge, traversedSoFar), "occupied");
+                return new SpritePosition(edge, convertToPercent(path, edge, traversedSoFar), status);
             }
+            // if we have reached originNode exactly
+            System.out.println("traversed so far is: " + traversedSoFar);
         }
+
+        // FIXME : sometimes traverSoFar is also larger than 0
+        if (traversedSoFar >= 0) return new SpritePosition(currentEdge, convertToPercent(path, currentEdge, edgeLength), status);
 
         System.out.println("THIS SHOULDN'T HAPPEN! REWORK-RAT WILL BE ANGRY!");
         return null;
