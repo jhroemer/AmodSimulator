@@ -19,12 +19,11 @@ public class ExperimentRunner {
     private static void runExperiment(Graph graph, int timesteps, boolean visual) {
         AmodSimulator simulator = new AmodSimulator(graph, visual);
 
-        if (visual) for (int j = 0; j < 50; j++) sleep(); //Makes the simulation start after the graph is drawn.
-
+        if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
         for (int i = 0; i < timesteps; i++) {
             simulator.tick(graph, i);
-            if (visual) sleep();
+            if (visual) sleep(50);
         }
 
         //simulator.getResults()
@@ -62,8 +61,8 @@ public class ExperimentRunner {
     /**
      * Makes thread sleep
      */
-    protected static void sleep() {
-        try { Thread.sleep(50); } catch (Exception e) {}
+    protected static void sleep(int duration) {
+        try { Thread.sleep(duration); } catch (Exception e) {}
     }
 
 

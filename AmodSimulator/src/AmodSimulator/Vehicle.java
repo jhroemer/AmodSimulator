@@ -56,12 +56,6 @@ public class Vehicle extends Observable{
         this.speed = speed;
     }
 
-    //////////NEW METHODS FOR NON-VISUAL EXPERIMENTS///////////////
-
-    public void arrive() {
-        System.out.println("arrive() is not implemented!");
-        //TODO should arrive set some more fields to the vehicles
-    }
 
     /**
      *
@@ -71,16 +65,6 @@ public class Vehicle extends Observable{
         return !requests.isEmpty();
     }
 
-    /**
-     * Takes a timestep
-     *
-     * @param //timeStep
-     * @return
-     */
-    //public int startRequest(int timeStep) {
-        
-    //    return 0;
-    //}
 
     public String getId() {
         return id;
