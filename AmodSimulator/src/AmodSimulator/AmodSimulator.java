@@ -19,7 +19,7 @@ public class AmodSimulator {
     static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private int numVehicles = 10;
-    boolean IS_VISUAL = true;
+    private boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
     private List<Request> requests;
