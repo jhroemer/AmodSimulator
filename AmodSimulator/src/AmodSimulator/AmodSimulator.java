@@ -89,8 +89,9 @@ public class AmodSimulator {
         //adding requests for the current timestep
         requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
+        //assigning vehicles to requests
         Map<Vehicle, Request> assignments = Utility.assign(idleVehicles,requests);
-
+        
         for (Vehicle veh : assignments.keySet()) {
             Request req = assignments.get(veh);
             veh.serviceRequest(req);
