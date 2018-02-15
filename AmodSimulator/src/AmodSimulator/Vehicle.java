@@ -43,8 +43,9 @@ public class Vehicle extends Observable{
         location = request.getDestination();
         vacantTime = request.getDestinationTime()+1;
         
-        emptyKilometersDriven += (int) Math.round(request.getPathToOrigin().getPathWeight("layout.weight"));
-        occupiedKilometersDriven += (int) Math.round(request.getPathToDestination().getPathWeight("layout.weight"));
+        emptyKilometersDriven += request.getOriginPathLength();
+        occupiedKilometersDriven += request.getDestinationPathLength();
+
         numRequestServiced++;
     }
 
@@ -116,14 +117,14 @@ public class Vehicle extends Observable{
         int edgeLength = 0;
         Edge currentEdge = null;
 
-        if (traversedSoFar > path.getPathWeight("layout.weight")) {
-            System.out.println("HEY: traversedSoFar: " + traversedSoFar + " path weight: " + path.getPathWeight("layout.weight"));
+        if (traversedSoFar > Utility.calcPathLength(path)) {
+            System.out.println("HEY: traversedSoFar: " + traversedSoFar + " path weight: " + Utility.calcPathLength(path));
         }
 
         // find out which element to attach to
         for (Edge edge : path.getEdgeSet()) {
             currentEdge = edge;
-            edgeLength = (int) Math.round((double) edge.getAttribute("layout.weight"));
+            edgeLength = edge.getAttribute("length");
             if (traversedSoFar >= edgeLength) {
                 traversedSoFar -= edgeLength;
             }
@@ -141,8 +142,9 @@ public class Vehicle extends Observable{
         return null;
     }
 
-    private double convertToPercent(Path path, Edge edge, double traversedSoFar) {
-        double percent = traversedSoFar / (double) edge.getAttribute("layout.weight");
+    private double convertToPercent(Path path, Edge edge, int traversedSoFar) {
+        double percent = ((double) traversedSoFar) / (int) edge.getAttribute("length");
+
         // if the source node of the edge has a lower index in path than the target node, then convert to percent normally
         if (path.getNodePath().indexOf(edge.getSourceNode()) < path.getNodePath().indexOf(edge.getTargetNode())) {
             return percent;
