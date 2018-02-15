@@ -82,4 +82,5 @@ public class Utility {
     }
 
 
+    public static int midlertidigPathLength() {return 0;}
 }
