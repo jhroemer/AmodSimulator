@@ -70,6 +70,22 @@ public class Request {
         return startTime;
     }
 
+    public int getGenerationTime() {
+        return generationTime;
+    }
+
+    public int getWaitTime() {
+        return waitTime;
+    }
+
+    public int getOriginPathLength() {
+        return originPathLength;
+    }
+
+    public int getDestinationPathLength() {
+        return destinationPathLength;
+    }
+
     public void setUp(int vehicleVacantTime, Node source, int speed) {
         // when does this request start being serviced
         // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
@@ -78,10 +94,8 @@ public class Request {
         pathToOrigin = TripPlanner.getPath(source, origin);
         pathToDestination = TripPlanner.getPath(origin, destination);
 
-        //System.out.println("origin path weight is: " + pathToOrigin.getPathWeight("layout.weight"));
-        // fixme : sometimes path weights are rounded to 0 which makes stuff fail
-        originPathLength = (int) Math.round(pathToOrigin.getPathWeight("layout.weight"));
-        destinationPathLength = (int) Math.round(pathToDestination.getPathWeight("layout.weight"));
+        originPathLength = Utility.calcPathLength(pathToOrigin);
+        destinationPathLength = Utility.calcPathLength(pathToDestination);
 
         originTime = startTime + (int) Math.floor(originPathLength / speed);
         destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
