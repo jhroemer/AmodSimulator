@@ -1,7 +1,9 @@
 package AmodSimulator;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+import org.graphstream.graph.Path;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,4 +55,17 @@ public class Utility {
         return styleSheet;
     }
 
+
+    /**
+     * Calculates the length of a path
+     * @param path
+     * @return
+     */
+    private int calcPathLength(Path path) {
+        int length = 0;
+        for (Edge e : path.getEdgeSet()) {
+            length += (int) e.getAttribute("length");
+        }
+        return length;
+    }
 }
