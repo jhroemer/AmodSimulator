@@ -1,7 +1,9 @@
 package AmodSimulator;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+import org.graphstream.graph.Path;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,6 +59,19 @@ public class Utility {
 
 
     /**
+     * Calculates the length of a path
+     * @param path
+     * @return
+     */
+    public static int calcPathLength(Path path) {
+        int length = 0;
+        for (Edge e : path.getEdgeSet()) {
+            length += (int) e.getAttribute("layout.weight");
+        }
+        return length;
+    }
+
+    /**
      * Assigns vehicles to requests by simply matching first vehicle to first request, second vehicle
      * to second request and so on, until either vehicles or requests are used up.
      * @param vehicles
@@ -81,6 +96,4 @@ public class Utility {
         return assignment;
     }
 
-
-    public static int midlertidigPathLength() {return 0;}
 }
