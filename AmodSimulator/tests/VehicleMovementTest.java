@@ -1,3 +1,4 @@
+import AmodSimulator.AmodSimulator;
 import AmodSimulator.Request;
 import AmodSimulator.TripPlanner;
 import AmodSimulator.Vehicle;
@@ -89,10 +90,13 @@ public class VehicleMovementTest {
         Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
         v1.setSpeed(1);
         v1.addRequest(r1);
+        AmodSimulator simulator = new AmodSimulator(graph, false);
 
         Vehicle v2 = new Vehicle("v2", graph.getNode("A"));
         v2.addRequest(r1);
         v2.setSpeed(8);
+
+
     }
 
     @Test
