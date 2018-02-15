@@ -3,16 +3,13 @@ package AmodSimulator;
 import org.graphstream.graph.Element;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.stream.file.FileSource;
-import org.graphstream.stream.file.FileSourceDGS;
 import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AmodSimulator {
 
@@ -59,11 +56,7 @@ public class AmodSimulator {
         requests.add(new Request(4,graph.getNode("A"),graph.getNode("B"),0));
         requests.add(new Request(5,graph.getNode("C"),graph.getNode("D"),0));
         requests.add(new Request(6,graph.getNode("D"),graph.getNode("C"),0));
-
-
     }
-
-
 
     /**
      * What happens within a timestep:
@@ -164,8 +157,23 @@ public class AmodSimulator {
         activeVehicles.add(veh);
     }
 
+    /**
+     * Adds a list of vehicles to the idle vehicles in the simulator
+     *
+     * @param listOfVehicles a list of vehicles that are added to the simulator
+     */
+    public void addVehicles(List<Vehicle> listOfVehicles) {
+        idleVehicles.addAll(listOfVehicles);
+    }
 
-
+    /**
+     * Primarily (so far) for testing purposes.
+     *
+     * @param request ..
+     */
+    public void addRequest(Request request) {
+        requests.add(request);
+    }
 
     public void printVacancyMap() {
         System.out.println("\n--- vacancyMap ---");
