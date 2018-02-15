@@ -15,13 +15,13 @@ public class RandomGraphGenerator {
     private static boolean DEBUG = false;
 
     public static void main(String[] args) {
-        countryGraph();
+        countrysideGraph();
     }
 
     /**
      * Builds a random graph that kinda resembles a rural areas with small cities
      */
-    public static void countryGraph() {
+    public static void countrysideGraph() {
 
         int minCitySize = 1;
         int maxCitySize = 10;
@@ -81,12 +81,14 @@ public class RandomGraphGenerator {
             roadNetwork.removeNode(mergeNodeCity);
         }
 
-        roadNetwork.display();
+        //for (Node n : roadNetwork) n.setAttribute("ui.label", n.getId());
+        for (Edge e : roadNetwork.getEdgeSet()) e.setAttribute("ui.label", e.getAttribute("layout.weight").toString());
 
-        // TODO: currently the weights from the city-clusters are null
+        // TODO: currently the weights from the city-clusters are null -- Astrid: I think we fixed this, right?
         for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
 
-        Utility.saveCompleteGraph("random1", roadNetwork);
+        roadNetwork.display();
+        //Utility.saveCompleteGraph("random1", roadNetwork);
     }
 
     /**
@@ -101,10 +103,6 @@ public class RandomGraphGenerator {
         Graph graph = new SingleGraph(name);
         RandomGenerator gen = new RandomGenerator(degree); // GraphStream's impl. of Erdos Renyi
 
-        //setting random weights between 0 and maxEdgeWeights on all edges
-        //gen.setEdgeAttributesRange(0.0, maxEdgeWeight);
-        //gen.addEdgeAttribute("layout.weight");
-
         //making the graph
         gen.addSink(graph);
         gen.begin();
@@ -118,7 +116,8 @@ public class RandomGraphGenerator {
             System.out.printf("Graph %s is not connected. Number of components are %d. Calculating new graph.\n", name, cc.getConnectedComponentsCount());
             return ErdosRenyiConnectedGraph(name, numVertices, degree, minEdgeWeight, maxEdgeWeight);
         }
-        
+
+        //setting random weights between minEdgeWeights and maxEdgeWeights on all edges
         for (Edge e : graph.getEdgeSet()) {
             int length = (int) (Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
             e.setAttribute("layout.weight", length);
