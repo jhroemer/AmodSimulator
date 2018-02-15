@@ -89,11 +89,17 @@ public class AmodSimulator {
         //adding requests for the current timestep
         requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
-        List<Vehicle> assignedVehicles = assign(timeStep);
-
-        for (Vehicle veh : assignedVehicles) {
+        //assigning vehicles to requests
+        Map<Vehicle, Request> assignments = Utility.assign(idleVehicles,requests);
+        
+        for (Vehicle veh : assignments.keySet()) {
+            Request req = assignments.get(veh);
+            veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);
+            assignedRequests.add(req);
+            requests.remove(req);
+            if (IS_VISUAL) veh.addRequest(req);
         }
 
         if (PRINT) printVacancyMap();
@@ -130,29 +136,6 @@ public class AmodSimulator {
             sprite.attachToEdge(element.getId());
         }
 
-    }
-
-    private List<Vehicle> assign(int timeStep) {
-
-        List<Vehicle> assignedVehicles = new ArrayList<>();
-
-        int numToAssign = Math.min(idleVehicles.size(),requests.size());
-        if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
-
-        for (int i = 0; i < numToAssign; i++) {
-            Vehicle veh = idleVehicles.get(i);
-            if (PRINT) System.out.println("\tVehicle "+ veh.getId() + " <-- request " + requests.get(i).getId());
-            veh.serviceRequest(requests.get(i));
-            assignedRequests.add(requests.get(i));
-            assignedVehicles.add(veh);
-            if (IS_VISUAL) veh.addRequest(requests.get(i));
-        }
-
-        for (int i = 0; i < numToAssign; i++) {
-            requests.remove(0);
-        }
-
-        return assignedVehicles;
     }
 
 
