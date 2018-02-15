@@ -64,7 +64,7 @@ public class Utility {
     public static int calcPathLength(Path path) {
         int length = 0;
         for (Edge e : path.getEdgeSet()) {
-            length += (int) e.getAttribute("length");
+            length += (int) e.getAttribute("layout.weight");
         }
         return length;
     }

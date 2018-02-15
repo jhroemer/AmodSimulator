@@ -124,7 +124,7 @@ public class Vehicle extends Observable{
         // find out which element to attach to
         for (Edge edge : path.getEdgeSet()) {
             currentEdge = edge;
-            edgeLength = edge.getAttribute("length");
+            edgeLength = edge.getAttribute("layout.weight");
             if (traversedSoFar >= edgeLength) {
                 traversedSoFar -= edgeLength;
             }
@@ -143,7 +143,7 @@ public class Vehicle extends Observable{
     }
 
     private double convertToPercent(Path path, Edge edge, int traversedSoFar) {
-        double percent = ((double) traversedSoFar) / (int) edge.getAttribute("length");
+        double percent = ((double) traversedSoFar) / (int) edge.getAttribute("layout.weight");
 
         // if the source node of the edge has a lower index in path than the target node, then convert to percent normally
         if (path.getNodePath().indexOf(edge.getSourceNode()) < path.getNodePath().indexOf(edge.getTargetNode())) {

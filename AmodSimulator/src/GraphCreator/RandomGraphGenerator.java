@@ -118,7 +118,7 @@ public class RandomGraphGenerator {
             System.out.printf("Graph %s is not connected. Number of components are %d. Calculating new graph.\n", name, cc.getConnectedComponentsCount());
             return ErdosRenyiConnectedGraph(name, numVertices, degree, minEdgeWeight, maxEdgeWeight);
         }
-
+        
         for (Edge e : graph.getEdgeSet()) {
             int length = (int) (Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
             e.setAttribute("layout.weight", length);
