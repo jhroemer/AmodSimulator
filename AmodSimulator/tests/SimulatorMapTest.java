@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class VehicleMovementTest {
+public class SimulatorMapTest {
     private Graph graph;
     private SpriteManager sman;
 
@@ -83,6 +83,13 @@ public class VehicleMovementTest {
         sman = null;
     }
 
+    // TODO : corner cases for testing:
+    // 1. vehicle gets a request with the same position as the vehicle
+    // 2. vehicle gets two requests that can be serviced within the same tick
+    // 3. vehicle gets a request in the same tick as it becomes vacant again
+    // 4. request is added with a wrong node?
+    // 5.
+
     @Test
     public void positionTest1() {
         setupGraph(1);
@@ -95,8 +102,6 @@ public class VehicleMovementTest {
         Vehicle v2 = new Vehicle("v2", graph.getNode("A"));
         v2.addRequest(r1);
         v2.setSpeed(8);
-
-
     }
 
     @Test
