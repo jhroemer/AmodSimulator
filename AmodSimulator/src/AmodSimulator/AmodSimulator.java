@@ -16,7 +16,7 @@ public class AmodSimulator {
     static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private int numVehicles;
-    private boolean IS_VISUAL = true;
+    boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
     private List<Request> requests;
@@ -33,6 +33,10 @@ public class AmodSimulator {
      * @param numVehicles
      */
     public AmodSimulator(Graph graph, boolean visual, int numVehicles) {
+
+        //printing the distances in the graph for debugging
+        Utility.printDistances(graph);
+
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         this.numVehicles = numVehicles;

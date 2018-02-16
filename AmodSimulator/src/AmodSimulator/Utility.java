@@ -1,9 +1,7 @@
 package AmodSimulator;
 
-import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.Path;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -84,4 +82,21 @@ public class Utility {
         return assignment;
     }
 
+    public static int getDist(Node origin, Node destination) {
+        return origin.getAttribute("distTo"+ destination.getId());
+    }
+
+    public static void printDistances(Graph graph) {
+        int n = graph.getNodeCount();
+        System.out.print("\t\t");
+        for (int j = 0; j < n; j++) System.out.print(graph.getNode(j).getId() + "\t");
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            System.out.print(i + "(" + graph.getNode(i).getId() + ") :");
+            for (int j = 0; j < n; j++) {
+                System.out.print("\t" + Utility.getDist(graph.getNode(i), graph.getNode(j)));
+            }
+            System.out.println();
+        }
+    }
 }

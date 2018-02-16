@@ -11,13 +11,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
-        runPredefinedExperiment(graph, 1000, false);
+        runPredefinedExperiment(graph, 1000, true);
+        //runExperiment(graph, 1000, false);
     }
 
     // todo : the experiment probably needs a set of params as arg that sets up no. vehicles, assignment method etc.?

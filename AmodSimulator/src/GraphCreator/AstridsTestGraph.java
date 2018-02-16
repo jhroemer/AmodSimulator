@@ -35,6 +35,9 @@ public class AstridsTestGraph {
         for (Node n : graph) n.setAttribute("ui.label", n.getId());
         for (Edge e : graph.getEdgeSet()) e.setAttribute("ui.label", e.getAttribute("layout.weight").toString());
 
+        //setting the distances between all nodes in the graph
+        Utility.setDistances(graph);
+
         //graph.display();
         Utility.saveCompleteGraph("AstridsTestGraph", graph);
     }
