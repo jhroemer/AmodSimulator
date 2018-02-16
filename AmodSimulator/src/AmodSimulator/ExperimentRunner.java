@@ -70,7 +70,7 @@ public class ExperimentRunner {
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
         for (int i = 0; i < timesteps; i++) {
-            simulator.tickWithPredefinedRequests(graph, i);
+            simulator.tick(graph, i);
             if (visual) sleep(50);
         }
 

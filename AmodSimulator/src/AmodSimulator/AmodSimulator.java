@@ -15,6 +15,7 @@ public class AmodSimulator {
 
     static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
+    private boolean TEST = false;
     private int numVehicles;
     private boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
@@ -54,6 +55,7 @@ public class AmodSimulator {
      * @param requestMap a mapping of timesteps -> list of requests for that timestep
      */
     public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap) {
+        TEST = true;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         activeVehicles = new ArrayList<>();
@@ -102,8 +104,9 @@ public class AmodSimulator {
         vacancyMap.remove(timeStep);
         if (PRINT) System.out.println();
 
-        //adding requests for the current timestep
-        requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
+        // adding requests for current timestep:
+        if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
+        else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         //assigning vehicles to requests
         Map<Vehicle, Request> assignments = Utility.assign(idleVehicles,requests);
@@ -124,35 +127,6 @@ public class AmodSimulator {
         if (IS_VISUAL) drawSprites(timeStep);
     }
 
-    /**
-     * Method used for testing.
-     * Allows to use the simulator with manually added requests.
-     */
-    void tickWithPredefinedRequests(Graph graph, int timeStep) {
-        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
-            makeIdle(veh);
-        }
-        vacancyMap.remove(timeStep);
-
-        // adding requests for current timestep:
-        requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
-
-        //assigning vehicles to requests
-        Map<Vehicle, Request> assignments = Utility.assign(idleVehicles, requests);
-
-        // todo : move into method?
-        for (Vehicle veh : assignments.keySet()) {
-            Request req = assignments.get(veh);
-            veh.serviceRequest(req);
-            addToVacancyMap(veh);
-            makeActive(veh);
-            assignedRequests.add(req);
-            requests.remove(req);
-            if (IS_VISUAL) veh.addRequest(req);
-        }
-
-        if (IS_VISUAL) drawSprites(timeStep);
-    }
 
     /**
      *
