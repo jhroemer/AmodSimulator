@@ -11,11 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class SimulatorMapTest {
+public class SimulatorTest {
     private Graph graph;
     private SpriteManager sman;
 
@@ -88,29 +90,36 @@ public class SimulatorMapTest {
     // 2. vehicle gets two requests that can be serviced within the same tick
     // 3. vehicle gets a request in the same tick as it becomes vacant again
     // 4. request is added with a wrong node?
-    // 5.
+    // 5. a set of requests are assigned within a timestep but one, that one is assigned in a later timestep to the first vehicle to finish
+    // 6.
 
+    // test the normal cases
     @Test
-    public void positionTest1() {
+    public void vacancyMapTest1() {
         setupGraph(1);
         Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
-        Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
         v1.setSpeed(1);
-        v1.addRequest(r1);
-        AmodSimulator simulator = new AmodSimulator(graph, false);
 
-        Vehicle v2 = new Vehicle("v2", graph.getNode("A"));
-        v2.addRequest(r1);
-        v2.setSpeed(8);
+        Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
+        List<Request> requestList1 = new ArrayList<>();
+        requestList1.add(r1);
+
+        Map<Integer, List<Request>> requestMap = new HashMap<>();
+        requestMap.put(0, requestList1);
+
+        AmodSimulator simulator = new AmodSimulator(graph, false);
     }
 
+    // test cases with several vehicles and requests that arrive at a later time
     @Test
-    public void positionTest2() {
+    public void vacancyMapTest2() {
         setupGraph(2);
         Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
         v2.setSpeed(1);
+
         Request r2 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
-        v2.addRequest(r2);
+        List<Request> requestList1 = new ArrayList<>();
+        requestList1.add(r2);
 
         for (int i = 1; i < 17; i++) {
         }
@@ -133,7 +142,7 @@ public class SimulatorMapTest {
     }
 
     @Test
-    public void vehicleStatusTest1() {
+    public void visualTest1() {
         setupGraph(1);
         Vehicle v1 = new Vehicle("v2", graph.getNode("B"));
         v1.setSpeed(1);
