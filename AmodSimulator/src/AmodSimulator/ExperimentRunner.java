@@ -17,14 +17,40 @@ public class ExperimentRunner {
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
-        runExperiment(graph,1000,false);
+        runPredefinedExperiment(graph, 1000, false);
     }
 
+    // todo : the experiment probably needs a set of params as arg that sets up no. vehicles, assignment method etc.?
+    /**
+     * Runs a single experiment
+     *
+     * @param graph
+     * @param timesteps
+     * @param visual
+     */
     private static void runExperiment(Graph graph, int timesteps, boolean visual) {
+        AmodSimulator simulator = new AmodSimulator(graph, visual, 10);
 
-        //--------------------//
+        if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
+
+        for (int i = 0; i < timesteps; i++) {
+            simulator.tick(graph, i);
+            if (visual) sleep(50);
+        }
+
+        //simulator.getResults()
+        //printResults()
+        //saveResultsAsFile()
+    }
+
+    /**
+     *
+     * @param graph
+     * @param timesteps
+     * @param visual
+     */
+    private static void runPredefinedExperiment(Graph graph, int timesteps, boolean visual) {
         //generating controlled vehicles and requests
-        //todo this is for testing the simulator. To be removed later.
         List<Vehicle> vehicles = new ArrayList<>();
         vehicles.add(new Vehicle("v1", graph.getNode("A")));
         vehicles.add(new Vehicle("v2", graph.getNode("F")));
@@ -38,12 +64,13 @@ public class ExperimentRunner {
         requests.add(new Request(6, graph.getNode("D"), graph.getNode("C"),0));
         Map<Integer, List<Request>> requestMap = new HashMap<>();
         requestMap.put(0, requests);
+
         AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap);
 
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
         for (int i = 0; i < timesteps; i++) {
-            simulator.tick(graph, i);
+            simulator.tickWithPredefinedRequests(graph, i);
             if (visual) sleep(50);
         }
 
