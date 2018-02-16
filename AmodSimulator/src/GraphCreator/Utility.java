@@ -1,6 +1,7 @@
 package GraphCreator;
 
 import AmodSimulator.TripPlanner;
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Path;
 import org.graphstream.stream.file.FileSinkDGS;
@@ -17,7 +18,21 @@ public class Utility {
         }
     }
 
-    //todo Er det lidt noget rod at denne metode skal bruge TripPlanner og AmodSimulator.Utility?
+
+    /**
+     * Calculates the length of a path
+     * @param path
+     * @return
+     */
+    public static int calcPathLength(Path path) {
+        int length = 0;
+        for (Edge e : path.getEdgeSet()) {
+            length += (int) e.getAttribute("layout.weight");
+        }
+        return length;
+    }
+
+    //todo Er det lidt noget rod at denne metode skal bruge TripPlanner?
     public static int[][] createPathLengthLookupTable(Graph graph) {
         int n = graph.getNodeCount();
         int[][] table = new int[n][n];
