@@ -15,7 +15,7 @@ public class AmodSimulator {
 
     static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
-    private int numVehicles = 10;
+    private int numVehicles;
     private boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
@@ -24,38 +24,59 @@ public class AmodSimulator {
     private SpriteManager sman;
     private List<Request> assignedRequests = new ArrayList<>();
 
-    public AmodSimulator(Graph graph, boolean visual) {
-
+    /**
+     * Normal constructor used to initialize a simulator
+     *
+     * @param graph
+     * @param visual
+     * @param numVehicles
+     */
+    public AmodSimulator(Graph graph, boolean visual, int numVehicles) {
         IS_VISUAL = visual;
         TripPlanner.init(graph);
-
+        this.numVehicles = numVehicles;
         activeVehicles = new ArrayList<>();
         idleVehicles = Utility.generateVehicles(graph, numVehicles);
         requests = new ArrayList<>();
 
         if (IS_VISUAL) {
-            sman = new SpriteManager(graph);
-            for (Vehicle v : idleVehicles) sman.addSprite(v.getId());
-            String styleSheet = Utility.parseStylesheet(styleSheetPath);
-            graph.addAttribute("ui.stylesheet", styleSheet);
-            graph.display();
+            setupVisuals(graph, idleVehicles);
         }
-        //--------------------//
-        //generating controlled vehicles and requests
-        //todo this is for testing the simulator. To be removed later.
-        idleVehicles = new ArrayList<>();
-        idleVehicles.add(new Vehicle("v1", graph.getNode("A")));
-        idleVehicles.add(new Vehicle("v2", graph.getNode("F")));
+    }
+
+    /**
+     * Constructor used for testing purposes with a predefined list of vehicles and requests
+     *
+     * @param graph
+     * @param visual
+     * @param vehicles
+     * @param requests
+     */
+    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, List<Request> requests) {
+        IS_VISUAL = visual;
+        TripPlanner.init(graph);
+        activeVehicles = new ArrayList<>();
+        idleVehicles = vehicles;
+        numVehicles = vehicles.size();
+        this.requests = requests;
+
         if (IS_VISUAL) {
-            sman.addSprite("v1");
-            sman.addSprite("v2");
+            setupVisuals(graph, idleVehicles);
         }
-        requests.add(new Request(1,graph.getNode("B"),graph.getNode("F"),0));
-        requests.add(new Request(2,graph.getNode("E"),graph.getNode("A"),0));
-        requests.add(new Request(3,graph.getNode("F"),graph.getNode("D"),0));
-        requests.add(new Request(4,graph.getNode("A"),graph.getNode("B"),0));
-        requests.add(new Request(5,graph.getNode("C"),graph.getNode("D"),0));
-        requests.add(new Request(6,graph.getNode("D"),graph.getNode("C"),0));
+    }
+
+    /**
+     * Helper-method that sets up the visual components
+     *
+     * @param graph
+     * @param idleVehicles
+     */
+    private void setupVisuals(Graph graph, List<Vehicle> idleVehicles) {
+        sman = new SpriteManager(graph);
+        for (Vehicle v : idleVehicles) sman.addSprite(v.getId());
+        String styleSheet = Utility.parseStylesheet(styleSheetPath);
+        graph.addAttribute("ui.stylesheet", styleSheet);
+        graph.display();
     }
 
     /**
@@ -100,6 +121,20 @@ public class AmodSimulator {
         if (IS_VISUAL) drawSprites(timeStep);
     }
 
+    // TODO
+
+    /**
+     * Method used for testing.
+     * Allows to use the simulator with manually added requests.
+     */
+    void tickWithPredefinedRequests() {
+
+    }
+
+    /**
+     * 
+     * @param timeStep
+     */
     private void drawSprites(int timeStep) {
         // iterate over all vehicles and draw sprites
         for (Vehicle veh : activeVehicles) {

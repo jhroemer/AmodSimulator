@@ -6,6 +6,8 @@ import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExperimentRunner {
 
@@ -17,7 +19,23 @@ public class ExperimentRunner {
     }
 
     private static void runExperiment(Graph graph, int timesteps, boolean visual) {
-        AmodSimulator simulator = new AmodSimulator(graph, visual);
+
+        //--------------------//
+        //generating controlled vehicles and requests
+        //todo this is for testing the simulator. To be removed later.
+        List<Vehicle> vehicles = new ArrayList<>();
+        vehicles.add(new Vehicle("v1", graph.getNode("A")));
+        vehicles.add(new Vehicle("v2", graph.getNode("F")));
+
+        List<Request> requests = new ArrayList<Request>();
+        requests.add(new Request(1,graph.getNode("B"),graph.getNode("F"),0));
+        requests.add(new Request(2,graph.getNode("E"),graph.getNode("A"),0));
+        requests.add(new Request(3,graph.getNode("F"),graph.getNode("D"),0));
+        requests.add(new Request(4,graph.getNode("A"),graph.getNode("B"),0));
+        requests.add(new Request(5,graph.getNode("C"),graph.getNode("D"),0));
+        requests.add(new Request(6,graph.getNode("D"),graph.getNode("C"),0));
+
+        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requests);
 
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
@@ -29,11 +47,7 @@ public class ExperimentRunner {
         //simulator.getResults()
         //printResults()
         //saveResultsAsFile()
-
     }
-
-
-
 
     /**
      * Constructs a <Code>Graph</Code> from an dgs-file
