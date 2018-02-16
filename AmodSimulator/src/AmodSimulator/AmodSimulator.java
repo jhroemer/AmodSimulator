@@ -23,6 +23,7 @@ public class AmodSimulator {
     private Map<Integer,List<Vehicle>> vacancyMap = new HashMap<>();
     private SpriteManager sman;
     private List<Request> assignedRequests = new ArrayList<>();
+    private Map<Integer, List<Request>> predefinedRequestsMap;
 
     /**
      * Normal constructor used to initialize a simulator
@@ -47,18 +48,19 @@ public class AmodSimulator {
     /**
      * Constructor used for testing purposes with a predefined list of vehicles and requests
      *
-     * @param graph
-     * @param visual
-     * @param vehicles
-     * @param requests
+     * @param graph the graph to run a simulation on
+     * @param visual a boolean that decides if visuals are shown or not
+     * @param vehicles a predefined list of vehicles
+     * @param requestMap a mapping of timesteps -> list of requests for that timestep
      */
-    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, List<Request> requests) {
+    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap) {
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         activeVehicles = new ArrayList<>();
         idleVehicles = vehicles;
         numVehicles = vehicles.size();
-        this.requests = requests;
+        requests = new ArrayList<>();
+        predefinedRequestsMap = requestMap;
 
         if (IS_VISUAL) {
             setupVisuals(graph, idleVehicles);
@@ -68,7 +70,7 @@ public class AmodSimulator {
     /**
      * Helper-method that sets up the visual components
      *
-     * @param graph
+     * @param graph the graph to run a simulation on
      * @param idleVehicles
      */
     private void setupVisuals(Graph graph, List<Vehicle> idleVehicles) {
@@ -105,7 +107,8 @@ public class AmodSimulator {
 
         //assigning vehicles to requests
         Map<Vehicle, Request> assignments = Utility.assign(idleVehicles,requests);
-        
+
+        // todo : move into method?
         for (Vehicle veh : assignments.keySet()) {
             Request req = assignments.get(veh);
             veh.serviceRequest(req);
@@ -121,18 +124,38 @@ public class AmodSimulator {
         if (IS_VISUAL) drawSprites(timeStep);
     }
 
-    // TODO
-
     /**
      * Method used for testing.
      * Allows to use the simulator with manually added requests.
      */
-    void tickWithPredefinedRequests() {
+    void tickWithPredefinedRequests(Graph graph, int timeStep) {
+        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
+            makeIdle(veh);
+        }
+        vacancyMap.remove(timeStep);
 
+        // adding requests for current timestep:
+        requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
+
+        //assigning vehicles to requests
+        Map<Vehicle, Request> assignments = Utility.assign(idleVehicles, requests);
+
+        // todo : move into method?
+        for (Vehicle veh : assignments.keySet()) {
+            Request req = assignments.get(veh);
+            veh.serviceRequest(req);
+            addToVacancyMap(veh);
+            makeActive(veh);
+            assignedRequests.add(req);
+            requests.remove(req);
+            if (IS_VISUAL) veh.addRequest(req);
+        }
+
+        if (IS_VISUAL) drawSprites(timeStep);
     }
 
     /**
-     * 
+     *
      * @param timeStep
      */
     private void drawSprites(int timeStep) {
