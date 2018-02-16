@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-
 public class SimulatorTest {
     private Graph graph;
     private SpriteManager sman;
@@ -97,31 +95,45 @@ public class SimulatorTest {
     @Test
     public void vacancyMapTest1() {
         setupGraph(1);
+
+        // vehicles
         Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
         v1.setSpeed(1);
+        List<Vehicle> vehicles = new ArrayList<>();
+        vehicles.add(v1);
 
+        // requests
         Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
-        List<Request> requestList1 = new ArrayList<>();
-        requestList1.add(r1);
-
+        List<Request> requestList = new ArrayList<>();
+        requestList.add(r1);
         Map<Integer, List<Request>> requestMap = new HashMap<>();
-        requestMap.put(0, requestList1);
+        requestMap.put(0, requestList);
 
-        AmodSimulator simulator = new AmodSimulator(graph, false);
+        AmodSimulator simulator = new AmodSimulator(graph, false, vehicles, requestMap);
     }
 
     // test cases with several vehicles and requests that arrive at a later time
     @Test
     public void vacancyMapTest2() {
         setupGraph(2);
+
+        // vehicles
         Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
         v2.setSpeed(1);
+        List<Vehicle> vehicles = new ArrayList<>();
+        vehicles.add(v2);
 
+        // requests
         Request r2 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
-        List<Request> requestList1 = new ArrayList<>();
-        requestList1.add(r2);
+        List<Request> requestList = new ArrayList<>();
+        requestList.add(r2);
+        Map<Integer, List<Request>> requestMap = new HashMap<>();
+        requestMap.put(0, requestList);
+
+        AmodSimulator simulator = new AmodSimulator(graph, false, vehicles, requestMap);
 
         for (int i = 1; i < 17; i++) {
+//            simulator.tick(graph, i); todo: has to be public
         }
     }
 
@@ -139,6 +151,8 @@ public class SimulatorTest {
         List<Vehicle> vehicleList = new ArrayList<>();
         vehicleList.add(v1);
         vehicleList.add(v2);
+
+
     }
 
     @Test
@@ -151,34 +165,10 @@ public class SimulatorTest {
     }
 
     @Test
-    public void vehicleStatusTest2() {
+    public void visualTest2() {
         setupGraph(2);
         Vehicle v1 = new Vehicle("v2", graph.getNode("B"));
         v1.setSpeed(1);
         Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
-        assertEquals(true, v1.getRequests().isEmpty());
-        v1.addRequest(r1);
-        assertEquals(false, v1.getRequests().isEmpty());
-    }
-
-    @Test
-    public void currentPathTest1() {
-
-        // TODO : move into a new test called lastnode/attachment test
-        setupGraph(1);
-        Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
-        v1.setSpeed(1);
-        Request r1 = new Request(1, graph.getNode("A"), graph.getNode("C"), 1);
-        v1.addRequest(r1);
-    }
-
-    @Test
-    public void currentPathTest2() {
-
-    }
-
-    @Test
-    public void currentPathTest3() {
-
     }
 }
