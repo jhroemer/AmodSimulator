@@ -18,7 +18,7 @@ public class ExperimentRunner {
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
-        runPredefinedExperiment(graph, 1000, true);
+        runPredefinedExperiment(graph, 1000, false);
         //runExperiment(graph, 1000, false);
     }
 
