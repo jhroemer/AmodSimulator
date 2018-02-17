@@ -1,16 +1,58 @@
 DGS004
 null 0 0
 an "A"
+cn "A"  "org.graphstream.algorithm.Dijkstra@27d6c5e0_result_":"org.graphstream.algorithm.Dijkstra$Data@7cd84586"
+cn "A"  "distToE":80
+cn "A"  "distToF":100
+cn "A"  "distToC":50
+cn "A"  "distToD":50
+cn "A"  "distToA":0
+cn "A"  "distToB":20
 cn "A"  "ui.label":"A"
 an "B"
+cn "B"  "org.graphstream.algorithm.Dijkstra@27d6c5e0_result_":"org.graphstream.algorithm.Dijkstra$Data@30dae81"
+cn "B"  "distToE":60
+cn "B"  "distToF":80
+cn "B"  "distToC":30
+cn "B"  "distToD":30
+cn "B"  "distToA":20
+cn "B"  "distToB":0
 cn "B"  "ui.label":"B"
 an "C"
+cn "C"  "org.graphstream.algorithm.Dijkstra@27d6c5e0_result_":"org.graphstream.algorithm.Dijkstra$Data@1b2c6ec2"
+cn "C"  "distToE":30
+cn "C"  "distToF":50
+cn "C"  "distToC":0
+cn "C"  "distToD":60
+cn "C"  "distToA":50
+cn "C"  "distToB":30
 cn "C"  "ui.label":"C"
 an "D"
+cn "D"  "org.graphstream.algorithm.Dijkstra@27d6c5e0_result_":"org.graphstream.algorithm.Dijkstra$Data@4edde6e5"
+cn "D"  "distToE":30
+cn "D"  "distToF":50
+cn "D"  "distToC":60
+cn "D"  "distToD":0
+cn "D"  "distToA":50
+cn "D"  "distToB":30
 cn "D"  "ui.label":"D"
 an "E"
+cn "E"  "org.graphstream.algorithm.Dijkstra@27d6c5e0_result_":"org.graphstream.algorithm.Dijkstra$Data@70177ecd"
+cn "E"  "distToE":0
+cn "E"  "distToF":20
+cn "E"  "distToC":30
+cn "E"  "distToD":30
+cn "E"  "distToA":80
+cn "E"  "distToB":60
 cn "E"  "ui.label":"E"
 an "F"
+cn "F"  "org.graphstream.algorithm.Dijkstra@27d6c5e0_result_":"org.graphstream.algorithm.Dijkstra$Data@1e80bfe8"
+cn "F"  "distToE":20
+cn "F"  "distToF":0
+cn "F"  "distToC":50
+cn "F"  "distToD":50
+cn "F"  "distToA":100
+cn "F"  "distToB":80
 cn "F"  "ui.label":"F"
 ae "AB" "A"  "B"
 ce "AB"  "ui.label":"20"

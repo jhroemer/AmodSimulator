@@ -91,17 +91,18 @@ public class Request {
         // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
         startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
 
-        pathToOrigin = TripPlanner.getPath(source, origin);
-        pathToDestination = TripPlanner.getPath(origin, destination);
-
-        originPathLength = Utility.calcPathLength(pathToOrigin);
-        destinationPathLength = Utility.calcPathLength(pathToDestination);
+        originPathLength = Utility.getDist(source, origin);
+        destinationPathLength = Utility.getDist(origin, destination);
 
         originTime = startTime + (int) Math.floor(originPathLength / speed);
         destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
 
         waitTime = originTime - generationTime;
 
+        //todo: if (AmodSimulator.IS_VISUAL) {
+        pathToOrigin = TripPlanner.getPath(source, origin);
+        pathToDestination = TripPlanner.getPath(origin, destination);
+        //}
 
         if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
     }
