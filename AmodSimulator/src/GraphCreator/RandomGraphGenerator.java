@@ -87,6 +87,9 @@ public class RandomGraphGenerator {
         // TODO: currently the weights from the city-clusters are null -- Astrid: I think we fixed this, right?
         for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
 
+        //setting the distances between all nodes in the graph
+        Utility.setDistances(roadNetwork);
+
         roadNetwork.display();
         //Utility.saveCompleteGraph("random1", roadNetwork);
     }

@@ -117,9 +117,11 @@ public class Vehicle extends Observable{
         int edgeLength = 0;
         Edge currentEdge = null;
 
-        if (traversedSoFar > Utility.calcPathLength(path)) {
-            System.out.println("HEY: traversedSoFar: " + traversedSoFar + " path weight: " + Utility.calcPathLength(path));
-        }
+
+        //TODO - Dette print virker ikke pt fordi calcPathLength er flyttet til GraphCreator.Utility
+        //if (traversedSoFar > Utility.calcPathLength(path)) {
+        //    System.out.println("HEY: traversedSoFar: " + traversedSoFar + " path weight: " + Utility.calcPathLength(path));
+        //}
 
         // find out which element to attach to
         for (Edge edge : path.getEdgeSet()) {
