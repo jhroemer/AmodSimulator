@@ -156,7 +156,7 @@ public class SimulatorTest {
 
             if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(17).get(0).getId());
             if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(10).get(0).getId());
-            // todo : it takes one timestep to service a request with total length 0 - thats completely intended right=
+            // todo : it takes one timestep to service a request with total length 0 - thats completely intended right?
             if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(11).get(0).getId());
         }
     }
@@ -180,9 +180,10 @@ public class SimulatorTest {
         setup(1);
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
+            System.out.println("TIMESTEP IS: " + timestep);
             simulator.tick(graph, timestep);
-            // fixme : v1 should be servicing r1 and hence be attached to AB - but now it's attachment is null
-            if (timestep == 0) Assert.assertEquals("AB", sman.getSprite("v1").getAttachment().getId());
+            // fixme : nullpointer at timestep = 10
+            if (timestep == 0) Assert.assertEquals("AB", simulator.getSman().getSprite("v1").getAttachment().getId());
         }
     }
 

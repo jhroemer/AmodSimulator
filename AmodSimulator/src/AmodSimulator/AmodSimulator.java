@@ -230,4 +230,8 @@ public class AmodSimulator {
     public Map<Integer, List<Vehicle>> getVacancyMap() {
         return vacancyMap;
     }
+
+    public SpriteManager getSman() {
+        return sman;
+    }
 }
