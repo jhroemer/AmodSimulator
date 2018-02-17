@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AmodSimulator {
 
-    static final boolean PRINT = true;
+    static final boolean PRINT = false;
     private static String styleSheetPath = "styles/style.css";
     private boolean TEST = false;
     private int numVehicles;

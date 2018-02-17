@@ -23,6 +23,8 @@ public class SimulatorTest {
     private List<Vehicle> vehicles;
     private Map<Integer, List<Request>> requestMap;
     private AmodSimulator simulator;
+    private int simulation1Length = 20;
+    private int simulation2Length = 20;
 
     @Before
     public void setup() {
@@ -65,8 +67,10 @@ public class SimulatorTest {
             Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
             // vehicle v2 gets a request with the same position as the vehicle
             Request r2 = new Request(2, graph.getNode("D"), graph.getNode("E"), 1);
+            Request r3 = new Request(3, graph.getNode("E"), graph.getNode("E"), 10);
             addToRequestMap(r1);
             addToRequestMap(r2);
+            addToRequestMap(r3);
         }
         else if (no == 2) {
             graph = new MultiGraph("graph #2");
@@ -112,7 +116,8 @@ public class SimulatorTest {
         Utility.setDistances(graph);
         TripPlanner.init(graph);
         sman = new SpriteManager(graph);
-        simulator = new AmodSimulator(graph, false, vehicles, requestMap);
+        for (Vehicle v : vehicles) sman.addSprite(v.getId());
+        simulator = new AmodSimulator(graph, true, vehicles, requestMap);
     }
 
     /**
@@ -136,12 +141,8 @@ public class SimulatorTest {
     //  - check that the position of the sprite is correct, at different timesteps especially ones where edge has changed
     // TODO : corner cases
     // 2. vehicle gets two requests that can be serviced within the same tick
-    // 3. vehicle gets a request in the same tick as it becomes vacant again
     // 4. request is added with a wrong node?
     // 5. a set of requests are assigned within a timestep but one, that one is assigned in a later timestep to the first vehicle to finish
-    // 6.
-
-    //  - check that vacancymap is updated correctly
 
     /**
      * Test that is mainly concerned with checking if the vacancymap is updated correctly
@@ -150,11 +151,13 @@ public class SimulatorTest {
     public void vacancyMapTest1() {
         setup(1);
 
-        for (int timestep = 1; timestep < 21; timestep++) {
+        for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
 
-            // fixme : something weird happens here, v1 is added at timestep 22 in vacancymap, although it should only take 16 timesteps to service r1
-            if (timestep == 1) Assert.assertEquals("v1", simulator.getVacancyMap().get(18).get(0).getId());
+            if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(17).get(0).getId());
+            if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(10).get(0).getId());
+            // todo : it takes one timestep to service a request with total length 0 - thats completely intended right=
+            if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(11).get(0).getId());
         }
     }
 
@@ -175,6 +178,12 @@ public class SimulatorTest {
     @Test
     public void spritePositionTest1() {
         setup(1);
+
+        for (int timestep = 0; timestep < simulation1Length; timestep++) {
+            simulator.tick(graph, timestep);
+            // fixme : v1 should be servicing r1 and hence be attached to AB - but now it's attachment is null
+            if (timestep == 0) Assert.assertEquals("AB", sman.getSprite("v1").getAttachment().getId());
+        }
     }
 
     /**
