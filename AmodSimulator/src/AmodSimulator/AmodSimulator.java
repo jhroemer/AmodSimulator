@@ -222,4 +222,12 @@ public class AmodSimulator {
         }
         System.out.println("\n------------------");
     }
+
+    /**
+     *
+     * @return
+     */
+    public Map<Integer, List<Vehicle>> getVacancyMap() {
+        return vacancyMap;
+    }
 }
