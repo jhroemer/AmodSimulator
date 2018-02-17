@@ -18,29 +18,31 @@ import java.util.Map;
 public class SimulatorTest {
     private Graph graph;
     private SpriteManager sman;
+    private List<Vehicle> vehicles;
+    private Map<Integer, List<Request>> requestMap;
+    private AmodSimulator simulator;
 
     @Before
     public void setup() {
-        // some common thing to setup?
-        // TODO: should we split up the tests, so that some tests are only concerned with sprites?
+    
+    }
+
+    @After
+    public void tearDown() {
+        graph = null;
+        sman = null;
+        vehicles = null;
+        requestMap = null;
+        simulator = null;
     }
 
     /**
      * Method that sets up the graph, spritemanager and initializes the tripplanner
      * @param no an int that decides which graph to initialize
      */
-    private void setupGraph(int no) {
-        if (no == 0) return;
+    private void setup(int no) {
         if (no == 1) {
             graph = new MultiGraph("graph #1");
-            graph.setAutoCreate(true);
-            graph.setStrict(false);
-            graph.addEdge("AB", "A", "B");
-            graph.addEdge("CB", "C", "B");
-            for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 2);
-        }
-        else if (no == 2) {
-            graph = new MultiGraph("graph #2");
             graph.setAutoCreate(true);
             graph.setStrict(false);
             graph.addEdge("AB", "A", "B");
@@ -48,9 +50,19 @@ public class SimulatorTest {
             graph.addEdge("DC", "D", "C");
             graph.addEdge("EC", "C", "E");
             for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 4);
+
+            // vehicles
+            vehicles = new ArrayList<>();
+            Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
+            v1.setSpeed(1);
+            vehicles.add(v1);
+            // requests
+            requestMap = new HashMap<>();
+            Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
+            requestMap.getOrDefault(r1.getGenerationTime(), new ArrayList<>()).add(r1);
         }
-        else if (no == 3) {
-            graph = new MultiGraph("graph #3");
+        else if (no == 2) {
+            graph = new MultiGraph("graph #2");
             graph.setAutoCreate(true);
             graph.setStrict(false);
             graph.addEdge("AB", "A", "B");
@@ -71,16 +83,28 @@ public class SimulatorTest {
                 }
                 edge.setAttribute("layout.weight", 5);
             }
+
+            // vehicles
+            vehicles = new ArrayList<>();
+            Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
+            v2.setSpeed(1);
+            vehicles.add(v2);
+
+            // requests
+            requestMap = new HashMap<>();
+            Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
+            requestMap.getOrDefault(r1.getGenerationTime(), new ArrayList<>()).add(r1);
         }
+
+        else try {
+                throw new Exception("setup() method was not called correctly");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         TripPlanner.init(graph);
         sman = new SpriteManager(graph);
-    }
-
-    @After
-    public void tearDown() {
-        graph = null;
-        sman = null;
+        simulator = new AmodSimulator(graph, false, vehicles, requestMap);
     }
 
     // TODO : corner cases for testing:
@@ -94,81 +118,33 @@ public class SimulatorTest {
     // test the normal cases
     @Test
     public void vacancyMapTest1() {
-        setupGraph(1);
+        setup(1);
+        for (int i = 1; i < 21; i++) {
 
-        // vehicles
-        Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
-        v1.setSpeed(1);
-        List<Vehicle> vehicles = new ArrayList<>();
-        vehicles.add(v1);
-
-        // requests
-        Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
-        List<Request> requestList = new ArrayList<>();
-        requestList.add(r1);
-        Map<Integer, List<Request>> requestMap = new HashMap<>();
-        requestMap.put(0, requestList);
-
-        AmodSimulator simulator = new AmodSimulator(graph, false, vehicles, requestMap);
+        }
     }
 
     // test cases with several vehicles and requests that arrive at a later time
     @Test
     public void vacancyMapTest2() {
-        setupGraph(2);
-
-        // vehicles
-        Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
-        v2.setSpeed(1);
-        List<Vehicle> vehicles = new ArrayList<>();
-        vehicles.add(v2);
-
-        // requests
-        Request r2 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
-        List<Request> requestList = new ArrayList<>();
-        requestList.add(r2);
-        Map<Integer, List<Request>> requestMap = new HashMap<>();
-        requestMap.put(0, requestList);
-
-        AmodSimulator simulator = new AmodSimulator(graph, false, vehicles, requestMap);
-
+        setup(2);
         for (int i = 1; i < 17; i++) {
-//            simulator.tick(graph, i); todo: has to be public
+//            simulator.tick(graph, i);
         }
     }
 
     @Test
-    public void positionTest3() {
-        setupGraph(3);
-        Vehicle v1 = new Vehicle("v1", graph.getNode("A")); //sman.addSprite("s1", AmodSprite.class));
-        Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
-        v1.setSpeed(2);
-        v2.setSpeed(2);
-        Request r1 = new Request(1, graph.getNode("I"), graph.getNode("D"), 1);
-        Request r2 = new Request(2, graph.getNode("C"), graph.getNode("G"), 1);
-        v1.addRequest(r1);
-        v2.addRequest(r2);
-        List<Vehicle> vehicleList = new ArrayList<>();
-        vehicleList.add(v1);
-        vehicleList.add(v2);
-
-
+    public void positionTest1() {
+        setup(2);
     }
 
     @Test
     public void visualTest1() {
-        setupGraph(1);
-        Vehicle v1 = new Vehicle("v2", graph.getNode("B"));
-        v1.setSpeed(1);
-        Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
-        // todo finish this test / or is it too simple and redundant? Rather make test 2 the first test case?
+        setup(1);
     }
 
     @Test
     public void visualTest2() {
-        setupGraph(2);
-        Vehicle v1 = new Vehicle("v2", graph.getNode("B"));
-        v1.setSpeed(1);
-        Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
+        setup(2);
     }
 }
