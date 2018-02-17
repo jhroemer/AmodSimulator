@@ -95,7 +95,7 @@ public class AmodSimulator {
      *
      * @param graph
      */
-    void tick(Graph graph, int timeStep) {
+    public void tick(Graph graph, int timeStep) {
         if (PRINT) System.out.println("\n\n//////// TICK " + timeStep + "/////////");
         // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
 
