@@ -141,12 +141,6 @@ public class SimulatorTest {
         }
     }
 
-    // todo : normal cases
-    // 1. a vehicle gets a request at a certain timestep:
-    //  - check that the position of the sprite is correct, at different timesteps especially ones where edge has changed
-    // TODO : corner cases
-    // 5. a set of requests are assigned within a timestep but one, that one is assigned in a later timestep to the first vehicle to finish
-
     /**
      * Test that is mainly concerned with checking if the vacancymap is updated correctly
      */
@@ -222,7 +216,24 @@ public class SimulatorTest {
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
-            if (timestep == 5) Assert.assertEquals("AE", simulator.getSman().getSprite("v1").getAttachment().getId());
+
+            if (timestep == 0) {
+                Assert.assertEquals("G", simulator.getSman().getSprite("v1").getAttachment().getId());  // fixme : attachment is null
+                Assert.assertEquals("B", simulator.getSman().getSprite("v2").getAttachment().getId());  // fixme : attachment is null
+            }
+
+            if (timestep == 1) Assert.assertEquals("B", simulator.getSman().getSprite("v2").getAttachment().getId());  // fixme : attachment is null
+
+            // remember, sprites are drawn in the end of a timestep, so the logic is a bit different from the vacancy thing..
+            if (timestep == 3) {
+                // v1
+                Assert.assertEquals("EF", simulator.getSman().getSprite("v1").getAttachment().getId());
+            }
+            if (timestep == 4) {
+                // v1
+                Assert.assertEquals("AE", simulator.getSman().getSprite("v1").getAttachment().getId()); // fixme : somehow it leaps all the way to "DA" in timestep 4 which it shouldn't
+                Assert.assertEquals(0.66, simulator.getSman().getSprite("v1").getX(), 0.01);      // fixme : position is 0.0 - which points to a problem when origin path is surpassed within a timestep something goes wrong
+            }
         }
     }
 }
