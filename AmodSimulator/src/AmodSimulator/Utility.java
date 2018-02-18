@@ -1,7 +1,11 @@
 package AmodSimulator;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;
+import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
+import org.jgrapht.graph.Multigraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -98,5 +102,38 @@ public class Utility {
             }
             System.out.println();
         }
+    }
+
+    //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
+    public static Map<Vehicle,Request> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
+
+        //MultiGraph from jgrapht with nodes and edges from graphstream:
+        Multigraph<Node,Edge> graph = new Multigraph<>(Edge.class);
+
+        Set<Node> vehicleNodes = new HashSet<>();
+        Set<Node> requestNodes = new HashSet<>();
+
+        for (Vehicle veh : vehicles) {
+            Node vehNode = veh.getLocation();
+            for (Request req : requests) {
+                Node reqNode = req.getOrigin();
+                Edge edge = graph.addEdge(vehNode,reqNode); //info to jgrapht
+                //todo make assignment class to use as edge :)
+                int weight = vehNode.getAttribute("distTo" + reqNode.getId());
+                graph.setEdgeWeight(edge,weight);
+            }
+        }
+
+        KuhnMunkresMinimalWeightBipartitePerfectMatching hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching(graph, vehicleNodes, requestNodes);
+        Matching<Node, Edge> matching = hungarian.getMatching();
+
+        Map<Vehicle,Request> assignment = new HashMap<>();
+
+        for (Edge e : matching.getEdges()) {
+            //assignment.put(e.get)
+        }
+
+        System.out.println("HungarianAssignment is not finished");
+        return assignment;
     }
 }
