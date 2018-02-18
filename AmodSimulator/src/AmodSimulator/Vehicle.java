@@ -138,6 +138,7 @@ public class Vehicle extends Observable{
         }
 
         // FIXME : sometimes traverSoFar is also larger than 0
+        // fixme : when given a path request with same origin and destination and position as vehicle, currentEdge is null
         if (traversedSoFar >= 0) return new SpritePosition(currentEdge, convertToPercent(path, currentEdge, edgeLength), status);
 
         System.out.println("THIS SHOULDN'T HAPPEN! REWORK-RAT WILL BE ANGRY!");
