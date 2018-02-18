@@ -52,7 +52,7 @@ public class SimulatorTest {
             graph.addEdge("AB", "A", "B");
             graph.addEdge("CB", "C", "B");
             graph.addEdge("DC", "D", "C");
-            graph.addEdge("EC", "C", "E");
+            graph.addEdge("EC", "E", "C");
             for (Edge edge : graph.getEdgeSet()) edge.setAttribute("layout.weight", 4);
 
             // vehicles
@@ -66,8 +66,8 @@ public class SimulatorTest {
             requestMap = new HashMap<>();
             Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
             // vehicle v2 gets a request with the same position as the vehicle
-            Request r2 = new Request(2, graph.getNode("D"), graph.getNode("E"), 1); // fixme : triggers a nullpointer from Vehicle.findAttachment() because currentEdge = null
-//            Request r3 = new Request(3, graph.getNode("E"), graph.getNode("E"), 10);
+            Request r2 = new Request(2, graph.getNode("D"), graph.getNode("E"), 1);
+//            Request r3 = new Request(3, graph.getNode("E"), graph.getNode("E"), 10); fixme : triggers a nullpointer from Vehicle.findAttachment() because currentEdge = null
             addToRequestMap(r1);
             addToRequestMap(r2);
 //            addToRequestMap(r3);
@@ -181,8 +181,20 @@ public class SimulatorTest {
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
-            // fixme : nullpointer in Vehicle.java at timestep = 10
             if (timestep == 0) Assert.assertEquals("AB", simulator.getSman().getSprite("v1").getAttachment().getId());
+            if (timestep == 3) {
+                // v1 position
+                Assert.assertEquals("CB", simulator.getSman().getSprite("v1").getAttachment().getId());
+                Assert.assertEquals(1.0, simulator.getSman().getSprite("v1").getX(), 0.01);
+                // v2 position
+                Assert.assertEquals("DC", simulator.getSman().getSprite("v2").getAttachment().getId());
+                Assert.assertEquals(0.75, simulator.getSman().getSprite("v2").getX(), 0.01);
+            }
+            if (timestep == 5) {
+                // v2 position
+                Assert.assertEquals("EC", simulator.getSman().getSprite("v2").getAttachment().getId());
+                Assert.assertEquals(0.75, simulator.getSman().getSprite("v2").getX(), 0.01);
+            }
         }
     }
 
@@ -192,5 +204,7 @@ public class SimulatorTest {
     @Test
     public void spritePositionTest2() {
         setup(2);
+
+
     }
 }
