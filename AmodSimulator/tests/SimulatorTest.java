@@ -89,22 +89,27 @@ public class SimulatorTest {
             graph.addEdge("IH", "I", "H");
             for (Edge edge : graph.getEdgeSet()) {
                 if (edge == graph.getEdge("EF")) {
-                    edge.setAttribute("layout.weight", 3);
+                    edge.setAttribute("layout.weight", 1);
                     continue;
                 }
-                edge.setAttribute("layout.weight", 5);
+                edge.setAttribute("layout.weight", 3);
             }
 
             // vehicles
             vehicles = new ArrayList<>();
+            Vehicle v1 = new Vehicle("v1", graph.getNode("G"));
             Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
+            v1.setSpeed(2);
             v2.setSpeed(1);
+            vehicles.add(v1);
             vehicles.add(v2);
 
             // requests
             requestMap = new HashMap<>();
-            Request r1 = new Request(2, graph.getNode("E"), graph.getNode("D"), 1);
-            requestMap.getOrDefault(r1.getGenerationTime(), new ArrayList<>()).add(r1);
+            Request r1 = new Request(1, graph.getNode("E"), graph.getNode("D"), 1);
+            Request r2 = new Request(2, graph.getNode("C"), graph.getNode("E"), 2);
+            addToRequestMap(r1);
+            addToRequestMap(r2);
         }
 
         else try {
@@ -140,8 +145,6 @@ public class SimulatorTest {
     // 1. a vehicle gets a request at a certain timestep:
     //  - check that the position of the sprite is correct, at different timesteps especially ones where edge has changed
     // TODO : corner cases
-    // 2. vehicle gets two requests that can be serviced within the same tick
-    // 4. request is added with a wrong node?
     // 5. a set of requests are assigned within a timestep but one, that one is assigned in a later timestep to the first vehicle to finish
 
     /**
@@ -154,8 +157,12 @@ public class SimulatorTest {
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
 
-            if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(17).get(0).getId());
+            if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(16).get(0).getId());
+            // fixme, currently its vacant at timestep 17
+            // this is because the request has a destinationtime of 16 and vacantTime is destinationTime+1 - but is the +1 not wrong?
+
             if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(10).get(0).getId());
+
             // todo : it takes one timestep to service a request with total length 0 - thats completely intended right?
             if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(11).get(0).getId());
         }
@@ -167,8 +174,10 @@ public class SimulatorTest {
     @Test
     public void vacancyMapTest2() {
         setup(2);
-        for (int i = 1; i < 17; i++) {
-            simulator.tick(graph, i);
+        for (int timestep = 0; timestep < simulation2Length; timestep++) {
+            simulator.tick(graph, timestep);
+
+//            if ()
         }
     }
 
@@ -196,6 +205,12 @@ public class SimulatorTest {
                 Assert.assertEquals(0.75, simulator.getSman().getSprite("v2").getX(), 0.01);
             }
         }
+        // v1
+        Assert.assertEquals("A", simulator.getSman().getSprite("v1").getAttachment().getId());  // fixme : is attached to AB and not A
+        Assert.assertEquals(0.0, simulator.getSman().getSprite("v1").getX(), 0.01);
+        // v2
+        Assert.assertEquals("E", simulator.getSman().getSprite("v2").getAttachment().getId());
+        Assert.assertEquals(0.0, simulator.getSman().getSprite("v2").getX(), 0.01);
     }
 
     /**
@@ -205,6 +220,9 @@ public class SimulatorTest {
     public void spritePositionTest2() {
         setup(2);
 
-
+        for (int timestep = 0; timestep < simulation1Length; timestep++) {
+            simulator.tick(graph, timestep);
+            if (timestep == 5) Assert.assertEquals("AE", simulator.getSman().getSprite("v1").getAttachment().getId());
+        }
     }
 }

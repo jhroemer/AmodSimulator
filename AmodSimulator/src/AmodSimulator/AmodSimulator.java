@@ -141,7 +141,7 @@ public class AmodSimulator {
         for (Vehicle veh : activeVehicles) {
             SpritePosition spritePosition = veh.findAttachment(timeStep);
             Sprite s = sman.getSprite(veh.getId());
-            System.out.println("Spriteposition is: " + spritePosition);
+            System.out.println("Spriteposition is: " + spritePosition.getElement().getId() + " at: " + spritePosition.getPosition());
             attachIfNeeded(s, spritePosition.getElement());
             s.setPosition(spritePosition.getPosition());
             s.setAttribute("ui.class", spritePosition.getStatus());
