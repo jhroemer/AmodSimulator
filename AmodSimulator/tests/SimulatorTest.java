@@ -9,7 +9,6 @@ import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.spriteManager.SpriteManager;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -25,11 +24,6 @@ public class SimulatorTest {
     private AmodSimulator simulator;
     private int simulation1Length = 20;
     private int simulation2Length = 20;
-
-    @Before
-    public void setup() {
-    
-    }
 
     @After
     public void tearDown() {
@@ -58,10 +52,12 @@ public class SimulatorTest {
             // vehicles
             vehicles = new ArrayList<>();
             Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
-            v1.setSpeed(1);
             Vehicle v2 = new Vehicle("v2", graph.getNode("D"));
+            v1.setSpeed(1);
+            v2.setSpeed(1);
             vehicles.add(v1);
             vehicles.add(v2);
+
             // requests
             requestMap = new HashMap<>();
             Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);

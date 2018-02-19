@@ -94,8 +94,9 @@ public class Request {
         originPathLength = Utility.getDist(source, origin);
         destinationPathLength = Utility.getDist(origin, destination);
 
-        originTime = startTime + (int) Math.floor(originPathLength / speed);
-        destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
+        originTime = startTime + (int) Math.ceil(originPathLength / speed) -1; //-1 because we also drive within the starttime-timestep
+        //destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
+        destinationTime = startTime + (int) Math.ceil((originPathLength + destinationPathLength) / speed) -1; //-1 because we also drive within the starttime-timestep
 
         waitTime = originTime - generationTime;
 
