@@ -6,9 +6,8 @@ import org.graphstream.graph.Path;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Observable;
 
-public class Vehicle extends Observable{
+public class Vehicle implements HungarianNode{
 
     private String id;
     private ArrayList<Request> requests;
@@ -41,8 +40,10 @@ public class Vehicle extends Observable{
         request.setUp(vacantTime, location, speed);
 
         location = request.getDestination();
+        // fixme : is +1 wrong now? r1 in timestep 0 with pathlength 16 is currently vaccant in timestep 17
+        // but it should get the request and start driving in timestep 0, then timestep 16 should actually be the timestep in which is is vacant again, right?
         vacantTime = request.getDestinationTime()+1;
-        
+
         emptyKilometersDriven += request.getOriginPathLength();
         occupiedKilometersDriven += request.getDestinationPathLength();
 
@@ -101,7 +102,7 @@ public class Vehicle extends Observable{
 
         Path path;
         String status;
-        System.out.println("current request is: " + currentRequest);
+        System.out.println("current request is: " + currentRequest.getId());
         if (timeStep < currentRequest.getOriginTime()) {
             path = currentRequest.getPathToOrigin();
             status = "moving";
@@ -138,6 +139,7 @@ public class Vehicle extends Observable{
         }
 
         // FIXME : sometimes traverSoFar is also larger than 0
+        // fixme : when given a path request with same origin and destination and position as vehicle, currentEdge is null
         if (traversedSoFar >= 0) return new SpritePosition(currentEdge, convertToPercent(path, currentEdge, edgeLength), status);
 
         System.out.println("THIS SHOULDN'T HAPPEN! REWORK-RAT WILL BE ANGRY!");
@@ -169,5 +171,10 @@ public class Vehicle extends Observable{
 
     public Node getLocation() {
         return location;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Vehicle " + id;
     }
 }

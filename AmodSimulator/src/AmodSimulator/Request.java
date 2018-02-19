@@ -6,7 +6,7 @@ import org.graphstream.graph.Path;
 import static AmodSimulator.AmodSimulator.PRINT;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
-public class Request {
+public class Request implements HungarianNode{
 
     //original info:
     private int id;
@@ -32,6 +32,13 @@ public class Request {
         this.origin = location;
         this.destination = destination;
         this.generationTime = generationTime;
+
+
+        if (origin == destination) try {
+            throw new Exception("Request added with same origin and destination");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Node getOrigin() {
@@ -94,8 +101,10 @@ public class Request {
         originPathLength = Utility.getDist(source, origin);
         destinationPathLength = Utility.getDist(origin, destination);
 
-        originTime = startTime + (int) Math.floor(originPathLength / speed);
-        destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
+        originTime = (origin == source)? startTime : startTime + (int) Math.ceil(originPathLength / (double) speed) -1; //-1 because we also drive within the starttime-timestep
+        //destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
+        destinationTime = startTime + (int) Math.ceil((originPathLength + destinationPathLength) / (double) speed) -1; //-1 because we also drive within the starttime-timestep
+
 
         waitTime = originTime - generationTime;
 
@@ -105,5 +114,10 @@ public class Request {
         //}
 
         if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
+    }
+
+    @Override
+    public String getInfo() {
+        return "Request " + id;
     }
 }

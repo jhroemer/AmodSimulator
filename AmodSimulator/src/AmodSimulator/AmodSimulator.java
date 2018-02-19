@@ -113,7 +113,7 @@ public class AmodSimulator {
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         //assigning vehicles to requests
-        List<Assignment> assignments = Utility.assign(idleVehicles,requests);
+        List<Assignment> assignments = Utility.hungarianAssign(idleVehicles,requests);
 
         // todo : move into method?
         for (Assignment a : assignments) {
@@ -142,7 +142,7 @@ public class AmodSimulator {
         for (Vehicle veh : activeVehicles) {
             SpritePosition spritePosition = veh.findAttachment(timeStep);
             Sprite s = sman.getSprite(veh.getId());
-            System.out.println("Spriteposition is: " + spritePosition);
+            System.out.println("Spriteposition is: " + spritePosition.getElement().getId() + " at: " + spritePosition.getPosition());
             attachIfNeeded(s, spritePosition.getElement());
             s.setPosition(spritePosition.getPosition());
             s.setAttribute("ui.class", spritePosition.getStatus());
@@ -222,5 +222,17 @@ public class AmodSimulator {
             System.out.println();
         }
         System.out.println("\n------------------");
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Map<Integer, List<Vehicle>> getVacancyMap() {
+        return vacancyMap;
+    }
+
+    public SpriteManager getSman() {
+        return sman;
     }
 }
