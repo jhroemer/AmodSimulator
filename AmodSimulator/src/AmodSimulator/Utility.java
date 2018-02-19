@@ -67,22 +67,19 @@ public class Utility {
      * @param requests
      * @return
      */
-    public static Map<Vehicle, Request> assign(List<Vehicle> vehicles, List<Request> requests) {
+    public static List<Assignment> assign(List<Vehicle> vehicles, List<Request> requests) {
 
-        Map<Vehicle, Request> assignment = new HashMap<>();
+        List<Assignment> assignments = new ArrayList<>();
 
         int numToAssign = Math.min(vehicles.size(),requests.size());
         if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
 
         for (int i = 0; i < numToAssign; i++) {
-            assignment.put(vehicles.get(i),requests.get(i));
+            assignments.add(new Assignment(vehicles.get(i), requests.get(i)));
             if (PRINT) System.out.println("\tVehicle "+ vehicles.get(i).getId() + " <-- request " + requests.get(i).getId());
         }
 
-        //for (int i = 0; i < numToAssign; i++) {
-        //}
-
-        return assignment;
+        return assignments;
     }
 
     public static int getDist(Node origin, Node destination) {
@@ -104,7 +101,7 @@ public class Utility {
     }
 
     //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
-    public static Map<Vehicle,Request> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
+    public static List<Assignment> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
 
         //MultiGraph from jgrapht with nodes and edges from graphstream:
         Multigraph<Node,Assignment> graph = new Multigraph<>(Assignment.class);
@@ -126,16 +123,14 @@ public class Utility {
             }
         }
 
-        KuhnMunkresMinimalWeightBipartitePerfectMatching hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching(graph, vehicleNodes, requestNodes);
+        KuhnMunkresMinimalWeightBipartitePerfectMatching<Node,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
         Matching<Node, Assignment> matching = hungarian.getMatching();
 
-        Map<Vehicle,Request> assignment = new HashMap<>();
+        Set<Assignment> assignmentSet = matching.getEdges();
 
-        for (Assignment a : matching.getEdges()) {
-            //assignment.put(e.get)
-        }
+        List<Assignment> assignments = new ArrayList<>();
+        assignments.addAll(assignmentSet);
 
-        System.out.println("HungarianAssignment is not finished");
-        return assignment;
+        return assignments;
     }
 }
