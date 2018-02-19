@@ -84,7 +84,10 @@ public class AmodSimulator {
      */
     private void setupVisuals(Graph graph, List<Vehicle> idleVehicles) {
         sman = new SpriteManager(graph);
-        for (Vehicle v : idleVehicles) sman.addSprite(v.getId());
+        for (Vehicle v : idleVehicles) {
+            sman.addSprite(v.getId());
+            drawSprites(0);
+        }
         String styleSheet = Utility.parseStylesheet(styleSheetPath);
         graph.addAttribute("ui.stylesheet", styleSheet);
         graph.display();
