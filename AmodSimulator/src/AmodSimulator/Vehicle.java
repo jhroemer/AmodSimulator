@@ -93,7 +93,7 @@ public class Vehicle implements HungarianNode{
                 currentRequest = req;
                 break;
             }
-            if (requests.isEmpty()) {
+            if (requests.isEmpty()) { // todo : is this necessary anymore? Don't we know that requests is not empty because otherwise findAttachment() wouldn't have been called?
                 return new SpritePosition(location, 0.0, "idle");
             }
         }
@@ -114,6 +114,11 @@ public class Vehicle implements HungarianNode{
 
         // FIXME: traversedSoFar is sometimes larger than the last edge, which shouldn't happen.
         int traversedSoFar = (timeStep - currentRequest.getStartTime()) * speed;
+
+        // todo : this could be a fix to the problem, when path to origin has been surpassed within the first tick, because before it wasn't included
+        // fixme : but in it's current form it introduces new problems with attachments
+        // if (path == currentRequest.getPathToDestination()) traversedSoFar -= currentRequest.getOriginPathLength();
+
         traversedSoFar += speed; // because the current timestep is also counted
         int edgeLength = 0;
         Edge currentEdge = null;
