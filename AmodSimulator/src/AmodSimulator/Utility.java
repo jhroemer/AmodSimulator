@@ -1,6 +1,5 @@
 package AmodSimulator;
 
-import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;
@@ -108,28 +107,31 @@ public class Utility {
     public static Map<Vehicle,Request> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
 
         //MultiGraph from jgrapht with nodes and edges from graphstream:
-        Multigraph<Node,Edge> graph = new Multigraph<>(Edge.class);
+        Multigraph<Node,Assignment> graph = new Multigraph<>(Assignment.class);
 
         Set<Node> vehicleNodes = new HashSet<>();
         Set<Node> requestNodes = new HashSet<>();
 
         for (Vehicle veh : vehicles) {
-            Node vehNode = veh.getLocation();
+            Node vehNode = veh.getLocation(); //vehicles current location
             for (Request req : requests) {
-                Node reqNode = req.getOrigin();
-                Edge edge = graph.addEdge(vehNode,reqNode); //info to jgrapht
-                //todo make assignment class to use as edge :)
-                int weight = vehNode.getAttribute("distTo" + reqNode.getId());
-                graph.setEdgeWeight(edge,weight);
+                Node reqNode = req.getOrigin(); //request pick-up location
+                int weight = vehNode.getAttribute("distTo" + reqNode.getId()); //distance between the two locations
+
+                Assignment edge = graph.addEdge(vehNode,reqNode); //info to jgrapht
+                graph.setEdgeWeight(edge,weight); //info to jgrapht
+
+                edge.setVehicle(veh); //info to graphstream
+                edge.setRequest(req); //info to graphstream
             }
         }
 
         KuhnMunkresMinimalWeightBipartitePerfectMatching hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching(graph, vehicleNodes, requestNodes);
-        Matching<Node, Edge> matching = hungarian.getMatching();
+        Matching<Node, Assignment> matching = hungarian.getMatching();
 
         Map<Vehicle,Request> assignment = new HashMap<>();
 
-        for (Edge e : matching.getEdges()) {
+        for (Assignment a : matching.getEdges()) {
             //assignment.put(e.get)
         }
 
