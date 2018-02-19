@@ -15,6 +15,7 @@ import java.util.Map;
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
+    private static String assignmentMethod = "hungarian";
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
@@ -31,7 +32,7 @@ public class ExperimentRunner {
      * @param visual
      */
     private static void runExperiment(Graph graph, int timesteps, boolean visual) {
-        AmodSimulator simulator = new AmodSimulator(graph, visual, 10);
+        AmodSimulator simulator = new AmodSimulator(graph, visual, 10, assignmentMethod);
 
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
@@ -67,7 +68,7 @@ public class ExperimentRunner {
         Map<Integer, List<Request>> requestMap = new HashMap<>();
         requestMap.put(0, requests);
 
-        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap);
+        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap, assignmentMethod);
 
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 

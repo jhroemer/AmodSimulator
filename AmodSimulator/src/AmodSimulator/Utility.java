@@ -59,8 +59,23 @@ public class Utility {
         return styleSheet;
     }
 
+    //todo make ENUM
+    public static List<Assignment> assign(String type, List<Vehicle> vehicles, List<Request> requests) {
 
+        switch (type) {
+            case "brute":
+                return bruteForceAssign(vehicles,requests);
+            case "hungarian":
+                return hungarianAssign(vehicles,requests);
+        }
 
+        try {
+            throw new Exception(type + " is not a valid assignment method");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * Assigns vehicles to requests by simply matching first vehicle to first request, second vehicle
      * to second request and so on, until either vehicles or requests are used up.
@@ -68,7 +83,7 @@ public class Utility {
      * @param requests
      * @return
      */
-    public static List<Assignment> assign(List<Vehicle> vehicles, List<Request> requests) {
+    public static List<Assignment> bruteForceAssign(List<Vehicle> vehicles, List<Request> requests) {
 
         List<Assignment> assignments = new ArrayList<>();
 
@@ -103,6 +118,8 @@ public class Utility {
 
     //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
     public static List<Assignment> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
+
+        addDummyNodes(vehicles,requests);
 
         //MultiGraph from jgrapht with nodes and edges from graphstream:
         SimpleGraph<HungarianNode,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
@@ -153,5 +170,9 @@ public class Utility {
         assignments.addAll(assignmentSet);
 
         return assignments;
+    }
+
+    private static void addDummyNodes(List<Vehicle> vehicles, List<Request> requests) {
+
     }
 }

@@ -118,7 +118,7 @@ public class SimulatorTest {
         TripPlanner.init(graph);
         sman = new SpriteManager(graph);
         for (Vehicle v : vehicles) sman.addSprite(v.getId());
-        simulator = new AmodSimulator(graph, true, vehicles, requestMap);
+        simulator = new AmodSimulator(graph, true, vehicles, requestMap, "brute");
     }
 
     /**

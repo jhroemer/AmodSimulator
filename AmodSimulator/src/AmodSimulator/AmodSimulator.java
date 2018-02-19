@@ -15,6 +15,7 @@ public class AmodSimulator {
 
     static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
+    private String assignmentType;
     private boolean TEST = false;
     private int numVehicles;
     boolean IS_VISUAL = true;
@@ -33,11 +34,12 @@ public class AmodSimulator {
      * @param visual
      * @param numVehicles
      */
-    public AmodSimulator(Graph graph, boolean visual, int numVehicles) {
+    public AmodSimulator(Graph graph, boolean visual, int numVehicles, String assignmentType) {
 
         //printing the distances in the graph for debugging
         Utility.printDistances(graph);
 
+        this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         this.numVehicles = numVehicles;
@@ -58,8 +60,9 @@ public class AmodSimulator {
      * @param vehicles a predefined list of vehicles
      * @param requestMap a mapping of timesteps -> list of requests for that timestep
      */
-    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap) {
+    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap, String assignmentType) {
         TEST = true;
+        this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         activeVehicles = new ArrayList<>();
@@ -113,7 +116,7 @@ public class AmodSimulator {
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         //assigning vehicles to requests
-        List<Assignment> assignments = Utility.hungarianAssign(idleVehicles,requests);
+        List<Assignment> assignments = Utility.assign(assignmentType,idleVehicles,requests);
 
         // todo : move into method?
         for (Assignment a : assignments) {
