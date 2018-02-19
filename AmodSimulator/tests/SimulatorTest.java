@@ -134,18 +134,11 @@ public class SimulatorTest {
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
-            System.out.println(timestep);
 
             if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(16).get(0).getId());
-            // fixme, currently its vacant at timestep 17
-            // this is because the request has a destinationtime of 16 and vacantTime is destinationTime+1 - but is the +1 not wrong?
-
             if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(9).get(0).getId());
 
             simulator.printVacancyMap();
-            // todo : it takes one timestep to service a request with total length 0 - thats completely intended right?
-            // fixme : vehicle gets request at timestep 10 and is set to be vacant at timestep 10, that's not necessarily good..
-//            if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(10).get(0).getId());
         }
     }
 
@@ -186,7 +179,7 @@ public class SimulatorTest {
             }
         }
         // v1
-        Assert.assertEquals("A", simulator.getSman().getSprite("v1").getAttachment().getId());  // fixme : is attached to AB and not A
+        Assert.assertEquals("A", simulator.getSman().getSprite("v1").getAttachment().getId());
         Assert.assertEquals(0.0, simulator.getSman().getSprite("v1").getX(), 0.01);
         // v2
         Assert.assertEquals("E", simulator.getSman().getSprite("v2").getAttachment().getId());

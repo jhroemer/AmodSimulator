@@ -150,6 +150,14 @@ public class AmodSimulator {
             s.setPosition(spritePosition.getPosition());
             s.setAttribute("ui.class", spritePosition.getStatus());
         }
+
+        // todo : fixing that sprites didn't attach to nodes. do we have to detach, or re-attach?
+        for (Vehicle veh : idleVehicles) {
+            Sprite s = sman.getSprite(veh.getId());
+            s.setPosition(0.0);
+            s.setAttribute("ui.class", "idle");
+            s.attachToNode(veh.getLocation().getId());
+        }
     }
 
     /**
