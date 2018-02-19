@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AmodSimulator {
 
-    static final boolean PRINT = false;
+    static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private boolean TEST = false;
     private int numVehicles;
@@ -113,7 +113,7 @@ public class AmodSimulator {
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         //assigning vehicles to requests
-        List<Assignment> assignments = Utility.assign(idleVehicles,requests);
+        List<Assignment> assignments = Utility.hungarianAssign(idleVehicles,requests);
 
         // todo : move into method?
         for (Assignment a : assignments) {

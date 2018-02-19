@@ -4,7 +4,8 @@ import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;
 import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
-import org.jgrapht.graph.Multigraph;
+import org.jgrapht.graph.ClassBasedEdgeFactory;
+import org.jgrapht.graph.SimpleGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -104,27 +105,47 @@ public class Utility {
     public static List<Assignment> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
 
         //MultiGraph from jgrapht with nodes and edges from graphstream:
-        Multigraph<Node,Assignment> graph = new Multigraph<>(Assignment.class);
+        SimpleGraph<HungarianNode,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
 
-        Set<Node> vehicleNodes = new HashSet<>();
-        Set<Node> requestNodes = new HashSet<>();
+        Set<HungarianNode> vehicleNodes = new HashSet<>();
+        Set<HungarianNode> requestNodes = new HashSet<>();
+
+        for (Request req : requests) {
+            graph.addVertex(req);
+            requestNodes.add(req);
+        }
 
         for (Vehicle veh : vehicles) {
-            Node vehNode = veh.getLocation(); //vehicles current location
+            //Node vehNode = veh.getLocation(); //vehicles current location
+            graph.addVertex(veh);
+            vehicleNodes.add(veh);
             for (Request req : requests) {
-                Node reqNode = req.getOrigin(); //request pick-up location
-                int weight = vehNode.getAttribute("distTo" + reqNode.getId()); //distance between the two locations
+                //Node reqNode = req.getOrigin(); //request pick-up location
+                int intWeight = veh.getLocation().getAttribute("distTo" + req.getOrigin().getId()); //distance between the two locations
+                double weight = (double) intWeight;
+                //System.out.println("Adding edge from " + vehNode.getId() + " to " + reqNode.getId());
+                Assignment assignmentEdge = graph.addEdge(veh,req); //info to jgrapht
+                graph.setEdgeWeight(assignmentEdge, weight); //info to jgrapht
 
-                Assignment edge = graph.addEdge(vehNode,reqNode); //info to jgrapht
-                graph.setEdgeWeight(edge,weight); //info to jgrapht
-
-                edge.setVehicle(veh); //info to graphstream
-                edge.setRequest(req); //info to graphstream
+                assignmentEdge.setVehicle(veh); //info to graphstream
+                assignmentEdge.setRequest(req); //info to graphstream
             }
         }
 
-        KuhnMunkresMinimalWeightBipartitePerfectMatching<Node,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
-        Matching<Node, Assignment> matching = hungarian.getMatching();
+        /*
+        System.out.println("Nodes:");
+        for (HungarianNode h : graph.vertexSet()) {
+            System.out.println(h.getInfo());
+        }
+
+        System.out.println("Edges ");
+        for (Assignment a : graph.edgeSet()) {
+            System.out.println("Vehicle " + a.getVehicle().getId() + " --> Request " + a.getRequest().getId());
+        }
+        */
+
+        KuhnMunkresMinimalWeightBipartitePerfectMatching<HungarianNode,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
+        Matching<HungarianNode, Assignment> matching = hungarian.getMatching();
 
         Set<Assignment> assignmentSet = matching.getEdges();
 

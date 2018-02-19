@@ -5,6 +5,8 @@ public class Assignment {
     private Vehicle vehicle;
     private Request request;
 
+    public Assignment() {}
+
     public Assignment(Vehicle vehicle, Request request) {
         this.vehicle = vehicle;
         this.request = request;

@@ -6,9 +6,8 @@ import org.graphstream.graph.Path;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Observable;
 
-public class Vehicle extends Observable{
+public class Vehicle implements HungarianNode{
 
     private String id;
     private ArrayList<Request> requests;
@@ -172,5 +171,10 @@ public class Vehicle extends Observable{
 
     public Node getLocation() {
         return location;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Vehicle " + id;
     }
 }
