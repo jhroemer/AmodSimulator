@@ -108,16 +108,17 @@ public class AmodSimulator {
         vacancyMap.remove(timeStep);
         if (PRINT) System.out.println();
 
-        // adding requests for current timestep:
+        // adding requests for current time step:
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         //assigning vehicles to requests
-        Map<Vehicle, Request> assignments = Utility.assign(idleVehicles,requests);
+        List<Assignment> assignments = Utility.assign(idleVehicles,requests);
 
         // todo : move into method?
-        for (Vehicle veh : assignments.keySet()) {
-            Request req = assignments.get(veh);
+        for (Assignment a : assignments) {
+            Vehicle veh = a.getVehicle();
+            Request req = a.getRequest();
             veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);

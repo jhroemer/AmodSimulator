@@ -18,6 +18,24 @@
     <option name="OPEN_IN_BROWSER" value="true" />
     <option name="OPTION_INCLUDE_LIBS" value="false" />
   </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../../jgrapht-master/pom.xml" />
+        <option value="$PROJECT_DIR$/../jgrapht-master/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../../jgrapht-master/jgrapht-core/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jgrapht-master/jgrapht-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jgrapht-master/jgrapht-dist/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jgrapht-master/jgrapht-ext/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jgrapht-master/jgrapht-io/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jgrapht-master/pom.xml" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

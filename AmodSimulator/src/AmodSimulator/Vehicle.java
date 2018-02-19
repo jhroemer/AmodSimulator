@@ -169,4 +169,8 @@ public class Vehicle extends Observable{
     public void addRequest(Request request) {
         requests.add(request);
     }
+
+    public Node getLocation() {
+        return location;
+    }
 }
