@@ -32,6 +32,13 @@ public class Request {
         this.origin = location;
         this.destination = destination;
         this.generationTime = generationTime;
+
+
+        if (origin == destination) try {
+            throw new Exception("Request added with same origin and destination");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Node getOrigin() {
@@ -94,9 +101,10 @@ public class Request {
         originPathLength = Utility.getDist(source, origin);
         destinationPathLength = Utility.getDist(origin, destination);
 
-        originTime = startTime + (int) Math.ceil(originPathLength / speed) -1; //-1 because we also drive within the starttime-timestep
+        originTime = (origin == source)? startTime : startTime + (int) Math.ceil(originPathLength / (double) speed) -1; //-1 because we also drive within the starttime-timestep
         //destinationTime = originTime + (int) Math.floor(destinationPathLength / speed);
-        destinationTime = startTime + (int) Math.ceil((originPathLength + destinationPathLength) / speed) -1; //-1 because we also drive within the starttime-timestep
+        destinationTime = startTime + (int) Math.ceil((originPathLength + destinationPathLength) / (double) speed) -1; //-1 because we also drive within the starttime-timestep
+
 
         waitTime = originTime - generationTime;
 

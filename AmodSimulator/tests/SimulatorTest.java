@@ -63,10 +63,10 @@ public class SimulatorTest {
             Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
             // vehicle v2 gets a request with the same position as the vehicle
             Request r2 = new Request(2, graph.getNode("D"), graph.getNode("E"), 1);
-//            Request r3 = new Request(3, graph.getNode("E"), graph.getNode("E"), 10); fixme : triggers a nullpointer from Vehicle.findAttachment() because currentEdge = null
+            //Request r3 = new Request(3, graph.getNode("E"), graph.getNode("E"), 10); //fixme : triggers a nullpointer from Vehicle.findAttachment() because currentEdge = null
             addToRequestMap(r1);
             addToRequestMap(r2);
-//            addToRequestMap(r3);
+            //addToRequestMap(r3);
         }
         else if (no == 2) {
             graph = new MultiGraph("graph #2");
@@ -146,13 +146,15 @@ public class SimulatorTest {
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
+            System.out.println(timestep);
 
             if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(16).get(0).getId());
             // fixme, currently its vacant at timestep 17
             // this is because the request has a destinationtime of 16 and vacantTime is destinationTime+1 - but is the +1 not wrong?
 
-            if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(10).get(0).getId());
+            if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(9).get(0).getId());
 
+            simulator.printVacancyMap();
             // todo : it takes one timestep to service a request with total length 0 - thats completely intended right?
             if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(11).get(0).getId());
         }
