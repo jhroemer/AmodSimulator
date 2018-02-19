@@ -106,7 +106,7 @@ public class SimulatorTest {
         TripPlanner.init(graph);
         sman = new SpriteManager(graph);
         for (Vehicle v : vehicles) sman.addSprite(v.getId());
-        simulator = new AmodSimulator(graph, true, vehicles, requestMap);
+        simulator = new AmodSimulator(graph, true, vehicles, requestMap, "brute");
     }
 
     /**
@@ -134,6 +134,7 @@ public class SimulatorTest {
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
+            System.out.println(timestep);
 
             if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(16).get(0).getId());
             // fixme, currently its vacant at timestep 17
@@ -141,6 +142,7 @@ public class SimulatorTest {
 
             if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(9).get(0).getId());
 
+            simulator.printVacancyMap();
             // todo : it takes one timestep to service a request with total length 0 - thats completely intended right?
             // fixme : vehicle gets request at timestep 10 and is set to be vacant at timestep 10, that's not necessarily good..
 //            if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(10).get(0).getId());

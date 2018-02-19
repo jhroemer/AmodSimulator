@@ -3,6 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AmodSimulator.iml" filepath="$PROJECT_DIR$/AmodSimulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jgrapht-master/jgrapht.iml" filepath="$PROJECT_DIR$/../jgrapht-master/jgrapht.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jgrapht-master/jgrapht-core/jgrapht-core.iml" filepath="$PROJECT_DIR$/../jgrapht-master/jgrapht-core/jgrapht-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jgrapht-master/jgrapht-demo/jgrapht-demo.iml" filepath="$PROJECT_DIR$/../jgrapht-master/jgrapht-demo/jgrapht-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jgrapht-master/jgrapht-dist/jgrapht-dist.iml" filepath="$PROJECT_DIR$/../jgrapht-master/jgrapht-dist/jgrapht-dist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jgrapht-master/jgrapht-ext/jgrapht-ext.iml" filepath="$PROJECT_DIR$/../jgrapht-master/jgrapht-ext/jgrapht-ext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jgrapht-master/jgrapht-io/jgrapht-io.iml" filepath="$PROJECT_DIR$/../jgrapht-master/jgrapht-io/jgrapht-io.iml" />
     </modules>
   </component>
 </project>

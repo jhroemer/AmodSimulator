@@ -2,6 +2,10 @@ package AmodSimulator;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;
+import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
+import org.jgrapht.graph.ClassBasedEdgeFactory;
+import org.jgrapht.graph.SimpleGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,8 +59,23 @@ public class Utility {
         return styleSheet;
     }
 
+    //todo make ENUM
+    public static List<Assignment> assign(String type, List<Vehicle> vehicles, List<Request> requests) {
 
+        switch (type) {
+            case "brute":
+                return bruteForceAssign(vehicles,requests);
+            case "hungarian":
+                return hungarianAssign(vehicles,requests);
+        }
 
+        try {
+            throw new Exception(type + " is not a valid assignment method");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * Assigns vehicles to requests by simply matching first vehicle to first request, second vehicle
      * to second request and so on, until either vehicles or requests are used up.
@@ -64,22 +83,19 @@ public class Utility {
      * @param requests
      * @return
      */
-    public static Map<Vehicle, Request> assign(List<Vehicle> vehicles, List<Request> requests) {
+    public static List<Assignment> bruteForceAssign(List<Vehicle> vehicles, List<Request> requests) {
 
-        Map<Vehicle, Request> assignment = new HashMap<>();
+        List<Assignment> assignments = new ArrayList<>();
 
         int numToAssign = Math.min(vehicles.size(),requests.size());
         if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
 
         for (int i = 0; i < numToAssign; i++) {
-            assignment.put(vehicles.get(i),requests.get(i));
+            assignments.add(new Assignment(vehicles.get(i), requests.get(i)));
             if (PRINT) System.out.println("\tVehicle "+ vehicles.get(i).getId() + " <-- request " + requests.get(i).getId());
         }
 
-        //for (int i = 0; i < numToAssign; i++) {
-        //}
-
-        return assignment;
+        return assignments;
     }
 
     public static int getDist(Node origin, Node destination) {
@@ -98,5 +114,65 @@ public class Utility {
             }
             System.out.println();
         }
+    }
+
+    //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
+    public static List<Assignment> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
+
+        addDummyNodes(vehicles,requests);
+
+        //MultiGraph from jgrapht with nodes and edges from graphstream:
+        SimpleGraph<HungarianNode,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
+
+        Set<HungarianNode> vehicleNodes = new HashSet<>();
+        Set<HungarianNode> requestNodes = new HashSet<>();
+
+        for (Request req : requests) {
+            graph.addVertex(req);
+            requestNodes.add(req);
+        }
+
+        for (Vehicle veh : vehicles) {
+            //Node vehNode = veh.getLocation(); //vehicles current location
+            graph.addVertex(veh);
+            vehicleNodes.add(veh);
+            for (Request req : requests) {
+                //Node reqNode = req.getOrigin(); //request pick-up location
+                int intWeight = veh.getLocation().getAttribute("distTo" + req.getOrigin().getId()); //distance between the two locations
+                double weight = (double) intWeight;
+                //System.out.println("Adding edge from " + vehNode.getId() + " to " + reqNode.getId());
+                Assignment assignmentEdge = graph.addEdge(veh,req); //info to jgrapht
+                graph.setEdgeWeight(assignmentEdge, weight); //info to jgrapht
+
+                assignmentEdge.setVehicle(veh); //info to graphstream
+                assignmentEdge.setRequest(req); //info to graphstream
+            }
+        }
+
+        /*
+        System.out.println("Nodes:");
+        for (HungarianNode h : graph.vertexSet()) {
+            System.out.println(h.getInfo());
+        }
+
+        System.out.println("Edges ");
+        for (Assignment a : graph.edgeSet()) {
+            System.out.println("Vehicle " + a.getVehicle().getId() + " --> Request " + a.getRequest().getId());
+        }
+        */
+
+        KuhnMunkresMinimalWeightBipartitePerfectMatching<HungarianNode,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
+        Matching<HungarianNode, Assignment> matching = hungarian.getMatching();
+
+        Set<Assignment> assignmentSet = matching.getEdges();
+
+        List<Assignment> assignments = new ArrayList<>();
+        assignments.addAll(assignmentSet);
+
+        return assignments;
+    }
+
+    private static void addDummyNodes(List<Vehicle> vehicles, List<Request> requests) {
+
     }
 }
