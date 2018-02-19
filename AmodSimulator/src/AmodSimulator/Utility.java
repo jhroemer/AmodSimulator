@@ -119,7 +119,6 @@ public class Utility {
     //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
     public static List<Assignment> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
 
-        addDummyNodes(vehicles,requests);
 
         //MultiGraph from jgrapht with nodes and edges from graphstream:
         SimpleGraph<HungarianNode,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
@@ -161,6 +160,8 @@ public class Utility {
         }
         */
 
+        addDummyNodes(graph, vehicleNodes,requestNodes);
+
         KuhnMunkresMinimalWeightBipartitePerfectMatching<HungarianNode,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
         Matching<HungarianNode, Assignment> matching = hungarian.getMatching();
 
@@ -172,7 +173,35 @@ public class Utility {
         return assignments;
     }
 
-    private static void addDummyNodes(List<Vehicle> vehicles, List<Request> requests) {
+    private static void addDummyNodes(org.jgrapht.Graph<HungarianNode,Assignment> graph, Set<HungarianNode> vehicles, Set<HungarianNode> requests) {
+
+        int numVeh = vehicles.size();
+        int numReq = requests.size();
+        if (numVeh == numReq) return; //no need for dummy nodes
+
+        //making dummies
+        int numDummies = Math.abs(numVeh - numReq);
+        Set<HungarianNode> dummies = new HashSet<>();
+        for (int i = 0; i < numDummies; i++) {
+            DummyNode dummy = new DummyNode();
+            dummies.add(dummy);
+            graph.addVertex(dummy);
+        }
+
+        //setting edges from dummies to the vehicles/request in the biggest of the Sets
+        Set<HungarianNode> smallest = (numVeh < numReq)? vehicles : requests;
+        Set<HungarianNode> biggest = (numVeh > numReq)? vehicles : requests;
+
+        for (HungarianNode dummy : dummies) {
+            for (HungarianNode real : biggest) {
+                Assignment assignmentEdge = graph.addEdge(dummy,real); //assignments containing a dummy does not contain either a vehicle or a request
+                assignmentEdge.setToDummy();
+                graph.setEdgeWeight(assignmentEdge, Integer.MAX_VALUE);
+            }
+        }
+
+        //adding the dummies to the smallest of the Sets
+        smallest.addAll(dummies);
 
     }
 }

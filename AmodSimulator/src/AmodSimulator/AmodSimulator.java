@@ -115,11 +115,13 @@ public class AmodSimulator {
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
-        //assigning vehicles to requests
+        //assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
         List<Assignment> assignments = Utility.assign(assignmentType,idleVehicles,requests);
 
         // todo : move into method?
         for (Assignment a : assignments) {
+            if (a.isDummy()) continue;
+            System.out.println(a);
             Vehicle veh = a.getVehicle();
             Request req = a.getRequest();
             veh.serviceRequest(req);
@@ -216,15 +218,15 @@ public class AmodSimulator {
     }
 
     public void printVacancyMap() {
-        System.out.println("\n--- vacancyMap ---");
+        System.out.print("\n--- vacancyMap --");
         for (int i : vacancyMap.keySet()) {
-            System.out.print("  " + i + " --> ");
+            System.out.print("\n|\t" + i + "\t--> ");
             for (Vehicle v : vacancyMap.get(i)) {
-                System.out.print(v.getId() + ", ");
+                System.out.print(v.getId() + "\t|");
             }
-            System.out.println();
+            //System.out.println();
         }
-        System.out.println("\n------------------");
+        System.out.println("\n-----------------");
     }
 
     /**
