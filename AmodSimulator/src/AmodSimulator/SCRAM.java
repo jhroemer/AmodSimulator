@@ -29,9 +29,11 @@ public class SCRAM {
 
     public List<Assignment> match() {
         SCRAMEdge longestEdge = getMiniMalMaxEdgeInPerfectMatching();
+        System.out.println("LONGEST EDGE WEIGHT IS: " + longestEdge.weight);
         List<SCRAMEdge> minimalEdges = new ArrayList<>();
         for (SCRAMEdge e : edges) if (e.weight < longestEdge.weight) minimalEdges.add(e);
-        return hungarian(minimalEdges); // todo : use approach from Utility.hungarian()?
+        return null;
+//        return hungarian(minimalEdges); // todo : use approach from Utility.hungarian()?
     }
 
     private List<Assignment> hungarian(List<SCRAMEdge> minimalEdges) {
@@ -65,7 +67,7 @@ public class SCRAM {
      *
      * @param curNode
      * @param prevNode
-     * @return
+     * @return returns a request that has ... to be continued..
      */
     private Request flood(SCRAMNode curNode, SCRAMNode prevNode) {
         curNode.setVisited(true);
@@ -89,12 +91,21 @@ public class SCRAM {
     }
 
     /**
-     *
+     * Resetting stuff
      */
     private void resetFlood() {
-//        for () {
-//        }
-        for (Vehicle v : unmatchedAgents) {
+        for (Vehicle veh : vehicles) {          // line 13-15
+            veh.setVisited(false);
+            veh.setPrevious(null);
+        }
+
+        for (Request req : requests) {          // line 13-15
+            req.setVisited(false);
+            req.setPrevious(null);
+        }
+
+        for (Vehicle veh : unmatchedAgents) {   // line 16-17
+            flood(veh, null);
         }
     }
 
@@ -104,19 +115,33 @@ public class SCRAM {
      * @return
      */
     private Vehicle reversePath(Request matchedPosition) {
+        SCRAMNode node = matchedPosition;
+        while (node.getPrevious() != null) {
+            reverseEdgeDirection(node, node.getPrevious());
+        }
+
         return null;
     }
 
-
+    private void reverseEdgeDirection(SCRAMNode node, SCRAMNode previous) {
+        for (SCRAMEdge edge : edges) {
+            // FIXME: brute-force, has to be changed e.g. saved as a field in SCRAMNodes
+            if ((edge.start == node && edge.end == previous) || (edge.start == previous && edge.end == node)) {
+                SCRAMNode oldEnd = edge.end;
+                edge.end = edge.start;
+                edge.start = oldEnd;
+            }
+        }
+    }
 
 
     /**
      *
      */
     private void createMatchingEdges() {
-        for (Vehicle v : vehicles) {
-            for (Request r : requests) {
-                SCRAMEdge s = new SCRAMEdge(v, r);
+        for (Vehicle veh : vehicles) {
+            for (Request req : requests) {
+                SCRAMEdge s = new SCRAMEdge(veh, req);
                 edges.add(s);
             }
         }
@@ -130,10 +155,10 @@ public class SCRAM {
         SCRAMNode end;
         int weight;
 
-        public SCRAMEdge(Vehicle v, Request r) {
-            start = v;
-            end = r;
-            weight = Utility.getDist(v.getLocation(), r.getOrigin());
+        public SCRAMEdge(Vehicle veh, Request req) {
+            start = veh;
+            end = req;
+            weight = Utility.getDist(veh.getLocation(), req.getOrigin());
         }
 
         @Override
