@@ -117,7 +117,7 @@ public class Vehicle implements HungarianNode{
 
         // todo : this could be a fix to the problem, when path to origin has been surpassed within the first tick, because before it wasn't included
         // fixme : but in it's current form it introduces new problems with attachments
-        // if (path == currentRequest.getPathToDestination()) traversedSoFar -= currentRequest.getOriginPathLength();
+//         if (path == currentRequest.getPathToDestination()) traversedSoFar -= currentRequest.getOriginPathLength();
 
         traversedSoFar += speed; // because the current timestep is also counted
         int edgeLength = 0;
@@ -176,6 +176,10 @@ public class Vehicle implements HungarianNode{
 
     public Node getLocation() {
         return location;
+    }
+
+    public int getEmptyKilometersDriven() {
+        return emptyKilometersDriven;
     }
 
     @Override

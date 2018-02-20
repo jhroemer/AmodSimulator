@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AmodSimulator {
 
-    static final boolean PRINT = true;
+    static boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private AssignmentType assignmentType;
     private boolean TEST = false;
@@ -62,6 +62,7 @@ public class AmodSimulator {
      */
     public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap, AssignmentType assignmentType) {
         TEST = true;
+        PRINT = false;
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
@@ -90,7 +91,7 @@ public class AmodSimulator {
         }
         String styleSheet = Utility.parseStylesheet(styleSheetPath);
         graph.addAttribute("ui.stylesheet", styleSheet);
-        graph.display();
+        if (!TEST) graph.display();
     }
 
     /**
@@ -250,5 +251,13 @@ public class AmodSimulator {
 
     public SpriteManager getSman() {
         return sman;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Vehicle> getActiveVehicles() {
+        return activeVehicles;
     }
 }

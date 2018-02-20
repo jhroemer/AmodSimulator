@@ -244,4 +244,18 @@ public class SimulatorTest {
             }
         }
     }
+
+    /**
+     * Test that is mainly concerned with checking if sprites are positioned correctly
+     */
+    @Test
+    public void dataCollectionTest2() {
+        setup(2);
+
+        for (int timestep = 0; timestep < simulation2Length; timestep++) {
+            simulator.tick(graph, timestep);
+
+            if (timestep == 0) Assert.assertEquals(1, simulator.getActiveVehicles().get(1).getEmptyKilometersDriven());
+        }
+    }
 }
