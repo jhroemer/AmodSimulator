@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AmodSimulator {
 
-    static final boolean PRINT = true;
+    static boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private AssignmentType assignmentType;
     private boolean TEST = false;
@@ -62,6 +62,7 @@ public class AmodSimulator {
      */
     public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap, AssignmentType assignmentType) {
         TEST = true;
+        PRINT = false;
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
@@ -84,10 +85,13 @@ public class AmodSimulator {
      */
     private void setupVisuals(Graph graph, List<Vehicle> idleVehicles) {
         sman = new SpriteManager(graph);
-        for (Vehicle v : idleVehicles) sman.addSprite(v.getId());
+        for (Vehicle v : idleVehicles) {
+            sman.addSprite(v.getId());
+            drawSprites(0);
+        }
         String styleSheet = Utility.parseStylesheet(styleSheetPath);
         graph.addAttribute("ui.stylesheet", styleSheet);
-        graph.display();
+        if (!TEST) graph.display();
     }
 
     /**
@@ -151,6 +155,14 @@ public class AmodSimulator {
             attachIfNeeded(s, spritePosition.getElement());
             s.setPosition(spritePosition.getPosition());
             s.setAttribute("ui.class", spritePosition.getStatus());
+        }
+
+        // todo : fixing that sprites didn't attach to nodes. do we have to detach, or re-attach?
+        for (Vehicle veh : idleVehicles) {
+            Sprite s = sman.getSprite(veh.getId());
+            s.setPosition(0.0);
+            s.setAttribute("ui.class", "idle");
+            s.attachToNode(veh.getLocation().getId());
         }
     }
 
@@ -239,5 +251,13 @@ public class AmodSimulator {
 
     public SpriteManager getSman() {
         return sman;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Vehicle> getActiveVehicles() {
+        return activeVehicles;
     }
 }

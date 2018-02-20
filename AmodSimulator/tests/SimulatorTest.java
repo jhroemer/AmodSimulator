@@ -65,49 +65,39 @@ public class SimulatorTest {
             Request r1 = new Request(1, graph.getNode("C"), graph.getNode("A"), 0);
             // vehicle v2 gets a request with the same position as the vehicle
             Request r2 = new Request(2, graph.getNode("D"), graph.getNode("E"), 1);
-            //Request r3 = new Request(3, graph.getNode("E"), graph.getNode("E"), 10); //fixme : triggers a nullpointer from Vehicle.findAttachment() because currentEdge = null
             addToRequestMap(r1);
             addToRequestMap(r2);
-            //addToRequestMap(r3);
         }
         else if (no == 2) {
             graph = new MultiGraph("graph #2");
             graph.setAutoCreate(true);
             graph.setStrict(false);
-            graph.addEdge("AB", "A", "B");
-            graph.addEdge("AE", "A", "E");
-            graph.addEdge("DA", "D", "A");
-            graph.addEdge("EF", "E", "F");
-            graph.addEdge("FC", "F", "C");
-            graph.addEdge("CB", "C", "B");
-            graph.addEdge("BF", "B", "F");
-            graph.addEdge("GC", "G", "C");
-            graph.addEdge("FH", "F", "H");
-            graph.addEdge("GH", "G", "H");
-            graph.addEdge("IH", "I", "H");
-            for (Edge edge : graph.getEdgeSet()) {
-                if (edge == graph.getEdge("EF")) {
-                    edge.setAttribute("layout.weight", 1);
-                    continue;
-                }
-                edge.setAttribute("layout.weight", 3);
-            }
+            graph.addEdge("AB", "A", "B").setAttribute("layout.weight", 1);
+            graph.addEdge("CA", "C", "A").setAttribute("layout.weight", 3);
+            graph.addEdge("BC", "B", "C").setAttribute("layout.weight", 2);
+            graph.addEdge("CD", "C", "D").setAttribute("layout.weight", 2);
 
             // vehicles
             vehicles = new ArrayList<>();
-            Vehicle v1 = new Vehicle("v1", graph.getNode("G"));
-            Vehicle v2 = new Vehicle("v2", graph.getNode("B"));
+            Vehicle v1 = new Vehicle("v1", graph.getNode("A"));
+            Vehicle v2 = new Vehicle("v2", graph.getNode("C"));
             v1.setSpeed(2);
-            v2.setSpeed(1);
+            v2.setSpeed(3);
             vehicles.add(v1);
             vehicles.add(v2);
 
             // requests
+            // corner cases covered:
+            // 1. very short request that can be serviced completely within one tick
             requestMap = new HashMap<>();
-            Request r1 = new Request(1, graph.getNode("E"), graph.getNode("D"), 1);
-            Request r2 = new Request(2, graph.getNode("C"), graph.getNode("E"), 2);
+            Request r1 = new Request(1, graph.getNode("A"), graph.getNode("B"), 0);
+            Request r2 = new Request(2, graph.getNode("D"), graph.getNode("B"), 0);
+            Request r3 = new Request(3, graph.getNode("B"), graph.getNode("C"), 1);
+            Request r4 = new Request(4, graph.getNode("A"), graph.getNode("C"), 3);
             addToRequestMap(r1);
             addToRequestMap(r2);
+            addToRequestMap(r3);
+            addToRequestMap(r4);
         }
 
         else try {
@@ -148,17 +138,11 @@ public class SimulatorTest {
 
         for (int timestep = 0; timestep < simulation1Length; timestep++) {
             simulator.tick(graph, timestep);
-            System.out.println(timestep);
 
             if (timestep == 0) Assert.assertEquals("v1", simulator.getVacancyMap().get(16).get(0).getId());
-            // fixme, currently its vacant at timestep 17
-            // this is because the request has a destinationtime of 16 and vacantTime is destinationTime+1 - but is the +1 not wrong?
-
             if (timestep == 1) Assert.assertEquals("v2", simulator.getVacancyMap().get(9).get(0).getId());
 
             simulator.printVacancyMap();
-            // todo : it takes one timestep to service a request with total length 0 - thats completely intended right?
-            if (timestep == 10) Assert.assertEquals("v2", simulator.getVacancyMap().get(11).get(0).getId());
         }
     }
 
@@ -170,8 +154,14 @@ public class SimulatorTest {
         setup(2);
         for (int timestep = 0; timestep < simulation2Length; timestep++) {
             simulator.tick(graph, timestep);
-
-//            if ()
+            if (timestep == 0) {
+                // v1
+                Assert.assertEquals("v1", simulator.getVacancyMap().get(1).get(0).getId());
+                // v2
+                Assert.assertEquals("v2", simulator.getVacancyMap().get(2).get(0).getId());
+            }
+            if (timestep == 1) Assert.assertEquals("v1", simulator.getVacancyMap().get(2).get(1).getId());
+            if (timestep == 3) Assert.assertEquals("v2", simulator.getVacancyMap().get(5).get(0).getId());
         }
     }
 
@@ -200,7 +190,7 @@ public class SimulatorTest {
             }
         }
         // v1
-        Assert.assertEquals("A", simulator.getSman().getSprite("v1").getAttachment().getId());  // fixme : is attached to AB and not A
+        Assert.assertEquals("A", simulator.getSman().getSprite("v1").getAttachment().getId());
         Assert.assertEquals(0.0, simulator.getSman().getSprite("v1").getX(), 0.01);
         // v2
         Assert.assertEquals("E", simulator.getSman().getSprite("v2").getAttachment().getId());
@@ -213,27 +203,59 @@ public class SimulatorTest {
     @Test
     public void spritePositionTest2() {
         setup(2);
+        Assert.assertEquals("A", simulator.getSman().getSprite("v1").getAttachment().getId());
+        Assert.assertEquals("C", simulator.getSman().getSprite("v2").getAttachment().getId());
 
-        for (int timestep = 0; timestep < simulation1Length; timestep++) {
+        for (int timestep = 0; timestep < simulation2Length; timestep++) {
             simulator.tick(graph, timestep);
 
             if (timestep == 0) {
-                Assert.assertEquals("G", simulator.getSman().getSprite("v1").getAttachment().getId());  // fixme : attachment is null
-                Assert.assertEquals("B", simulator.getSman().getSprite("v2").getAttachment().getId());  // fixme : attachment is null
+                // v1
+                Assert.assertEquals("AB", simulator.getSman().getSprite("v1").getAttachment().getId());
+                Assert.assertEquals(1.0, simulator.getSman().getSprite("v1").getX(), 0.01);
+                // v2
+                Assert.assertEquals("BC", simulator.getSman().getSprite("v2").getAttachment().getId());
+                Assert.assertEquals(0.5, simulator.getSman().getSprite("v2").getX(), 0.01);
             }
 
-            if (timestep == 1) Assert.assertEquals("B", simulator.getSman().getSprite("v2").getAttachment().getId());  // fixme : attachment is null
+            if (timestep == 1) {
+                Assert.assertEquals("BC", simulator.getSman().getSprite("v2").getAttachment().getId());
+                Assert.assertEquals(0.0, simulator.getSman().getSprite("v2").getX(), 0.01);
+            }
 
             // remember, sprites are drawn in the end of a timestep, so the logic is a bit different from the vacancy thing..
             if (timestep == 3) {
                 // v1
-                Assert.assertEquals("EF", simulator.getSman().getSprite("v1").getAttachment().getId());
+                Assert.assertEquals("C", simulator.getSman().getSprite("v1").getAttachment().getId());
+                Assert.assertEquals(0.0, simulator.getSman().getSprite("v1").getX(), 0.01);
+                // v2
+                Assert.assertEquals("CA", simulator.getSman().getSprite("v2").getAttachment().getId());
+                // fixme : position is 0.0 even though it should 0.33, maybe the problem is that it completes the trip to origin and comes further within the same timestep
+                // the problem prob. comes from findattachment(), where traversedSoFar is not counted when originpath is surpassed within one timestep
+                Assert.assertEquals(0.33, simulator.getSman().getSprite("v2").getX(), 0.01);
             }
             if (timestep == 4) {
                 // v1
-                Assert.assertEquals("AE", simulator.getSman().getSprite("v1").getAttachment().getId()); // fixme : somehow it leaps all the way to "DA" in timestep 4 which it shouldn't
-                Assert.assertEquals(0.66, simulator.getSman().getSprite("v1").getX(), 0.01);      // fixme : position is 0.0 - which points to a problem when origin path is surpassed within a timestep something goes wrong
+                Assert.assertEquals("C", simulator.getSman().getSprite("v1").getAttachment().getId());
+                Assert.assertEquals(0.0, simulator.getSman().getSprite("v1").getX(), 0.01);
+                // v2
+                Assert.assertEquals("CA", simulator.getSman().getSprite("v2").getAttachment().getId());
+                Assert.assertEquals(0.0, simulator.getSman().getSprite("v2").getX(), 0.01);
             }
+        }
+    }
+
+    /**
+     * Test that is mainly concerned with checking if sprites are positioned correctly
+     */
+    @Test
+    public void dataCollectionTest2() {
+        setup(2);
+
+        for (int timestep = 0; timestep < simulation2Length; timestep++) {
+            simulator.tick(graph, timestep);
+
+            if (timestep == 0) Assert.assertEquals(1, simulator.getActiveVehicles().get(1).getEmptyKilometersDriven());
         }
     }
 }
