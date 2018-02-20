@@ -6,7 +6,7 @@ import org.graphstream.graph.Path;
 import static AmodSimulator.AmodSimulator.PRINT;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
-public class Request implements HungarianNode{
+public class Request extends SCRAMNode implements HungarianNode{
 
     //original info:
     private int id;
@@ -28,11 +28,11 @@ public class Request implements HungarianNode{
     private int destinationPathLength;
 
     public Request(int id, Node location, Node destination, int generationTime) {
+        super();
         this.id = id;
         this.origin = location;
         this.destination = destination;
         this.generationTime = generationTime;
-
 
         if (origin == destination) try {
             throw new Exception("Request added with same origin and destination");

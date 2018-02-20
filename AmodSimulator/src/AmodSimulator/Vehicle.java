@@ -7,7 +7,7 @@ import org.graphstream.graph.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Vehicle implements HungarianNode{
+public class Vehicle extends SCRAMNode implements HungarianNode {
 
     private String id;
     private ArrayList<Request> requests;
@@ -23,6 +23,7 @@ public class Vehicle implements HungarianNode{
     
 
     public Vehicle(String id, Node startNode) {
+        super();
         this.id = id;
         requests = new ArrayList<>();
         location = startNode;

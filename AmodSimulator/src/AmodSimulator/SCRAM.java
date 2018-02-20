@@ -1,7 +1,5 @@
 package AmodSimulator;
 
-import org.graphstream.graph.Edge;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +34,9 @@ public class SCRAM {
         return hungarian(minimalEdges); // todo : use approach from Utility.hungarian()?
     }
 
+    private List<Assignment> hungarian(List<SCRAMEdge> minimalEdges) {
+        return null;
+    }
 
 
     /**
@@ -51,7 +52,7 @@ public class SCRAM {
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet
                 longestEdge = edges.remove(0); // todo : indexoutofboundsexception
                 allowedEdges.add(longestEdge);
-                matchedPosition = flood(longestEdge.r, longestEdge.v);
+                matchedPosition = flood(longestEdge.end, longestEdge.start);
             }
             Vehicle matchedAgent = reversePath(matchedPosition);
             unmatchedAgents.remove(matchedAgent);
@@ -62,12 +63,29 @@ public class SCRAM {
 
     /**
      *
-     * @param r
-     * @param v
+     * @param curNode
+     * @param prevNode
      * @return
      */
-    private Request flood(Request r, Vehicle v) {
+    private Request flood(SCRAMNode curNode, SCRAMNode prevNode) {
+        curNode.setVisited(true);
+        curNode.setPrevious(prevNode);
+
+        // todo : curNode instanceof does not necessarily work, refer to pseudocode again if encountering problems
+        if (curNode instanceof Request && !doesRequestAppearInAllowedEdges(curNode)) return (Request) curNode;
+
+        for (SCRAMEdge e : allowedEdges) {
+            if (e.start == curNode && !e.end.isVisited()) { // fixme
+                Request val = flood(e.end, e.start);
+                if (val != null) return val;
+            }
+        }
         return null;
+    }
+
+    private boolean doesRequestAppearInAllowedEdges(SCRAMNode curNode) {
+        for (SCRAMEdge e : allowedEdges) if (e.end == curNode) return true;
+        return false;
     }
 
     /**
@@ -88,7 +106,7 @@ public class SCRAM {
     private Vehicle reversePath(Request matchedPosition) {
         return null;
     }
-    
+
 
 
 
@@ -108,13 +126,13 @@ public class SCRAM {
      *
      */
     private class SCRAMEdge implements Comparable<SCRAMEdge> {
-        Vehicle v;
-        Request r;
+        SCRAMNode start;
+        SCRAMNode end;
         int weight;
 
         public SCRAMEdge(Vehicle v, Request r) {
-            this.v = v;
-            this.r = r;
+            start = v;
+            end = r;
             weight = Utility.getDist(v.getLocation(), r.getOrigin());
         }
 
