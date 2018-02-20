@@ -11,11 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static AmodSimulator.AssignmentType.HUNGARIAN;
+
 
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
-    private static String assignmentMethod = "hungarian";
+    private static AssignmentType assignmentMethod = HUNGARIAN;
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
@@ -61,10 +63,10 @@ public class ExperimentRunner {
         List<Request> requests = new ArrayList<Request>();
         requests.add(new Request(1, graph.getNode("F"), graph.getNode("B"),0));
         requests.add(new Request(2, graph.getNode("A"), graph.getNode("E"),0));
-        //requests.add(new Request(3, graph.getNode("F"), graph.getNode("D"),0));
-        //requests.add(new Request(4, graph.getNode("A"), graph.getNode("B"),0));
-        //requests.add(new Request(5, graph.getNode("C"), graph.getNode("D"),0));
-        //requests.add(new Request(6, graph.getNode("D"), graph.getNode("C"),0));
+        requests.add(new Request(3, graph.getNode("F"), graph.getNode("D"),0));
+        requests.add(new Request(4, graph.getNode("A"), graph.getNode("B"),0));
+        requests.add(new Request(5, graph.getNode("C"), graph.getNode("D"),0));
+        requests.add(new Request(6, graph.getNode("D"), graph.getNode("C"),0));
         Map<Integer, List<Request>> requestMap = new HashMap<>();
         requestMap.put(0, requests);
 

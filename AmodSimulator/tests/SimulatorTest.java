@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static AmodSimulator.AssignmentType.BRUTE_FORCE;
+
 public class SimulatorTest {
     private Graph graph;
     private SpriteManager sman;
@@ -108,7 +110,7 @@ public class SimulatorTest {
         TripPlanner.init(graph);
         sman = new SpriteManager(graph);
         for (Vehicle v : vehicles) sman.addSprite(v.getId());
-        simulator = new AmodSimulator(graph, true, vehicles, requestMap, "brute");
+        simulator = new AmodSimulator(graph, true, vehicles, requestMap, BRUTE_FORCE);
     }
 
     /**
