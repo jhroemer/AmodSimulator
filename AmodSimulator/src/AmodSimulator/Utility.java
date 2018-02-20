@@ -60,13 +60,16 @@ public class Utility {
     }
 
     //todo make ENUM
-    public static List<Assignment> assign(String type, List<Vehicle> vehicles, List<Request> requests) {
+    public static List<Assignment> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
 
         switch (type) {
-            case "brute":
+            case BRUTE_FORCE:
                 return bruteForceAssign(vehicles,requests);
-            case "hungarian":
+            case HUNGARIAN:
                 return hungarianAssign(vehicles,requests);
+            case SCRAM:
+                System.out.println("SCRAM not implemented");
+                return new ArrayList<>();
         }
 
         try {
@@ -74,7 +77,7 @@ public class Utility {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
     /**
      * Assigns vehicles to requests by simply matching first vehicle to first request, second vehicle

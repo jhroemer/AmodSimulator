@@ -15,7 +15,7 @@ public class AmodSimulator {
 
     static final boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
-    private String assignmentType;
+    private AssignmentType assignmentType;
     private boolean TEST = false;
     private int numVehicles;
     boolean IS_VISUAL = true;
@@ -34,7 +34,7 @@ public class AmodSimulator {
      * @param visual
      * @param numVehicles
      */
-    public AmodSimulator(Graph graph, boolean visual, int numVehicles, String assignmentType) {
+    public AmodSimulator(Graph graph, boolean visual, int numVehicles, AssignmentType assignmentType) {
 
         //printing the distances in the graph for debugging
         Utility.printDistances(graph);
@@ -60,7 +60,7 @@ public class AmodSimulator {
      * @param vehicles a predefined list of vehicles
      * @param requestMap a mapping of timesteps -> list of requests for that timestep
      */
-    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap, String assignmentType) {
+    public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap, AssignmentType assignmentType) {
         TEST = true;
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;

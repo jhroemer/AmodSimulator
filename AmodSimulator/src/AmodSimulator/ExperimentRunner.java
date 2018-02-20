@@ -11,11 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static AmodSimulator.AssignmentType.HUNGARIAN;
+
 
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
-    private static String assignmentMethod = "hungarian";
+    private static AssignmentType assignmentMethod = HUNGARIAN;
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
