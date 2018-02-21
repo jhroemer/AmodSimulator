@@ -21,7 +21,7 @@ public class CplusplusSCRAM {
 
     //std::vector<std::vector<int> > out[2];  //adjacency list for each node
     //private int[][][] out;
-    private List<Integer>[][] out;
+    private ArrayList<Integer>[][] out;
 
     //std::vector<bool> visited[2];           //reached in floodfill
     private boolean[][] visited;
@@ -67,7 +67,7 @@ public class CplusplusSCRAM {
     // Returns:
     //  If it reaches an unassigned right node, the index of this node.
     //  Otherwise, -1.
-    int flood(int x, int y, int prev){
+    private int flood(int x, int y, int prev){
         //visited[x][y] = 1; //currentNode.visited = true;
         visited[x][y] = true;
         //back[x][y] = prev; //currentNode.previous = prevNode
@@ -127,7 +127,7 @@ public class CplusplusSCRAM {
 
 
     //int getMinimalMaxEdgeInPerfectMatching(std::vector<Edge> edges, int n, int k) {
-    int getMinimalMaxEdgeInPerfectMatching(List<Edge> edges, int k) { //todo k can just be n as well?
+    int getMinimalMaxEdgeInPerfectMatching(List<Edge> edges, int k) { //todo k can just be n as well? Or can we use it wisely?
         Collections.sort(edges);
 
         for (int i = 0; i < 2; i++) { //Clear the graph
@@ -225,10 +225,23 @@ public class CplusplusSCRAM {
         edges.add(new Edge(2, 2, 8));
 
         int edgeIndex = scram.getMinimalMaxEdgeInPerfectMatching(edges, 3); //todo k can just be n as well?
-
         int longestWeight = edges.get(edgeIndex).getWeight();
+        System.out.println("Should be 3: " + longestWeight);
 
-        System.out.println("result = " + longestWeight);
+        edges = new ArrayList<>();
+        edges.add(new Edge(0, 0, 1));
+        edges.add(new Edge(0, 1, 2));
+        edges.add(new Edge(0, 2, 7));
+        edges.add(new Edge(1, 0, 1));
+        edges.add(new Edge(1, 1, 2));
+        edges.add(new Edge(1, 2, 7));
+        edges.add(new Edge(2, 0, 1));
+        edges.add(new Edge(2, 1, 2));
+        edges.add(new Edge(2, 2, 7));
+
+        edgeIndex = scram.getMinimalMaxEdgeInPerfectMatching(edges, 3); //todo k can just be n as well?
+        longestWeight = edges.get(edgeIndex).getWeight();
+        System.out.println("Should be 7: " + longestWeight);
     }
 }
 
