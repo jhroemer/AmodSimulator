@@ -1,7 +1,6 @@
 import AmodSimulator.Request;
 import AmodSimulator.SCRAM;
 import AmodSimulator.Vehicle;
-import GraphCreator.Utility;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.junit.Test;
@@ -27,6 +26,8 @@ public class SCRAMTest {
         graph.addEdge("v3r2", "v3", "r2").setAttribute("layout.weight", 3);
         graph.addEdge("v3r3", "v3", "r3").setAttribute("layout.weight", 8);
 
+
+
         Vehicle v1 = new Vehicle("v1", graph.getNode("v1"));
         Vehicle v2 = new Vehicle("v2", graph.getNode("v2"));
         Vehicle v3 = new Vehicle("v3", graph.getNode("v3"));
@@ -42,7 +43,17 @@ public class SCRAMTest {
         requestList.add(r1);
         requestList.add(r2);
         requestList.add(r3);
-        Utility.setDistances(graph);
+        //Utility.setDistances(graph);
+
+        graph.getNode("v1").setAttribute("distTor1", 2);
+        graph.getNode("v1").setAttribute("distTor2", 3);
+        graph.getNode("v1").setAttribute("distTor3", 5);
+        graph.getNode("v2").setAttribute("distTor1", 5);
+        graph.getNode("v2").setAttribute("distTor2", 1);
+        graph.getNode("v2").setAttribute("distTor3", 2);
+        graph.getNode("v3").setAttribute("distTor1", 7);
+        graph.getNode("v3").setAttribute("distTor2", 3);
+        graph.getNode("v3").setAttribute("distTor3", 8);
 
         SCRAM s = new SCRAM(vehicleList, requestList);
         s.match();
