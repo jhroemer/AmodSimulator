@@ -86,7 +86,7 @@ public class SCRAM {
     }
 
     private boolean doesRequestAppearInAllowedEdges(SCRAMNode curNode) {
-        for (SCRAMEdge e : allowedEdges) if (e.end == curNode) return true;
+        for (SCRAMEdge e : allowedEdges) if (e.start == curNode) return true;
         return false;
     }
 
