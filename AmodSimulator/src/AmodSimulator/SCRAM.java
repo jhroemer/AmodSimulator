@@ -74,7 +74,7 @@ public class SCRAM {
         curNode.setPrevious(prevNode);
 
         // todo : curNode instanceof does not necessarily work, refer to pseudocode again if encountering problems
-        if (curNode instanceof Request && !doesRequestAppearInAllowedEdges(curNode)) return (Request) curNode;
+        if (curNode instanceof Request && !isThereOutgoingAllowedEdge(curNode)) return (Request) curNode;
 
         for (SCRAMEdge e : allowedEdges) {
             if (e.start == curNode && !e.end.isVisited()) { // fixme
@@ -85,8 +85,13 @@ public class SCRAM {
         return null;
     }
 
-    private boolean doesRequestAppearInAllowedEdges(SCRAMNode curNode) {
-        for (SCRAMEdge e : allowedEdges) if (e.end == curNode) return true;
+    /**
+     * Checks if
+     * @param curNode
+     * @return
+     */
+    private boolean isThereOutgoingAllowedEdge(SCRAMNode curNode) {
+        for (SCRAMEdge e : allowedEdges) if (e.start == curNode) return true;
         return false;
     }
 
@@ -118,6 +123,7 @@ public class SCRAM {
         SCRAMNode node = matchedPosition;
         while (node.getPrevious() != null) {
             reverseEdgeDirection(node, node.getPrevious());
+            node = node.getPrevious();
         }
 
         return null;
