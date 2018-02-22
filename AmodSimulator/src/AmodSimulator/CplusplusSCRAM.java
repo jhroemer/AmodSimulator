@@ -36,27 +36,37 @@ public class CplusplusSCRAM {
 
     //right nodes are used if and only if out[1][j].size() == 1.
 
+    private int answer;
 
-    public CplusplusSCRAM(int n) {
-        this.n = n;
-        //out = new int[2][n][n];
+
+    public CplusplusSCRAM(List<Vehicle> vehicles, List<Request> requests) {
+        if (vehicles.size() != requests.size()) try {
+            throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        n = vehicles.size();
+
+        List<Edge> edges = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
+                edges.add(new Edge(i,j,weight));
+            }
+        }
+
+        visited = new boolean[2][n];
+        back = new int[2][n];
+        used = new boolean[n];
         out = new ArrayList[2][n];
         for (int i = 0; i < n; i++) {
             out[0][i] = new ArrayList<>();
             out[1][i] = new ArrayList<>();
         }
 
-        visited = new boolean[2][n];
-        //visited = new ArrayList[2];
-        //visited[0]=new ArrayList<>();
-        //visited[1]=new ArrayList<>();
-
-        back = new int[2][n];
-        //back = new ArrayList[2];
-        //back[0]=new ArrayList<>();
-        //back[1]=new ArrayList<>();
-
-        used = new boolean[n];
+        answer = getMinimalMaxEdgeInPerfectMatching(edges, n);
     }
 
     // Floodfill from a node.
@@ -127,7 +137,7 @@ public class CplusplusSCRAM {
 
 
     //int getMinimalMaxEdgeInPerfectMatching(std::vector<Edge> edges, int n, int k) {
-    int getMinimalMaxEdgeInPerfectMatching(List<Edge> edges, int k) { //todo k can just be n as well? Or can we use it wisely?
+    public int getMinimalMaxEdgeInPerfectMatching(List<Edge> edges, int k) { //todo k can just be n as well? Or can we use it wisely?
         Collections.sort(edges);
 
         for (int i = 0; i < 2; i++) { //Clear the graph
@@ -170,6 +180,10 @@ public class CplusplusSCRAM {
         return answer;
     }
 
+    public int getAnswer() {
+        return answer;
+    }
+
     public static class Edge implements Comparable<Edge> {
         int weight;
         int start;
@@ -201,6 +215,7 @@ public class CplusplusSCRAM {
         }
     }
 
+    /*
     public static void main(String[] args) {
 
         CplusplusSCRAM scram = new CplusplusSCRAM(3);
@@ -243,5 +258,6 @@ public class CplusplusSCRAM {
         longestWeight = edges.get(edgeIndex).getWeight();
         System.out.println("Should be 7: " + longestWeight);
     }
+    */
 }
 
