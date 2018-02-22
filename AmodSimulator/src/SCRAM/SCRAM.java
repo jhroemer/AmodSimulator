@@ -1,5 +1,6 @@
 package SCRAM;
 
+import AmodSimulator.Assignment;
 import AmodSimulator.Request;
 import AmodSimulator.Vehicle;
 
@@ -42,36 +43,48 @@ public class SCRAM {
 
 
     public SCRAM(List<Vehicle> vehicles, List<Request> requests) {
+        // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
         if (vehicles.size() != requests.size()) try {
             throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // 1. Make the SCRAM edges
+//        if (vehicles.size() != requests.size()) {
+//            int difference = Math.abs(vehicles.size() - requests.size());
+//            if (vehicles.size() > requests.size()) vehicles.addAll(createDummyNodes(vehicles, difference));
+//            else requests.addAll(createDummyNodes(requests, difference));
+//        }
 
+        // 2. create edges for the bipartite matching-graph
         n = vehicles.size();
         List<Edge> edges = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
-                edges.add(new Edge(i,j,weight));
+                edges.add(new Edge(i, j, weight));
             }
         }
 
         visited = new boolean[2][n];
         back = new int[2][n];
         used = new boolean[n];
+        //noinspection unchecked
         out = new ArrayList[2][n];
         for (int i = 0; i < n; i++) {
             out[0][i] = new ArrayList<>();
             out[1][i] = new ArrayList<>();
         }
 
-        // 2. get the minimal
+        // 3. get the minimal
         longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching(edges, n);
 
+        // 4. 'remove' (set to infinity) edges that are longer than longestEdgeWeight, ensuring that they will not be included in the assignment
+        for (Edge edge : edges) if (edge.getWeight() > longestEdgeWeight) edge.setWeight(Integer.MAX_VALUE);
 
+        // 5. run hungarian on the reduced set of edges, to find a min-matching
+        Hungarian hungarian = new Hungarian(edges, n);
+        List<Assignment> assignments = hungarian.match();
     }
 
     // Floodfill from a node.
@@ -188,81 +201,5 @@ public class SCRAM {
     public int getLongestEdgeWeight() {
         return longestEdgeWeight;
     }
-
-    public static class Edge implements Comparable<Edge> {
-        int weight;
-        int start;
-        int end;
-
-        public Edge(int start, int end, int weight) {
-            this.weight = weight;
-            this.start = start;
-            this.end = end;
-        }
-
-        public int getStart() {
-            return start;
-        }
-
-        public int getEnd() {
-            return end;
-        }
-
-        @Override
-        public int compareTo(Edge other) {
-            if (this.weight < other.weight) return -1;
-            else if (this.weight == other.weight) return 0;
-            else return 1;
-        }
-
-        public int getWeight() {
-            return weight;
-        }
-    }
-
-    /*
-    public static void main(String[] args) {
-
-        SCRAM scram = new SCRAM(3);
-
-        List<Edge> edges = new ArrayList<>();
-
-        // 0 = v1
-        // 1 = v2
-        // 2 = v3
-        // 0 = r1
-        // 1 = r2
-        // 2 = r3
-
-        edges.add(new Edge(0, 0, 2));
-        edges.add(new Edge(0, 1, 3));
-        edges.add(new Edge(0, 2, 5));
-        edges.add(new Edge(1, 0, 5));
-        edges.add(new Edge(1, 1, 1));
-        edges.add(new Edge(1, 2, 2));
-        edges.add(new Edge(2, 0, 7));
-        edges.add(new Edge(2, 1, 3));
-        edges.add(new Edge(2, 2, 8));
-
-        int edgeIndex = scram.getMinimalMaxEdgeInPerfectMatching(edges, 3); //todo k can just be n as well?
-        int longestWeight = edges.get(edgeIndex).getWeight();
-        System.out.println("Should be 3: " + longestWeight);
-
-        edges = new ArrayList<>();
-        edges.add(new Edge(0, 0, 1));
-        edges.add(new Edge(0, 1, 2));
-        edges.add(new Edge(0, 2, 7));
-        edges.add(new Edge(1, 0, 1));
-        edges.add(new Edge(1, 1, 2));
-        edges.add(new Edge(1, 2, 7));
-        edges.add(new Edge(2, 0, 1));
-        edges.add(new Edge(2, 1, 2));
-        edges.add(new Edge(2, 2, 7));
-
-        edgeIndex = scram.getMinimalMaxEdgeInPerfectMatching(edges, 3); //todo k can just be n as well?
-        longestWeight = edges.get(edgeIndex).getWeight();
-        System.out.println("Should be 7: " + longestWeight);
-    }
-    */
 }
 

@@ -66,7 +66,7 @@ public class Utility {
 
         switch (type) {
             case BRUTE_FORCE:
-                return bruteForceAssign(vehicles,requests);
+                return schwachsinnAssign(vehicles,requests);
             case HUNGARIAN:
                 return hungarianAssign(vehicles,requests);
             case SCRAM:
@@ -88,7 +88,7 @@ public class Utility {
      * @param requests
      * @return
      */
-    public static List<Assignment> bruteForceAssign(List<Vehicle> vehicles, List<Request> requests) {
+    public static List<Assignment> schwachsinnAssign(List<Vehicle> vehicles, List<Request> requests) {
 
         List<Assignment> assignments = new ArrayList<>();
 
