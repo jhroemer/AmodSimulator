@@ -1,5 +1,7 @@
 package AmodSimulator;
 
+import SCRAM.HungarianNode;
+import SCRAM.SCRAMNode;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;

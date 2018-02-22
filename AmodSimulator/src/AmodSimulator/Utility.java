@@ -1,5 +1,7 @@
 package AmodSimulator;
 
+import SCRAM.DummyNode;
+import SCRAM.HungarianNode;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;

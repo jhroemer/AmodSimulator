@@ -1,4 +1,4 @@
-package AmodSimulator;
+package SCRAM;
 
 public class SCRAMNode {
     private boolean visited;

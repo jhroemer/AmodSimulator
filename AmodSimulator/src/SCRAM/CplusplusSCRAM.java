@@ -1,10 +1,14 @@
-package AmodSimulator;
+package SCRAM;
+
+import AmodSimulator.Request;
+import AmodSimulator.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CplusplusSCRAM {
+
 
     // remove an element from a vector by value.
     //#define VECREMOVE(vec, v) (vec).erase(  \

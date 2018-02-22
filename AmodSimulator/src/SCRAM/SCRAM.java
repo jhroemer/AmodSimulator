@@ -1,4 +1,9 @@
-package AmodSimulator;
+package SCRAM;
+
+import AmodSimulator.Assignment;
+import AmodSimulator.Request;
+import AmodSimulator.Utility;
+import AmodSimulator.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Collections;

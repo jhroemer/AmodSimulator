@@ -1,5 +1,5 @@
 import AmodSimulator.Request;
-import AmodSimulator.SCRAM;
+import SCRAM.SCRAM;
 import AmodSimulator.Vehicle;
 import GraphCreator.Utility;
 import org.graphstream.graph.Graph;

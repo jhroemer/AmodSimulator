@@ -1,4 +1,4 @@
-package AmodSimulator;
+package SCRAM;
 
 public interface HungarianNode {
     boolean visited = false;

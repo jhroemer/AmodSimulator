@@ -1,12 +1,14 @@
 package AmodSimulator;
 
+import SCRAM.HungarianNode;
+import SCRAM.SCRAMNode;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
 import static AmodSimulator.AmodSimulator.PRINT;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
-public class Request extends SCRAMNode implements HungarianNode{
+public class Request extends SCRAMNode implements HungarianNode {
 
     //original info:
     private int id;
