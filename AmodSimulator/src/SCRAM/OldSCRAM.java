@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Based on MMD+MSD^2 algorithm by MacAlpine etc...
  */
-public class SCRAM {
+public class OldSCRAM {
     List<Vehicle> vehicles;
     List<Request> requests;
     List<SCRAMEdge> allowedEdges;
@@ -21,14 +21,14 @@ public class SCRAM {
     List<Vehicle> unmatchedAgents;
     int n;
 
-    public SCRAM(List<Vehicle> vehicles, List<Request> requests) {
+    public OldSCRAM(List<Vehicle> vehicles, List<Request> requests) {
         this.vehicles = vehicles;   // todo : remember to check for immutability
         this.requests = requests;   // todo : remember to check for immutability
         allowedEdges = new ArrayList<SCRAMEdge>();
         matchedAgents = new ArrayList<>();
         edges = new ArrayList<>();
         unmatchedAgents = new ArrayList<>(vehicles);
-        n = vehicles.size();        // todo : SCRAM should add dummy vertices s.t. |vehicles| = |requests|
+        n = vehicles.size();        // todo : OldSCRAM should add dummy vertices s.t. |vehicles| = |requests|
         createMatchingEdges();
     }
 

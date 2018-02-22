@@ -1,9 +1,10 @@
 import AmodSimulator.Request;
-import SCRAM.SCRAM;
 import AmodSimulator.Vehicle;
 import GraphCreator.Utility;
+import SCRAM.*;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -56,8 +57,10 @@ public class SCRAMTest {
         graph.getNode("v3").setAttribute("distTor2", 3);
         graph.getNode("v3").setAttribute("distTor3", 8);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        s.match();
+//        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+//        s.match();
+        CplusplusSCRAM s = new CplusplusSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 
     @Test
@@ -92,8 +95,10 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        s.match();
+//        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+//        s.match();
+        CplusplusSCRAM s = new CplusplusSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 
     @Test
@@ -126,7 +131,7 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        s.match();
+        CplusplusSCRAM s = new CplusplusSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 }

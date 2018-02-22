@@ -8,8 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class CplusplusSCRAM {
-
-
     // remove an element from a vector by value.
     //#define VECREMOVE(vec, v) (vec).erase(  \
     //                                        std::remove((vec).begin(), (vec).end(), (v)), (vec).end())
@@ -40,7 +38,7 @@ public class CplusplusSCRAM {
 
     //right nodes are used if and only if out[1][j].size() == 1.
 
-    private int answer;
+    private int longestEdgeWeight;
 
 
     public CplusplusSCRAM(List<Vehicle> vehicles, List<Request> requests) {
@@ -70,7 +68,7 @@ public class CplusplusSCRAM {
             out[1][i] = new ArrayList<>();
         }
 
-        answer = getMinimalMaxEdgeInPerfectMatching(edges, n);
+        longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching(edges, n);
     }
 
     // Floodfill from a node.
@@ -158,7 +156,7 @@ public class CplusplusSCRAM {
         int answer;
         for (answer = 0; answer < edges.size(); answer++) {
 
-            //std::pair <int, int>e = edges[answer].second;       // gets edge between match -> to-node
+            //std::pair <int, int>e = edges[longestEdgeWeight].second;       // gets edge between match -> to-node
             int edgeStart = edges.get(answer).getStart();
             int edgeEnd = edges.get(answer).getEnd();
 
@@ -180,12 +178,12 @@ public class CplusplusSCRAM {
                 }
             }
         }
-        // We must use edges[answer] to push k flow with minimal max edge.
-        return answer;
+        // We must use edges[longestEdgeWeight] to push k flow with minimal max edge.
+        return edges.get(answer).getWeight();
     }
 
-    public int getAnswer() {
-        return answer;
+    public int getLongestEdgeWeight() {
+        return longestEdgeWeight;
     }
 
     public static class Edge implements Comparable<Edge> {
