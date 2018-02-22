@@ -1,12 +1,8 @@
 package SCRAM;
 
 import AmodSimulator.Assignment;
-import AmodSimulator.Request;
-import AmodSimulator.Vehicle;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SCRAM {
     // remove an element from a vector by value.
@@ -42,7 +38,7 @@ public class SCRAM {
     private int longestEdgeWeight;
 
 
-    public SCRAM(List<Vehicle> vehicles, List<Request> requests) {
+    public SCRAM(List<Node> vehicles, List<Node> requests) {
         // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
         if (vehicles.size() != requests.size()) try {
             throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
@@ -50,18 +46,19 @@ public class SCRAM {
             e.printStackTrace();
         }
 
-//        if (vehicles.size() != requests.size()) {
-//            int difference = Math.abs(vehicles.size() - requests.size());
-//            if (vehicles.size() > requests.size()) vehicles.addAll(createDummyNodes(vehicles, difference));
-//            else requests.addAll(createDummyNodes(requests, difference));
-//        }
+        if (vehicles.size() != requests.size()) {
+            int difference = Math.abs(vehicles.size() - requests.size());
+            if (vehicles.size() > requests.size()) addDummyNodes(vehicles, difference);
+            else addDummyNodes(requests, difference);
+        }
 
         // 2. create edges for the bipartite matching-graph
         n = vehicles.size();
         List<Edge> edges = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
+                //int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
+                int weight = vehicles.get(i).getDistance(requests.get(j));
                 edges.add(new Edge(i, j, weight));
             }
         }
@@ -196,6 +193,15 @@ public class SCRAM {
         }
         // We must use edges[longestEdgeWeight] to push k flow with minimal max edge.
         return edges.get(answer).getWeight();
+    }
+
+
+    private static void addDummyNodes(List<Node> list, int numDummies) {
+        Set<Node> dummies = new HashSet<>();
+        for (int i = 0; i < numDummies; i++) {
+            list.add(new DummyNode());
+        }
+
     }
 
     public int getLongestEdgeWeight() {

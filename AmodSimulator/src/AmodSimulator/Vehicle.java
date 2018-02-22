@@ -1,20 +1,20 @@
 package AmodSimulator;
 
-import SCRAM.HungarianNode;
+import SCRAM.DummyNode;
+import SCRAM.Node;
 import SCRAM.SCRAMNode;
 import org.graphstream.graph.Edge;
-import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Vehicle extends SCRAMNode implements HungarianNode {
+public class Vehicle extends SCRAMNode implements Node {
 
     private String id;
     private ArrayList<Request> requests;
     private int speed = 1; //distance per timestep
-    private Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
+    private org.graphstream.graph.Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
     private int vacantTime;
 
     
@@ -24,7 +24,7 @@ public class Vehicle extends SCRAMNode implements HungarianNode {
     private int numRequestServiced;
     
 
-    public Vehicle(String id, Node startNode) {
+    public Vehicle(String id, org.graphstream.graph.Node startNode) {
         super();
         this.id = id;
         requests = new ArrayList<>();
@@ -177,12 +177,26 @@ public class Vehicle extends SCRAMNode implements HungarianNode {
         requests.add(request);
     }
 
-    public Node getLocation() {
+    public org.graphstream.graph.Node getLocation() {
         return location;
     }
 
     public int getEmptyKilometersDriven() {
         return emptyKilometersDriven;
+    }
+
+
+    @Override
+    public int getDistance(Node node) {
+        if (node instanceof Request) return location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
+        if (node instanceof DummyNode) return 0;
+        try {
+            throw new Exception("Vehicle.getDistance() called with a Vehicle as parameter");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return 0;
     }
 
     @Override

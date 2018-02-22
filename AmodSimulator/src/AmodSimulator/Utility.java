@@ -1,9 +1,8 @@
 package AmodSimulator;
 
 import SCRAM.DummyNode;
-import SCRAM.HungarianNode;
+import SCRAM.Node;
 import org.graphstream.graph.Graph;
-import org.graphstream.graph.Node;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;
 import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
 import org.jgrapht.graph.ClassBasedEdgeFactory;
@@ -17,7 +16,7 @@ import static AmodSimulator.AmodSimulator.PRINT;
 
 public class Utility {
 
-    public static Map<Node,Map<Node,Integer>> produceLookupTable(Graph graph) {
+    public static Map<org.graphstream.graph.Node,Map<org.graphstream.graph.Node,Integer>> produceLookupTable(Graph graph) {
         //todo
         return null;
     }
@@ -103,7 +102,7 @@ public class Utility {
         return assignments;
     }
 
-    public static int getDist(Node origin, Node destination) {
+    public static int getDist(org.graphstream.graph.Node origin, org.graphstream.graph.Node destination) {
         return origin.getAttribute("distTo"+ destination.getId());
     }
 
@@ -126,10 +125,10 @@ public class Utility {
 
 
         //MultiGraph from jgrapht with nodes and edges from graphstream:
-        SimpleGraph<HungarianNode,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
+        SimpleGraph<Node,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
 
-        Set<HungarianNode> vehicleNodes = new HashSet<>();
-        Set<HungarianNode> requestNodes = new HashSet<>();
+        Set<Node> vehicleNodes = new HashSet<>();
+        Set<Node> requestNodes = new HashSet<>();
 
         for (Request req : requests) {
             graph.addVertex(req);
@@ -155,7 +154,7 @@ public class Utility {
 
         /*
         System.out.println("Nodes:");
-        for (HungarianNode h : graph.vertexSet()) {
+        for (Node h : graph.vertexSet()) {
             System.out.println(h.getInfo());
         }
 
@@ -167,8 +166,8 @@ public class Utility {
 
         addDummyNodes(graph, vehicleNodes,requestNodes);
 
-        KuhnMunkresMinimalWeightBipartitePerfectMatching<HungarianNode,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
-        Matching<HungarianNode, Assignment> matching = hungarian.getMatching();
+        KuhnMunkresMinimalWeightBipartitePerfectMatching<Node,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
+        Matching<Node, Assignment> matching = hungarian.getMatching();
 
         Set<Assignment> assignmentSet = matching.getEdges();
 
@@ -178,7 +177,7 @@ public class Utility {
         return assignments;
     }
 
-    private static void addDummyNodes(org.jgrapht.Graph<HungarianNode,Assignment> graph, Set<HungarianNode> vehicles, Set<HungarianNode> requests) {
+    private static void addDummyNodes(org.jgrapht.Graph<Node,Assignment> graph, Set<Node> vehicles, Set<Node> requests) {
 
         int numVeh = vehicles.size();
         int numReq = requests.size();
@@ -186,7 +185,7 @@ public class Utility {
 
         //making dummies
         int numDummies = Math.abs(numVeh - numReq);
-        Set<HungarianNode> dummies = new HashSet<>();
+        Set<Node> dummies = new HashSet<>();
         for (int i = 0; i < numDummies; i++) {
             DummyNode dummy = new DummyNode();
             dummies.add(dummy);
@@ -194,11 +193,11 @@ public class Utility {
         }
 
         //setting edges from dummies to the vehicles/request in the biggest of the Sets
-        Set<HungarianNode> smallest = (numVeh < numReq)? vehicles : requests;
-        Set<HungarianNode> biggest = (numVeh > numReq)? vehicles : requests;
+        Set<Node> smallest = (numVeh < numReq)? vehicles : requests;
+        Set<Node> biggest = (numVeh > numReq)? vehicles : requests;
 
-        for (HungarianNode dummy : dummies) {
-            for (HungarianNode real : biggest) {
+        for (Node dummy : dummies) {
+            for (Node real : biggest) {
                 Assignment assignmentEdge = graph.addEdge(dummy,real); //assignments containing a dummy does not contain either a vehicle or a request
                 assignmentEdge.setToDummy();
                 graph.setEdgeWeight(assignmentEdge, Integer.MAX_VALUE);

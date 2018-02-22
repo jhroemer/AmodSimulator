@@ -1,19 +1,19 @@
 package AmodSimulator;
 
-import SCRAM.HungarianNode;
+import SCRAM.DummyNode;
+import SCRAM.Node;
 import SCRAM.SCRAMNode;
-import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
 
 import static AmodSimulator.AmodSimulator.PRINT;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
-public class Request extends SCRAMNode implements HungarianNode {
+public class Request extends SCRAMNode implements Node {
 
     //original info:
     private int id;
-    private Node origin;
-    private Node destination;
+    private org.graphstream.graph.Node origin;
+    private org.graphstream.graph.Node destination;
     private final int generationTime;
 
     //info from setUp():
@@ -29,7 +29,7 @@ public class Request extends SCRAMNode implements HungarianNode {
     private int originPathLength;
     private int destinationPathLength;
 
-    public Request(int id, Node location, Node destination, int generationTime) {
+    public Request(int id, org.graphstream.graph.Node location, org.graphstream.graph.Node destination, int generationTime) {
         super();
         this.id = id;
         this.origin = location;
@@ -43,11 +43,11 @@ public class Request extends SCRAMNode implements HungarianNode {
         }
     }
 
-    public Node getOrigin() {
+    public org.graphstream.graph.Node getOrigin() {
         return origin;
     }
 
-    public Node getDestination() {
+    public org.graphstream.graph.Node getDestination() {
         return destination;
     }
 
@@ -95,7 +95,7 @@ public class Request extends SCRAMNode implements HungarianNode {
         return destinationPathLength;
     }
 
-    public void setUp(int vehicleVacantTime, Node source, int speed) {
+    public void setUp(int vehicleVacantTime, org.graphstream.graph.Node source, int speed) {
         // when does this request start being serviced
         // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
         startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
@@ -117,6 +117,20 @@ public class Request extends SCRAMNode implements HungarianNode {
 
         if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
     }
+
+    @Override
+    public int getDistance(Node node) {
+        if (node instanceof Vehicle) return origin.getAttribute("distTo" + ((Vehicle) node).getLocation().getId());
+        if (node instanceof DummyNode) return 0;
+        try {
+            throw new Exception("Request.getDistance() called with a Request as parameter");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return 0;
+    }
+
 
     @Override
     public String getInfo() {
