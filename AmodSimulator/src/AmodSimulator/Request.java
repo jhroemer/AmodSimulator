@@ -8,7 +8,7 @@ import org.graphstream.graph.Path;
 import static AmodSimulator.AmodSimulator.PRINT;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
-public class Request extends SCRAMNode implements Node {
+public class Request extends SCRAMNode implements SCRAM.Node {
 
     //original info:
     private int id;

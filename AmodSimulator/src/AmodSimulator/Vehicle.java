@@ -9,7 +9,7 @@ import org.graphstream.graph.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Vehicle extends SCRAMNode implements Node {
+public class Vehicle extends SCRAMNode implements SCRAM.Node {
 
     private String id;
     private ArrayList<Request> requests;

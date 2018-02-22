@@ -2,21 +2,23 @@ package SCRAM;
 
 public class Edge implements Comparable<Edge> {
     int weight;
-    int start;
-    int end;
+    Node startNode;
+    Node endNode;
+    int startIndex;
+    int endIndex;
 
     public Edge(int start, int end, int weight) {
         this.weight = weight;
-        this.start = start;
-        this.end = end;
+        this.startIndex = start;
+        this.endIndex = end;
     }
 
-    public int getStart() {
-        return start;
+    public int getStartIndex() {
+        return startIndex;
     }
 
-    public int getEnd() {
-        return end;
+    public int getEndIndex() {
+        return endIndex;
     }
 
     @Override

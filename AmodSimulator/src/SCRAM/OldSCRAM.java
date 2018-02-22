@@ -83,13 +83,13 @@ public class OldSCRAM {
         curNode.setVisited(true);
         curNode.setPrevious(prevNode);
 
-        // if curNode ∈ Positions and  ̸∃ e ∈ allowedEdges, s.t. e.start = curNode
+        // if curNode ∈ Positions and  ̸∃ e ∈ allowedEdges, s.t. e.startIndex = curNode
         //    then return currentNode
         // todo : curNode instanceof does not necessarily work, refer to pseudocode again if encountering problems
         if (curNode instanceof Request && !isThereOutgoingAllowedEdge(curNode)) return (Request) curNode;
 
-        // for each e ∈ allowedEdges, s.t. (e.start = curNode and not e.end.visited) do
-        //    val := flood(e.end, e.start)
+        // for each e ∈ allowedEdges, s.t. (e.startIndex = curNode and not e.endIndex.visited) do
+        //    val := flood(e.endIndex, e.startIndex)
         //    if val  ̸= ∅ then
         //          return val
         for (SCRAMEdge e : allowedEdges) {  // line 7-10
@@ -108,7 +108,7 @@ public class OldSCRAM {
      * @return
      */
     private boolean isThereOutgoingAllowedEdge(SCRAMNode curNode) {
-        for (SCRAMEdge e : allowedEdges) if (e.start == curNode) return true; // possible fix: if (e.end == curNode.getPrevious()) return true;
+        for (SCRAMEdge e : allowedEdges) if (e.start == curNode) return true; // possible fix: if (e.endIndex == curNode.getPrevious()) return true;
         return false;
     }
 

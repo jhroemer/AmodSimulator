@@ -7,7 +7,7 @@ import java.util.*;
 public class SCRAM {
     // remove an element from a vector by value.
     //#define VECREMOVE(vec, v) (vec).erase(  \
-    //                                        std::remove((vec).begin(), (vec).end(), (v)), (vec).end())
+    //                                        std::remove((vec).begin(), (vec).endIndex(), (v)), (vec).endIndex())
 
     // Edge looks like (dist, (left node, right node))
     // typedef std::pair<double, std::pair<int, int> > Edge;
@@ -81,7 +81,7 @@ public class SCRAM {
 
         // 5. run hungarian on the reduced set of edges, to find a min-matching
         Hungarian hungarian = new Hungarian(edges, n);
-        List<Assignment> assignments = hungarian.match();
+        List<Assignment> assignments = hungarian.getAssignments();
     }
 
     // Floodfill from a node.
@@ -104,7 +104,7 @@ public class SCRAM {
             //if (!visited[1-x][out[x][y][j]]){
             if (!visited[1-x][out[x][y].get(j)]){
                 int tmp = flood(1-x, out[x][y].get(j), y);
-                if (tmp != -1) //Flood reached the end
+                if (tmp != -1) //Flood reached the endIndex
                     return tmp;
             }
         }
@@ -134,7 +134,7 @@ public class SCRAM {
     //private void reset_flooding(n){
     private void reset_flooding(){
         for(int i = 0; i < 2; i++)
-            //std::fill(visited[i].begin(), visited[i].end(), 0);
+            //std::fill(visited[i].begin(), visited[i].endIndex(), 0);
             visited[i] = new boolean[n];
 
         for(int i = 0; i < n; i++)
@@ -161,7 +161,7 @@ public class SCRAM {
             for (int j = 0; j < n; j++) out[i][j] = new ArrayList<>();
         }
 
-        //std::fill(used.begin(), used.end(), 0);
+        //std::fill(used.begin(), used.endIndex(), 0);
         used = new boolean[n];
         //reset_flooding(n);
         reset_flooding();
@@ -170,8 +170,8 @@ public class SCRAM {
         for (answer = 0; answer < edges.size(); answer++) {
 
             //std::pair <int, int>e = edges[longestEdgeWeight].second;       // gets edge between match -> to-node
-            int edgeStart = edges.get(answer).getStart();
-            int edgeEnd = edges.get(answer).getEnd();
+            int edgeStart = edges.get(answer).getStartIndex();
+            int edgeEnd = edges.get(answer).getEndIndex();
 
             //  out[0][e.first].push_back(e.second);                //
             out[0][edgeStart].add(edgeEnd);                //
@@ -181,10 +181,10 @@ public class SCRAM {
             if (visited[0][edgeStart] && !visited[1][edgeEnd]) { // if
                 //int ans = flood(1, e.second, e.first);
                 int ans = flood(1, edgeEnd, edgeStart);
-                if (ans != -1) {  //We made it to the end!
+                if (ans != -1) {  //We made it to the endIndex!
                     if (--k == 0) break;
                     int start = reverse(1, ans);
-                    //used[start] = 1;
+                    //used[startIndex] = 1;
                     used[start] = true;
                     //reset_flooding(n);
                     reset_flooding();

@@ -120,62 +120,6 @@ public class Utility {
         }
     }
 
-    //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
-    public static List<Assignment> hungarianAssign(List<Vehicle> vehicles, List<Request> requests) {
-
-
-        //MultiGraph from jgrapht with nodes and edges from graphstream:
-        SimpleGraph<Node,Assignment> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Assignment.class),true);
-
-        Set<Node> vehicleNodes = new HashSet<>();
-        Set<Node> requestNodes = new HashSet<>();
-
-        for (Request req : requests) {
-            graph.addVertex(req);
-            requestNodes.add(req);
-        }
-
-        for (Vehicle veh : vehicles) {
-            //Node vehNode = veh.getLocation(); //vehicles current location
-            graph.addVertex(veh);
-            vehicleNodes.add(veh);
-            for (Request req : requests) {
-                //Node reqNode = req.getOrigin(); //request pick-up location
-                int intWeight = veh.getLocation().getAttribute("distTo" + req.getOrigin().getId()); //distance between the two locations
-                double weight = (double) intWeight;
-                //System.out.println("Adding edge from " + vehNode.getId() + " to " + reqNode.getId());
-                Assignment assignmentEdge = graph.addEdge(veh,req); //info to jgrapht
-                graph.setEdgeWeight(assignmentEdge, weight); //info to jgrapht
-
-                assignmentEdge.setVehicle(veh); //info to graphstream
-                assignmentEdge.setRequest(req); //info to graphstream
-            }
-        }
-
-        /*
-        System.out.println("Nodes:");
-        for (Node h : graph.vertexSet()) {
-            System.out.println(h.getInfo());
-        }
-
-        System.out.println("Edges ");
-        for (Assignment a : graph.edgeSet()) {
-            System.out.println("Vehicle " + a.getVehicle().getId() + " --> Request " + a.getRequest().getId());
-        }
-        */
-
-        addDummyNodes(graph, vehicleNodes,requestNodes);
-
-        KuhnMunkresMinimalWeightBipartitePerfectMatching<Node,Assignment> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
-        Matching<Node, Assignment> matching = hungarian.getMatching();
-
-        Set<Assignment> assignmentSet = matching.getEdges();
-
-        List<Assignment> assignments = new ArrayList<>();
-        assignments.addAll(assignmentSet);
-
-        return assignments;
-    }
 
     private static void addDummyNodes(org.jgrapht.Graph<Node,Assignment> graph, Set<Node> vehicles, Set<Node> requests) {
 
