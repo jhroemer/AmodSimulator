@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CplusplusSCRAM {
+public class SCRAM {
     // remove an element from a vector by value.
     //#define VECREMOVE(vec, v) (vec).erase(  \
     //                                        std::remove((vec).begin(), (vec).end(), (v)), (vec).end())
@@ -41,17 +41,17 @@ public class CplusplusSCRAM {
     private int longestEdgeWeight;
 
 
-    public CplusplusSCRAM(List<Vehicle> vehicles, List<Request> requests) {
+    public SCRAM(List<Vehicle> vehicles, List<Request> requests) {
         if (vehicles.size() != requests.size()) try {
             throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        // 1. Make the SCRAM edges
+
         n = vehicles.size();
-
         List<Edge> edges = new ArrayList<>();
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
@@ -68,7 +68,10 @@ public class CplusplusSCRAM {
             out[1][i] = new ArrayList<>();
         }
 
+        // 2. get the minimal
         longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching(edges, n);
+
+
     }
 
     // Floodfill from a node.
@@ -220,7 +223,7 @@ public class CplusplusSCRAM {
     /*
     public static void main(String[] args) {
 
-        CplusplusSCRAM scram = new CplusplusSCRAM(3);
+        SCRAM scram = new SCRAM(3);
 
         List<Edge> edges = new ArrayList<>();
 

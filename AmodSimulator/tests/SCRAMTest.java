@@ -59,7 +59,7 @@ public class SCRAMTest {
 
 //        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
 //        s.match();
-        CplusplusSCRAM s = new CplusplusSCRAM(vehicleList, requestList);
+        SCRAM.SCRAM s = new SCRAM.SCRAM(vehicleList, requestList);
         Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 
@@ -97,7 +97,7 @@ public class SCRAMTest {
 
 //        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
 //        s.match();
-        CplusplusSCRAM s = new CplusplusSCRAM(vehicleList, requestList);
+        SCRAM.SCRAM s = new SCRAM.SCRAM(vehicleList, requestList);
         Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 
@@ -131,7 +131,7 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        CplusplusSCRAM s = new CplusplusSCRAM(vehicleList, requestList);
+        SCRAM.SCRAM s = new SCRAM.SCRAM(vehicleList, requestList);
         Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 }
