@@ -19,44 +19,44 @@
 // Returns:
 //  If it reaches an unassigned right node, the index of this node.
 //  Otherwise, -1.
-        int flood(int x, int y, int prev){
-        visited[x][y] = 1;
-        back[x][y] = prev;
-        if (x == 1 && out[x][y].size() == 0) //reached an unassigned right node!
-        return y;
+        int flood(int x, int y, int prev) {
+            visited[x][y] = 1;
+            back[x][y] = prev;
+            if (x == 1 && out[x][y].size() == 0) //reached an unassigned right node!
+            return y;
 
-        for(int j = 0; j < out[x][y].size(); j++){
-        if (!visited[1-x][out[x][y][j]]){
-        int tmp = flood(1-x, out[x][y][j], y);
-        if (tmp != -1) //Flood reached the end
-        return tmp;
-        }
-        }
-        return -1;
+            for (int j = 0; j < out[x][y].size(); j++) {
+                        if (!visited[1-x][out[x][y][j]]) {
+                        int tmp = flood(1-x, out[x][y][j], y);
+                        if (tmp != -1) //Flood reached the end
+                        return tmp;
+                    }
+                }
+            return -1;
         }
 
 // starting at node (x, y), follow the back pointers and reverse each edge.
 // Return the last node reached (i.e., the newly assigned left node)
-        inline int reverse(int x, int y){
-        while (true) {
-        int prev = back[x][y];
-        if (prev == -1)       // Reached the unassigned node on the left
-        break;
-        out[x][y].push_back(prev);
-        VECREMOVE(out[1-x][prev], y);
-        x = 1-x; y = prev;
-        }
-        return y;
+        inline int reverse(int x, int y) {
+            while (true) {
+                int prev = back[x][y];
+                if (prev == -1)       // Reached the unassigned node on the left
+                break;
+                out[x][y].push_back(prev);
+                VECREMOVE(out[1-x][prev], y);
+                x = 1-x; y = prev;
+            }
+            return y;
         }
 
 // Set visited to 0 and flood from unassigned left nodes.
-        inline void reset_flooding(int n){
-        for(int i = 0; i < 2; i++)
-        std::fill(visited[i].begin(), visited[i].end(), 0);
+        inline void reset_flooding(int n) {
+            for(int i = 0; i < 2; i++)
+            std::fill(visited[i].begin(), visited[i].end(), 0);
 
-        for(int i = 0; i < n; i++)
-        if(!used[i])
-        flood(0, i, -1);
+            for(int i = 0; i < n; i++)
+            if(!used[i])
+            flood(0, i, -1);
         }
 
 /*

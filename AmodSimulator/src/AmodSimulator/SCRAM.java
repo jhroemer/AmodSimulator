@@ -143,6 +143,7 @@ public class SCRAM {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
