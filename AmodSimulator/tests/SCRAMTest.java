@@ -1,6 +1,8 @@
 import AmodSimulator.Request;
 import AmodSimulator.Vehicle;
 import GraphCreator.Utility;
+import SCRAM.Node;
+import SCRAM.OldSCRAM;
 import SCRAM.*;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
@@ -57,10 +59,10 @@ public class SCRAMTest {
         graph.getNode("v3").setAttribute("distTor2", 3);
         graph.getNode("v3").setAttribute("distTor3", 8);
 
-//        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-//        s.match();
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3,s.getLongestEdgeWeight());
+        SCRAM s2 = new SCRAM(vehicleList, requestList);
+        Assert.assertEquals(3, s2.getLongestEdgeWeight());
     }
 
     @Test
@@ -95,10 +97,10 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-//        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-//        s.match();
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3,s.getLongestEdgeWeight());
+        SCRAM s2 = new SCRAM(vehicleList, requestList);
+        Assert.assertEquals(3, s2.getLongestEdgeWeight());
     }
 
     @Test
@@ -131,7 +133,9 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3,s.getLongestEdgeWeight());
+        SCRAM s2 = new SCRAM(vehicleList, requestList);
+        Assert.assertEquals(3, s2.getLongestEdgeWeight());
     }
 }

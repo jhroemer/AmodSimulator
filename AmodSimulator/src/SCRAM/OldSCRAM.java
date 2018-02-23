@@ -1,48 +1,66 @@
 package SCRAM;
 
-import AmodSimulator.Assignment;
 import AmodSimulator.Request;
-import AmodSimulator.Utility;
 import AmodSimulator.Vehicle;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Based on MMD+MSD^2 algorithm by MacAlpine etc...
  */
 public class OldSCRAM {
-    List<Vehicle> vehicles;
-    List<Request> requests;
-    List<SCRAMEdge> allowedEdges;
-    List<Vehicle> matchedAgents;
-    List<SCRAMEdge> edges;
-    List<Vehicle> unmatchedAgents;
+    private List<Edge> assignments;
+    List<Node> vehicles;
+    List<Node> requests;
+    List<Edge> allowedEdges;
+    List<Node> matchedAgents;
+    List<Edge> edges;
+    List<Node> unmatchedAgents;
     int n;
+    private int longestEdgeWeight;
 
-    public OldSCRAM(List<Vehicle> vehicles, List<Request> requests) {
+    public OldSCRAM(List<Node> vehicles, List<Node> requests) {
+        // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
+        if (vehicles.size() != requests.size()) try {
+            throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         this.vehicles = vehicles;   // todo : remember to check for immutability
         this.requests = requests;   // todo : remember to check for immutability
-        allowedEdges = new ArrayList<SCRAMEdge>();
+        allowedEdges = new ArrayList<Edge>();
         matchedAgents = new ArrayList<>();
         edges = new ArrayList<>();
         unmatchedAgents = new ArrayList<>(vehicles);
         n = vehicles.size();        // todo : OldSCRAM should add dummy vertices s.t. |vehicles| = |requests|
+
+        //adding dummy nodes
+        if (vehicles.size() != requests.size()) {
+            int difference = Math.abs(vehicles.size() - requests.size());
+            if (vehicles.size() > requests.size()) addDummyNodes(vehicles, difference);
+            else addDummyNodes(requests, difference);
+        }
+
+        // 2. create edges for the bipartite matching-graph
         createMatchingEdges();
+
+
+        // 3. get the minimal
+        longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching();
+        System.out.println("LONGEST EDGE WEIGHT IS: " + longestEdgeWeight);
+
+        // 4. 'remove' (set to infinity) edges that are longer than longestEdgeWeight, ensuring that they will not be included in the assignment
+        for (Edge edge : edges) if (edge.getWeight() > longestEdgeWeight) edge.setWeight(Integer.MAX_VALUE);
+
+        // 5. run hungarian on the reduced set of edges, to find a min-matching
+        Hungarian hungarian = new Hungarian(edges, n);
+        assignments = hungarian.getAssignments();
     }
 
-    public List<Assignment> match() {
-        SCRAMEdge longestEdge = getMiniMalMaxEdgeInPerfectMatching();
-        System.out.println("LONGEST EDGE WEIGHT IS: " + longestEdge.weight);
-        List<SCRAMEdge> minimalEdges = new ArrayList<>();
-        for (SCRAMEdge e : edges) if (e.weight < longestEdge.weight) minimalEdges.add(e);
-        return null;
-//        return hungarian(minimalEdges); // todo : use approach from Utility.hungarian()?
-    }
-
-    private List<Assignment> hungarian(List<SCRAMEdge> minimalEdges) {
-        return null;
+    public int getLongestEdgeWeight() {
+        return longestEdgeWeight;
     }
 
 
@@ -50,27 +68,35 @@ public class OldSCRAM {
      *
      * @return ..
      */
-    private SCRAMEdge getMiniMalMaxEdgeInPerfectMatching() {
+    private int getMinimalMaxEdgeInPerfectMatching() {
         Collections.sort(edges); // corresponds to edgeQ from pseudocode
 //        List<SCRAMEdge> edgeQ = new ArrayList<>(edges);   todo: this is wrong right? we don't want to have copies of the edge-objects?
-        List<SCRAMEdge> edgeQ = new ArrayList<>();       // rather we wan't the actual objects so that theyre reversed in both lists
+        List<Edge> edgeQ = new ArrayList<>();       // rather we wan't the actual objects so that theyre reversed in both lists
         edgeQ.addAll(edges);
-        SCRAMEdge longestEdge = null;
+        Edge longestEdge = null;
 
-        for (int i = 0; i < edges.size(); i++) {
+        for (int i = 0; i < n; i++) {
             resetFlood();
             Request matchedPosition = null;
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet
                 longestEdge = edgeQ.remove(0);
                 allowedEdges.add(longestEdge);
-                matchedPosition = flood(longestEdge.end, longestEdge.start);
+                if (longestEdge.startNode.isVisited() && !longestEdge.endNode.isVisited()) {
+                    matchedPosition = flood(longestEdge.endNode, longestEdge.startNode);
+                }
             }
             Vehicle matchedAgent = reversePath(matchedPosition);
             unmatchedAgents.remove(matchedAgent);   // FIXME : is this always up-to date?
             matchedAgents.add(matchedAgent);
         }
-        System.out.println("hey");
-        return longestEdge;
+        if (longestEdge == null) try {
+            throw new Exception();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        longestEdgeWeight = longestEdge.weight;
+        return longestEdgeWeight;
     }
 
     /**
@@ -79,7 +105,7 @@ public class OldSCRAM {
      * @param prevNode
      * @return returns a request that has ... to be continued..
      */
-    private Request flood(SCRAMNode curNode, SCRAMNode prevNode) {
+    private Request flood(Node curNode, Node prevNode) {
         curNode.setVisited(true);
         curNode.setPrevious(prevNode);
 
@@ -92,10 +118,9 @@ public class OldSCRAM {
         //    val := flood(e.endIndex, e.startIndex)
         //    if val  ̸= ∅ then
         //          return val
-        for (SCRAMEdge e : allowedEdges) {  // line 7-10
-            if (e.start == curNode && !e.end.isVisited()) { // fixme
-                Request val = flood(e.end, e.start);        // we never get here, which might be why we have a problem
-                System.out.println("what is val? " + val);
+        for (Edge e : allowedEdges) {  // line 7-10
+            if (e.startNode == curNode && !e.endNode.isVisited()) { // fixme
+                Request val = flood(e.endNode, e.startNode);        // we never get here, which might be why we have a problem
                 if (val != null) return val;
             }
         }
@@ -107,8 +132,8 @@ public class OldSCRAM {
      * @param curNode
      * @return
      */
-    private boolean isThereOutgoingAllowedEdge(SCRAMNode curNode) {
-        for (SCRAMEdge e : allowedEdges) if (e.start == curNode) return true; // possible fix: if (e.endIndex == curNode.getPrevious()) return true;
+    private boolean isThereOutgoingAllowedEdge(Node curNode) {
+        for (Edge e : allowedEdges) if (e.startNode == curNode) return true; // possible fix: if (e.endIndex == curNode.getPrevious()) return true;
         return false;
     }
 
@@ -116,17 +141,15 @@ public class OldSCRAM {
      * Resetting stuff
      */
     private void resetFlood() {
-        for (Vehicle veh : vehicles) {          // line 13-15
-            veh.setVisited(false);
-            veh.setPrevious(null);
+
+        for (int i = 0; i < vehicles.size(); i++) {
+            vehicles.get(i).setVisited(false);
+            vehicles.get(i).setPrevious(null); //todo This is done in the pseudocode, but is not in the c++ implemention
+            requests.get(i).setVisited(false);
+            requests.get(i).setPrevious(null);
         }
 
-        for (Request req : requests) {          // line 13-15
-            req.setVisited(false);
-            req.setPrevious(null);
-        }
-
-        for (Vehicle veh : unmatchedAgents) {   // line 16-17
+        for (Node veh : unmatchedAgents) {   // line 16-17
             flood(veh, null);
         }
     }
@@ -137,7 +160,7 @@ public class OldSCRAM {
      * @return
      */
     private Vehicle reversePath(Request matchedPosition) {
-        SCRAMNode node = matchedPosition;
+        Node node = matchedPosition;
         while (node.getPrevious() != null) {
             reverseEdgeDirection(node, node.getPrevious());
             node = node.getPrevious();
@@ -152,15 +175,15 @@ public class OldSCRAM {
         return null;
     }
 
-    private void reverseEdgeDirection(SCRAMNode node, SCRAMNode previous) {
+    private void reverseEdgeDirection(Node node, Node previous) {
         // I think the problem is that we work with different edge objects
 
-        for (SCRAMEdge edge : edges) {
+        for (Edge edge : edges) {
             // FIXME: brute-force, has to be changed e.g. saved as a field in SCRAMNodes
-            if ((edge.start == node && edge.end == previous) || (edge.start == previous && edge.end == node)) {
-                SCRAMNode oldEnd = edge.end;
-                edge.end = edge.start;
-                edge.start = oldEnd;
+            if ((edge.startNode == node && edge.endNode == previous) || (edge.startNode == previous && edge.endNode == node)) {
+                Node oldEnd = edge.endNode;
+                edge.endNode = edge.startNode;
+                edge.startNode = oldEnd;
             }
         }
     }
@@ -170,18 +193,25 @@ public class OldSCRAM {
      *
      */
     private void createMatchingEdges() {
-        for (Vehicle veh : vehicles) {
-            for (Request req : requests) {
-                SCRAMEdge s = new SCRAMEdge(veh, req);
+        for (Node veh : vehicles) {
+            for (Node req : requests) {
+                Edge s = new Edge(veh, req);
                 edges.add(s);
-                System.out.println(s.weight);
             }
         }
     }
 
+    private static void addDummyNodes(List<Node> list, int numDummies) {
+        for (int i = 0; i < numDummies; i++) {
+            list.add(new DummyNode());
+        }
+    }
+
+
     /**
      *
      */
+    /*
     private class SCRAMEdge implements Comparable<SCRAMEdge> {
         SCRAMNode start;
         SCRAMNode end;
@@ -200,4 +230,5 @@ public class OldSCRAM {
             else return 1;
         }
     }
+    */
 }
