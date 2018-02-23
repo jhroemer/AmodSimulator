@@ -1,7 +1,5 @@
 package SCRAM;
 
-import AmodSimulator.Assignment;
-
 import java.util.*;
 
 public class SCRAM {
@@ -63,16 +61,6 @@ public class SCRAM {
             }
         }
 
-        visited = new boolean[2][n];
-        back = new int[2][n];
-        used = new boolean[n];
-        //noinspection unchecked
-        out = new ArrayList[2][n];
-        for (int i = 0; i < n; i++) {
-            out[0][i] = new ArrayList<>();
-            out[1][i] = new ArrayList<>();
-        }
-
         // 3. get the minimal
         longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching(edges, n);
 
@@ -81,7 +69,7 @@ public class SCRAM {
 
         // 5. run hungarian on the reduced set of edges, to find a min-matching
         Hungarian hungarian = new Hungarian(edges, n);
-        List<Assignment> assignments = hungarian.getAssignments();
+        List<Edge> assignments = hungarian.getAssignments();
     }
 
     // Floodfill from a node.
@@ -98,12 +86,13 @@ public class SCRAM {
         //back[x][y] = prev; //currentNode.previous = prevNode
         back[x][y] = prev;
         if (x == 1 && out[x][y].size() == 0) //reached an unassigned right node!
-            return y;
+            return y;   // todo: if it's a request and there is no outgoing node from it
 
-        for(int j = 0; j < out[x][y].size(); j++){
+        // todo: for each edge in outgoing edges
+        for (int j = 0; j < out[x][y].size(); j++) {
             //if (!visited[1-x][out[x][y][j]]){
-            if (!visited[1-x][out[x][y].get(j)]){
-                int tmp = flood(1-x, out[x][y].get(j), y);
+            if (!visited[1-x][out[x][y].get(j)]) { // out[x][y].get(j) = is the j'th outgoing edge of the y'th vehicle/request (depending on x = 0 or 1)
+                int tmp = flood(1-x, out[x][y].get(j), y); // fixme: but is visited necessarily edge.end like in pseudo?
                 if (tmp != -1) //Flood reached the endIndex
                     return tmp;
             }
@@ -138,7 +127,7 @@ public class SCRAM {
             visited[i] = new boolean[n];
 
         for(int i = 0; i < n; i++)
-            if(!used[i])
+            if(!used[i]) // todo : for unmatched agents flood(x, y, prev) - it's -1 and not null - does that change something?
                 flood(0, i, -1);
     }
 
@@ -155,34 +144,38 @@ public class SCRAM {
     public int getMinimalMaxEdgeInPerfectMatching(List<Edge> edges, int k) { //todo k can just be n as well? Or can we use it wisely?
         Collections.sort(edges);
 
-        for (int i = 0; i < 2; i++) { //Clear the graph
-            //out[i].clear();
-            //out[i].resize(n);
-            for (int j = 0; j < n; j++) out[i][j] = new ArrayList<>();
+        visited = new boolean[2][n];
+        back = new int[2][n];
+        used = new boolean[n];
+        //noinspection unchecked
+        out = new ArrayList[2][n];
+        for (int i = 0; i < n; i++) { // fixme: isn't this done twice? also on line 156-159
+            out[0][i] = new ArrayList<>();
+            out[1][i] = new ArrayList<>();
         }
 
         //std::fill(used.begin(), used.endIndex(), 0);
         used = new boolean[n];
         //reset_flooding(n);
-        reset_flooding();
+        reset_flooding(); // todo: resetFlooding() is run before the match-loop, which isn't how the pseudocode is
 
         int answer;
-        for (answer = 0; answer < edges.size(); answer++) {
+        for (answer = 0; answer < edges.size(); answer++) { // fixme : line 28 for-loop? in this case, then n is not |vehicles| but |edges|
 
             //std::pair <int, int>e = edges[longestEdgeWeight].second;       // gets edge between match -> to-node
             int edgeStart = edges.get(answer).getStartIndex();
             int edgeEnd = edges.get(answer).getEndIndex();
 
             //  out[0][e.first].push_back(e.second);                //
-            out[0][edgeStart].add(edgeEnd);                //
+            out[0][edgeStart].add(edgeEnd); // todo : longestEdge = edgeQ.pop() ?
 
             //printf("Added edge: %d %d\n", e.first, e.second);
             //if (visited[0][e.first] && !visited[1][e.second]) { // if
-            if (visited[0][edgeStart] && !visited[1][edgeEnd]) { // if
-                //int ans = flood(1, e.second, e.first);
-                int ans = flood(1, edgeEnd, edgeStart);
+            if (visited[0][edgeStart] && !visited[1][edgeEnd]) {    // todo: if edge starts in a vehicle and not in a request?
+                //int ans = flood(1, e.second, e.first);            // todo: where is this loop in pseudo?
+                int ans = flood(1, edgeEnd, edgeStart);          // todo: flood() always run with curNode = vehicle?
                 if (ans != -1) {  //We made it to the endIndex!
-                    if (--k == 0) break;
+                    if (--k == 0) break; // k is subtracted 1 each time a match is made
                     int start = reverse(1, ans);
                     //used[startIndex] = 1;
                     used[start] = true;

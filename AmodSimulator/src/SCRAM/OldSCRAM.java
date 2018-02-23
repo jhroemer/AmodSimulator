@@ -57,7 +57,7 @@ public class OldSCRAM {
         edgeQ.addAll(edges);
         SCRAMEdge longestEdge = null;
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < edges.size(); i++) {
             resetFlood();
             Request matchedPosition = null;
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet

@@ -122,9 +122,9 @@ public class AmodSimulator {
         //assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
         List<Assignment> assignments = Utility.assign(assignmentType,idleVehicles,requests);
 
-        // todo : move into method?
+        // todo : refactor to SCRAM.Edge - utilize that weight is already saved in the Edge object
         for (Assignment a : assignments) {
-            if (a.isDummy()) continue;
+            if (a.isDummy()) continue; // if edge.start is dummy || edge.end is dummy - continue
             System.out.println(a);
             Vehicle veh = a.getVehicle();
             Request req = a.getRequest();

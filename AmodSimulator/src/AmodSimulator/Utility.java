@@ -3,10 +3,6 @@ package AmodSimulator;
 import SCRAM.DummyNode;
 import SCRAM.Node;
 import org.graphstream.graph.Graph;
-import org.jgrapht.alg.interfaces.MatchingAlgorithm.Matching;
-import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
-import org.jgrapht.graph.ClassBasedEdgeFactory;
-import org.jgrapht.graph.SimpleGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -67,7 +63,7 @@ public class Utility {
             case BRUTE_FORCE:
                 return schwachsinnAssign(vehicles,requests);
             case HUNGARIAN:
-                return hungarianAssign(vehicles,requests);
+//                return hungarianAssign(vehicles,requests);
             case SCRAM:
                 System.out.println("SCRAM not implemented");
                 return new ArrayList<>();
