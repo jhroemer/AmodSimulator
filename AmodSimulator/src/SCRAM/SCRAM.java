@@ -80,17 +80,24 @@ public class SCRAM {
     // Returns:
     //  If it reaches an unassigned right node, the index of this node.
     //  Otherwise, -1.
-    private int flood(int x, int y, int prev){
+
+    // x = 0 means its a vehicle, x = 1 means its a request
+    // y = req/veh-number
+    // prev = previous req/veh-number
+    private int flood(int x, int y, int prev) {
         //visited[x][y] = 1; //currentNode.visited = true;
         visited[x][y] = true;
         //back[x][y] = prev; //currentNode.previous = prevNode
         back[x][y] = prev;
-        if (x == 1 && out[x][y].size() == 0) //reached an unassigned right node!
+        if (x == 1 && out[x][y].size() == 0) { //reached an unassigned right node!
             return y;   // todo: if it's a request and there is no outgoing node from it
-
-        // todo: for each edge in outgoing edges
+        }
+        // todo: for allowed outgoing edge of x,y do line 96 if it's end-node is not visited
         for (int j = 0; j < out[x][y].size(); j++) {
             //if (!visited[1-x][out[x][y][j]]){
+
+            // Astrid doesn't think so, but I think this translates to: "if the end of the outgoing edge is matched
+            // this looks at the outgoing edges of a node and looks for a new 'match'
             if (!visited[1-x][out[x][y].get(j)]) { // out[x][y].get(j) = is the j'th outgoing edge of the y'th vehicle/request (depending on x = 0 or 1)
                 int tmp = flood(1-x, out[x][y].get(j), y); // fixme: but is visited necessarily edge.end like in pseudo?
                 if (tmp != -1) //Flood reached the endIndex
@@ -103,32 +110,38 @@ public class SCRAM {
 // starting at node (x, y), follow the back pointers and reverse each edge.
 // Return the last node reached (i.e., the newly assigned left node)
     //inline int reverse(int x, int y){
-    private int reverse(int x, int y){
+    private int reverse(int x, int y) {
         while (true) {
             int prev = back[x][y];
-            if (prev == -1)       // Reached the unassigned node on the left
+            if (prev == -1) {       // Reached the unassigned node on the left
                 break;
-            //out[x][y].push_back(prev);
+            }
+
+            // this block reverses the direction of the edge, by adding to out for one node and removing from out for the other
             out[x][y].add(prev);
-            //VECREMOVE(out[1-x][prev], y);
-            //out[1-x][prev].remove(y); //todo Jeg er i tvivl her, for i java fjerner det index y, men i c++ fjerner VECREMOVE måske (alle forekomster af) værdien y?
             for (int i = 0; i < out[1-x][prev].size(); i++) if (out[1-x][prev].get(i) == y) out[1-x][prev].remove(i);
-            x = 1-x; y = prev;
+
+            x = 1-x; y = prev; // switch from vehicle/request and set new y'th vehicle/request to previous of the current one
         }
         return y;
     }
 
 
 // Set visited to 0 and flood from unassigned left nodes.
-    //private void reset_flooding(n){
-    private void reset_flooding(){
-        for(int i = 0; i < 2; i++)
-            //std::fill(visited[i].begin(), visited[i].endIndex(), 0);
-            visited[i] = new boolean[n];
+    //private void resetFlooding(n){
+    private void resetFlooding() {
+        // setting vehicles and requests to visited = false
+        visited[0] = new boolean[n];
+        visited[1] = new boolean[n];
+        //std::fill(visited[i].begin(), visited[i].endIndex(), 0);
 
-        for(int i = 0; i < n; i++)
-            if(!used[i]) // todo : for unmatched agents flood(x, y, prev) - it's -1 and not null - does that change something?
+        // if a vehicle is unmatched, run flood on its edge
+        for(int i = 0; i < n; i++) {
+            // todo : for unmatched agents flood(x, y, prev) - it's -1 and not null - does that change something?
+            if (!used[i]) {
                 flood(0, i, -1);
+            }
+        }
     }
 
 /*
@@ -144,8 +157,8 @@ public class SCRAM {
     public int getMinimalMaxEdgeInPerfectMatching(List<Edge> edges, int k) { //todo k can just be n as well? Or can we use it wisely?
         Collections.sort(edges);
 
-        visited = new boolean[2][n];
-        back = new int[2][n];
+        visited = new boolean[2][n]; // visited is more like " reachableFromAnUnmatchedVehicle..? "
+        back = new int[2][n]; // todo: should back be initialized with all values = -1?
         used = new boolean[n];
         //noinspection unchecked
         out = new ArrayList[2][n];
@@ -154,12 +167,10 @@ public class SCRAM {
             out[1][i] = new ArrayList<>();
         }
 
-        //std::fill(used.begin(), used.endIndex(), 0);
-        used = new boolean[n];
-        //reset_flooding(n);
-        reset_flooding(); // todo: resetFlooding() is run before the match-loop, which isn't how the pseudocode is
+        //resetFlooding(n);
+        resetFlooding(); // todo: resetFlooding() is run before the match-loop, which isn't how the pseudocode is
 
-        int answer;
+        int answer; // answer = current edge index
         for (answer = 0; answer < edges.size(); answer++) { // fixme : line 28 for-loop? in this case, then n is not |vehicles| but |edges|
 
             //std::pair <int, int>e = edges[longestEdgeWeight].second;       // gets edge between match -> to-node
@@ -171,16 +182,18 @@ public class SCRAM {
 
             //printf("Added edge: %d %d\n", e.first, e.second);
             //if (visited[0][e.first] && !visited[1][e.second]) { // if
+
+            // if the vehicle is visited and the end-node of edge is not visited
             if (visited[0][edgeStart] && !visited[1][edgeEnd]) {    // todo: if edge starts in a vehicle and not in a request?
                 //int ans = flood(1, e.second, e.first);            // todo: where is this loop in pseudo?
                 int ans = flood(1, edgeEnd, edgeStart);          // todo: flood() always run with curNode = vehicle?
                 if (ans != -1) {  //We made it to the endIndex!
                     if (--k == 0) break; // k is subtracted 1 each time a match is made
-                    int start = reverse(1, ans);
+                    int start = reverse(1, ans); // start = matchedAgent, 1 = request, ans = req.no
                     //used[startIndex] = 1;
                     used[start] = true;
-                    //reset_flooding(n);
-                    reset_flooding();
+                    //resetFlooding(n);
+                    resetFlooding();
                 }
             }
         }
