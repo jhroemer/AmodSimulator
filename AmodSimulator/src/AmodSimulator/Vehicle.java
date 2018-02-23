@@ -2,14 +2,13 @@ package AmodSimulator;
 
 import SCRAM.DummyNode;
 import SCRAM.Node;
-import SCRAM.SCRAMNode;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Path;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Vehicle extends SCRAMNode implements SCRAM.Node {
+public class Vehicle implements SCRAM.Node {
 
     private String id;
     private ArrayList<Request> requests;
@@ -22,7 +21,9 @@ public class Vehicle extends SCRAMNode implements SCRAM.Node {
     private int emptyKilometersDriven;
     private int occupiedKilometersDriven;
     private int numRequestServiced;
-    
+    private boolean visited;
+    private Node previous;
+
 
     public Vehicle(String id, org.graphstream.graph.Node startNode) {
         super();
@@ -197,6 +198,26 @@ public class Vehicle extends SCRAMNode implements SCRAM.Node {
             System.exit(0);
         }
         return 0;
+    }
+
+    @Override
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    @Override
+    public boolean isVisited() {
+        return visited;
+    }
+
+    @Override
+    public Node getPrevious() {
+        return previous;
+    }
+
+    @Override
+    public void setPrevious(Node previous) {
+        this.previous = previous;
     }
 
     @Override

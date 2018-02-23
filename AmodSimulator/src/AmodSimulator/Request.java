@@ -2,13 +2,12 @@ package AmodSimulator;
 
 import SCRAM.DummyNode;
 import SCRAM.Node;
-import SCRAM.SCRAMNode;
 import org.graphstream.graph.Path;
 
 import static AmodSimulator.AmodSimulator.PRINT;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
-public class Request extends SCRAMNode implements SCRAM.Node {
+public class Request implements SCRAM.Node {
 
     //original info:
     private int id;
@@ -28,6 +27,9 @@ public class Request extends SCRAMNode implements SCRAM.Node {
     private Path pathToDestination;
     private int originPathLength;
     private int destinationPathLength;
+
+    boolean visited;
+    Node previous;
 
     public Request(int id, org.graphstream.graph.Node location, org.graphstream.graph.Node destination, int generationTime) {
         super();
@@ -129,6 +131,26 @@ public class Request extends SCRAMNode implements SCRAM.Node {
             System.exit(0);
         }
         return 0;
+    }
+
+    @Override
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    @Override
+    public boolean isVisited() {
+        return visited;
+    }
+
+    @Override
+    public Node getPrevious() {
+        return previous;
+    }
+
+    @Override
+    public void setPrevious(Node previous) {
+        this.previous = previous;
     }
 
 

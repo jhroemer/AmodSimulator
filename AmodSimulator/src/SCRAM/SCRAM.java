@@ -203,7 +203,6 @@ public class SCRAM {
 
 
     private static void addDummyNodes(List<Node> list, int numDummies) {
-        Set<Node> dummies = new HashSet<>();
         for (int i = 0; i < numDummies; i++) {
             list.add(new DummyNode());
         }
