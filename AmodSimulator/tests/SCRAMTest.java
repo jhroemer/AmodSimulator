@@ -1,7 +1,7 @@
 import AmodSimulator.Request;
 import AmodSimulator.Vehicle;
 import GraphCreator.Utility;
-import SCRAM.*;
+import SCRAM.OldSCRAM;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.junit.Assert;
@@ -33,7 +33,7 @@ public class SCRAMTest {
         Vehicle v1 = new Vehicle("v1", graph.getNode("v1"));
         Vehicle v2 = new Vehicle("v2", graph.getNode("v2"));
         Vehicle v3 = new Vehicle("v3", graph.getNode("v3"));
-        List<Node> vehicleList = new ArrayList<>();
+        List<Vehicle> vehicleList = new ArrayList<>();
         vehicleList.add(v1);
         vehicleList.add(v2);
         vehicleList.add(v3);
@@ -41,7 +41,7 @@ public class SCRAMTest {
         Request r1 = new Request(1, graph.getNode("r1"), null, 0);
         Request r2 = new Request(2, graph.getNode("r2"), null, 0);
         Request r3 = new Request(3, graph.getNode("r3"), null, 0);
-        List<Node> requestList = new ArrayList<>();
+        List<Request> requestList = new ArrayList<>();
         requestList.add(r1);
         requestList.add(r2);
         requestList.add(r3);
@@ -57,10 +57,10 @@ public class SCRAMTest {
         graph.getNode("v3").setAttribute("distTor2", 3);
         graph.getNode("v3").setAttribute("distTor3", 8);
 
-//        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-//        s.match();
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3,s.match());
+        //SCRAM s = new SCRAM(vehicleList, requestList);
+        //Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class SCRAMTest {
         Vehicle v1 = new Vehicle("v1", graph.getNode("v1"));
         Vehicle v2 = new Vehicle("v2", graph.getNode("v2"));
         Vehicle v3 = new Vehicle("v3", graph.getNode("v3"));
-        List<Node> vehicleList = new ArrayList<>();
+        List<Vehicle> vehicleList = new ArrayList<>();
         vehicleList.add(v1);
         vehicleList.add(v2);
         vehicleList.add(v3);
@@ -89,16 +89,16 @@ public class SCRAMTest {
         Request r1 = new Request(1, graph.getNode("r1"), null, 0);
         Request r2 = new Request(2, graph.getNode("r2"), null, 0);
         Request r3 = new Request(3, graph.getNode("r3"), null, 0);
-        List<Node> requestList = new ArrayList<>();
+        List<Request> requestList = new ArrayList<>();
         requestList.add(r1);
         requestList.add(r2);
         requestList.add(r3);
         Utility.setDistances(graph);
 
-//        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-//        s.match();
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3,s.match());
+        //SCRAM s = new SCRAM(vehicleList, requestList);
+        //Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class SCRAMTest {
         Vehicle v1 = new Vehicle("v1", graph.getNode("v1"));
         Vehicle v2 = new Vehicle("v2", graph.getNode("v2"));
         Vehicle v3 = new Vehicle("v3", graph.getNode("v3"));
-        List<Node> vehicleList = new ArrayList<>();
+        List<Vehicle> vehicleList = new ArrayList<>();
         vehicleList.add(v1);
         vehicleList.add(v2);
         vehicleList.add(v3);
@@ -125,13 +125,15 @@ public class SCRAMTest {
         Request r1 = new Request(1, graph.getNode("r1"), null, 0);
         Request r2 = new Request(2, graph.getNode("r2"), null, 0);
         Request r3 = new Request(3, graph.getNode("r3"), null, 0);
-        List<Node> requestList = new ArrayList<>();
+        List<Request> requestList = new ArrayList<>();
         requestList.add(r1);
         requestList.add(r2);
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        Assert.assertEquals(3,s.match());
+//        SCRAM s = new SCRAM(vehicleList, requestList);
+//        Assert.assertEquals(3, s.getLongestEdgeWeight());
     }
 }

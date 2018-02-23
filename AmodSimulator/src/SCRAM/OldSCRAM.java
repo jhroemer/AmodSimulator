@@ -32,12 +32,12 @@ public class OldSCRAM {
         createMatchingEdges();
     }
 
-    public List<Assignment> match() {
+    public int match() {
         SCRAMEdge longestEdge = getMiniMalMaxEdgeInPerfectMatching();
         System.out.println("LONGEST EDGE WEIGHT IS: " + longestEdge.weight);
         List<SCRAMEdge> minimalEdges = new ArrayList<>();
         for (SCRAMEdge e : edges) if (e.weight < longestEdge.weight) minimalEdges.add(e);
-        return null;
+        return longestEdge.weight;
 //        return hungarian(minimalEdges); // todo : use approach from Utility.hungarian()?
     }
 
@@ -57,13 +57,15 @@ public class OldSCRAM {
         edgeQ.addAll(edges);
         SCRAMEdge longestEdge = null;
 
-        for (int i = 0; i < edges.size(); i++) {
+        for (int i = 0; i < n; i++) {
             resetFlood();
             Request matchedPosition = null;
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet
                 longestEdge = edgeQ.remove(0);
                 allowedEdges.add(longestEdge);
-                matchedPosition = flood(longestEdge.end, longestEdge.start);
+                if (longestEdge.start.isVisited() && !longestEdge.end.isVisited()) {
+                    matchedPosition = flood(longestEdge.end, longestEdge.start);
+                }
             }
             Vehicle matchedAgent = reversePath(matchedPosition);
             unmatchedAgents.remove(matchedAgent);   // FIXME : is this always up-to date?
@@ -118,7 +120,7 @@ public class OldSCRAM {
     private void resetFlood() {
         for (Vehicle veh : vehicles) {          // line 13-15
             veh.setVisited(false);
-            veh.setPrevious(null);
+            veh.setPrevious(null); //todo This is done in the pseudocode, but is not in the c++ implemention
         }
 
         for (Request req : requests) {          // line 13-15
@@ -135,7 +137,7 @@ public class OldSCRAM {
      *
      * @param matchedPosition
      * @return
-     */
+     */ 
     private Vehicle reversePath(Request matchedPosition) {
         SCRAMNode node = matchedPosition;
         while (node.getPrevious() != null) {
