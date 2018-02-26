@@ -214,7 +214,7 @@ public class SimulatorTest {
                 Assert.assertEquals("AB", simulator.getSman().getSprite("v1").getAttachment().getId());
                 Assert.assertEquals(1.0, simulator.getSman().getSprite("v1").getX(), 0.01);
                 // v2
-                Assert.assertEquals("BC", simulator.getSman().getSprite("v2").getAttachment().getId());
+                Assert.assertEquals("CD", simulator.getSman().getSprite("v2").getAttachment().getId());
                 Assert.assertEquals(0.5, simulator.getSman().getSprite("v2").getX(), 0.01);
             }
 
@@ -230,8 +230,6 @@ public class SimulatorTest {
                 Assert.assertEquals(0.0, simulator.getSman().getSprite("v1").getX(), 0.01);
                 // v2
                 Assert.assertEquals("CA", simulator.getSman().getSprite("v2").getAttachment().getId());
-                // fixme : position is 0.0 even though it should 0.33, maybe the problem is that it completes the trip to origin and comes further within the same timestep
-                // the problem prob. comes from findattachment(), where traversedSoFar is not counted when originpath is surpassed within one timestep
                 Assert.assertEquals(0.33, simulator.getSman().getSprite("v2").getX(), 0.01);
             }
             if (timestep == 4) {

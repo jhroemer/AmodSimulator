@@ -102,52 +102,46 @@ public class Vehicle implements SCRAM.Node {
             }
         }
 
-//        Path path = (timeStep < currentRequest.getOriginTime()) ? currentRequest.getPathToOrigin() : currentRequest.getPathToDestination();
-
         Path path;
         String status;
         System.out.println("current request is: " + currentRequest.getId());
+        int traversedOnCurrentPath = 0;
+
         if (timeStep < currentRequest.getOriginTime()) {
             path = currentRequest.getPathToOrigin();
             status = "moving";
+            traversedOnCurrentPath = (timeStep - currentRequest.getStartTime()) * speed + speed;
         }
         else {
             path = currentRequest.getPathToDestination();
             status = "occupied";
+            // corner case when originpath has been traversed within the first timestep
+            if (timeStep == currentRequest.getStartTime()) traversedOnCurrentPath = speed - currentRequest.getOriginPathLength();
+            else traversedOnCurrentPath = (timeStep - currentRequest.getStartTime()) * speed + speed;
         }
 
         // FIXME: traversedSoFar is sometimes larger than the last edge, which shouldn't happen.
+        // if path to origin is done within the first timestep then traversedsofar is falsely set to 0
         int traversedSoFar = (timeStep - currentRequest.getStartTime()) * speed;
-
-        // todo : this could be a fix to the problem, when path to origin has been surpassed within the first tick, because before it wasn't included
-        // fixme : but in it's current form it introduces new problems with attachments
-//         if (path == currentRequest.getPathToDestination()) traversedSoFar -= currentRequest.getOriginPathLength();
 
         traversedSoFar += speed; // because the current timestep is also counted
         int edgeLength = 0;
         Edge currentEdge = null;
 
-
-        //TODO - Dette print virker ikke pt fordi calcPathLength er flyttet til GraphCreator.Utility
-        //if (traversedSoFar > Utility.calcPathLength(path)) {
-        //    System.out.println("HEY: traversedSoFar: " + traversedSoFar + " path weight: " + Utility.calcPathLength(path));
-        //}
-
         // find out which element to attach to
         for (Edge edge : path.getEdgeSet()) {
             currentEdge = edge;
             edgeLength = edge.getAttribute("layout.weight");
-            if (traversedSoFar >= edgeLength) {
-                traversedSoFar -= edgeLength;
+            if (traversedOnCurrentPath >= edgeLength) {
+                traversedOnCurrentPath -= edgeLength;
             }
             else {
-                return new SpritePosition(edge, convertToPercent(path, edge, traversedSoFar), status);
+                return new SpritePosition(edge, convertToPercent(path, edge, traversedOnCurrentPath), status);
             }
             // if we have reached originNode exactly
-            System.out.println("traversed so far is: " + traversedSoFar);
+            System.out.println("traversed so far is: " + traversedOnCurrentPath);
         }
 
-        // FIXME : sometimes traverSoFar is also larger than 0
         // fixme : when given a path request with same origin and destination and position as vehicle, currentEdge is null
         if (traversedSoFar >= 0) return new SpritePosition(currentEdge, convertToPercent(path, currentEdge, edgeLength), status);
 
