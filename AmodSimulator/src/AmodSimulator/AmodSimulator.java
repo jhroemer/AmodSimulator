@@ -260,4 +260,12 @@ public class AmodSimulator {
     public List<Vehicle> getActiveVehicles() {
         return activeVehicles;
     }
+
+    /**
+     *
+     * @return
+     */
+    public List<Vehicle> getIdleVehicles() {
+        return idleVehicles;
+    }
 }

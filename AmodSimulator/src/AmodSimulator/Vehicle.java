@@ -24,7 +24,6 @@ public class Vehicle implements SCRAM.Node {
     private boolean visited;
     private Node previous;
 
-
     public Vehicle(String id, org.graphstream.graph.Node startNode) {
         super();
         this.id = id;
@@ -165,6 +164,13 @@ public class Vehicle implements SCRAM.Node {
         return emptyKilometersDriven;
     }
 
+    public int getOccupiedKilometersDriven() {
+        return occupiedKilometersDriven;
+    }
+
+    public int getNumRequestServiced() {
+        return numRequestServiced;
+    }
 
     @Override
     public int getDistance(Node node) {
