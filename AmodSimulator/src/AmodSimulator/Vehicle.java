@@ -88,31 +88,27 @@ public class Vehicle implements SCRAM.Node {
         Request currentRequest = null;
 
         Iterator<Request> requestIterator = requests.iterator();
-
         while (requestIterator.hasNext()) {
             Request req = requestIterator.next();
-            // TODO : remember corner-case where a vehicle can service two requests within a timestep
             if (timeStep > req.getDestinationTime()) requests.remove(req);
             else {
                 currentRequest = req;
                 break;
             }
-            if (requests.isEmpty()) { // todo : is this necessary anymore? Don't we know that requests is not empty because otherwise findAttachment() wouldn't have been called?
-                return new SpritePosition(location, 0.0, "idle");
-            }
+            // todo : is this necessary anymore? Don't we know that requests is not empty because otherwise findAttachment() wouldn't have been called?
+            if (requests.isEmpty()) return new SpritePosition(location, 0.0, "idle");
         }
 
         Path path;
         String status;
         System.out.println("current request is: " + currentRequest.getId());
-        int traversedOnCurrentPath = 0;
+        int traversedOnCurrentPath;
 
         if (timeStep < currentRequest.getOriginTime()) {
             path = currentRequest.getPathToOrigin();
             status = "moving";
             traversedOnCurrentPath = (timeStep - currentRequest.getStartTime()) * speed + speed;
-        }
-        else {
+        } else {
             path = currentRequest.getPathToDestination();
             status = "occupied";
             // corner case when originpath has been traversed within the first timestep
@@ -120,11 +116,6 @@ public class Vehicle implements SCRAM.Node {
             else traversedOnCurrentPath = (timeStep - currentRequest.getStartTime()) * speed + speed;
         }
 
-        // FIXME: traversedSoFar is sometimes larger than the last edge, which shouldn't happen.
-        // if path to origin is done within the first timestep then traversedsofar is falsely set to 0
-        int traversedSoFar = (timeStep - currentRequest.getStartTime()) * speed;
-
-        traversedSoFar += speed; // because the current timestep is also counted
         int edgeLength = 0;
         Edge currentEdge = null;
 
@@ -132,18 +123,12 @@ public class Vehicle implements SCRAM.Node {
         for (Edge edge : path.getEdgeSet()) {
             currentEdge = edge;
             edgeLength = edge.getAttribute("layout.weight");
-            if (traversedOnCurrentPath >= edgeLength) {
-                traversedOnCurrentPath -= edgeLength;
-            }
-            else {
-                return new SpritePosition(edge, convertToPercent(path, edge, traversedOnCurrentPath), status);
-            }
-            // if we have reached originNode exactly
-            System.out.println("traversed so far is: " + traversedOnCurrentPath);
+            if (traversedOnCurrentPath >= edgeLength) traversedOnCurrentPath -= edgeLength;
+            else return new SpritePosition(edge, convertToPercent(path, edge, traversedOnCurrentPath), status);
         }
 
         // fixme : when given a path request with same origin and destination and position as vehicle, currentEdge is null
-        if (traversedSoFar >= 0) return new SpritePosition(currentEdge, convertToPercent(path, currentEdge, edgeLength), status);
+        if (traversedOnCurrentPath >= 0) return new SpritePosition(currentEdge, convertToPercent(path, currentEdge, edgeLength), status);
 
         System.out.println("THIS SHOULDN'T HAPPEN! REWORK-RAT WILL BE ANGRY!");
         return null;
