@@ -11,18 +11,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static AmodSimulator.AssignmentType.HUNGARIAN;
+import static AmodSimulator.AssignmentType.BRUTE_FORCE;
 
 
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
-    private static AssignmentType assignmentMethod = HUNGARIAN;
+    private static AssignmentType assignmentMethod = BRUTE_FORCE;
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
-        runPredefinedExperiment(graph, 1000, false);
-        //runExperiment(graph, 1000, false);
+        runPredefinedExperiment(graph, 1000, true); // todo: doesn't do the visuals right now, weirdly..
+//        runExperiment(graph, 1000, false);
     }
 
     // todo : the experiment probably needs a set of params as arg that sets up no. vehicles, assignment method etc.?
