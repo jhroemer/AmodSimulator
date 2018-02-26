@@ -109,6 +109,6 @@ Temporary Items
 .apdisk
 
 # pdfs, because of the test graph latex thing
-/Data/TestGraphs/.pdf
+/Data/TestGraphs/*.pdf
 
 # End of https://www.gitignore.io/api/linux,macos,intellij
