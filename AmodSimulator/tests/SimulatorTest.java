@@ -244,7 +244,35 @@ public class SimulatorTest {
     }
 
     /**
-     * Test that is mainly concerned with checking if sprites are positioned correctly
+     *
+     */
+    @Test
+    public void dataCollectionTest1() {
+        setup(1);
+
+        for (int timestep = 0; timestep < simulation1Length; timestep++) {
+            simulator.tick(graph, timestep);
+            if (timestep == 0) {
+                // v1
+                Assert.assertEquals(8, simulator.getActiveVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(8, simulator.getActiveVehicles().get(0).getOccupiedKilometersDriven());
+                // v2
+                Assert.assertEquals(0, simulator.getIdleVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(0, simulator.getIdleVehicles().get(0).getOccupiedKilometersDriven());
+            }
+            if (timestep == 1) {
+                // v1
+                Assert.assertEquals(8, simulator.getActiveVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(8, simulator.getActiveVehicles().get(0).getOccupiedKilometersDriven());
+                // v2
+                Assert.assertEquals(0, simulator.getActiveVehicles().get(1).getEmptyKilometersDriven());
+                Assert.assertEquals(8, simulator.getActiveVehicles().get(1).getOccupiedKilometersDriven());
+            }
+        }
+    }
+
+    /**
+     *
      */
     @Test
     public void dataCollectionTest2() {
@@ -253,7 +281,30 @@ public class SimulatorTest {
         for (int timestep = 0; timestep < simulation2Length; timestep++) {
             simulator.tick(graph, timestep);
 
-            if (timestep == 0) Assert.assertEquals(1, simulator.getActiveVehicles().get(1).getEmptyKilometersDriven());
+            if (timestep == 0) {
+                // v1
+                Assert.assertEquals(0, simulator.getActiveVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(1, simulator.getActiveVehicles().get(0).getOccupiedKilometersDriven());
+                // v2
+                Assert.assertEquals(2, simulator.getActiveVehicles().get(1).getEmptyKilometersDriven());
+                Assert.assertEquals(1, simulator.getActiveVehicles().get(0).getOccupiedKilometersDriven());
+            }
+            if (timestep == 1) {
+                // v1
+                Assert.assertEquals(0, simulator.getActiveVehicles().get(1).getEmptyKilometersDriven());
+                Assert.assertEquals(3, simulator.getActiveVehicles().get(1).getOccupiedKilometersDriven());
+                // v2
+                Assert.assertEquals(2, simulator.getActiveVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(4, simulator.getActiveVehicles().get(0).getOccupiedKilometersDriven());
+            }
+            if (timestep == 3) {
+                // v1
+                Assert.assertEquals(0, simulator.getIdleVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(3, simulator.getIdleVehicles().get(0).getOccupiedKilometersDriven());
+                // v2
+                Assert.assertEquals(3, simulator.getActiveVehicles().get(0).getEmptyKilometersDriven());
+                Assert.assertEquals(7, simulator.getActiveVehicles().get(0).getOccupiedKilometersDriven());
+            }
         }
     }
 }

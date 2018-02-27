@@ -28,4 +28,27 @@ r1 A--B timestep: 0
       (C)     edge [mystyle]    node   {$CD\ 2$} (D);
 \end{tikzpicture}
 
+\bigskip
+
+Test graph 1
+\\ V1: Position: A speed: 1
+\\ V2: Position: D speed: 1
+\\
+r1 C--A timestep: 0
+\\ r2 D--E timestep: 1
+
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+  \node[state]          (A)                        {$A$};
+  \node[state]          (B) [right =of A]    {$B$};
+  \node[state]          (C) [right =of B]    {$C$};
+  \node[state]          (D) [below =of C]    {$D$};
+ \node[state]          (E) [right =of C]    {$E$};
+\tikzset{mystyle/.style={-}} 
+\tikzset{every node/.style={fill=white}} 
+\path (A)     edge [mystyle]    node   {$AB\ 4$} (B)
+      (C)     edge [mystyle]    node   {$CB\ 4$} (B) 
+      (D)     edge [mystyle]    node   {$DC\ 4$} (C)
+      (E)     edge [mystyle]    node   {$EC\ 4$} (C);
+\end{tikzpicture}
+
 \end{document}
