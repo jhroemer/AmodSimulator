@@ -47,7 +47,7 @@ public class SCRAMTest {
         requestList.add(r1);
         requestList.add(r2);
         requestList.add(r3);
-        //Utility.setDistances(graph);
+//        Utility.setDistances(graph);
 
         graph.getNode("v1").setAttribute("distTor1", 2);
         graph.getNode("v1").setAttribute("distTor2", 3);
