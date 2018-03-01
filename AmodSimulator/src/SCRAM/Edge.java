@@ -14,6 +14,13 @@ public class Edge implements Comparable<Edge> {
         this.endNode = end;
     }
 
+    /**
+     * Constructor that works with the array-based SCRAM implementation
+     *
+     * @param start
+     * @param end
+     * @param weight
+     */
     public Edge(int start, int end, int weight) {
         this.weight = weight;
         this.startIndex = start;
@@ -42,5 +49,13 @@ public class Edge implements Comparable<Edge> {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public Node getStartNode() {
+        return startNode;
+    }
+
+    public Node getEndNode() {
+        return endNode;
     }
 }

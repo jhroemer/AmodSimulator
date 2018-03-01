@@ -63,6 +63,10 @@ public class SCRAMTest {
         Assert.assertEquals(3,s.getLongestEdgeWeight());
         SCRAM s2 = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(3, s2.getLongestEdgeWeight());
+
+        // asserting if assignments are made correctly
+        Assert.assertEquals(r1, s.getAssignments().get(0).getStartNode());
+//        // TODO : array-based also
     }
 
     @Test
@@ -101,6 +105,8 @@ public class SCRAMTest {
         Assert.assertEquals(3,s.getLongestEdgeWeight());
         SCRAM s2 = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(3, s2.getLongestEdgeWeight());
+
+        // TODO
     }
 
     @Test
@@ -137,5 +143,7 @@ public class SCRAMTest {
         Assert.assertEquals(3,s.getLongestEdgeWeight());
         SCRAM s2 = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(3, s2.getLongestEdgeWeight());
+
+        // TODO
     }
 }

@@ -35,6 +35,7 @@ public class SCRAM {
 
     private int longestEdgeWeight;
 
+    private List<Edge> assignments;
 
     public SCRAM(List<Node> vehicles, List<Node> requests) {
         // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
@@ -69,7 +70,7 @@ public class SCRAM {
 
         // 5. run hungarian on the reduced set of edges, to find a min-matching
         Hungarian hungarian = new Hungarian(edges, n);
-        List<Edge> assignments = hungarian.getAssignments();
+        assignments = hungarian.getAssignments();
     }
 
     // Floodfill from a node.
@@ -211,6 +212,10 @@ public class SCRAM {
 
     public int getLongestEdgeWeight() {
         return longestEdgeWeight;
+    }
+
+    public List<Edge> getAssignments() {
+        return assignments;
     }
 }
 

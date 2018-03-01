@@ -207,28 +207,7 @@ public class OldSCRAM {
         }
     }
 
-
-    /**
-     *
-     */
-    /*
-    private class SCRAMEdge implements Comparable<SCRAMEdge> {
-        SCRAMNode start;
-        SCRAMNode end;
-        int weight;
-
-        public SCRAMEdge(Vehicle veh, Request req) {
-            start = veh;
-            end = req;
-            weight = Utility.getDist(veh.getLocation(), req.getOrigin());
-        }
-
-        @Override
-        public int compareTo(SCRAMEdge other) {
-            if (this.weight < other.weight) return -1;
-            else if (this.weight == other.weight) return 0;
-            else return 1;
-        }
+    public List<Edge> getAssignments() {
+        return assignments;
     }
-    */
 }

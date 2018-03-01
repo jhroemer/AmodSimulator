@@ -1,5 +1,6 @@
 package SCRAM;
 
+import AmodSimulator.Vehicle;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm;
 import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
 import org.jgrapht.graph.ClassBasedEdgeFactory;
@@ -11,28 +12,39 @@ import java.util.List;
 import java.util.Set;
 
 public class Hungarian {
-
     List<Edge> assignments;
 
     public Hungarian(List<Edge> edges, int n) {
 
 
-        //todo do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
+        // todo : do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
+        // todo : dummy vertices should already have been added
 
-
-        //MultiGraph from jgrapht with nodes and edges from graphstream:
         SimpleGraph<Node, Edge> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Edge.class), true);
 
         Set<Node> vehicleNodes = new HashSet<>();
         Set<Node> requestNodes = new HashSet<>();
 
-        //for (Request req : requests) {
-        //    graph.addVertex(req);
-        //    requestNodes.add(req);
-        //}
+        // FIXME : this does not work with array-based
+        for (Edge e : edges) {
+            graph.addVertex(e.startNode);
+            graph.addVertex(e.endNode);
+            graph.addEdge(e.startNode, e.endNode, e);
 
-        for (int i = 0; i < n; i++) {
-            //graph.addVertex(i);
+            if (e.startNode instanceof Vehicle) {
+                vehicleNodes.add(e.startNode);
+                requestNodes.add(e.endNode);
+            }
+            else {
+                vehicleNodes.add(e.endNode);
+                requestNodes.add(e.startNode);
+            }
+        }
+
+
+        SimpleGraph<Integer, Edge> graph2 = new SimpleGraph<Integer, Edge>(new ClassBasedEdgeFactory<>(Edge.class), true);
+        for (int i = 0; i < n; i++) { // n = assignments we have to make
+            graph2.addVertex(i);
             //todo add all vertices to graph
             //todo add all vertices to vehicleNodes and requestNodes
         }
@@ -79,7 +91,6 @@ public class Hungarian {
         assignments = new ArrayList<>();
         assignments.addAll(assignmentSet);
     }
-
 
     public List<Edge> getAssignments() {
         return assignments;
