@@ -4,7 +4,7 @@ import AmodSimulator.Request;
 import AmodSimulator.Vehicle;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm;
 import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
-import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.graph.SimpleWeightedGraph;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,24 +15,24 @@ public class Hungarian {
     private List<Edge> assignments;
 
     public Hungarian(List<Edge> edges, int n) {
-        SimpleGraph<Node, Edge> graph = new SimpleGraph<>(Edge.class);
+        SimpleWeightedGraph<Node, Edge> graph = new SimpleWeightedGraph<Node, Edge>(Edge.class);
 
         Set<Node> vehicleNodes = new HashSet<>();
         Set<Node> requestNodes = new HashSet<>();
 
+        // FIXME : this does not work with array-based
         for (Edge e : edges) {
+            // turning the direction around if it's reversed, s.t. edge goes from veh --> req
             if (e.startNode instanceof Request) {
                 Node temp = e.startNode;
                 e.startNode = e.endNode;
                 e.endNode = temp;
             }
-        }
 
-        // FIXME : this does not work with array-based
-        for (Edge e : edges) {
             graph.addVertex(e.startNode);
             graph.addVertex(e.endNode);
             graph.addEdge(e.startNode, e.endNode, e);
+            graph.setEdgeWeight(e, e.getWeight()); // this has to be done, otherwise edge weight is not set!
 
             if (e.startNode instanceof Vehicle) {
                 vehicleNodes.add(e.startNode);
@@ -44,7 +44,7 @@ public class Hungarian {
             }
         }
 
-        //todo add all edges
+        //todo OLD VERSION add all edges
         /*
         for (Vehicle veh : vehicles) {
             //Node vehNode = veh.getLocation(); //vehicles current location
