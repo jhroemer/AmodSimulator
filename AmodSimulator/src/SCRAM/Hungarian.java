@@ -1,9 +1,9 @@
 package SCRAM;
 
+import AmodSimulator.Request;
 import AmodSimulator.Vehicle;
 import org.jgrapht.alg.interfaces.MatchingAlgorithm;
 import org.jgrapht.alg.matching.KuhnMunkresMinimalWeightBipartitePerfectMatching;
-import org.jgrapht.graph.ClassBasedEdgeFactory;
 import org.jgrapht.graph.SimpleGraph;
 
 import java.util.ArrayList;
@@ -12,18 +12,21 @@ import java.util.List;
 import java.util.Set;
 
 public class Hungarian {
-    List<Edge> assignments;
+    private List<Edge> assignments;
 
     public Hungarian(List<Edge> edges, int n) {
-
-
-        // todo : do we need to make sure that there are the same amount of vehicles and request, or does the algorithm work without this?
-        // todo : dummy vertices should already have been added
-
-        SimpleGraph<Node, Edge> graph = new SimpleGraph<>(new ClassBasedEdgeFactory<>(Edge.class), true);
+        SimpleGraph<Node, Edge> graph = new SimpleGraph<>(Edge.class);
 
         Set<Node> vehicleNodes = new HashSet<>();
         Set<Node> requestNodes = new HashSet<>();
+
+        for (Edge e : edges) {
+            if (e.startNode instanceof Request) {
+                Node temp = e.startNode;
+                e.startNode = e.endNode;
+                e.endNode = temp;
+            }
+        }
 
         // FIXME : this does not work with array-based
         for (Edge e : edges) {
@@ -39,14 +42,6 @@ public class Hungarian {
                 vehicleNodes.add(e.endNode);
                 requestNodes.add(e.startNode);
             }
-        }
-
-
-        SimpleGraph<Integer, Edge> graph2 = new SimpleGraph<Integer, Edge>(new ClassBasedEdgeFactory<>(Edge.class), true);
-        for (int i = 0; i < n; i++) { // n = assignments we have to make
-            graph2.addVertex(i);
-            //todo add all vertices to graph
-            //todo add all vertices to vehicleNodes and requestNodes
         }
 
         //todo add all edges
@@ -69,19 +64,6 @@ public class Hungarian {
         }
         */
 
-        /*
-        System.out.println("Nodes:");
-        for (Node h : graph.vertexSet()) {
-            System.out.println(h.getInfo());
-        }
-
-        System.out.println("Edges ");
-        for (Assignment a : graph.edgeSet()) {
-            System.out.println("Vehicle " + a.getVehicle().getId() + " --> Request " + a.getRequest().getId());
-        }
-        */
-
-        //addDummyNodes(graph, vehicleNodes, requestNodes);
 
         KuhnMunkresMinimalWeightBipartitePerfectMatching<Node, Edge> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
         MatchingAlgorithm.Matching<Node, Edge> matching = hungarian.getMatching();
@@ -92,6 +74,10 @@ public class Hungarian {
         assignments.addAll(assignmentSet);
     }
 
+    /**
+     *
+     * @return a list of edges that holds assigned vehicle-request pairs
+     */
     public List<Edge> getAssignments() {
         return assignments;
     }

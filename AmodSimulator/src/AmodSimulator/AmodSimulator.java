@@ -18,7 +18,7 @@ public class AmodSimulator {
     private AssignmentType assignmentType;
     private boolean TEST = false;
     private int numVehicles;
-    boolean IS_VISUAL = true;
+    static boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
     private List<Request> requests;

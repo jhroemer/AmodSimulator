@@ -112,10 +112,10 @@ public class Request implements SCRAM.Node {
 
         waitTime = originTime - generationTime;
 
-        //todo: if (AmodSimulator.IS_VISUAL) {
-        pathToOrigin = TripPlanner.getPath(source, origin);
-        pathToDestination = TripPlanner.getPath(origin, destination);
-        //}
+        if (AmodSimulator.IS_VISUAL) {
+            pathToOrigin = TripPlanner.getPath(source, origin);
+            pathToDestination = TripPlanner.getPath(origin, destination);
+        }
 
         if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
     }

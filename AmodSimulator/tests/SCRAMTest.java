@@ -60,12 +60,19 @@ public class SCRAMTest {
         graph.getNode("v3").setAttribute("distTor3", 8);
 
         OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-        Assert.assertEquals(3,s.getLongestEdgeWeight());
-        SCRAM s2 = new SCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s2.getLongestEdgeWeight());
-
+        Assert.assertEquals(3, s.getLongestEdgeWeight());
+//        SCRAM s2 = new SCRAM(vehicleList, requestList);
+//        Assert.assertEquals(3, s2.getLongestEdgeWeight());
+        System.out.println(s.getAssignments());
         // asserting if assignments are made correctly
-        Assert.assertEquals(r1, s.getAssignments().get(0).getStartNode());
+        Assert.assertEquals(v1, s.getAssignments().get(0).getStartNode());
+        Assert.assertEquals(r1, s.getAssignments().get(0).getEndNode());
+        Assert.assertEquals(v2, s.getAssignments().get(1).getStartNode());
+        Assert.assertEquals(r3, s.getAssignments().get(1).getEndNode());
+        Assert.assertEquals(v3, s.getAssignments().get(2).getStartNode());
+        Assert.assertEquals(r2, s.getAssignments().get(2).getEndNode());
+
+
 //        // TODO : array-based also
     }
 

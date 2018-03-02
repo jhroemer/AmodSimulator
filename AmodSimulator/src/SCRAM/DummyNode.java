@@ -1,8 +1,6 @@
 package SCRAM;
 
 public class DummyNode implements Node {
-
-
     private boolean visited;
     private Node previous;
 
