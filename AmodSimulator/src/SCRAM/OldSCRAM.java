@@ -86,7 +86,7 @@ public class OldSCRAM {
                     matchedPosition = flood(longestEdge.endNode, longestEdge.startNode);
                 }
             }
-            Vehicle matchedAgent = reversePath(matchedPosition);
+            Node matchedAgent = reversePath(matchedPosition);
             unmatchedAgents.remove(matchedAgent);
             matchedAgents.add(matchedAgent);
         }
@@ -160,13 +160,13 @@ public class OldSCRAM {
      * @param matchedPosition
      * @return
      */
-    private Vehicle reversePath(Node matchedPosition) {
+    private Node reversePath(Node matchedPosition) {
         Node node = matchedPosition;
         while (node.getPrevious() != null) {
             reverseEdgeDirection(node, node.getPrevious());
             node = node.getPrevious();
         }
-        if (node instanceof Vehicle) return (Vehicle) node; // FIXME : problem again with dummynode
+        if (node instanceof Vehicle || node instanceof DummyNode) return node; // FIXME : problem again with dummynode
         else try {
             throw new Exception("problem with reversePath()");
         } catch (Exception e) {
