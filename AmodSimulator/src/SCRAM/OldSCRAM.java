@@ -49,7 +49,6 @@ public class OldSCRAM {
 
         // 3. get the minimal
         longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching();
-        System.out.println("LONGEST EDGE WEIGHT IS: " + longestEdgeWeight);
 
         // 4. 'remove' (set to infinity) edges that are longer than longestEdgeWeight, ensuring that they will not be included in the assignment
         for (Edge edge : edges) if (edge.getWeight() > longestEdgeWeight) edge.setWeight(Integer.MAX_VALUE);
