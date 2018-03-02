@@ -24,10 +24,10 @@ public class SCRAMTest {
 
         graph.addEdge("v1r1", "v1", "r1").setAttribute("layout.weight", 2);
         graph.addEdge("v1r2", "v1", "r2").setAttribute("layout.weight", 3);
-        graph.addEdge("v1r3", "v1", "r3").setAttribute("layout.weight", 5);
+        graph.addEdge("v1r3", "v1", "r3").setAttribute("layout.weight", 6);
         graph.addEdge("v2r1", "v2", "r1").setAttribute("layout.weight", 5);
         graph.addEdge("v2r2", "v2", "r2").setAttribute("layout.weight", 1);
-        graph.addEdge("v2r3", "v2", "r3").setAttribute("layout.weight", 2);
+        graph.addEdge("v2r3", "v2", "r3").setAttribute("layout.weight", 10);
         graph.addEdge("v3r1", "v3", "r1").setAttribute("layout.weight", 7);
         graph.addEdge("v3r2", "v3", "r2").setAttribute("layout.weight", 3);
         graph.addEdge("v3r3", "v3", "r3").setAttribute("layout.weight", 8);
@@ -53,32 +53,29 @@ public class SCRAMTest {
 
         graph.getNode("v1").setAttribute("distTor1", 2);
         graph.getNode("v1").setAttribute("distTor2", 3);
-        graph.getNode("v1").setAttribute("distTor3", 5);
+        graph.getNode("v1").setAttribute("distTor3", 6);
         graph.getNode("v2").setAttribute("distTor1", 5);
         graph.getNode("v2").setAttribute("distTor2", 1);
-        graph.getNode("v2").setAttribute("distTor3", 2);
+        graph.getNode("v2").setAttribute("distTor3", 10);
         graph.getNode("v3").setAttribute("distTor1", 7);
         graph.getNode("v3").setAttribute("distTor2", 3);
         graph.getNode("v3").setAttribute("distTor3", 8);
 
         OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-        Assert.assertEquals(3, s.getLongestEdgeWeight());
+        Assert.assertEquals(6, s.getLongestEdgeWeight());
 //        SCRAM s2 = new SCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
 
-        System.out.println(s.getAssignments());
-        List<Edge> list = new ArrayList<Edge>(s.getAssignments());
-        Collections.sort(list);
-        System.out.println(list);
-        // asserting if assignments are made correctly
-        // to do these assertions for hungarian properly, I need to trace the algorithm to find out how they are added to assignments
-//        Assert.assertEquals(v1, s.getAssignments().get(0).getStartNode());
-//        Assert.assertEquals(r1, s.getAssignments().get(0).getEndNode());
-//        Assert.assertEquals(v2, s.getAssignments().get(1).getStartNode());
-//        Assert.assertEquals(r3, s.getAssignments().get(1).getEndNode());
-//        Assert.assertEquals(v3, s.getAssignments().get(2).getStartNode());
-//        Assert.assertEquals(r2, s.getAssignments().get(2).getEndNode());
+        List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
+        Collections.sort(sortedAssignmentList);
 
+        // object-based SCRAM
+        Assert.assertEquals(v3, sortedAssignmentList.get(0).getStartNode());
+        Assert.assertEquals(r2, sortedAssignmentList.get(0).getEndNode());
+        Assert.assertEquals(v2, sortedAssignmentList.get(1).getStartNode());
+        Assert.assertEquals(r1, sortedAssignmentList.get(1).getEndNode());
+        Assert.assertEquals(v1, sortedAssignmentList.get(2).getStartNode());
+        Assert.assertEquals(r3, sortedAssignmentList.get(2).getEndNode());
 
 //        // TODO : array-based also
     }
@@ -116,7 +113,7 @@ public class SCRAMTest {
         Utility.setDistances(graph);
 
         OldSCRAM s = new OldSCRAM(vehicleList, requestList);
-        Assert.assertEquals(3,s.getLongestEdgeWeight());
+        Assert.assertEquals(3, s.getLongestEdgeWeight());
 //        SCRAM s2 = new SCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
 
