@@ -32,7 +32,6 @@ public class Request implements SCRAM.Node {
     Node previous;
 
     public Request(int id, org.graphstream.graph.Node location, org.graphstream.graph.Node destination, int generationTime) {
-        super();
         this.id = id;
         this.origin = location;
         this.destination = destination;

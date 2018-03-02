@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Vehicle implements SCRAM.Node {
-
     private String id;
     private ArrayList<Request> requests;
     private int speed = 1; //distance per timestep
@@ -25,7 +24,6 @@ public class Vehicle implements SCRAM.Node {
     private Node previous;
 
     public Vehicle(String id, org.graphstream.graph.Node startNode) {
-        super();
         this.id = id;
         requests = new ArrayList<>();
         location = startNode;

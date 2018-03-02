@@ -30,14 +30,21 @@ public class SCRAMTest {
         graph.addEdge("v3r1", "v3", "r1").setAttribute("layout.weight", 7);
         graph.addEdge("v3r2", "v3", "r2").setAttribute("layout.weight", 3);
         graph.addEdge("v3r3", "v3", "r3").setAttribute("layout.weight", 8);
+        // dummy
+        graph.addEdge("v4r1", "v4", "r1").setAttribute("layout.weight", 1000);
+        graph.addEdge("v4r2", "v4", "r2").setAttribute("layout.weight", 1000);
+        graph.addEdge("v4r3", "v4", "r3").setAttribute("layout.weight", 1000);
 
         Vehicle v1 = new Vehicle("v1", graph.getNode("v1"));
         Vehicle v2 = new Vehicle("v2", graph.getNode("v2"));
         Vehicle v3 = new Vehicle("v3", graph.getNode("v3"));
+        // dummy
+        Vehicle v4 = new Vehicle("v4", graph.getNode("v4"));
         List<Node> vehicleList = new ArrayList<>();
         vehicleList.add(v1);
         vehicleList.add(v2);
         vehicleList.add(v3);
+        vehicleList.add(v4);
 
         Request r1 = new Request(1, graph.getNode("r1"), null, 0);
         Request r2 = new Request(2, graph.getNode("r2"), null, 0);
@@ -57,6 +64,10 @@ public class SCRAMTest {
         graph.getNode("v3").setAttribute("distTor1", 7);
         graph.getNode("v3").setAttribute("distTor2", 3);
         graph.getNode("v3").setAttribute("distTor3", 8);
+        // dummy
+        graph.getNode("v4").setAttribute("distTor1", 1000);
+        graph.getNode("v4").setAttribute("distTor2", 1000);
+        graph.getNode("v4").setAttribute("distTor3", 1000);
 
         OldSCRAM s = new OldSCRAM(vehicleList, requestList);
         Assert.assertEquals(6, s.getLongestEdgeWeight());
@@ -67,12 +78,14 @@ public class SCRAMTest {
         Collections.sort(sortedAssignmentList);
 
         // object-based SCRAM
-        Assert.assertEquals(v3, sortedAssignmentList.get(0).getStartNode());
-        Assert.assertEquals(r2, sortedAssignmentList.get(0).getEndNode());
-        Assert.assertEquals(v2, sortedAssignmentList.get(1).getStartNode());
-        Assert.assertEquals(r1, sortedAssignmentList.get(1).getEndNode());
-        Assert.assertEquals(v1, sortedAssignmentList.get(2).getStartNode());
-        Assert.assertEquals(r3, sortedAssignmentList.get(2).getEndNode());
+        Assert.assertEquals(v4, sortedAssignmentList.get(0).getStartNode());
+        Assert.assertEquals("DummyNode", sortedAssignmentList.get(0).getEndNode().getInfo());
+        Assert.assertEquals(v3, sortedAssignmentList.get(1).getStartNode());
+        Assert.assertEquals(r2, sortedAssignmentList.get(1).getEndNode());
+        Assert.assertEquals(v2, sortedAssignmentList.get(2).getStartNode());
+        Assert.assertEquals(r1, sortedAssignmentList.get(2).getEndNode());
+        Assert.assertEquals(v1, sortedAssignmentList.get(3).getStartNode());
+        Assert.assertEquals(r3, sortedAssignmentList.get(3).getEndNode());
 
 //        // TODO : array-based also
     }
@@ -92,6 +105,11 @@ public class SCRAMTest {
         graph.addEdge("v3r1", "v3", "r1").setAttribute("layout.weight", 13);
         graph.addEdge("v3r2", "v3", "r2").setAttribute("layout.weight", 15);
         graph.addEdge("v3r3", "v3", "r3").setAttribute("layout.weight", 17);
+
+        // dummy
+        graph.addEdge("v1r4", "v1", "r4").setAttribute("layout.weight", 1000);
+        graph.addEdge("v2r4", "v2", "r4").setAttribute("layout.weight", 1000);
+        graph.addEdge("v3r4", "v3", "r4").setAttribute("layout.weight", 1000);
 //        Utility.setDistances(graph);
 
         graph.getNode("v1").setAttribute("distTor1", 1);
@@ -103,6 +121,10 @@ public class SCRAMTest {
         graph.getNode("v3").setAttribute("distTor1", 13);
         graph.getNode("v3").setAttribute("distTor2", 15);
         graph.getNode("v3").setAttribute("distTor3", 17);
+        // dummy
+        graph.getNode("v1").setAttribute("distTor4", 1000);
+        graph.getNode("v2").setAttribute("distTor4", 1000);
+        graph.getNode("v3").setAttribute("distTor4", 1000);
 
         Vehicle v1 = new Vehicle("v1", graph.getNode("v1"));
         Vehicle v2 = new Vehicle("v2", graph.getNode("v2"));
@@ -115,10 +137,12 @@ public class SCRAMTest {
         Request r1 = new Request(1, graph.getNode("r1"), null, 0);
         Request r2 = new Request(2, graph.getNode("r2"), null, 0);
         Request r3 = new Request(3, graph.getNode("r3"), null, 0);
+        Request r4 = new Request(4, graph.getNode("r4"), null, 0);
         List<Node> requestList = new ArrayList<>();
         requestList.add(r1);
         requestList.add(r2);
         requestList.add(r3);
+        requestList.add(r4);
 
         OldSCRAM s = new OldSCRAM(vehicleList, requestList);
         Assert.assertEquals(13, s.getLongestEdgeWeight());
@@ -129,12 +153,15 @@ public class SCRAMTest {
         Collections.sort(sortedAssignmentList);
 
         // object-based SCRAM
-        Assert.assertEquals(v1, sortedAssignmentList.get(0).getStartNode());
-        Assert.assertEquals(r2, sortedAssignmentList.get(0).getEndNode());
-        Assert.assertEquals(v2, sortedAssignmentList.get(1).getStartNode());
-        Assert.assertEquals(r3, sortedAssignmentList.get(1).getEndNode());
-        Assert.assertEquals(v3, sortedAssignmentList.get(2).getStartNode());
-        Assert.assertEquals(r1, sortedAssignmentList.get(2).getEndNode());
+//        Assert.assertEquals(v1, sortedAssignmentList.get(0).getStartNode());
+//        Assert.assertEquals(r2, sortedAssignmentList.get(0).getEndNode());
+
+        Assert.assertEquals(v1, sortedAssignmentList.get(1).getStartNode());
+        Assert.assertEquals(r2, sortedAssignmentList.get(1).getEndNode());
+        Assert.assertEquals(v2, sortedAssignmentList.get(2).getStartNode());
+        Assert.assertEquals(r3, sortedAssignmentList.get(2).getEndNode());
+        Assert.assertEquals(v3, sortedAssignmentList.get(3).getStartNode());
+        Assert.assertEquals(r1, sortedAssignmentList.get(3).getEndNode());
 
         // TODO add tests for array-based SCRAM
     }
@@ -252,4 +279,6 @@ public class SCRAMTest {
 
         // TODO
     }
+
+
 }

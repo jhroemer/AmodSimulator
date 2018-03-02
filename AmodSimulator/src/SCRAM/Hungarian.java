@@ -23,7 +23,7 @@ public class Hungarian {
         // FIXME : this does not work with array-based
         for (Edge e : edges) {
             // turning the direction around if it's reversed, s.t. edge goes from veh --> req
-            if (e.startNode instanceof Request) {
+            if (e.startNode instanceof Request || e.endNode instanceof Vehicle) {
                 Node temp = e.startNode;
                 e.startNode = e.endNode;
                 e.endNode = temp;
@@ -34,7 +34,8 @@ public class Hungarian {
             graph.addEdge(e.startNode, e.endNode, e);
             graph.setEdgeWeight(e, e.getWeight()); // this has to be done, otherwise edge weight is not set!
 
-            if (e.startNode instanceof Vehicle) {
+            // TODO : check should in principle not be necessary, since we already reversed at l 24-29 s.t. Vehicle is always the startnode
+            if (e.startNode instanceof Vehicle || e.endNode instanceof Request) {   // both checks have to be used because of dummy-nodes
                 vehicleNodes.add(e.startNode);
                 requestNodes.add(e.endNode);
             }

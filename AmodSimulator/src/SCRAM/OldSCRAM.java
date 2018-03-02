@@ -1,9 +1,10 @@
 package SCRAM;
 
-import AmodSimulator.Request;
 import AmodSimulator.Vehicle;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Based on MMD+MSD^2 algorithm by MacAlpine etc...
@@ -21,12 +22,19 @@ public class OldSCRAM {
 
     public OldSCRAM(List<Node> vehicles, List<Node> requests) {
         // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
-        if (vehicles.size() != requests.size()) try {
-            throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (vehicles.size() != requests.size()) try {
+//            throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
+        // add dummy vertices s.t. |vehicles| = |requests|
+        if (vehicles.size() != requests.size()) {
+            int difference = Math.abs(vehicles.size() - requests.size());
+            if (vehicles.size() > requests.size()) addDummyNodes(requests, difference);
+            else addDummyNodes(vehicles, difference);
+        }
+        n = vehicles.size();
 
         this.vehicles = vehicles;   // todo : remember to check for immutability
         this.requests = requests;   // todo : remember to check for immutability
@@ -34,18 +42,9 @@ public class OldSCRAM {
         matchedAgents = new ArrayList<>();
         edges = new ArrayList<>();
         unmatchedAgents = new ArrayList<>(vehicles);
-        n = vehicles.size();        // todo : OldSCRAM should add dummy vertices s.t. |vehicles| = |requests|
-
-        //adding dummy nodes
-        if (vehicles.size() != requests.size()) {
-            int difference = Math.abs(vehicles.size() - requests.size());
-            if (vehicles.size() > requests.size()) addDummyNodes(vehicles, difference);
-            else addDummyNodes(requests, difference);
-        }
 
         // 2. create edges for the bipartite matching-graph
         createMatchingEdges();
-
 
         // 3. get the minimal
         longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching();
@@ -76,8 +75,11 @@ public class OldSCRAM {
 
         for (int i = 0; i < n; i++) {
             resetFlood();
-            Request matchedPosition = null;
+            Node matchedPosition = null;
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet
+                // FIXME : when dummy node is added, were matching until edgeQ.remove() makes a nullpointer
+                // n is 3 when we try to remove index 0 from the empty list
+                // TODO : the fix is probably that dummynode is neither a request or a vehicle, which we check for in
                 longestEdge = edgeQ.remove(0);
                 allowedEdges.add(longestEdge);
                 if (longestEdge.startNode.isVisited() && !longestEdge.endNode.isVisited()) {
@@ -85,7 +87,7 @@ public class OldSCRAM {
                 }
             }
             Vehicle matchedAgent = reversePath(matchedPosition);
-            unmatchedAgents.remove(matchedAgent);   // FIXME : is this always up-to date?
+            unmatchedAgents.remove(matchedAgent);
             matchedAgents.add(matchedAgent);
         }
         if (longestEdge == null) try {
@@ -104,14 +106,14 @@ public class OldSCRAM {
      * @param prevNode
      * @return returns a request that has ... to be continued..
      */
-    private Request flood(Node curNode, Node prevNode) {
+    private Node flood(Node curNode, Node prevNode) {
         curNode.setVisited(true);
         curNode.setPrevious(prevNode);
 
         // if curNode ∈ Positions and  ̸∃ e ∈ allowedEdges, s.t. e.startIndex = curNode
         //    then return currentNode
         // todo : curNode instanceof does not necessarily work, refer to pseudocode again if encountering problems
-        if (curNode instanceof Request && !isThereOutgoingAllowedEdge(curNode)) return (Request) curNode;
+        if (requests.contains(curNode) && !isThereOutgoingAllowedEdge(curNode)) return curNode;
 
         // for each e ∈ allowedEdges, s.t. (e.startIndex = curNode and not e.endIndex.visited) do
         //    val := flood(e.endIndex, e.startIndex)
@@ -119,7 +121,7 @@ public class OldSCRAM {
         //          return val
         for (Edge e : allowedEdges) {  // line 7-10
             if (e.startNode == curNode && !e.endNode.isVisited()) { // fixme
-                Request val = flood(e.endNode, e.startNode);        // we never get here, which might be why we have a problem
+                Node val = flood(e.endNode, e.startNode);        // we never get here, which might be why we have a problem
                 if (val != null) return val;
             }
         }
@@ -158,13 +160,13 @@ public class OldSCRAM {
      * @param matchedPosition
      * @return
      */
-    private Vehicle reversePath(Request matchedPosition) {
+    private Vehicle reversePath(Node matchedPosition) {
         Node node = matchedPosition;
         while (node.getPrevious() != null) {
             reverseEdgeDirection(node, node.getPrevious());
             node = node.getPrevious();
         }
-        if (node instanceof Vehicle) return (Vehicle) node;
+        if (node instanceof Vehicle) return (Vehicle) node; // FIXME : problem again with dummynode
         else try {
             throw new Exception("problem with reversePath()");
         } catch (Exception e) {
@@ -196,13 +198,14 @@ public class OldSCRAM {
             for (Node req : requests) {
                 Edge s = new Edge(veh, req);
                 edges.add(s);
+                System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
             }
         }
     }
 
-    private static void addDummyNodes(List<Node> list, int numDummies) {
+    private static void addDummyNodes(List<Node> smallerList, int numDummies) {
         for (int i = 0; i < numDummies; i++) {
-            list.add(new DummyNode());
+            smallerList.add(new DummyNode());
         }
     }
 
