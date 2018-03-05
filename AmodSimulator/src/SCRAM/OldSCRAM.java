@@ -21,12 +21,6 @@ public class OldSCRAM {
     private int longestEdgeWeight;
 
     public OldSCRAM(List<Node> vehicles, List<Node> requests) {
-        // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
-//        if (vehicles.size() != requests.size()) try {
-//            throw new Exception("SCRAM called on unequal amount of Vehicles and Requests");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         // add dummy vertices s.t. |vehicles| = |requests|
         if (vehicles.size() != requests.size()) {
@@ -34,6 +28,7 @@ public class OldSCRAM {
             if (vehicles.size() > requests.size()) addDummyNodes(requests, difference);
             else addDummyNodes(vehicles, difference);
         }
+
         n = vehicles.size();
 
         this.vehicles = vehicles;   // todo : remember to check for immutability
@@ -60,7 +55,6 @@ public class OldSCRAM {
     public int getLongestEdgeWeight() {
         return longestEdgeWeight;
     }
-
 
     /**
      *
@@ -110,22 +104,15 @@ public class OldSCRAM {
         curNode.setVisited(true);
         curNode.setPrevious(prevNode);
 
-        // if curNode ∈ Positions and  ̸∃ e ∈ allowedEdges, s.t. e.startIndex = curNode
-        //    then return currentNode
-        // todo : curNode instanceof does not necessarily work, refer to pseudocode again if encountering problems
         if (requests.contains(curNode) && !isThereOutgoingAllowedEdge(curNode)) return curNode;
 
-        // for each e ∈ allowedEdges, s.t. (e.startIndex = curNode and not e.endIndex.visited) do
-        //    val := flood(e.endIndex, e.startIndex)
-        //    if val  ̸= ∅ then
-        //          return val
         for (Edge e : allowedEdges) {  // line 7-10
-            if (e.startNode == curNode && !e.endNode.isVisited()) { // fixme
-                Node val = flood(e.endNode, e.startNode);        // we never get here, which might be why we have a problem
+            if (e.startNode == curNode && !e.endNode.isVisited()) {
+                Node val = flood(e.endNode, e.startNode);
                 if (val != null) return val;
             }
         }
-        return null;                        // line 11
+        return null; // line 11
     }
 
     /**
