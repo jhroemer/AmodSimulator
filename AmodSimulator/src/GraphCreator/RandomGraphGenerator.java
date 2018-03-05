@@ -21,7 +21,7 @@ public class RandomGraphGenerator {
     /**
      * Builds a random graph that kinda resembles a rural areas with small cities
      */
-    public static void countrysideGraph() {
+    public static Graph countrysideGraph() {
 
         int minCitySize = 1;
         int maxCitySize = 10;
@@ -90,8 +90,10 @@ public class RandomGraphGenerator {
         //setting the distances between all nodes in the graph
         Utility.setDistances(roadNetwork);
 
-        roadNetwork.display();
+//        roadNetwork.display();
         //Utility.saveCompleteGraph("random1", roadNetwork);
+
+        return roadNetwork;
     }
 
     /**

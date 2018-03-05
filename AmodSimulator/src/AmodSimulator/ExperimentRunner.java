@@ -1,59 +1,67 @@
 package AmodSimulator;
 
+import GraphCreator.RandomGraphGenerator;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
-import static AmodSimulator.AssignmentType.*;
+import static AmodSimulator.AssignmentType.SCRAM;
 
 
 public class ExperimentRunner {
-
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
     private static AssignmentType assignmentMethod = SCRAM;
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide the path for a properties file as argument");
+            System.exit(1);
+        }
+        Properties props = loadProps(args[0]);
+        System.out.println("should print 10: " + props.getProperty("numVehicles"));
+
+        System.exit(1);
         Graph graph = parseGraph("test", graphPath);
 
-//        runPredefinedExperiment(graph, 1000, true); // todo: doesn't do the visuals right now, weirdly..
-        runExperiment(graph, 2, 100, false);
+        Graph randomGraph = RandomGraphGenerator.countrysideGraph();
+
+//        runPredefinedExperiment(graph, 1000, true);
+        runExperiment(randomGraph, props);
     }
 
     /**
      * Runs a single experiment
      *
      * @param graph
-     * @param timesteps
-     * @param visual
      */
-    private static void runExperiment(Graph graph, int iterations, int timesteps, boolean visual) {
-        int numVehicles = 10;
+    private static void runExperiment(Graph graph, Properties props) {
+        int numVehicles = Integer.parseInt(props.getProperty("numVehicles"));
+        int iterations = Integer.parseInt(props.getProperty("iterations"));
+        int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
+        boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
 
         for (int i = 0; i < iterations; i++) {
             AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
 
             if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
-            for (int j = 0; j < timesteps; j++) {
+            for (int j = 0; j < timeSteps; j++) {
                 simulator.tick(graph, j);
                 if (visual) sleep(50);
             }
 
-            int test = Math.round(13 / 3);
             int unoccupied = simulator.getUnoccupiedKmDriven();
-            int avgUnoccupied = Math.round(unoccupied / numVehicles);
-            
+            double avgUnoccupied = (double) unoccupied / (double) numVehicles;
+
             // done with simulation, get the results
             System.out.println("unoccupied km's driven: " + unoccupied);
             System.out.println("unoccupied km's avg: " + avgUnoccupied);
             System.out.println("waiting time: " + simulator.getWaitingTime());
+
         }
 
         //simulator.getResults()
@@ -127,6 +135,28 @@ public class ExperimentRunner {
         try { Thread.sleep(duration); } catch (Exception e) {}
     }
 
+    /**
+     *
+     * @return
+     * @param path
+     */
+    private static Properties loadProps(String path) {
+        Properties props = new Properties();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (in != null) try {
+            props.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return props;
+    }
 
 //        //todo: test if we can save a lookup-table like this:
 //        Map<Node, Map<Node, Integer>> lookupTable = new HashMap<>();
