@@ -21,8 +21,13 @@ public class SCRAM {
     private int longestEdgeWeight;
 
     public SCRAM(List<Node> vehicles, List<Node> requests) {
+        // if either of the lists is empty, we can't make any assignments
+        if (vehicles.isEmpty() || requests.isEmpty()) {
+            assignments = new ArrayList<>();
+            return;
+        }
 
-        // add dummy vertices s.t. |vehicles| = |requests|
+        // 1. add dummy vertices s.t. |vehicles| = |requests|
         if (vehicles.size() != requests.size()) {
             int difference = Math.abs(vehicles.size() - requests.size());
             if (vehicles.size() > requests.size()) addDummyNodes(requests, difference);
@@ -80,6 +85,7 @@ public class SCRAM {
             matchedAgents.add(matchedAgent);
         }
         if (longestEdge == null) try {
+            System.out.println("hey");
             throw new Exception();
         } catch (Exception e) {
             e.printStackTrace();

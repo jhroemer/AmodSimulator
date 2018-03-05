@@ -21,8 +21,9 @@ public class ExperimentRunner {
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
-        runPredefinedExperiment(graph, 1000, true); // todo: doesn't do the visuals right now, weirdly..
-//        runExperiment(graph, 1000, false);
+
+//        runPredefinedExperiment(graph, 1000, true); // todo: doesn't do the visuals right now, weirdly..
+        runExperiment(graph, 2, 100, false);
     }
 
     /**
@@ -32,15 +33,29 @@ public class ExperimentRunner {
      * @param timesteps
      * @param visual
      */
-    private static void runExperiment(Graph graph, int timesteps, boolean visual) {
-        AmodSimulator simulator = new AmodSimulator(graph, visual, 10, assignmentMethod);
+    private static void runExperiment(Graph graph, int iterations, int timesteps, boolean visual) {
+        int numVehicles = 10;
 
-        if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
+        for (int i = 0; i < iterations; i++) {
+            AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
 
-        for (int i = 0; i < timesteps; i++) {
-            simulator.tick(graph, i);
-            if (visual) sleep(50);
+            if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
+
+            for (int j = 0; j < timesteps; j++) {
+                simulator.tick(graph, j);
+                if (visual) sleep(50);
+            }
+
+            int test = Math.round(13 / 3);
+            int unoccupied = simulator.getUnoccupiedKmDriven();
+            int avgUnoccupied = Math.round(unoccupied / numVehicles);
+            
+            // done with simulation, get the results
+            System.out.println("unoccupied km's driven: " + unoccupied);
+            System.out.println("unoccupied km's avg: " + avgUnoccupied);
+            System.out.println("waiting time: " + simulator.getWaitingTime());
         }
+
         //simulator.getResults()
         //printResults()
         //saveResultsAsFile()

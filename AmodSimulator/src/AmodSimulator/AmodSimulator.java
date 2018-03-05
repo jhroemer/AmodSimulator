@@ -17,7 +17,7 @@ public class AmodSimulator {
     static boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private AssignmentType assignmentType;
-    private boolean TEST = true;
+    private boolean TEST = false;
     private int numVehicles;
     static boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
@@ -29,7 +29,7 @@ public class AmodSimulator {
     private Map<Integer, List<Request>> predefinedRequestsMap;
 
     /**
-     * Normal constructor used to initialize a simulator
+     * Normal constructor used to initialize a simulator for running experiments
      *
      * @param graph
      * @param visual
@@ -120,13 +120,11 @@ public class AmodSimulator {
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
-        //assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
+        // assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
+        // when multiple-assignments extension is included, in principle it will only be requests that can be empty
         List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
 
-        // todo : refactor to IndexBasedSCRAM.Edge - utilize that weight is already saved in the Edge object
         for (Edge e : assignments) {
-            // if (a.isDummy()) continue; // if edge.start is dummy || edge.end is dummy - continue
-
             if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
 
             Vehicle veh = e.getVehicle();
@@ -271,5 +269,30 @@ public class AmodSimulator {
      */
     public List<Vehicle> getIdleVehicles() {
         return idleVehicles;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getUnoccupiedKmDriven() {
+        int result = 0;
+
+        for (Vehicle v : idleVehicles) result += v.getEmptyKilometersDriven();
+        for (Vehicle v : activeVehicles) result += v.getEmptyKilometersDriven(); // TODO : should not count km's that are not within the simulation
+
+        return result;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getWaitingTime() {
+        int result = 0;
+
+        for (Request r : assignedRequests) result += r.getWaitTime();
+
+        return result;
     }
 }

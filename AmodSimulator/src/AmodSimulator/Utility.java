@@ -60,8 +60,7 @@ public class Utility {
 
     static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
 
-        // done to avoid major and annoying genereic refactoring in AmodSimulator
-        // adds some (linear) running time
+        // done to avoid major and annoying generic refactoring in AmodSimulator - adds some (linear) running time
         List<Node> vehicleNodeList = new ArrayList<>(vehicles);
         List<Node> requestNodeList = new ArrayList<>(requests);
 
@@ -72,8 +71,7 @@ public class Utility {
 //                return hungarianAssign(vehicles,requests);
             case SCRAM:
                 SCRAM s = new SCRAM(vehicleNodeList, requestNodeList);
-                System.out.println("IndexBasedSCRAM not implemented");
-                return new ArrayList<>();
+                return s.getAssignments();
         }
 
         try {
