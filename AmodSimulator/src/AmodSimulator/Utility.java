@@ -59,7 +59,7 @@ public class Utility {
     static List<Assignment> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
 
         switch (type) {
-            case BRUTE_FORCE:
+            case SCHWACHSINN:
                 return schwachsinnAssign(vehicles,requests);
             case HUNGARIAN:
 //                return hungarianAssign(vehicles,requests);
@@ -75,6 +75,7 @@ public class Utility {
         }
         return new ArrayList<>();
     }
+
     /**
      * Assigns vehicles to requests by simply matching first vehicle to first request, second vehicle
      * to second request and so on, until either vehicles or requests are used up.
@@ -87,6 +88,7 @@ public class Utility {
         List<Assignment> assignments = new ArrayList<>();
 
         int numToAssign = Math.min(vehicles.size(),requests.size());
+
         if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
 
         for (int i = 0; i < numToAssign; i++) {

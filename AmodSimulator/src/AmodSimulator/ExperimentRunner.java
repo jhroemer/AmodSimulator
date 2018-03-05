@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static AmodSimulator.AssignmentType.BRUTE_FORCE;
+import static AmodSimulator.AssignmentType.SCHWACHSINN;
 
 
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
-    private static AssignmentType assignmentMethod = BRUTE_FORCE;
+    private static AssignmentType assignmentMethod = SCHWACHSINN;
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);
