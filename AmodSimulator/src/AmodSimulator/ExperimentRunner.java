@@ -41,6 +41,9 @@ public class ExperimentRunner {
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
 
+        double totalAvgUnoccupied = 0.0;
+        double totalAvgWait = 0.0;
+
         for (int i = 0; i < iterations; i++) {
             AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
 
@@ -51,18 +54,30 @@ public class ExperimentRunner {
                 if (visual) sleep(50);
             }
 
+            // results for this iteration
             int unoccupied = simulator.getUnoccupiedKmDriven();
             double avgUnoccupied = (double) unoccupied / (double) numVehicles;
+            int wait = simulator.getWaitingTime();
+            double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
+            // add to total results
+            totalAvgUnoccupied += avgUnoccupied;
+            totalAvgWait += avgWait;
 
             // done with simulation, get the results
             System.out.println("unoccupied km's driven: " + unoccupied);
             System.out.println("unoccupied km's avg: " + avgUnoccupied);
             System.out.println("waiting time: " + simulator.getWaitingTime());
 
-
             props.setProperty(i + "-wait", String.valueOf(simulator.getWaitingTime()));
             props.setProperty(i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
         }
+
+        totalAvgUnoccupied = totalAvgUnoccupied / iterations;
+        totalAvgWait = totalAvgWait / iterations;
+
+        System.out.println("<<<<<<<<<<<< RESULTS >>>>>>>>>>>>>");
+        System.out.println("total avg unoccupied: " + totalAvgUnoccupied);
+        System.out.println("total avg wait: " + totalAvgWait);
 
         Utility.saveResultsAsFile(props);
     }

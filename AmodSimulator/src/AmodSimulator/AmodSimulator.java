@@ -295,4 +295,12 @@ public class AmodSimulator {
 
         return result;
     }
+
+    /**
+     *
+     * @return
+     */
+    public List<Request> getAssignedRequests() {
+        return assignedRequests;
+    }
 }
