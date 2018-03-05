@@ -3,7 +3,7 @@ import AmodSimulator.Vehicle;
 import GraphCreator.Utility;
 import SCRAM.Edge;
 import SCRAM.Node;
-import SCRAM.OldSCRAM;
+import SCRAM.SCRAM;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.junit.Assert;
@@ -69,15 +69,15 @@ public class SCRAMTest {
         graph.getNode("v4").setAttribute("distTor2", 1000);
         graph.getNode("v4").setAttribute("distTor3", 1000);
 
-        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(6, s.getLongestEdgeWeight());
-//        SCRAM s2 = new SCRAM(vehicleList, requestList);
+//        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
         Collections.sort(sortedAssignmentList);
 
-        // object-based SCRAM
+        // object-based IndexBasedSCRAM
         Assert.assertEquals(v4, sortedAssignmentList.get(0).getStartNode());
         Assert.assertEquals("DummyNode", sortedAssignmentList.get(0).getEndNode().getInfo());
         Assert.assertEquals(v3, sortedAssignmentList.get(1).getStartNode());
@@ -144,15 +144,15 @@ public class SCRAMTest {
         requestList.add(r3);
         requestList.add(r4);
 
-        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(13, s.getLongestEdgeWeight());
-//        SCRAM s2 = new SCRAM(vehicleList, requestList);
+//        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
         Collections.sort(sortedAssignmentList);
 
-        // object-based SCRAM
+        // object-based IndexBasedSCRAM
 //        Assert.assertEquals(v1, sortedAssignmentList.get(0).getStartNode());
 //        Assert.assertEquals(r2, sortedAssignmentList.get(0).getEndNode());
 
@@ -163,7 +163,7 @@ public class SCRAMTest {
         Assert.assertEquals(v3, sortedAssignmentList.get(3).getStartNode());
         Assert.assertEquals(r1, sortedAssignmentList.get(3).getEndNode());
 
-        // TODO add tests for array-based SCRAM
+        // TODO add tests for array-based IndexBasedSCRAM
     }
 
     @Test
@@ -209,23 +209,21 @@ public class SCRAMTest {
         requestList.add(r2);
         requestList.add(r3);
 
-        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(6, s.getLongestEdgeWeight());
-//        SCRAM s2 = new SCRAM(vehicleList, requestList);
+//        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
         Collections.sort(sortedAssignmentList);
 
-        // object-based SCRAM
+        // object-based IndexBasedSCRAM
         Assert.assertEquals(v3, sortedAssignmentList.get(0).getStartNode());
         Assert.assertEquals(r1, sortedAssignmentList.get(0).getEndNode());
         Assert.assertEquals(v2, sortedAssignmentList.get(1).getStartNode());
         Assert.assertEquals(r2, sortedAssignmentList.get(1).getEndNode());
         Assert.assertEquals(v1, sortedAssignmentList.get(2).getStartNode());
         Assert.assertEquals(r3, sortedAssignmentList.get(2).getEndNode());
-
-        // TODO add tests for array-based SCRAM
     }
 
     @Test
@@ -261,9 +259,9 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        OldSCRAM s = new OldSCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList);
         Assert.assertEquals(8, s.getLongestEdgeWeight());
-//        SCRAM s2 = new SCRAM(vehicleList, requestList);
+//        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<Edge>(s.getAssignments());
@@ -276,9 +274,5 @@ public class SCRAMTest {
         Assert.assertEquals(r2, sortedAssignmentList.get(1).getEndNode());
         Assert.assertEquals(v1, sortedAssignmentList.get(2).getStartNode());
         Assert.assertEquals(r3, sortedAssignmentList.get(2).getEndNode());
-
-        // TODO
     }
-
-
 }

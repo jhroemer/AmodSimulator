@@ -56,8 +56,7 @@ public class Utility {
         return styleSheet;
     }
 
-    //todo make ENUM
-    public static List<Assignment> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
+    static List<Assignment> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
 
         switch (type) {
             case BRUTE_FORCE:
@@ -65,7 +64,7 @@ public class Utility {
             case HUNGARIAN:
 //                return hungarianAssign(vehicles,requests);
             case SCRAM:
-                System.out.println("SCRAM not implemented");
+                System.out.println("IndexBasedSCRAM not implemented");
                 return new ArrayList<>();
         }
 
@@ -83,7 +82,7 @@ public class Utility {
      * @param requests
      * @return
      */
-    public static List<Assignment> schwachsinnAssign(List<Vehicle> vehicles, List<Request> requests) {
+    private static List<Assignment> schwachsinnAssign(List<Vehicle> vehicles, List<Request> requests) {
 
         List<Assignment> assignments = new ArrayList<>();
 

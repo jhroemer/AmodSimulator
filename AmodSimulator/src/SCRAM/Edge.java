@@ -4,7 +4,7 @@ public class Edge implements Comparable<Edge> {
     int weight;
     Node startNode;
     Node endNode;
-    // for MacAlpine SCRAM implementation
+    // for MacAlpine IndexBasedSCRAM implementation
     int startIndex;
     int endIndex;
 
@@ -15,7 +15,7 @@ public class Edge implements Comparable<Edge> {
     }
 
     /**
-     * Constructor that works with the array-based SCRAM implementation
+     * Constructor that works with the array-based IndexBasedSCRAM implementation
      *
      * @param start
      * @param end
