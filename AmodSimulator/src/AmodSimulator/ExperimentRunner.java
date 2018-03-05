@@ -40,6 +40,7 @@ public class ExperimentRunner {
         int iterations = Integer.parseInt(props.getProperty("iterations"));
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
+        String method = props.getProperty("assignmentType"); // todo : enums can't be retrieved from properties..
 
         double totalAvgUnoccupied = 0.0;
         double totalAvgWait = 0.0;
@@ -79,6 +80,8 @@ public class ExperimentRunner {
         System.out.println("total avg unoccupied: " + totalAvgUnoccupied);
         System.out.println("total avg wait: " + totalAvgWait);
 
+        // TODO: right now the properties result file does not look pretty, should it be converted to a treemap? Or doesn't it matter?
+        // TODO: run two experiments that documents schwachsinn vs SCRAM
         Utility.saveResultsAsFile(props);
     }
 
