@@ -61,19 +61,14 @@ public class OldSCRAM {
      * @return ..
      */
     private int getMinimalMaxEdgeInPerfectMatching() {
-        Collections.sort(edges); // corresponds to edgeQ from pseudocode
-//        List<SCRAMEdge> edgeQ = new ArrayList<>(edges);   todo: this is wrong right? we don't want to have copies of the edge-objects?
-        List<Edge> edgeQ = new ArrayList<>();       // rather we wan't the actual objects so that theyre reversed in both lists
-        edgeQ.addAll(edges);
+        Collections.sort(edges);
+        List<Edge> edgeQ = new ArrayList<>(edges);
         Edge longestEdge = null;
 
         for (int i = 0; i < n; i++) {
             resetFlood();
             Node matchedPosition = null;
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet
-                // FIXME : when dummy node is added, were matching until edgeQ.remove() makes a nullpointer
-                // n is 3 when we try to remove index 0 from the empty list
-                // TODO : the fix is probably that dummynode is neither a request or a vehicle, which we check for in
                 longestEdge = edgeQ.remove(0);
                 allowedEdges.add(longestEdge);
                 if (longestEdge.startNode.isVisited() && !longestEdge.endNode.isVisited()) {

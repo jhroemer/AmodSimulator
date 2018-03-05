@@ -25,7 +25,6 @@ public class ExperimentRunner {
 //        runExperiment(graph, 1000, false);
     }
 
-    // todo : the experiment probably needs a set of params as arg that sets up no. vehicles, assignment method etc.?
     /**
      * Runs a single experiment
      *
@@ -42,7 +41,6 @@ public class ExperimentRunner {
             simulator.tick(graph, i);
             if (visual) sleep(50);
         }
-
         //simulator.getResults()
         //printResults()
         //saveResultsAsFile()

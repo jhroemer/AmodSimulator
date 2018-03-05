@@ -117,7 +117,7 @@ public class Utility {
     }
 
 
-    private static void addDummyNodes(org.jgrapht.Graph<Node,Assignment> graph, Set<Node> vehicles, Set<Node> requests) {
+    private static void addDummyNodes(org.jgrapht.Graph<Node, Assignment> graph, Set<Node> vehicles, Set<Node> requests) {
 
         int numVeh = vehicles.size();
         int numReq = requests.size();
