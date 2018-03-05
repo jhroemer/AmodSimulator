@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static AmodSimulator.AssignmentType.SCHWACHSINN;
+import static AmodSimulator.AssignmentType.*;
 
 
 public class ExperimentRunner {
 
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
-    private static AssignmentType assignmentMethod = SCHWACHSINN;
+    private static AssignmentType assignmentMethod = SCRAM;
 
     public static void main(String[] args) {
         Graph graph = parseGraph("test", graphPath);

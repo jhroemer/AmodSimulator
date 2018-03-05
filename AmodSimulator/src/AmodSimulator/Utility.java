@@ -2,6 +2,8 @@ package AmodSimulator;
 
 import SCRAM.DummyNode;
 import SCRAM.Node;
+import SCRAM.SCRAM;
+import SCRAM.Edge;
 import org.graphstream.graph.Graph;
 
 import java.io.File;
@@ -56,14 +58,20 @@ public class Utility {
         return styleSheet;
     }
 
-    static List<Assignment> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
+    static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
+
+        // done to avoid major and annoying genereic refactoring in AmodSimulator
+        // adds some (linear) running time
+        List<Node> vehicleNodeList = new ArrayList<>(vehicles);
+        List<Node> requestNodeList = new ArrayList<>(requests);
 
         switch (type) {
             case SCHWACHSINN:
-                return schwachsinnAssign(vehicles,requests);
+                return schwachsinnAssign(vehicleNodeList, requestNodeList);
             case HUNGARIAN:
 //                return hungarianAssign(vehicles,requests);
             case SCRAM:
+                SCRAM s = new SCRAM(vehicleNodeList, requestNodeList);
                 System.out.println("IndexBasedSCRAM not implemented");
                 return new ArrayList<>();
         }
@@ -83,17 +91,17 @@ public class Utility {
      * @param requests
      * @return
      */
-    private static List<Assignment> schwachsinnAssign(List<Vehicle> vehicles, List<Request> requests) {
+    private static List<Edge> schwachsinnAssign(List<Node> vehicles, List<Node> requests) {
 
-        List<Assignment> assignments = new ArrayList<>();
+        List<Edge> assignments = new ArrayList<>();
 
         int numToAssign = Math.min(vehicles.size(),requests.size());
 
         if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
 
         for (int i = 0; i < numToAssign; i++) {
-            assignments.add(new Assignment(vehicles.get(i), requests.get(i)));
-            if (PRINT) System.out.println("\tVehicle "+ vehicles.get(i).getId() + " <-- request " + requests.get(i).getId());
+            assignments.add(new Edge(vehicles.get(i), requests.get(i)));
+            if (PRINT) System.out.println("\tVehicle "+ vehicles.get(i).getInfo() + " <-- request " + requests.get(i).getInfo());
         }
 
         return assignments;

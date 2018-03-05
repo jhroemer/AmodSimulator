@@ -1,5 +1,6 @@
 package AmodSimulator;
 
+import SCRAM.Edge;
 import org.graphstream.graph.Element;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -16,13 +17,13 @@ public class AmodSimulator {
     static boolean PRINT = true;
     private static String styleSheetPath = "styles/style.css";
     private AssignmentType assignmentType;
-    private boolean TEST = false;
+    private boolean TEST = true;
     private int numVehicles;
     static boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
     private List<Request> requests;
-    private Map<Integer,List<Vehicle>> vacancyMap = new HashMap<>();
+    private Map<Integer, List<Vehicle>> vacancyMap = new HashMap<>();
     private SpriteManager sman;
     private List<Request> assignedRequests = new ArrayList<>();
     private Map<Integer, List<Request>> predefinedRequestsMap;
@@ -120,14 +121,17 @@ public class AmodSimulator {
         else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
 
         //assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
-        List<Assignment> assignments = Utility.assign(assignmentType,idleVehicles,requests);
+        List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
 
         // todo : refactor to IndexBasedSCRAM.Edge - utilize that weight is already saved in the Edge object
-        for (Assignment a : assignments) {
-            if (a.isDummy()) continue; // if edge.start is dummy || edge.end is dummy - continue
-            System.out.println(a);
-            Vehicle veh = a.getVehicle();
-            Request req = a.getRequest();
+        for (Edge e : assignments) {
+            // if (a.isDummy()) continue; // if edge.start is dummy || edge.end is dummy - continue
+
+            if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
+
+            Vehicle veh = e.getVehicle();
+            Request req = e.getRequest();
+
             veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);
