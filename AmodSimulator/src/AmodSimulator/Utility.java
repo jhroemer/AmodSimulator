@@ -6,8 +6,7 @@ import SCRAM.SCRAM;
 import SCRAM.Edge;
 import org.graphstream.graph.Graph;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 import static AmodSimulator.AmodSimulator.PRINT;
@@ -154,5 +153,49 @@ public class Utility {
         //adding the dummies to the smallest of the Sets
         smallest.addAll(dummies);
 
+    }
+
+    /**
+     *
+     * @return
+     * @param path
+     */
+    public static Properties loadProps(String path) {
+        Properties props = new Properties();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (in != null) try {
+            props.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return props;
+    }
+
+    /**
+     *
+     * @param props
+     */
+    public static void saveResultsAsFile(Properties props) {
+        File file = new File("data/experimentResults/test");
+        OutputStream out = null;
+
+        try {
+            out = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            props.store(out, "hey");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

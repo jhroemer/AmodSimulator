@@ -11,7 +11,6 @@ import java.util.*;
 
 import static AmodSimulator.AssignmentType.SCRAM;
 
-
 public class ExperimentRunner {
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
     private static AssignmentType assignmentMethod = SCRAM;
@@ -21,11 +20,9 @@ public class ExperimentRunner {
             System.out.println("Please provide the path for a properties file as argument");
             System.exit(1);
         }
-        Properties props = loadProps(args[0]);
-        System.out.println("should print 10: " + props.getProperty("numVehicles"));
+        Properties props = Utility.loadProps(args[0]);
 
-        System.exit(1);
-        Graph graph = parseGraph("test", graphPath);
+        Graph graph = parseGraph("test", graphPath); // todo: should graphPath be in props also?
 
         Graph randomGraph = RandomGraphGenerator.countrysideGraph();
 
@@ -62,11 +59,12 @@ public class ExperimentRunner {
             System.out.println("unoccupied km's avg: " + avgUnoccupied);
             System.out.println("waiting time: " + simulator.getWaitingTime());
 
+
+            props.setProperty(i + "-wait", String.valueOf(simulator.getWaitingTime()));
+            props.setProperty(i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
         }
 
-        //simulator.getResults()
-        //printResults()
-        //saveResultsAsFile()
+        Utility.saveResultsAsFile(props);
     }
 
     /**
@@ -133,29 +131,6 @@ public class ExperimentRunner {
      */
     protected static void sleep(int duration) {
         try { Thread.sleep(duration); } catch (Exception e) {}
-    }
-
-    /**
-     *
-     * @return
-     * @param path
-     */
-    private static Properties loadProps(String path) {
-        Properties props = new Properties();
-        InputStream in = null;
-        try {
-            in = new FileInputStream(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        if (in != null) try {
-            props.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return props;
     }
 
 //        //todo: test if we can save a lookup-table like this:
