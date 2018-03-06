@@ -184,16 +184,8 @@ public class Utility {
      */
     public static void saveResultsAsFile(Properties props) {
         File file = new File(props.getProperty("resultFolder") + props.getProperty("name"));
-        OutputStream out = null;
-
         try {
-            out = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        try {
-            props.store(out, "hey");
+            props.store(new FileOutputStream(file), props.getProperty("name"));
         } catch (IOException e) {
             e.printStackTrace();
         }

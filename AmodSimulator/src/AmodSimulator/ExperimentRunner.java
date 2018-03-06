@@ -74,11 +74,16 @@ public class ExperimentRunner {
                 System.out.println("unoccupied km's avg: " + avgUnoccupied);
                 System.out.println("waiting time: " + simulator.getWaitingTime());
 
-                props.setProperty("graph:" + graph.getId() + ",iteration:" + i + ",wait:", String.valueOf(simulator.getWaitingTime()));
-                props.setProperty("graph:" + graph.getId() + ",iteration:" + i + ",unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+                String one = graph.getId() + "iteration" + i + "wait";
+                String two = graph.getId() + "iteration_" + i + "unoccupied";
+                props.setProperty(one, String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(two, String.valueOf(simulator.getUnoccupiedKmDriven()));
             }
-            props.setProperty("graphTotal:" + graph.getId() + ",avgUnoccupied:", String.valueOf(totalAvgUnoccupied / iterations));
-            props.setProperty("graphTotal:" + graph.getId() + ",avgWait", String.valueOf(totalAvgWait / iterations));
+
+            String one = "graphTotal" + graph.getId() + "avgUnoccupied";
+            String two = "graphTotal" + graph.getId() + "avgWait";
+            props.setProperty(one, String.valueOf(totalAvgUnoccupied / iterations));
+            props.setProperty(two, String.valueOf(totalAvgWait / iterations));
         }
 
         Utility.saveResultsAsFile(props);
