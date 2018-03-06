@@ -1,7 +1,9 @@
 # setup
+name=firstTest
 assignment=SCHWACHSINN
 isVisual=false
 graphFolder=data/graphs/small
+resultFolder=data/experimentResults/
 
 numVehicles=10
 timeSteps=1000

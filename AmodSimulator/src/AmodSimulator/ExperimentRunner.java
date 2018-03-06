@@ -74,19 +74,13 @@ public class ExperimentRunner {
                 System.out.println("unoccupied km's avg: " + avgUnoccupied);
                 System.out.println("waiting time: " + simulator.getWaitingTime());
 
-                props.setProperty(i + "-wait", String.valueOf(simulator.getWaitingTime()));
-                props.setProperty(i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+                props.setProperty(graph.getId() + i + "-wait", String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(graph.getId() + i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
             }
+            props.setProperty(graph.getId() + "avgUnoccupied", String.valueOf(totalAvgUnoccupied / iterations));
+            props.setProperty(graph.getId() + "avgWait", String.valueOf(totalAvgWait / iterations));
         }
 
-        totalAvgUnoccupied = totalAvgUnoccupied / iterations;
-        totalAvgWait = totalAvgWait / iterations;
-
-        System.out.println("<<<<<<<<<<<< RESULTS >>>>>>>>>>>>>");
-        System.out.println("total avg unoccupied: " + totalAvgUnoccupied);
-        System.out.println("total avg wait: " + totalAvgWait);
-
-        // TODO: run two experiments that documents schwachsinn vs SCRAM
         Utility.saveResultsAsFile(props);
     }
 

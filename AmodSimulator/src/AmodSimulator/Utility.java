@@ -183,15 +183,15 @@ public class Utility {
      * @param props
      */
     public static void saveResultsAsFile(Properties props) {
-        File file = new File("data/experimentResults/test");
+        File file = new File(props.getProperty("resultFolder") + props.getProperty("name"));
         OutputStream out = null;
 
         try {
             out = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.exit(1);
         }
-
         try {
             props.store(out, "hey");
         } catch (IOException e) {
