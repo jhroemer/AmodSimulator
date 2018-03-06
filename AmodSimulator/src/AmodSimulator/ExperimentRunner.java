@@ -24,7 +24,7 @@ public class ExperimentRunner {
      */
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println("Please provide the path for a properties file as argument");
+            System.out.println("Please provide the path for a properties file folder as argument");
             System.exit(1);
         }
         if (args[0].equals("predefined")) {
@@ -80,9 +80,7 @@ public class ExperimentRunner {
                 totalAvgUnoccupied += avgUnoccupied;
                 totalAvgWait += avgWait;
 
-                String name = graph.getId() + "_" + i + "_wait";
-                System.out.println(name);
-                props.setProperty(name, String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(graph.getId() + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graph.getId() + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
             }
 
