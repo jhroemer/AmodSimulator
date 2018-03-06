@@ -26,21 +26,24 @@ public class AmodSimulator {
     private SpriteManager sman;
     private List<Request> assignedRequests = new ArrayList<>();
     private Map<Integer, List<Request>> predefinedRequestsMap;
+    private double lambda = 0.1;
 
     /**
      * Normal constructor used to initialize a simulator for running experiments
-     *
-     * @param graph
+     *  @param graph
      * @param visual
      * @param numVehicles
+     * @param lambda
      */
-    public AmodSimulator(Graph graph, boolean visual, int numVehicles, AssignmentType assignmentType) {
+    public AmodSimulator(Graph graph, boolean visual, int numVehicles, AssignmentType assignmentType, double lambda) {
         //printing the distances in the graph for debugging
         // Utility.printDistances(graph);
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         this.numVehicles = numVehicles;
+        this.lambda = lambda;
+
         activeVehicles = new ArrayList<>();
         idleVehicles = Utility.generateVehicles(graph, numVehicles);
         requests = new ArrayList<>();
@@ -113,7 +116,7 @@ public class AmodSimulator {
 
         // adding requests for current time step:
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
-        else requests.addAll(RequestGenerator.generateRequests(graph,0.1, timeStep));
+        else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
         // assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
         // when multiple-assignments extension is included, in principle it will only be requests that can be empty

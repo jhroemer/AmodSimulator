@@ -51,6 +51,7 @@ public class ExperimentRunner {
         int numVehicles = Integer.parseInt(props.getProperty("numVehicles"));
         int trials = Integer.parseInt(props.getProperty("trials"));
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
+        double lambda = Double.parseDouble(props.getProperty("requestsPerDay")) / 288.0; // there are 288 5min intervals per day
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
         List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphFolder"));
         AssignmentType assignmentMethod = AssignmentType.valueOf(props.getProperty("assignment"));
@@ -62,8 +63,8 @@ public class ExperimentRunner {
         for (Graph graph : graphList) {
 
             for (int i = 0; i < trials; i++) {
-
-                AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
+                System.out.println("starting trial: " + i);
+                AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
                 // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
@@ -72,7 +73,7 @@ public class ExperimentRunner {
                 }
 
                 // results for this iteration
-                int unoccupied = simulator.getUnoccupiedKmDriven();
+                int unoccupied = simulator.getUnoccupiedKmDriven(); // todo: do I get overflow? long needed?
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
                 int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
@@ -82,6 +83,8 @@ public class ExperimentRunner {
 
                 props.setProperty(graph.getId() + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graph.getId() + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+
+                System.out.println("ran trial " + i);
             }
 
             // todo : check the double-int-division of totalAvgWait and trials
