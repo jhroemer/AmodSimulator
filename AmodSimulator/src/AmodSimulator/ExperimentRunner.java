@@ -72,7 +72,7 @@ public class ExperimentRunner {
                     if (visual) sleep(50);
                 }
 
-                // results for this iteration
+                // results for the i'th trial
                 int unoccupied = simulator.getUnoccupiedKmDriven(); // todo: do I get overflow? long needed?
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
                 int wait = simulator.getWaitingTime();
