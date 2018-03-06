@@ -1,6 +1,9 @@
 # setup
+assignment=SCHWACHSINN
+isVisual=false
+graphFolder=data/graphs/small
+
 numVehicles=10
 timeSteps=1000
 vehicleSpeed=1
 iterations=10
-isVisual=false

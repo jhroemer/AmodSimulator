@@ -12,13 +12,15 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static AmodSimulator.AssignmentType.SCRAM;
-
+/**
+ *
+ */
 public class ExperimentRunner {
-    private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
-    private static AssignmentType assignmentMethod = SCRAM;
 
-
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Please provide the path for a properties file as argument");
@@ -41,12 +43,12 @@ public class ExperimentRunner {
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
         List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphFolder"));
-
-        String method = props.getProperty("assignmentType"); // todo : enums can't be retrieved from properties..
+        AssignmentType assignmentMethod = AssignmentType.valueOf(props.getProperty("assignment"));
 
         double totalAvgUnoccupied = 0.0;
         double totalAvgWait = 0.0;
 
+        // for each graph-type, do i simulations and collect data
         for (Graph graph : graphList) {
             for (int i = 0; i < iterations; i++) {
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
@@ -110,7 +112,7 @@ public class ExperimentRunner {
         Map<Integer, List<Request>> requestMap = new HashMap<>();
         requestMap.put(0, requests);
 
-        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap, assignmentMethod);
+        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap, AssignmentType.SCRAM);
 
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
@@ -118,10 +120,6 @@ public class ExperimentRunner {
             simulator.tick(graph, i);
             if (visual) sleep(50);
         }
-
-        //simulator.getResults()
-        //printResults()
-        //saveResultsAsFile()
     }
 
     /**
