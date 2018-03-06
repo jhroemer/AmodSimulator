@@ -19,18 +19,27 @@ public class ExperimentRunner {
 
     /**
      *
-     * @param args
+     * @param args should be a path to a folder containing properties for experiments
      */
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Please provide the path for a properties file as argument");
             System.exit(1);
         }
-        Properties props = Utility.loadProps(args[0]);
-        runExperiment(props);
+        if (args[0].equals("predefined")) {
+            System.out.println("running predefined - but still nothing to run");
+            // Graph randomGraph = RandomGraphGenerator.countrysideGraph();
+            // runPredefinedExperiment(graph, 1000, true);
+            System.exit(1);
+        }
 
-        // Graph randomGraph = RandomGraphGenerator.countrysideGraph();
-        // runPredefinedExperiment(graph, 1000, true);
+        List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
+
+        for (Properties props : propertiesList) {
+            runExperiment(props);
+        }
+
+        // TODO : fetch/parse results into latex table
     }
 
     /**
@@ -135,8 +144,24 @@ public class ExperimentRunner {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(graphList);
         return graphList;
+    }
+
+    /**
+     *
+     * @param folderPath
+     * @return
+     */
+    private static List<Properties> getPropertiesFromFolder(String folderPath) {
+        List<Properties> propertiesList = new ArrayList<>();
+        try (Stream<Path> paths = Files.walk(Paths.get(folderPath))) {
+            paths
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> propertiesList.add(Utility.loadProps(String.valueOf(path))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return propertiesList;
     }
 
     /**
