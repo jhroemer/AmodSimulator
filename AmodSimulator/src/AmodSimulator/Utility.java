@@ -161,7 +161,7 @@ public class Utility {
      * @param path
      */
     public static Properties loadProps(String path) {
-        Properties props = new Properties();
+        Properties props = new ExpProperties();
         InputStream in = null;
         try {
             in = new FileInputStream(path);
