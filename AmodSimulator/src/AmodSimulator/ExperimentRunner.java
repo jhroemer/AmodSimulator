@@ -1,13 +1,16 @@
 package AmodSimulator;
 
-import GraphCreator.RandomGraphGenerator;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
 
-import java.io.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static AmodSimulator.AssignmentType.SCRAM;
 
@@ -15,62 +18,63 @@ public class ExperimentRunner {
     private static String graphPath = "data/graphs/AstridsTestGraph.dgs";
     private static AssignmentType assignmentMethod = SCRAM;
 
+
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Please provide the path for a properties file as argument");
             System.exit(1);
         }
         Properties props = Utility.loadProps(args[0]);
+        runExperiment(props);
 
-        Graph graph = parseGraph("test", graphPath); // todo: should graphPath be in props also?
-
-        Graph randomGraph = RandomGraphGenerator.countrysideGraph();
-
-//        runPredefinedExperiment(graph, 1000, true);
-        runExperiment(randomGraph, props);
+        // Graph randomGraph = RandomGraphGenerator.countrysideGraph();
+        // runPredefinedExperiment(graph, 1000, true);
     }
 
     /**
-     * Runs a single experiment
      *
-     * @param graph
+     * @param props the properties object that holds all the info the experiment needs
      */
-    private static void runExperiment(Graph graph, Properties props) {
+    private static void runExperiment(Properties props) {
         int numVehicles = Integer.parseInt(props.getProperty("numVehicles"));
         int iterations = Integer.parseInt(props.getProperty("iterations"));
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
+        List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphFolder"));
+
         String method = props.getProperty("assignmentType"); // todo : enums can't be retrieved from properties..
 
         double totalAvgUnoccupied = 0.0;
         double totalAvgWait = 0.0;
 
-        for (int i = 0; i < iterations; i++) {
-            AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
+        for (Graph graph : graphList) {
+            for (int i = 0; i < iterations; i++) {
+                AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
 
-            if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
+                if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
-            for (int j = 0; j < timeSteps; j++) {
-                simulator.tick(graph, j);
-                if (visual) sleep(50);
+                for (int j = 0; j < timeSteps; j++) {
+                    simulator.tick(graph, j);
+                    if (visual) sleep(50);
+                }
+
+                // results for this iteration
+                int unoccupied = simulator.getUnoccupiedKmDriven();
+                double avgUnoccupied = (double) unoccupied / (double) numVehicles;
+                int wait = simulator.getWaitingTime();
+                double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
+                // add to total results
+                totalAvgUnoccupied += avgUnoccupied;
+                totalAvgWait += avgWait;
+
+                // done with simulation, get the results
+                System.out.println("unoccupied km's driven: " + unoccupied);
+                System.out.println("unoccupied km's avg: " + avgUnoccupied);
+                System.out.println("waiting time: " + simulator.getWaitingTime());
+
+                props.setProperty(i + "-wait", String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
             }
-
-            // results for this iteration
-            int unoccupied = simulator.getUnoccupiedKmDriven();
-            double avgUnoccupied = (double) unoccupied / (double) numVehicles;
-            int wait = simulator.getWaitingTime();
-            double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
-            // add to total results
-            totalAvgUnoccupied += avgUnoccupied;
-            totalAvgWait += avgWait;
-
-            // done with simulation, get the results
-            System.out.println("unoccupied km's driven: " + unoccupied);
-            System.out.println("unoccupied km's avg: " + avgUnoccupied);
-            System.out.println("waiting time: " + simulator.getWaitingTime());
-
-            props.setProperty(i + "-wait", String.valueOf(simulator.getWaitingTime()));
-            props.setProperty(i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
         }
 
         totalAvgUnoccupied = totalAvgUnoccupied / iterations;
@@ -80,7 +84,6 @@ public class ExperimentRunner {
         System.out.println("total avg unoccupied: " + totalAvgUnoccupied);
         System.out.println("total avg wait: " + totalAvgWait);
 
-        // TODO: right now the properties result file does not look pretty, should it be converted to a treemap? Or doesn't it matter?
         // TODO: run two experiments that documents schwachsinn vs SCRAM
         Utility.saveResultsAsFile(props);
     }
@@ -119,6 +122,23 @@ public class ExperimentRunner {
         //simulator.getResults()
         //printResults()
         //saveResultsAsFile()
+    }
+
+    /**
+     *
+     * @param folderPath
+     * @return
+     */
+    private static List<Graph> getGraphsFromFolder(String folderPath) {
+        List<Graph> graphList = new ArrayList<>();
+        try (Stream<Path> paths = Files.walk(Paths.get(folderPath))) {
+            paths
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> graphList.add(parseGraph("Graph no. " + (graphList.size()+1), path.toString())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return graphList;
     }
 
     /**

@@ -35,9 +35,6 @@ public class RequestGenerator {
         return reqList;
     }
 
-
-
-
     //TODO the poisson process does not work for large numbers (maybe the problem is overflow)
     /**
      * Knuth poisson process - runs in O(k) which can be improved
