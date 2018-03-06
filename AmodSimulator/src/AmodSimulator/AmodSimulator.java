@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AmodSimulator {
-
     static boolean PRINT = false;
     private static String styleSheetPath = "styles/style.css";
     private AssignmentType assignmentType;

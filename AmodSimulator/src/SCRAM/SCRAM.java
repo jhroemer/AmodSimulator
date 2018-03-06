@@ -20,6 +20,11 @@ public class SCRAM {
     int n;
     private int longestEdgeWeight;
 
+    /**
+     *
+     * @param vehicles
+     * @param requests
+     */
     public SCRAM(List<Node> vehicles, List<Node> requests) {
         // if either of the lists is empty, we can't make any assignments
         if (vehicles.isEmpty() || requests.isEmpty()) {
@@ -57,6 +62,10 @@ public class SCRAM {
         assignments = hungarian.getAssignments();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLongestEdgeWeight() {
         return longestEdgeWeight;
     }
@@ -164,6 +173,11 @@ public class SCRAM {
         return null;
     }
 
+    /**
+     *
+     * @param node
+     * @param previous
+     */
     private void reverseEdgeDirection(Node node, Node previous) {
         // I think the problem is that we work with different edge objects
 
@@ -186,17 +200,26 @@ public class SCRAM {
             for (Node req : requests) {
                 Edge s = new Edge(veh, req);
                 edges.add(s);
-                System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
+                // System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
             }
         }
     }
 
+    /**
+     *
+     * @param smallerList
+     * @param numDummies
+     */
     private static void addDummyNodes(List<Node> smallerList, int numDummies) {
         for (int i = 0; i < numDummies; i++) {
             smallerList.add(new DummyNode());
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Edge> getAssignments() {
         return assignments;
     }

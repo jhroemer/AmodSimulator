@@ -13,7 +13,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- *
+ * Class used to run experiments.
+ * Uses java Properties files.
  */
 public class ExperimentRunner {
 
@@ -48,7 +49,7 @@ public class ExperimentRunner {
      */
     private static void runExperiment(Properties props) {
         int numVehicles = Integer.parseInt(props.getProperty("numVehicles"));
-        int iterations = Integer.parseInt(props.getProperty("iterations"));
+        int trials = Integer.parseInt(props.getProperty("trials"));
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
         List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphFolder"));
@@ -59,11 +60,12 @@ public class ExperimentRunner {
 
         // for each graph-type, do i simulations and collect data
         for (Graph graph : graphList) {
-            for (int i = 0; i < iterations; i++) {
+
+            for (int i = 0; i < trials; i++) {
+
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod);
-
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
-
+                // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
                     if (visual) sleep(50);
@@ -78,21 +80,17 @@ public class ExperimentRunner {
                 totalAvgUnoccupied += avgUnoccupied;
                 totalAvgWait += avgWait;
 
-                // done with simulation, get the results
-                System.out.println("unoccupied km's driven: " + unoccupied);
-                System.out.println("unoccupied km's avg: " + avgUnoccupied);
-                System.out.println("waiting time: " + simulator.getWaitingTime());
-
-                String one = graph.getId() + "iteration" + i + "wait";
-                String two = graph.getId() + "iteration_" + i + "unoccupied";
-                props.setProperty(one, String.valueOf(simulator.getWaitingTime()));
-                props.setProperty(two, String.valueOf(simulator.getUnoccupiedKmDriven()));
+                String name = graph.getId() + "_" + i + "_wait";
+                System.out.println(name);
+                props.setProperty(name, String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(graph.getId() + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
             }
 
-            String one = "graphTotal" + graph.getId() + "avgUnoccupied";
-            String two = "graphTotal" + graph.getId() + "avgWait";
-            props.setProperty(one, String.valueOf(totalAvgUnoccupied / iterations));
-            props.setProperty(two, String.valueOf(totalAvgWait / iterations));
+            // todo : check the double-int-division of totalAvgWait and trials
+
+            // after i trials, get the average
+            props.setProperty("TOTAL_" + graph.getId() + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
+            props.setProperty("TOTAL_" + graph.getId() + "_avgWait", String.valueOf(totalAvgWait / trials));
         }
 
         Utility.saveResultsAsFile(props);
@@ -140,7 +138,7 @@ public class ExperimentRunner {
         try (Stream<Path> paths = Files.walk(Paths.get(folderPath))) {
             paths
                     .filter(Files::isRegularFile)
-                    .forEach(path -> graphList.add(parseGraph("Graph" + String.valueOf(graphList.size()+1), path.toString())));
+                    .forEach(path -> graphList.add(parseGraph("G" + String.valueOf(graphList.size()+1), path.toString())));
         } catch (IOException e) {
             e.printStackTrace();
         }
