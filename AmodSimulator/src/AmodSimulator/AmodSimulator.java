@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class AmodSimulator {
 
-    static boolean PRINT = true;
+    static boolean PRINT = false;
     private static String styleSheetPath = "styles/style.css";
     private AssignmentType assignmentType;
     private boolean TEST = false;
@@ -36,10 +36,8 @@ public class AmodSimulator {
      * @param numVehicles
      */
     public AmodSimulator(Graph graph, boolean visual, int numVehicles, AssignmentType assignmentType) {
-
         //printing the distances in the graph for debugging
-        Utility.printDistances(graph);
-
+        // Utility.printDistances(graph);
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
@@ -105,10 +103,8 @@ public class AmodSimulator {
      */
     public void tick(Graph graph, int timeStep) {
         if (PRINT) System.out.println("\n\n//////// TICK " + timeStep + "/////////");
+
         // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
-
-        if (PRINT && vacancyMap.containsKey(timeStep)) System.out.print("\nMaking idle: ");
-
         for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
             makeIdle(veh);
             if (PRINT) System.out.print(veh.getId() + ", ");
@@ -124,12 +120,11 @@ public class AmodSimulator {
         // when multiple-assignments extension is included, in principle it will only be requests that can be empty
         List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
 
+        // make vehicles serve the requests they are assigned
         for (Edge e : assignments) {
             if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
-
             Vehicle veh = e.getVehicle();
             Request req = e.getRequest();
-
             veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);
@@ -139,7 +134,6 @@ public class AmodSimulator {
         }
 
         if (PRINT) printVacancyMap();
-
         if (IS_VISUAL) drawSprites(timeStep);
     }
 
@@ -187,7 +181,10 @@ public class AmodSimulator {
 
     }
 
-
+    /**
+     *
+     * @param veh
+     */
     private void addToVacancyMap(Vehicle veh) {
         //todo Should also delete if the vehicle is already on the Map
         //todo (needs old finish time for this) but it is not necessary for
@@ -202,12 +199,20 @@ public class AmodSimulator {
         }
     }
 
+    /**
+     *
+     * @param veh
+     */
     private void makeIdle(Vehicle veh) {
         activeVehicles.remove(veh);
         idleVehicles.add(veh);
         if (IS_VISUAL) veh.removeRequest();
     }
 
+    /**
+     *
+     * @param veh
+     */
     private void makeActive(Vehicle veh) {
         idleVehicles.remove(veh);
         activeVehicles.add(veh);

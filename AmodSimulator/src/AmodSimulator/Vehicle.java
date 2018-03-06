@@ -41,8 +41,6 @@ public class Vehicle implements SCRAM.Node {
         request.setUp(vacantTime, location, speed);
 
         location = request.getDestination();
-        // fixme : is +1 wrong now? r1 in timestep 0 with pathlength 16 is currently vaccant in timestep 17
-        // but it should get the request and start driving in timestep 0, then timestep 16 should actually be the timestep in which is is vacant again, right?
         vacantTime = request.getDestinationTime()+1;
 
         emptyKilometersDriven += request.getOriginPathLength();
