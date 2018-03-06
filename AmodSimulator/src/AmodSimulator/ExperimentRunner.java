@@ -74,11 +74,11 @@ public class ExperimentRunner {
                 System.out.println("unoccupied km's avg: " + avgUnoccupied);
                 System.out.println("waiting time: " + simulator.getWaitingTime());
 
-                props.setProperty(graph.getId() + i + "-wait", String.valueOf(simulator.getWaitingTime()));
-                props.setProperty(graph.getId() + i + "-unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+                props.setProperty("graph:" + graph.getId() + ",iteration:" + i + ",wait:", String.valueOf(simulator.getWaitingTime()));
+                props.setProperty("graph:" + graph.getId() + ",iteration:" + i + ",unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
             }
-            props.setProperty(graph.getId() + "avgUnoccupied", String.valueOf(totalAvgUnoccupied / iterations));
-            props.setProperty(graph.getId() + "avgWait", String.valueOf(totalAvgWait / iterations));
+            props.setProperty("graphTotal:" + graph.getId() + ",avgUnoccupied:", String.valueOf(totalAvgUnoccupied / iterations));
+            props.setProperty("graphTotal:" + graph.getId() + ",avgWait", String.valueOf(totalAvgWait / iterations));
         }
 
         Utility.saveResultsAsFile(props);
@@ -126,10 +126,11 @@ public class ExperimentRunner {
         try (Stream<Path> paths = Files.walk(Paths.get(folderPath))) {
             paths
                     .filter(Files::isRegularFile)
-                    .forEach(path -> graphList.add(parseGraph("Graph no. " + (graphList.size()+1), path.toString())));
+                    .forEach(path -> graphList.add(parseGraph("Graph" + String.valueOf(graphList.size()+1), path.toString())));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(graphList);
         return graphList;
     }
 
