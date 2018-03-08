@@ -88,8 +88,8 @@ public class ExperimentRunner {
                 totalAvgUnoccupied += avgUnoccupied;
                 totalAvgWait += avgWait;
 
-                props.setProperty(graph.getId() + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
-                props.setProperty(graph.getId() + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
 
                 System.out.println("ran trial " + i);
             }
