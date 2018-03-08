@@ -31,9 +31,7 @@ public class RequestGenerator {
             Request req = new Request(idCounter++, originNode, destinationNode, timeStep);
             reqList.add(req);
         }
-
-        System.out.println(reqList.size() + " requests were generated");
-
+//        System.out.println(reqList.size() + " requests were generated");
         return reqList;
     }
 

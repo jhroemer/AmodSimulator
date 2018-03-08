@@ -75,7 +75,7 @@ public class ExperimentRunner {
                 // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
-                    System.out.println("tick: " + j);
+//                    System.out.println("tick: " + j);
                     if (visual) sleep(50);
                 }
 

@@ -118,8 +118,8 @@ public class AmodSimulator {
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
         else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
-        System.out.println("idlevehicles: " + idleVehicles.size());
-        System.out.println("requests: " + requests.size());
+//        System.out.println("idlevehicles: " + idleVehicles.size());
+//        System.out.println("requests: " + requests.size());
 
         // assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
         // when multiple-assignments extension is included, in principle it will only be requests that can be empty
