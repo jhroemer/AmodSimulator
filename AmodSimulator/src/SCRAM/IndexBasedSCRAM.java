@@ -37,15 +37,18 @@ public class IndexBasedSCRAM {
 
     private List<Edge> assignments;
 
+    private List<Node> vehicles;
+    private List<Node> requests;
+    private List<Edge> edges;
+
     public IndexBasedSCRAM(List<Node> vehicles, List<Node> requests) {
         // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
-        if (vehicles.size() != requests.size()) try {
-            throw new Exception("IndexBasedSCRAM called on unequal amount of Vehicles and Requests");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (vehicles.size() != requests.size()) try {
+//            throw new Exception("IndexBasedSCRAM called on unequal amount of Vehicles and Requests");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-        // FIXME : dummy nodes don't work with indices currently
         if (vehicles.size() != requests.size()) {
             int difference = Math.abs(vehicles.size() - requests.size());
             if (vehicles.size() > requests.size()) addDummyNodes(requests, difference);
@@ -70,7 +73,7 @@ public class IndexBasedSCRAM {
         for (Edge edge : edges) if (edge.getWeight() > longestEdgeWeight) edge.setWeight(Integer.MAX_VALUE);
 
         // 5. run hungarian on the reduced set of edges, to find a min-matching
-        Hungarian hungarian = new Hungarian(edges, n);
+        Hungarian hungarian = new Hungarian(edges, n, true);
         assignments = hungarian.getAssignments();
     }
 
@@ -217,6 +220,20 @@ public class IndexBasedSCRAM {
 
     public List<Edge> getAssignments() {
         return assignments;
+    }
+
+
+    /**
+     *
+     */
+    private void createMatchingEdges() {
+        for (Node veh : vehicles) {
+            for (Node req : requests) {
+                Edge s = new Edge(veh, req);
+                edges.add(s);
+                // System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
+            }
+        }
     }
 }
 

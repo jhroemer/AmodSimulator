@@ -54,6 +54,32 @@ public class Hungarian {
         assignments.addAll(assignmentSet);
     }
 
+    public Hungarian(List<Edge> edges, int n, boolean isIndexBased) {
+        SimpleWeightedGraph<Integer, Edge> graph = new SimpleWeightedGraph<Integer, Edge>(Edge.class);
+
+        Set<Integer> vehicleNodes = new HashSet<>();
+        Set<Integer> requestNodes = new HashSet<>();
+
+        // FIXME : this does not work with array-based
+        for (Edge e : edges) {
+            graph.addVertex(e.startIndex);
+            graph.addVertex(e.endIndex+n);
+            graph.addEdge(e.startIndex, e.endIndex+n, e);
+            graph.setEdgeWeight(e, e.getWeight()); // this has to be done, otherwise edge weight is not set!
+            // todo: do I also have to set e.endIndex to +n?
+            vehicleNodes.add(e.startIndex);
+            requestNodes.add(e.endIndex+n);
+        }
+
+        KuhnMunkresMinimalWeightBipartitePerfectMatching<Integer, Edge> hungarian = new KuhnMunkresMinimalWeightBipartitePerfectMatching<>(graph, vehicleNodes, requestNodes);
+        MatchingAlgorithm.Matching<Integer, Edge> matching = hungarian.getMatching();
+
+        Set<Edge> assignmentSet = matching.getEdges();
+
+        assignments = new ArrayList<>();
+        assignments.addAll(assignmentSet);
+    }
+
     /**
      *
      * @return a list of edges that holds assigned vehicle-request pairs

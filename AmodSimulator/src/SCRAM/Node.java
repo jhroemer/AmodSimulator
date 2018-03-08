@@ -15,4 +15,6 @@ public interface Node {
     void setPrevious(Node previous);
 
     String getInfo();
+
+    Node getType();
 }

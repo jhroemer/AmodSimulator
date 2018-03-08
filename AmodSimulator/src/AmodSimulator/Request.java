@@ -223,4 +223,9 @@ public class Request implements SCRAM.Node {
     public String getInfo() {
         return "Request " + id;
     }
+
+    @Override
+    public Node getType() {
+        return null;
+    }
 }

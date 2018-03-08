@@ -33,4 +33,9 @@ public class DummyNode implements Node {
     public String getInfo() {
         return "DummyNode";
     }
+
+    @Override
+    public Node getType() {
+        return null;
+    }
 }

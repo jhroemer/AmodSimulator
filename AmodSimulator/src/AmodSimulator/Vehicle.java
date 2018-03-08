@@ -15,13 +15,13 @@ public class Vehicle implements SCRAM.Node {
     private org.graphstream.graph.Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
     private int vacantTime;
 
-    
     //summed info of vehicle
     private int emptyKilometersDriven;
     private int occupiedKilometersDriven;
     private int numRequestServiced;
     private boolean visited;
     private Node previous;
+
 
     public Vehicle(String id, org.graphstream.graph.Node startNode) {
         this.id = id;
@@ -204,5 +204,10 @@ public class Vehicle implements SCRAM.Node {
     @Override
     public String getInfo() {
         return "Vehicle " + id;
+    }
+
+    @Override
+    public Node getType() {
+        return null;
     }
 }
