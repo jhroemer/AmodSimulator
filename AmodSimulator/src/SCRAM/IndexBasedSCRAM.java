@@ -45,6 +45,7 @@ public class IndexBasedSCRAM {
             e.printStackTrace();
         }
 
+        // FIXME : dummy nodes don't work with indices currently
         if (vehicles.size() != requests.size()) {
             int difference = Math.abs(vehicles.size() - requests.size());
             if (vehicles.size() > requests.size()) addDummyNodes(requests, difference);
