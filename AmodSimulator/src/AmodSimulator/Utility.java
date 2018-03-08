@@ -69,8 +69,12 @@ public class Utility {
             case HUNGARIAN:
 //                return hungarianAssign(vehicles,requests);
             case SCRAM:
+                long start = System.currentTimeMillis();
                 SCRAM s = new SCRAM(vehicleNodeList, requestNodeList);
-                return s.getAssignments();
+                System.out.println("SCRAM TOOK: " + (System.currentTimeMillis() - start) + " ms");
+                List<Edge> assignments = s.getAssignments();
+                s = null;
+                return assignments;
         }
 
         try {

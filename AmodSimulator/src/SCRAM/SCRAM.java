@@ -48,17 +48,24 @@ public class SCRAM {
         edges = new ArrayList<>();
         unmatchedAgents = new ArrayList<>(vehicles);
 
+        long start = System.currentTimeMillis();
         // 2. create edges for the bipartite matching-graph
-        createMatchingEdges();
+        createMatchingEdges(); // w. current setup 1 million matching edges will be created
+//        System.out.println("createMatchingEdges took: " + (System.currentTimeMillis() - start));
 
-        // 3. get the minimal
+        start = System.currentTimeMillis();
+        // 3. get the minimal // FIXME : THIS IS RUNNING FOREVER! (fuck..)
         longestEdgeWeight = getMinimalMaxEdgeInPerfectMatching();
+//        System.out.println("getMinimalMaxEdge took: " + (System.currentTimeMillis() - start));
 
         // 4. 'remove' (set to infinity) edges that are longer than longestEdgeWeight, ensuring that they will not be included in the assignment
         for (Edge edge : edges) if (edge.getWeight() > longestEdgeWeight) edge.setWeight(Integer.MAX_VALUE);
 
+        start = System.currentTimeMillis();
         // 5. run hungarian on the reduced set of edges, to find a min-matching
         Hungarian hungarian = new Hungarian(edges, n);
+//        System.out.println("Hungarian took: " + (System.currentTimeMillis() - start));
+
         assignments = hungarian.getAssignments();
     }
 
@@ -79,7 +86,9 @@ public class SCRAM {
         List<Edge> edgeQ = new ArrayList<>(edges);
         Edge longestEdge = null;
 
-        for (int i = 0; i < n; i++) {
+        // fixme: runningtime is bad for matching agents - 500-1000ms pr. agent - seems to be the current bottleneck
+        for (int i = 0; i < n; i++) { // n = 1000 w. current setup
+            // long start = System.currentTimeMillis();
             resetFlood();
             Node matchedPosition = null;
             while (matchedPosition == null) { // if matchedPosition is null it means we haven't found a matching yet
@@ -92,6 +101,7 @@ public class SCRAM {
             Node matchedAgent = reversePath(matchedPosition);
             unmatchedAgents.remove(matchedAgent);
             matchedAgents.add(matchedAgent);
+            // System.out.println("took: " + (System.currentTimeMillis() - start) + " ms to match an agent");
         }
         if (longestEdge == null) try {
             System.out.println("hey");

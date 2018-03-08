@@ -32,6 +32,8 @@ public class RequestGenerator {
             reqList.add(req);
         }
 
+        System.out.println(reqList.size() + " requests were generated");
+
         return reqList;
     }
 

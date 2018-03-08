@@ -5,6 +5,7 @@ import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceDGS;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,6 +38,8 @@ public class ExperimentRunner {
         List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
 
         for (Properties props : propertiesList) {
+            if (props.getProperty("name").equals("shwach1exp.properties")) continue; // todo : temporary debugging
+            System.out.println("running experiment: " + props.getProperty("name"));
             runExperiment(props);
         }
 
@@ -53,22 +56,26 @@ public class ExperimentRunner {
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         double lambda = Double.parseDouble(props.getProperty("requestsPerDay")) / 288.0; // there are 288 5min intervals per day
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
-        List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphFolder"));
+        String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         AssignmentType assignmentMethod = AssignmentType.valueOf(props.getProperty("assignment"));
 
         double totalAvgUnoccupied = 0.0;
         double totalAvgWait = 0.0;
 
-        // for each graph-type, do i simulations and collect data
-        for (Graph graph : graphList) {
+        // for each graph-type, do 50 trials on 5 random instances of the graph-type
+        for (String graphType : graphTypes) {
+            List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir")+"/"+graphType);
 
             for (int i = 0; i < trials; i++) {
                 System.out.println("starting trial: " + i);
+                Graph graph = getCorrectGraph(i, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
+
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
                 // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
+                    System.out.println("tick: " + j);
                     if (visual) sleep(50);
                 }
 
@@ -90,11 +97,30 @@ public class ExperimentRunner {
             // todo : check the double-int-division of totalAvgWait and trials
 
             // after i trials, get the average
-            props.setProperty("TOTAL_" + graph.getId() + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
-            props.setProperty("TOTAL_" + graph.getId() + "_avgWait", String.valueOf(totalAvgWait / trials));
+            // todo : change so that graphtype is used
+            props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
+            props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
         }
-
         Utility.saveResultsAsFile(props);
+    }
+
+    /**
+     *
+     * @param i
+     * @param graphList
+     * @return
+     */
+    private static Graph getCorrectGraph(int i, List<Graph> graphList) {
+        if (graphList.size() != 5) try {
+            throw new Exception("graphlist for experiment has to have exactly 5 graphs");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (i < 10) return graphList.get(0);
+        else if (i < 20) return graphList.get(1);
+        else if (i < 30) return graphList.get(2);
+        else if (i < 40) return graphList.get(3);
+        else return graphList.get(4);
     }
 
     /**
@@ -144,6 +170,16 @@ public class ExperimentRunner {
             e.printStackTrace();
         }
         return graphList;
+    }
+
+    /**
+     *
+     * @param folderPath
+     * @return
+     */
+    private static String[] getGraphTypes(String folderPath) {
+        File file = new File(folderPath);
+        return file.list((current, name) -> new File(current, name).isDirectory());
     }
 
     /**
