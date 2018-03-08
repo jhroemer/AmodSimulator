@@ -27,10 +27,10 @@ public class ResultParser {
             System.out.println(props.getProperty(k));
             System.out.println("\n");
         }
-
-        props.getProperty("TOTAL_G1_avgUnoccupied");
-        props.getProperty("TOTAL_G1_avgWait");
-        props.getProperty("TOTAL_G2_avgUnoccupied");
-        props.getProperty("TOTAL_G2_avgWait");
+//
+//        props.getProperty("TOTAL_G1_avgUnoccupied");
+//        props.getProperty("TOTAL_G1_avgWait");
+//        props.getProperty("TOTAL_G2_avgUnoccupied");
+//        props.getProperty("TOTAL_G2_avgWait");
     }
 }
