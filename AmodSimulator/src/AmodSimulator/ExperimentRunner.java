@@ -97,7 +97,6 @@ public class ExperimentRunner {
             // todo : check the double-int-division of totalAvgWait and trials
 
             // after i trials, get the average
-            // todo : change so that graphtype is used
             props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
         }

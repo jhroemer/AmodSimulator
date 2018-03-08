@@ -1,9 +1,9 @@
 package AmodSimulator;
 
 import SCRAM.DummyNode;
-import SCRAM.Node;
-import SCRAM.SCRAM;
 import SCRAM.Edge;
+import SCRAM.IndexBasedSCRAM;
+import SCRAM.Node;
 import org.graphstream.graph.Graph;
 
 import java.io.*;
@@ -70,11 +70,9 @@ public class Utility {
 //                return hungarianAssign(vehicles,requests);
             case SCRAM:
                 long start = System.currentTimeMillis();
-                SCRAM s = new SCRAM(vehicleNodeList, requestNodeList);
+                IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleNodeList, requestNodeList);
                 System.out.println("SCRAM TOOK: " + (System.currentTimeMillis() - start) + " ms");
-                List<Edge> assignments = s.getAssignments();
-                s = null;
-                return assignments;
+                return s.getAssignments();
         }
 
         try {

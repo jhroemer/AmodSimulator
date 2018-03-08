@@ -118,15 +118,25 @@ public class AmodSimulator {
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
         else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
+        System.out.println("idlevehicles: " + idleVehicles.size());
+        System.out.println("requests: " + requests.size());
+
         // assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
         // when multiple-assignments extension is included, in principle it will only be requests that can be empty
         List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
 
         // make vehicles serve the requests they are assigned
         for (Edge e : assignments) {
-            if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
-            Vehicle veh = e.getVehicle();
-            Request req = e.getRequest();
+            // object oriented check for dummynode
+//            if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
+//            Vehicle veh = e.getVehicle();
+//            Request req = e.getRequest();
+
+            // indexbased check for dummynode
+            if (e.getStartIndex() >= idleVehicles.size() || e.getEndIndex() >= requests.size()) continue;
+            Vehicle veh = idleVehicles.get(e.getStartIndex());
+            Request req = requests.get(e.getEndIndex());
+
             veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);
