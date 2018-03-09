@@ -66,6 +66,7 @@ public class ExperimentRunner {
         for (String graphType : graphTypes) {
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir")+"/"+graphType);
 
+            long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
                 System.out.println("starting trial: " + i);
                 Graph graph = getCorrectGraph(i, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
@@ -80,7 +81,7 @@ public class ExperimentRunner {
                 }
 
                 // results for the i'th trial
-                int unoccupied = simulator.getUnoccupiedKmDriven(); // todo: do I get overflow? long needed?
+                int unoccupied = simulator.getUnoccupiedKmDriven();
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
                 int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
@@ -88,11 +89,15 @@ public class ExperimentRunner {
                 totalAvgUnoccupied += avgUnoccupied;
                 totalAvgWait += avgWait;
 
-                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+                props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
+                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
 
                 System.out.println("ran trial " + i);
             }
+
+            System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
             // todo : check the double-int-division of totalAvgWait and trials
 
