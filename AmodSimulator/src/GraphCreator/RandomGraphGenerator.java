@@ -47,15 +47,17 @@ public class RandomGraphGenerator {
             System.out.println("seed is: " + seedInt);
 
             for (GraphType type : types) {
-                System.out.println("creating " + i + "th graph of type: " + type);
+                long start = System.currentTimeMillis();
+                System.out.println("creating graph no. " + i + " of type: " + type);
                 Graph graph;
                 if (type == GRID) {
-                    graph = generateRandomGraph(type, seedInt, 32, 5, 20, "DOROGOVTSEV_" + i);
+                    graph = generateRandomGraph(type, seedInt, 21, 5, 20, "DOROGOVTSEV_" + i);
                 }
-                else graph = generateRandomGraph(type, seedInt, 1087, 5, 20, type + "_" + i);
+                else graph = generateRandomGraph(type, seedInt, 484, 5, 20, type + "_" + i);
 
-                Utility.setDistances(graph); // fixme: is very slow for grid graph, can it be improved? probably not..
+                Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
                 Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
+                System.out.println("TOOK: " + (System.currentTimeMillis() - start) + "ms to create graph");
             }
         }
     }
