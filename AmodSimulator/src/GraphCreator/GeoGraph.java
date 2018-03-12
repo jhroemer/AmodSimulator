@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-public class TestMain {
+public class GeoGraph {
 
     private static String file = "fejoe";
     private static double latScale = 2;
@@ -58,7 +58,7 @@ public class TestMain {
             e.printStackTrace();
         }
 
-        System.out.println("Time taken (seconds) to make and safe graph: " + (System.currentTimeMillis()-start)/1000);
+        System.out.println("Time taken (seconds) to make and save graph: " + (System.currentTimeMillis()-start)/1000);
     }
 
     /**

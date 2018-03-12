@@ -26,9 +26,33 @@ public class RandomGraphGenerator {
 //        Graph doro = doroGraph(20);
 //        doro.display(true);
 
-        Graph euclid = randomEuclideanGraph(30);
-        System.out.println(euclid);
-        euclid.display();
+//        Graph euclid = randomEuclideanGraph(30);
+//        System.out.println(euclid);
+//        euclid.display();
+
+        Graph grid = gridGraph(20, "test");
+        grid.display();
+
+        Graph lobster = lobsterGraph(20, "test");
+        lobster.display();
+    }
+
+    private static Graph lobsterGraph(long randomSeed, String name) {
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new LobsterGenerator();
+        gen.setRandomSeed(randomSeed);
+        Random rand = new Random(randomSeed);
+        int upperBound = 5;
+        int lowerBound = 2;
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < 100; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+
+        return graph;
     }
 
     private static Graph randomEuclideanGraph(long randomSeed) {
@@ -42,7 +66,7 @@ public class RandomGraphGenerator {
         cc.init(graph);
 
         int i = 0;
-        while (i < 5 || cc.getConnectedComponentsCount() != 1) {
+        while (i < 5 || cc.getConnectedComponentsCount() != 1) { // needed to ensure graph is connected
             cc.init(graph);
             gen.nextEvents();
             i++;
@@ -54,14 +78,18 @@ public class RandomGraphGenerator {
 
     private static Graph gridGraph(long randomSeed, String name) {
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new IncompleteGridGenerator();
+        BaseGenerator gen = new GridGenerator();
         gen.setRandomSeed(randomSeed);
+        Random rand = new Random(randomSeed);
 
         gen.addSink(graph);
         gen.begin();
-        for (int i = 0; i < 40; i++) gen.nextEvents();
+        for (int i = 0; i < 15; i++) gen.nextEvents();
         gen.end();
-//        graph.display();
+
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt(5));
+
+        graph.display(true);
 
         return graph;
     }
