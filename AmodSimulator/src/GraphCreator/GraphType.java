@@ -1,5 +1,5 @@
 package GraphCreator;
 
 public enum GraphType {
-    GRID, LOBSTER, BARABASI,
+    GRID, LOBSTER, BARABASI, DOROGOVTSEV,
 }

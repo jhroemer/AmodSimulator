@@ -32,10 +32,21 @@ public class RandomGraphGenerator {
 //        System.out.println(euclid);
 //        euclid.display();
 
-        Graph graph = generateRandomGraph(GRID, 20, 20, 1, 1, "test");
+        // TODO : make method that generates 5 random instances of each graph type and saves them in the correct folder + with edgeTo attributes set
+        Graph graph = generateRandomGraph(DOROGOVTSEV, 20, 70, 1, 1, "test");
         graph.display();
     }
 
+    /**
+     *
+     * @param type
+     * @param randomSeed
+     * @param size
+     * @param lowerBound
+     * @param upperBound
+     * @param name
+     * @return
+     */
     private static Graph generateRandomGraph(GraphType type, long randomSeed, int size, int lowerBound, int upperBound, String name) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = null;
@@ -43,11 +54,14 @@ public class RandomGraphGenerator {
             case GRID:
                 gen = new GridGenerator();
                 break;
-            case LOBSTER:
+            case LOBSTER:   // TODO : lobster and barabasi are quite alike, consider using another type
                 gen = new LobsterGenerator();
                 break;
             case BARABASI:
                 gen = new BarabasiAlbertGenerator();
+                break;
+            case DOROGOVTSEV:
+                gen = new DorogovtsevMendesGenerator();
                 break;
         }
         gen.setRandomSeed(randomSeed);
@@ -60,24 +74,7 @@ public class RandomGraphGenerator {
 
         for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
 
-        return graph;
-    }
-
-    private static Graph lobsterGraph(long randomSeed, String name) {
-        Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new LobsterGenerator();
-        gen.setRandomSeed(randomSeed);
-        Random rand = new Random(randomSeed);
-        int upperBound = 5;
-        int lowerBound = 2;
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int i = 0; i < 100; i++) gen.nextEvents();
-        gen.end();
-
-        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
-
+        System.out.println(type + " had: " + graph.getNodeCount() + " nodes with size: " + size);
         return graph;
     }
 
@@ -97,57 +94,6 @@ public class RandomGraphGenerator {
             gen.nextEvents();
             i++;
         }
-        gen.end();
-
-        return graph;
-    }
-
-    private static Graph gridGraph(long randomSeed, String name) {
-        Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new GridGenerator();
-        gen.setRandomSeed(randomSeed);
-        Random rand = new Random(randomSeed);
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int i = 0; i < 15; i++) gen.nextEvents();
-        gen.end();
-
-        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt(5));
-
-        graph.display(true);
-
-        return graph;
-    }
-
-    private static Graph doroGraph(long randomSeed) {
-        Graph graph = new SingleGraph("Dorogovtsev mendes");
-        BaseGenerator gen = new DorogovtsevMendesGenerator();
-        Random rand = new Random();
-
-        gen.setRandomSeed(randomSeed);
-        rand.setSeed(randomSeed);
-
-        gen.addSink(graph);
-        gen.begin();
-        for(int i = 0; i < 50; i++) gen.nextEvents();
-        gen.end();
-
-        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt(20));
-
-        return graph;
-    }
-
-    private static Graph randomGraphWithSeed(String name, double avgDegree, int numVertices, long randomSeed) {
-        Graph graph = new SingleGraph(name);
-        RandomGenerator gen = new RandomGenerator(avgDegree); // GraphStream's impl. of Erdos Renyi
-        gen.setRandomSeed(randomSeed);
-
-        //making the graph
-        gen.addSink(graph);
-        gen.begin();
-//        while (graph.getNodeCount() < numVertices && gen.nextEvents());
-        for (int i = 0; i < 100; i++) gen.nextEvents();
         gen.end();
 
         return graph;
