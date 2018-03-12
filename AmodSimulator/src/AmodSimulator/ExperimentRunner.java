@@ -104,7 +104,7 @@ public class ExperimentRunner {
             props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
         }
-        
+
         Utility.saveResultsAsFile(props);
     }
 
