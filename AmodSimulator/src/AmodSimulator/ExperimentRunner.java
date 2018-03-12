@@ -63,7 +63,8 @@ public class ExperimentRunner {
 
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
         for (String graphType : graphTypes) {
-            List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir")+"/"+graphType);
+            List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
+            System.out.println("starting trials on graph type: " + graphType);
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -92,8 +93,6 @@ public class ExperimentRunner {
                 props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
                 props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
-
-                System.out.println("ran trial " + i);
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");

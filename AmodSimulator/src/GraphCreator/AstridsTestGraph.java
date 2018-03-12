@@ -39,6 +39,6 @@ public class AstridsTestGraph {
         Utility.setDistances(graph);
 
         //graph.display();
-        Utility.saveCompleteGraph("AstridsTestGraph", graph);
+        Utility.saveCompleteGraph("AstridsTestGraph", "data/graphs", graph);
     }
 }

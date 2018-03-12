@@ -48,6 +48,7 @@ public class IndexBasedSCRAM {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+        if (vehicles.isEmpty() && requests.isEmpty()) System.out.println("BOTH LISTS WERE EMPTY!!!");
 
         if (vehicles.size() != requests.size()) {
             int difference = Math.abs(vehicles.size() - requests.size());
@@ -202,6 +203,9 @@ public class IndexBasedSCRAM {
                 }
             }
         }
+
+        // FIXME :
+
         // We must use edges[longestEdgeWeight] to push k flow with minimal max edge.
         return edges.get(answer).getWeight();
     }

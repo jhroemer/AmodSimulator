@@ -6,10 +6,10 @@ import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import static GraphCreator.GraphType.*;
@@ -18,23 +18,46 @@ public class RandomGraphGenerator {
 
     private static boolean DEBUG = false;
 
-    @Test
     public static void main(String[] args) {
         // countrysideGraph();
 
 //        Graph graph = randomGraphWithSeed("test", 3.0, 100, 2);
 //        graph.display();
 
-//        Graph doro = doroGraph(20);
-//        doro.display(true);
-
-//        Graph euclid = randomEuclideanGraph(30);
-//        System.out.println(euclid);
-//        euclid.display();
-
         // TODO : make method that generates 5 random instances of each graph type and saves them in the correct folder + with edgeTo attributes set
-        Graph graph = generateRandomGraph(DOROGOVTSEV, 20, 70, 1, 1, "test");
-        graph.display();
+        Properties props = new Properties();
+        generateExperimentGraphs(props);
+
+//        Graph graph = generateRandomGraph(DOROGOVTSEV, 20, 70, 1, 1, "test");
+//        graph.display();
+    }
+
+    private static void generateExperimentGraphs(Properties props) {
+        // TODO get params from props
+
+        List<GraphType> types = new ArrayList<>();
+        types.add(GRID);
+        types.add(LOBSTER);
+        types.add(BARABASI);
+        types.add(DOROGOVTSEV);
+
+        for (int i = 1; i < 6; i++) {
+            String seedString = i + "0";
+            int seedInt = Integer.valueOf(seedString);
+            System.out.println("seed is: " + seedInt);
+
+            for (GraphType type : types) {
+                System.out.println("creating " + i + "th graph of type: " + type);
+                Graph graph;
+                if (type == GRID) {
+                    graph = generateRandomGraph(type, seedInt, 32, 5, 20, "DOROGOVTSEV_" + i);
+                }
+                else graph = generateRandomGraph(type, seedInt, 1087, 5, 20, type + "_" + i);
+
+                Utility.setDistances(graph); // fixme: is very slow for grid graph, can it be improved? probably not..
+                Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
+            }
+        }
     }
 
     /**
@@ -172,7 +195,7 @@ public class RandomGraphGenerator {
         Utility.setDistances(roadNetwork);
 
 //        roadNetwork.display();
-        //Utility.saveCompleteGraph("random1", roadNetwork);
+        //Utility.saveCompleteGraph("random1", "data/graphs/", roadNetwork);
 
         return roadNetwork;
     }

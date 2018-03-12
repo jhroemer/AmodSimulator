@@ -11,10 +11,10 @@ import java.io.IOException;
 
 public class Utility {
 
-    public static void saveCompleteGraph(String file, Graph graph) {
+    public static void saveCompleteGraph(String file, String folder, Graph graph) {
         FileSinkDGS fs = new FileSinkDGS();
         try {
-            fs.writeAll(graph, "data/graphs/" + file + ".dgs");
+            fs.writeAll(graph, folder + file + ".dgs");
         } catch (IOException e) {
             e.printStackTrace();
         }
