@@ -38,7 +38,6 @@ public class ExperimentRunner {
         List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
 
         for (Properties props : propertiesList) {
-            if (props.getProperty("name").equals("shwach1exp.properties")) continue; // todo : temporary debugging
             System.out.println("running experiment: " + props.getProperty("name"));
             runExperiment(props);
         }
