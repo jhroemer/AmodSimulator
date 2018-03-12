@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static GraphCreator.GraphType.*;
+
 public class RandomGraphGenerator {
 
     private static boolean DEBUG = false;
@@ -30,11 +32,35 @@ public class RandomGraphGenerator {
 //        System.out.println(euclid);
 //        euclid.display();
 
-        Graph grid = gridGraph(20, "test");
-        grid.display();
+        Graph graph = generateRandomGraph(GRID, 20, 20, 1, 1, "test");
+        graph.display();
+    }
 
-        Graph lobster = lobsterGraph(20, "test");
-        lobster.display();
+    private static Graph generateRandomGraph(GraphType type, long randomSeed, int size, int lowerBound, int upperBound, String name) {
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = null;
+        switch (type) {
+            case GRID:
+                gen = new GridGenerator();
+                break;
+            case LOBSTER:
+                gen = new LobsterGenerator();
+                break;
+            case BARABASI:
+                gen = new BarabasiAlbertGenerator();
+                break;
+        }
+        gen.setRandomSeed(randomSeed);
+        Random rand = new Random(randomSeed);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+
+        return graph;
     }
 
     private static Graph lobsterGraph(long randomSeed, String name) {
