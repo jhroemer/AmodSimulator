@@ -1,5 +1,5 @@
 package AmodSimulator;
 
 public enum AssignmentType {
-    SCHWACHSINN, HUNGARIAN, SCRAM
+    SCHWACHSINN, HUNGARIAN, ObjectSCRAM, IndexSCRAM
 }

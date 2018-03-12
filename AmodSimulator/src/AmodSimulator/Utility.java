@@ -1,5 +1,6 @@
 package AmodSimulator;
 
+import SCRAM.SCRAM;
 import SCRAM.DummyNode;
 import SCRAM.Edge;
 import SCRAM.IndexBasedSCRAM;
@@ -68,11 +69,15 @@ public class Utility {
                 return schwachsinnAssign(vehicleNodeList, requestNodeList);
             case HUNGARIAN:
 //                return hungarianAssign(vehicles,requests);
-            case SCRAM:
-//                long start = System.currentTimeMillis();
-                IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleNodeList, requestNodeList);
+            case ObjectSCRAM:
+                SCRAM scram = new SCRAM(vehicleNodeList, requestNodeList);
 //                System.out.println("SCRAM TOOK: " + (System.currentTimeMillis() - start) + " ms");
-                return s.getAssignments();
+                return scram.getAssignments();
+            case IndexSCRAM:
+//                long start = System.currentTimeMillis();
+                IndexBasedSCRAM idxScram = new IndexBasedSCRAM(vehicleNodeList, requestNodeList);
+//                System.out.println("SCRAM TOOK: " + (System.currentTimeMillis() - start) + " ms");
+                return idxScram.getAssignments();
         }
 
         try {

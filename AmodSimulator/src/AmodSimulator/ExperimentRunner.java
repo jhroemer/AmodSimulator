@@ -100,11 +100,11 @@ public class ExperimentRunner {
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
             // todo : check the double-int-division of totalAvgWait and trials
-
             // after i trials, get the average
             props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
         }
+        
         Utility.saveResultsAsFile(props);
     }
 
@@ -149,7 +149,7 @@ public class ExperimentRunner {
         Map<Integer, List<Request>> requestMap = new HashMap<>();
         requestMap.put(0, requests);
 
-        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap, AssignmentType.SCRAM);
+        AmodSimulator simulator = new AmodSimulator(graph, visual, vehicles, requestMap, AssignmentType.ObjectSCRAM);
 
         if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
 
