@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.6.0 (6275 thorn-02.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <bounds minlat="56.4878000" minlon="10.7020000" maxlat="56.4902000" maxlon="10.7076000"/>
+ <node id="958288842" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:44:52Z" user="AWSbot" uid="2184056" lat="56.4888520" lon="10.7055420">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="26B"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Kærvej"/>
+  <tag k="osak:identifier" v="0A3F509448B532B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:08:55.73"/>
+  <tag k="osak:street_no" v="0338"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958288844" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:45:35Z" user="AWSbot" uid="2184056" lat="56.4886850" lon="10.7058550">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="27"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Kærvej"/>
+  <tag k="osak:identifier" v="0A3F509448B632B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:08:56.103"/>
+  <tag k="osak:street_no" v="0338"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958288848" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:48:40Z" user="AWSbot" uid="2184056" lat="56.4887260" lon="10.7052270">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="29"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Kærvej"/>
+  <tag k="osak:identifier" v="0A3F509448B832B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:08:57.103"/>
+  <tag k="osak:street_no" v="0338"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958288854" visible="true" version="2" changeset="27696314" timestamp="2014-12-25T21:13:37Z" user="AWSbot" uid="2184056" lat="56.4891780" lon="10.7046670">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="31"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Kærvej"/>
+  <tag k="osak:identifier" v="0A3F509448BA32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:08:58.057"/>
+  <tag k="osak:street_no" v="0338"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="1168443758" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:10:44Z" user="Norgaard" uid="139017" lat="56.4872265" lon="10.7109809"/>
+ <node id="1168443763" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:10:44Z" user="Norgaard" uid="139017" lat="56.4931935" lon="10.7007309"/>
+ <node id="1168443878" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:55Z" user="Hjart" uid="207581" lat="56.4790984" lon="10.7226525"/>
+ <node id="1168444023" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:10:52Z" user="Norgaard" uid="139017" lat="56.4874914" lon="10.7104924"/>
+ <node id="1168444045" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:10:52Z" user="Norgaard" uid="139017" lat="56.4826767" lon="10.7172122"/>
+ <node id="1168444053" visible="true" version="2" changeset="8294876" timestamp="2011-05-30T18:40:25Z" user="rasmusv" uid="48588" lat="56.4936587" lon="10.7009721"/>
+ <node id="1168444159" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:10:57Z" user="Norgaard" uid="139017" lat="56.4818844" lon="10.7183009"/>
+ <node id="1168444257" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:02Z" user="Norgaard" uid="139017" lat="56.4877611" lon="10.7094805"/>
+ <node id="1168444265" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:02Z" user="Norgaard" uid="139017" lat="56.4834628" lon="10.7161738"/>
+ <node id="1168444286" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:03Z" user="Norgaard" uid="139017" lat="56.4910842" lon="10.7012631"/>
+ <node id="1168444328" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:05Z" user="Norgaard" uid="139017" lat="56.4892975" lon="10.7047873"/>
+ <node id="1168444405" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:09Z" user="Norgaard" uid="139017" lat="56.4887292" lon="10.7061918"/>
+ <node id="1168444439" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:11Z" user="Norgaard" uid="139017" lat="56.4851554" lon="10.7137026"/>
+ <node id="1168444446" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:11Z" user="Norgaard" uid="139017" lat="56.4915032" lon="10.7014463"/>
+ <node id="1168444553" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:16Z" user="Norgaard" uid="139017" lat="56.4900344" lon="10.7028943"/>
+ <node id="1168444568" visible="true" version="2" changeset="8294876" timestamp="2011-05-30T18:40:29Z" user="rasmusv" uid="48588" lat="56.4937618" lon="10.7009682"/>
+ <node id="1168444786" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:23Z" user="Norgaard" uid="139017" lat="56.4856034" lon="10.7130484"/>
+ <node id="1168444789" visible="true" version="2" changeset="45131178" timestamp="2017-01-13T11:58:16Z" user="Hjart" uid="207581" lat="56.4785780" lon="10.7241080"/>
+ <node id="1168444800" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:24Z" user="Norgaard" uid="139017" lat="56.4920137" lon="10.7015597"/>
+ <node id="1168444926" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:28Z" user="Norgaard" uid="139017" lat="56.4905400" lon="10.7016294"/>
+ <node id="1168444962" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:29Z" user="Norgaard" uid="139017" lat="56.4925964" lon="10.7010188"/>
+ <node id="1168445079" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:34Z" user="Norgaard" uid="139017" lat="56.4793490" lon="10.7221213"/>
+ <node id="1168445083" visible="true" version="3" changeset="45131178" timestamp="2017-01-13T11:58:16Z" user="Hjart" uid="207581" lat="56.4786558" lon="10.7240248"/>
+ <node id="1168445094" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:35Z" user="Norgaard" uid="139017" lat="56.4922208" lon="10.7014637"/>
+ <node id="1168445218" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:39Z" user="Norgaard" uid="139017" lat="56.4908097" lon="10.7013154"/>
+ <node id="1168445260" visible="true" version="1" changeset="7373754" timestamp="2011-02-23T16:11:41Z" user="Norgaard" uid="139017" lat="56.4928998" lon="10.7007397"/>
+ <node id="1168445362" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4796252" lon="10.7216777"/>
+ <node id="1168445364" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4789967" lon="10.7229156"/>
+ <node id="1303470064" visible="true" version="1" changeset="8271317" timestamp="2011-05-28T12:32:56Z" user="rasmusv" uid="48588" lat="56.4867240" lon="10.7116209"/>
+ <node id="1306036615" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:39:56Z" user="rasmusv" uid="48588" lat="56.4891301" lon="10.7030835"/>
+ <node id="1306036632" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:39:56Z" user="rasmusv" uid="48588" lat="56.4877597" lon="10.6932525"/>
+ <node id="1306036652" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:39:57Z" user="rasmusv" uid="48588" lat="56.4883286" lon="10.7066020"/>
+ <node id="1306036659" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:39:57Z" user="rasmusv" uid="48588" lat="56.4874387" lon="10.6916132"/>
+ <node id="1306036693" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:39:59Z" user="rasmusv" uid="48588" lat="56.4870424" lon="10.6893430"/>
+ <node id="1306036723" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:00Z" user="rasmusv" uid="48588" lat="56.4899015" lon="10.7032357"/>
+ <node id="1306036754" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:01Z" user="rasmusv" uid="48588" lat="56.4886547" lon="10.7020583"/>
+ <node id="1306036819" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:02Z" user="rasmusv" uid="48588" lat="56.4884634" lon="10.7070947"/>
+ <node id="1306036854" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:03Z" user="rasmusv" uid="48588" lat="56.4884776" lon="10.7003143"/>
+ <node id="1306037014" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:06Z" user="rasmusv" uid="48588" lat="56.4890350" lon="10.7029933"/>
+ <node id="1306037096" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:08Z" user="rasmusv" uid="48588" lat="56.4888132" lon="10.7025176"/>
+ <node id="1306037106" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:08Z" user="rasmusv" uid="48588" lat="56.4883151" lon="10.7062904"/>
+ <node id="1306037209" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:09Z" user="rasmusv" uid="48588" lat="56.4861684" lon="10.6846040"/>
+ <node id="1306037259" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:10Z" user="rasmusv" uid="48588" lat="56.4896690" lon="10.7032148"/>
+ <node id="1306037266" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:10Z" user="rasmusv" uid="48588" lat="56.4858538" lon="10.6826472"/>
+ <node id="1306037271" visible="true" version="1" changeset="8294876" timestamp="2011-05-30T18:40:11Z" user="rasmusv" uid="48588" lat="56.4886909" lon="10.7027391"/>
+ <node id="1316460242" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:44Z" user="rasmusv" uid="48588" lat="56.4888051" lon="10.7060041"/>
+ <node id="1316460362" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:46Z" user="rasmusv" uid="48588" lat="56.4906289" lon="10.7060539"/>
+ <node id="1316460522" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:50Z" user="rasmusv" uid="48588" lat="56.4908941" lon="10.7059052"/>
+ <node id="1316460580" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:52Z" user="rasmusv" uid="48588" lat="56.4924184" lon="10.7064827"/>
+ <node id="1316460633" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:53Z" user="rasmusv" uid="48588" lat="56.4907678" lon="10.7059395"/>
+ <node id="1316460699" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:55Z" user="rasmusv" uid="48588" lat="56.4900634" lon="10.7064609"/>
+ <node id="1316460771" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:34:57Z" user="rasmusv" uid="48588" lat="56.4910550" lon="10.7059110"/>
+ <node id="1316460959" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:35:02Z" user="rasmusv" uid="48588" lat="56.4903588" lon="10.7063969"/>
+ <node id="1316460963" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:35:02Z" user="rasmusv" uid="48588" lat="56.4902906" lon="10.7064564"/>
+ <node id="1316461079" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:35:04Z" user="rasmusv" uid="48588" lat="56.4916641" lon="10.7061511"/>
+ <node id="1316461084" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:35:05Z" user="rasmusv" uid="48588" lat="56.4901644" lon="10.7064792"/>
+ <node id="3791823584" visible="true" version="1" changeset="34717507" timestamp="2015-10-18T18:24:44Z" user="Hjart" uid="207581" lat="56.4788154" lon="10.7234386"/>
+ <node id="4605599327" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:09Z" user="Hjart" uid="207581" lat="56.4809616" lon="10.7196026"/>
+ <node id="4605599332" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:09Z" user="Hjart" uid="207581" lat="56.4813648" lon="10.7190279"/>
+ <node id="4605599337" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:10Z" user="Hjart" uid="207581" lat="56.4805217" lon="10.7202856"/>
+ <node id="4605599562" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:12Z" user="Hjart" uid="207581" lat="56.4786224" lon="10.7240986"/>
+ <node id="4605599566" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:12Z" user="Hjart" uid="207581" lat="56.4787555" lon="10.7236558"/>
+ <way id="101212822" visible="true" version="7" changeset="45131178" timestamp="2017-01-13T11:58:23Z" user="Hjart" uid="207581">
+  <nd ref="1168444789"/>
+  <nd ref="4605599562"/>
+  <nd ref="1168445083"/>
+  <nd ref="4605599566"/>
+  <nd ref="3791823584"/>
+  <nd ref="1168445364"/>
+  <nd ref="1168443878"/>
+  <nd ref="1168445079"/>
+  <nd ref="1168445362"/>
+  <nd ref="4605599337"/>
+  <nd ref="4605599327"/>
+  <nd ref="4605599332"/>
+  <nd ref="1168444159"/>
+  <nd ref="1168444045"/>
+  <nd ref="1168444265"/>
+  <nd ref="1168444439"/>
+  <nd ref="1168444786"/>
+  <nd ref="1303470064"/>
+  <nd ref="1168443758"/>
+  <nd ref="1168444023"/>
+  <nd ref="1168444257"/>
+  <nd ref="1306036819"/>
+  <nd ref="1168444405"/>
+  <nd ref="1316460242"/>
+  <nd ref="1168444328"/>
+  <nd ref="1306036723"/>
+  <nd ref="1168444553"/>
+  <nd ref="1168444926"/>
+  <nd ref="1168445218"/>
+  <nd ref="1168444286"/>
+  <nd ref="1168444446"/>
+  <nd ref="1168444800"/>
+  <nd ref="1168445094"/>
+  <nd ref="1168444962"/>
+  <nd ref="1168445260"/>
+  <nd ref="1168443763"/>
+  <nd ref="1168444053"/>
+  <nd ref="1168444568"/>
+  <tag k="highway" v="tertiary"/>
+  <tag k="name" v="Glesborg Kærvej"/>
+  <tag k="width" v="4.5"/>
+ </way>
+ <way id="115655053" visible="true" version="2" changeset="9508228" timestamp="2011-10-09T01:43:59Z" user="Ernst Poulsen" uid="35273">
+  <nd ref="1306036754"/>
+  <nd ref="1306037271"/>
+  <nd ref="1306037106"/>
+  <nd ref="1306036652"/>
+  <nd ref="1306036819"/>
+  <tag k="highway" v="unclassified"/>
+  <tag k="name" v="Skelhøjvej"/>
+ </way>
+ <way id="115655060" visible="true" version="2" changeset="9508228" timestamp="2011-10-09T01:44:00Z" user="Ernst Poulsen" uid="35273">
+  <nd ref="1306037266"/>
+  <nd ref="1306037209"/>
+  <nd ref="1306036693"/>
+  <nd ref="1306036659"/>
+  <nd ref="1306036632"/>
+  <nd ref="1306036854"/>
+  <nd ref="1306036754"/>
+  <nd ref="1306037096"/>
+  <nd ref="1306037014"/>
+  <nd ref="1306036615"/>
+  <nd ref="1306037259"/>
+  <nd ref="1306036723"/>
+  <tag k="highway" v="unclassified"/>
+  <tag k="name" v="Skelhøjvej"/>
+ </way>
+ <way id="116863099" visible="true" version="1" changeset="8382815" timestamp="2011-06-08T19:35:17Z" user="rasmusv" uid="48588">
+  <nd ref="1316460580"/>
+  <nd ref="1316461079"/>
+  <nd ref="1316460771"/>
+  <nd ref="1316460522"/>
+  <nd ref="1316460633"/>
+  <nd ref="1316460362"/>
+  <nd ref="1316460959"/>
+  <nd ref="1316460963"/>
+  <nd ref="1316461084"/>
+  <nd ref="1316460699"/>
+  <nd ref="1316460242"/>
+  <tag k="highway" v="service"/>
+  <tag k="name" v="Glesborg Kærvej"/>
+  <tag k="service" v="driveway"/>
+ </way>
+</osm>

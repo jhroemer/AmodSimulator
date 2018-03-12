@@ -6,16 +6,97 @@ import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RandomGraphGenerator {
 
     private static boolean DEBUG = false;
 
+    @Test
     public static void main(String[] args) {
-        countrysideGraph();
+        // countrysideGraph();
+
+//        Graph graph = randomGraphWithSeed("test", 3.0, 100, 2);
+//        graph.display();
+
+//        Graph doro = doroGraph(20);
+//        doro.display(true);
+
+        Graph euclid = randomEuclideanGraph(30);
+        System.out.println(euclid);
+        euclid.display();
+    }
+
+    private static Graph randomEuclideanGraph(long randomSeed) {
+        Graph graph = new SingleGraph("random euclidean");
+        BaseGenerator gen = new RandomEuclideanGenerator();
+        gen.addSink(graph);
+        gen.setRandomSeed(randomSeed);
+
+        gen.begin();
+        ConnectedComponents cc = new ConnectedComponents();
+        cc.init(graph);
+
+        int i = 0;
+        while (i < 5 || cc.getConnectedComponentsCount() != 1) {
+            cc.init(graph);
+            gen.nextEvents();
+            i++;
+        }
+        gen.end();
+
+        return graph;
+    }
+
+    private static Graph gridGraph(long randomSeed, String name) {
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new IncompleteGridGenerator();
+        gen.setRandomSeed(randomSeed);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < 40; i++) gen.nextEvents();
+        gen.end();
+//        graph.display();
+
+        return graph;
+    }
+
+    private static Graph doroGraph(long randomSeed) {
+        Graph graph = new SingleGraph("Dorogovtsev mendes");
+        BaseGenerator gen = new DorogovtsevMendesGenerator();
+        Random rand = new Random();
+
+        gen.setRandomSeed(randomSeed);
+        rand.setSeed(randomSeed);
+
+        gen.addSink(graph);
+        gen.begin();
+        for(int i = 0; i < 50; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt(20));
+
+        return graph;
+    }
+
+    private static Graph randomGraphWithSeed(String name, double avgDegree, int numVertices, long randomSeed) {
+        Graph graph = new SingleGraph(name);
+        RandomGenerator gen = new RandomGenerator(avgDegree); // GraphStream's impl. of Erdos Renyi
+        gen.setRandomSeed(randomSeed);
+
+        //making the graph
+        gen.addSink(graph);
+        gen.begin();
+//        while (graph.getNodeCount() < numVertices && gen.nextEvents());
+        for (int i = 0; i < 100; i++) gen.nextEvents();
+        gen.end();
+
+        return graph;
     }
 
     /**

@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.6.0 (9927 thorn-03.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <bounds minlat="56.4753300" minlon="10.7298200" maxlat="56.4769800" maxlon="10.7319400"/>
+ <node id="32997374" visible="true" version="5" changeset="55548066" timestamp="2018-01-18T12:27:35Z" user="Hjart" uid="207581" lat="56.4767446" lon="10.7264039"/>
+ <node id="33152079" visible="true" version="1" changeset="179624" timestamp="2007-07-31T01:11:05Z" user="Mikkel Kirkgaard Nielsen" uid="2051" lat="56.4785270" lon="10.7246075">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="33152080" visible="true" version="6" changeset="13670377" timestamp="2012-10-29T07:02:09Z" user="Ernst Poulsen" uid="35273" lat="56.4722993" lon="10.7372254"/>
+ <node id="33152082" visible="true" version="7" changeset="34717507" timestamp="2015-10-18T18:24:59Z" user="Hjart" uid="207581" lat="56.4761823" lon="10.7426766"/>
+ <node id="33152959" visible="true" version="2" changeset="7374085" timestamp="2011-02-23T16:48:58Z" user="Norgaard" uid="139017" lat="56.4741926" lon="10.7341069"/>
+ <node id="33152960" visible="true" version="3" changeset="34717507" timestamp="2015-10-18T18:24:59Z" user="Hjart" uid="207581" lat="56.4768723" lon="10.7295974"/>
+ <node id="33152961" visible="true" version="3" changeset="34717507" timestamp="2015-10-18T18:24:59Z" user="Hjart" uid="207581" lat="56.4769635" lon="10.7293606"/>
+ <node id="33152962" visible="true" version="6" changeset="7373754" timestamp="2011-02-23T16:12:10Z" user="Norgaard" uid="139017" lat="56.4778432" lon="10.7270570"/>
+ <node id="33152963" visible="true" version="2" changeset="7373754" timestamp="2011-02-23T16:12:20Z" user="Norgaard" uid="139017" lat="56.4781734" lon="10.7263462"/>
+ <node id="33152964" visible="true" version="3" changeset="7373754" timestamp="2011-02-23T16:12:09Z" user="Norgaard" uid="139017" lat="56.4783206" lon="10.7256706"/>
+ <node id="33152974" visible="true" version="3" changeset="34717507" timestamp="2015-10-18T18:24:59Z" user="Hjart" uid="207581" lat="56.4763798" lon="10.7325113"/>
+ <node id="33152975" visible="true" version="3" changeset="34717507" timestamp="2015-10-18T18:24:59Z" user="Hjart" uid="207581" lat="56.4764177" lon="10.7322434"/>
+ <node id="33152976" visible="true" version="2" changeset="7374085" timestamp="2011-02-23T16:48:57Z" user="Norgaard" uid="139017" lat="56.4766402" lon="10.7310725"/>
+ <node id="865251582" visible="true" version="2" changeset="7373754" timestamp="2011-02-23T16:12:21Z" user="Norgaard" uid="139017" lat="56.4784737" lon="10.7249263"/>
+ <node id="958313573" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T19:54:21Z" user="AWSbot" uid="2184056" lat="56.4769130" lon="10.7301180">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="1"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F509447AD32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T10:43:22.893"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958313575" visible="true" version="3" changeset="38912187" timestamp="2016-04-27T07:39:21Z" user="AWSbot" uid="2184056" lat="56.4762450" lon="10.7315030">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="2"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F50C07E4832B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="0707"/>
+  <tag k="osak:revision" v="2000-02-05T19:54:24.000"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="Geodatastyrelsens Adresse Web Services (AWS)"/>
+ </node>
+ <node id="958313578" visible="true" version="3" changeset="38912187" timestamp="2016-04-27T07:39:22Z" user="AWSbot" uid="2184056" lat="56.4762530" lon="10.7317600">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="4"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F50C07E4932B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="0707"/>
+  <tag k="osak:revision" v="2000-02-05T19:54:24.000"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="Geodatastyrelsens Adresse Web Services (AWS)"/>
+ </node>
+ <node id="958313583" visible="true" version="2" changeset="27696314" timestamp="2014-12-25T21:26:50Z" user="AWSbot" uid="2184056" lat="56.4768120" lon="10.7306450">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="7"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F509447B132B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T10:43:24.72"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958313585" visible="true" version="2" changeset="27696314" timestamp="2014-12-25T21:31:57Z" user="AWSbot" uid="2184056" lat="56.4767610" lon="10.7309100">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="9"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F509447B332B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T10:43:25.657"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958313588" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:02:07Z" user="AWSbot" uid="2184056" lat="56.4766910" lon="10.7312010">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="11"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F509447B532B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T10:43:26.61"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958313599" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:08:51Z" user="AWSbot" uid="2184056" lat="56.4766250" lon="10.7315840">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="13"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Gammel Rimsøvej"/>
+  <tag k="osak:identifier" v="0A3F509447BC32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T10:44:03.233"/>
+  <tag k="osak:street_no" v="0309"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458870" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:02:09Z" user="AWSbot" uid="2184056" lat="56.4754590" lon="10.7316570">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="11"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094483F32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:35.18"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458876" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:08:53Z" user="AWSbot" uid="2184056" lat="56.4756340" lon="10.7313650">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="13"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484132B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:36.49"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458886" visible="true" version="2" changeset="27696314" timestamp="2014-12-25T21:01:47Z" user="AWSbot" uid="2184056" lat="56.4757980" lon="10.7310890">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="15"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484332B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:37.57"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458903" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:20:34Z" user="AWSbot" uid="2184056" lat="56.4759980" lon="10.7308080">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="17"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484732B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:38.46"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458905" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:22:52Z" user="AWSbot" uid="2184056" lat="56.4758630" lon="10.7316180">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="18"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484832B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:39.053"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458915" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:25:02Z" user="AWSbot" uid="2184056" lat="56.4761770" lon="10.7304210">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="19"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484932B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:39.46"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458918" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:31:59Z" user="AWSbot" uid="2184056" lat="56.4760840" lon="10.7313750">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="20"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="7096F6186B275ED1E04400144F3EAD67"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:39.913"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458927" visible="true" version="3" changeset="38912187" timestamp="2016-04-27T07:39:22Z" user="AWSbot" uid="2184056" lat="56.4760960" lon="10.7313720">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="20A"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F50C07EDD32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="0707"/>
+  <tag k="osak:revision" v="2000-02-05T19:54:24.000"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="Geodatastyrelsens Adresse Web Services (AWS)"/>
+ </node>
+ <node id="958458928" visible="true" version="3" changeset="38912187" timestamp="2016-04-27T07:39:22Z" user="AWSbot" uid="2184056" lat="56.4762080" lon="10.7314310">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="20B"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F50C07EE032B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="0707"/>
+  <tag k="osak:revision" v="2000-02-05T19:54:24.000"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="Geodatastyrelsens Adresse Web Services (AWS)"/>
+ </node>
+ <node id="958458941" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:33:59Z" user="AWSbot" uid="2184056" lat="56.4764520" lon="10.7301080">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="21"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484C32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:04:41.023"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458945" visible="true" version="3" changeset="27696314" timestamp="2014-12-25T21:08:40Z" user="AWSbot" uid="2184056" lat="56.4761370" lon="10.7311010">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="22A"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484E32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:05:16.443"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458946" visible="true" version="3" changeset="27696314" timestamp="2014-12-25T21:08:41Z" user="AWSbot" uid="2184056" lat="56.4761800" lon="10.7310320">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="22B"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094484F32B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:05:16.833"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458959" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:38:16Z" user="AWSbot" uid="2184056" lat="56.4765620" lon="10.7298980">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="23"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094485032B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:05:17.24"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458961" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:40:13Z" user="AWSbot" uid="2184056" lat="56.4764330" lon="10.7306910">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="24"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094485132B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:05:17.707"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="958458979" visible="true" version="2" changeset="29207067" timestamp="2015-03-02T20:43:57Z" user="AWSbot" uid="2184056" lat="56.4767000" lon="10.7301170">
+  <tag k="addr:city" v="Glesborg"/>
+  <tag k="addr:country" v="DK"/>
+  <tag k="addr:housenumber" v="26"/>
+  <tag k="addr:postcode" v="8585"/>
+  <tag k="addr:street" v="Glesborg Bygade"/>
+  <tag k="osak:identifier" v="0A3F5094485432B8E0440003BA298018"/>
+  <tag k="osak:municipality_no" v="707"/>
+  <tag k="osak:revision" v="2012-08-14T11:05:19.067"/>
+  <tag k="osak:street_no" v="0337"/>
+  <tag k="source" v="AWS Web API"/>
+ </node>
+ <node id="1168444557" visible="true" version="2" changeset="45131178" timestamp="2017-01-13T11:58:16Z" user="Hjart" uid="207581" lat="56.4774001" lon="10.7280891"/>
+ <node id="1168445274" visible="true" version="2" changeset="52016513" timestamp="2017-09-13T19:20:43Z" user="Hjart" uid="207581" lat="56.4779722" lon="10.7267958"/>
+ <node id="1168492370" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:20Z" user="Norgaard" uid="139017" lat="56.4764495" lon="10.7313782"/>
+ <node id="1168492455" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4756238" lon="10.7238387"/>
+ <node id="1168492518" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4789259" lon="10.7118481"/>
+ <node id="1168492524" visible="true" version="2" changeset="45131178" timestamp="2017-01-13T11:58:17Z" user="Hjart" uid="207581" lat="56.4772187" lon="10.7285671"/>
+ <node id="1168492585" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4767389" lon="10.7268052"/>
+ <node id="1168492612" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4763603" lon="10.7327398"/>
+ <node id="1168492648" visible="true" version="2" changeset="13630317" timestamp="2012-10-25T18:18:08Z" user="Ernst Poulsen" uid="35273" lat="56.4759226" lon="10.7215873"/>
+ <node id="1168492663" visible="true" version="3" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4796124" lon="10.7261934"/>
+ <node id="1168492689" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4763519" lon="10.7333298"/>
+ <node id="1168492699" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:27Z" user="Norgaard" uid="139017" lat="56.4752834" lon="10.7322796"/>
+ <node id="1168492716" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4763126" lon="10.7315574"/>
+ <node id="1168492726" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4765268" lon="10.7293796"/>
+ <node id="1168492770" visible="true" version="2" changeset="13630317" timestamp="2012-10-25T18:18:08Z" user="Ernst Poulsen" uid="35273" lat="56.4752053" lon="10.7210654"/>
+ <node id="1168492799" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4763182" lon="10.7334592"/>
+ <node id="1168492828" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:31Z" user="Norgaard" uid="139017" lat="56.4760223" lon="10.7310328"/>
+ <node id="1168492840" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:31Z" user="Norgaard" uid="139017" lat="56.4763587" lon="10.7349127"/>
+ <node id="1168492842" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4763325" lon="10.7419498"/>
+ <node id="1168492894" visible="true" version="2" changeset="13630317" timestamp="2012-10-25T18:18:08Z" user="Ernst Poulsen" uid="35273" lat="56.4745552" lon="10.7236649"/>
+ <node id="1168492898" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4763528" lon="10.7416605"/>
+ <node id="1168492962" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:34Z" user="Norgaard" uid="139017" lat="56.4762828" lon="10.7422625"/>
+ <node id="1168492985" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4801029" lon="10.7125648"/>
+ <node id="1168493058" visible="true" version="2" changeset="13597423" timestamp="2012-10-22T19:44:15Z" user="Ernst Poulsen" uid="35273" lat="56.4787932" lon="10.7275814"/>
+ <node id="1168493136" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:37Z" user="Norgaard" uid="139017" lat="56.4765563" lon="10.7314815"/>
+ <node id="1168493146" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4743302" lon="10.7338668"/>
+ <node id="1168493248" visible="true" version="3" changeset="34717507" timestamp="2015-10-18T18:24:56Z" user="Hjart" uid="207581" lat="56.4793300" lon="10.7278983"/>
+ <node id="1301954889" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:57Z" user="Hjart" uid="207581" lat="56.4763675" lon="10.7362998"/>
+ <node id="1978467455" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:09Z" user="Ernst Poulsen" uid="35273" lat="56.4801630" lon="10.7177983"/>
+ <node id="1978467491" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:09Z" user="Ernst Poulsen" uid="35273" lat="56.4795930" lon="10.7152658"/>
+ <node id="1978467493" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:33Z" user="Ernst Poulsen" uid="35273" lat="56.4764967" lon="10.7279377"/>
+ <node id="1978467498" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:09Z" user="Ernst Poulsen" uid="35273" lat="56.4797077" lon="10.7219434"/>
+ <node id="1978467501" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4764278" lon="10.7257511"/>
+ <node id="1978467536" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4752392" lon="10.7315752"/>
+ <node id="1978467539" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4781325" lon="10.7301837"/>
+ <node id="1978467541" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4797474" lon="10.7213812"/>
+ <node id="1978467542" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4759159" lon="10.7361403"/>
+ <node id="1978467544" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4775744" lon="10.7303972"/>
+ <node id="1978467548" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4757547" lon="10.7307475"/>
+ <node id="1978467550" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4775507" lon="10.7299916"/>
+ <node id="1978467552" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4758246" lon="10.7352525"/>
+ <node id="1978467554" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4794443" lon="10.7218925"/>
+ <node id="1978467556" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4771715" lon="10.7299723"/>
+ <node id="1978467558" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4764892" lon="10.7294708"/>
+ <node id="1978467565" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:10Z" user="Ernst Poulsen" uid="35273" lat="56.4763236" lon="10.7378398"/>
+ <node id="1978467575" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:11Z" user="Ernst Poulsen" uid="35273" lat="56.4770393" lon="10.7324067"/>
+ <node id="1978467578" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:58Z" user="Hjart" uid="207581" lat="56.4793172" lon="10.7259577"/>
+ <node id="1978467579" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:11Z" user="Ernst Poulsen" uid="35273" lat="56.4792672" lon="10.7206828"/>
+ <node id="1978467584" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:11Z" user="Ernst Poulsen" uid="35273" lat="56.4807569" lon="10.7158623"/>
+ <node id="1978467587" visible="true" version="2" changeset="13670377" timestamp="2012-10-29T07:02:09Z" user="Ernst Poulsen" uid="35273" lat="56.4758703" lon="10.7347846"/>
+ <node id="1978467589" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:11Z" user="Ernst Poulsen" uid="35273" lat="56.4793338" lon="10.7235522"/>
+ <node id="1978467595" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:11Z" user="Ernst Poulsen" uid="35273" lat="56.4759159" lon="10.7377990"/>
+ <node id="1978467597" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:11Z" user="Ernst Poulsen" uid="35273" lat="56.4766782" lon="10.7272386"/>
+ <node id="1978467603" visible="true" version="2" changeset="34717507" timestamp="2015-10-18T18:24:58Z" user="Hjart" uid="207581" lat="56.4794311" lon="10.7250990"/>
+ <node id="1978467625" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:33Z" user="Ernst Poulsen" uid="35273" lat="56.4765235" lon="10.7281136"/>
+ <node id="1978467627" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4794455" lon="10.7212299"/>
+ <node id="1978467634" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4794736" lon="10.7239422"/>
+ <node id="1978467637" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4791427" lon="10.7234723"/>
+ <node id="1978467639" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4795447" lon="10.7208748"/>
+ <node id="1978467651" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4764474" lon="10.7285604"/>
+ <node id="1978467653" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4791555" lon="10.7233360"/>
+ <node id="1978467655" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4743264" lon="10.7339672"/>
+ <node id="1978467657" visible="true" version="2" changeset="13670377" timestamp="2012-10-29T07:02:09Z" user="Ernst Poulsen" uid="35273" lat="56.4744737" lon="10.7342216"/>
+ <node id="1978467675" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4783719" lon="10.7289949"/>
+ <node id="1978467679" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4782143" lon="10.7154932"/>
+ <node id="1978467682" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4784732" lon="10.7284086"/>
+ <node id="1978467686" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4792858" lon="10.7239132"/>
+ <node id="1978467688" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:12Z" user="Ernst Poulsen" uid="35273" lat="56.4759337" lon="10.7353180"/>
+ <node id="1978467698" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:13Z" user="Ernst Poulsen" uid="35273" lat="56.4762708" lon="10.7291301"/>
+ <node id="1978467720" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:13Z" user="Ernst Poulsen" uid="35273" lat="56.4779764" lon="10.7292798"/>
+ <node id="1978467723" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:13Z" user="Ernst Poulsen" uid="35273" lat="56.4771324" lon="10.7334699"/>
+ <node id="1978467725" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:13Z" user="Ernst Poulsen" uid="35273" lat="56.4754768" lon="10.7320484"/>
+ <node id="1978467729" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:34Z" user="Ernst Poulsen" uid="35273" lat="56.4763075" lon="10.7269981"/>
+ <node id="1978467735" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:34Z" user="Ernst Poulsen" uid="35273" lat="56.4765157" lon="10.7282678"/>
+ <node id="1978467737" visible="true" version="1" changeset="13597423" timestamp="2012-10-22T19:44:13Z" user="Ernst Poulsen" uid="35273" lat="56.4786483" lon="10.7285089"/>
+ <node id="1981795101" visible="true" version="1" changeset="13620802" timestamp="2012-10-24T20:07:35Z" user="Ernst Poulsen" uid="35273" lat="56.4764274" lon="10.7334606"/>
+ <node id="1981795368" visible="true" version="1" changeset="13620802" timestamp="2012-10-24T20:07:39Z" user="Ernst Poulsen" uid="35273" lat="56.4787561" lon="10.7278187"/>
+ <node id="1983307429" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:33Z" user="Ernst Poulsen" uid="35273" lat="56.4736677" lon="10.7287284"/>
+ <node id="1983307440" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:05Z" user="Ernst Poulsen" uid="35273" lat="56.4763790" lon="10.7292356"/>
+ <node id="1983307443" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:05Z" user="Ernst Poulsen" uid="35273" lat="56.4760387" lon="10.7209055"/>
+ <node id="1983307444" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:32Z" user="Ernst Poulsen" uid="35273" lat="56.4734428" lon="10.7302942"/>
+ <node id="1983307456" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:05Z" user="Ernst Poulsen" uid="35273" lat="56.4775479" lon="10.7157932"/>
+ <node id="1983307462" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:06Z" user="Ernst Poulsen" uid="35273" lat="56.4778708" lon="10.7159783"/>
+ <node id="1983307464" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:34Z" user="Ernst Poulsen" uid="35273" lat="56.4761834" lon="10.7206166"/>
+ <node id="1983307470" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:06Z" user="Ernst Poulsen" uid="35273" lat="56.4770128" lon="10.7185285"/>
+ <node id="1983307479" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:06Z" user="Ernst Poulsen" uid="35273" lat="56.4764911" lon="10.7207950"/>
+ <node id="1983307491" visible="true" version="1" changeset="13630317" timestamp="2012-10-25T18:18:07Z" user="Ernst Poulsen" uid="35273" lat="56.4769260" lon="10.7185832"/>
+ <node id="1983386034" visible="true" version="1" changeset="13630925" timestamp="2012-10-25T19:12:16Z" user="Ernst Poulsen" uid="35273" lat="56.4732970" lon="10.7326236"/>
+ <node id="1983386066" visible="true" version="1" changeset="13630925" timestamp="2012-10-25T19:12:17Z" user="Ernst Poulsen" uid="35273" lat="56.4747837" lon="10.7329471"/>
+ <node id="1987968787" visible="true" version="1" changeset="13670377" timestamp="2012-10-29T07:02:07Z" user="Ernst Poulsen" uid="35273" lat="56.4759281" lon="10.7355757"/>
+ <node id="1989440389" visible="true" version="1" changeset="13684255" timestamp="2012-10-30T09:41:16Z" user="Ernst Poulsen" uid="35273" lat="56.4795620" lon="10.7219152"/>
+ <node id="1989440398" visible="true" version="1" changeset="13684255" timestamp="2012-10-30T09:41:17Z" user="Ernst Poulsen" uid="35273" lat="56.4798306" lon="10.7188685"/>
+ <node id="1990369640" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:26Z" user="Ernst Poulsen" uid="35273" lat="56.4732713" lon="10.7314953"/>
+ <node id="1990369655" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:26Z" user="Ernst Poulsen" uid="35273" lat="56.4754146" lon="10.7319245"/>
+ <node id="1990369660" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:26Z" user="Ernst Poulsen" uid="35273" lat="56.4776601" lon="10.7274878"/>
+ <node id="1990369666" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:26Z" user="Ernst Poulsen" uid="35273" lat="56.4763754" lon="10.7274227"/>
+ <node id="1990369702" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:28Z" user="Ernst Poulsen" uid="35273" lat="56.4730747" lon="10.7325860"/>
+ <node id="1990369714" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:28Z" user="Ernst Poulsen" uid="35273" lat="56.4763223" lon="10.7270903"/>
+ <node id="1990369727" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:28Z" user="Ernst Poulsen" uid="35273" lat="56.4731214" lon="10.7325939"/>
+ <node id="1990369736" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:29Z" user="Ernst Poulsen" uid="35273" lat="56.4762444" lon="10.7292104"/>
+ <node id="3791823564" visible="true" version="1" changeset="34717507" timestamp="2015-10-18T18:24:44Z" user="Hjart" uid="207581" lat="56.4768717" lon="10.7298100"/>
+ <node id="3791823618" visible="true" version="1" changeset="34717507" timestamp="2015-10-18T18:24:45Z" user="Hjart" uid="207581" lat="56.4794811" lon="10.7269238"/>
+ <node id="3791823620" visible="true" version="1" changeset="34717507" timestamp="2015-10-18T18:24:45Z" user="Hjart" uid="207581" lat="56.4795136" lon="10.7270080"/>
+ <node id="4605493461" visible="true" version="1" changeset="45129676" timestamp="2017-01-13T10:44:49Z" user="GregersP" uid="122433" lat="56.4740712" lon="10.7343068"/>
+ <node id="4605493466" visible="true" version="1" changeset="45129676" timestamp="2017-01-13T10:44:49Z" user="GregersP" uid="122433" lat="56.4736865" lon="10.7349406"/>
+ <node id="4605599442" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:11Z" user="Hjart" uid="207581" lat="56.4763563" lon="10.7403997"/>
+ <node id="4605599551" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:12Z" user="Hjart" uid="207581" lat="56.4773279" lon="10.7282847"/>
+ <node id="4605599554" visible="true" version="1" changeset="45131178" timestamp="2017-01-13T11:58:12Z" user="Hjart" uid="207581" lat="56.4783059" lon="10.7257383"/>
+ <node id="5103928945" visible="true" version="1" changeset="52016513" timestamp="2017-09-13T19:20:30Z" user="Hjart" uid="207581" lat="56.4781233" lon="10.7264931"/>
+ <way id="4994263" visible="true" version="13" changeset="52016513" timestamp="2017-09-13T19:20:48Z" user="Hjart" uid="207581">
+  <nd ref="33152080"/>
+  <nd ref="4605493466"/>
+  <nd ref="4605493461"/>
+  <nd ref="33152959"/>
+  <nd ref="1168493146"/>
+  <nd ref="1168492699"/>
+  <nd ref="1168492828"/>
+  <nd ref="33152960"/>
+  <nd ref="33152961"/>
+  <nd ref="1168492524"/>
+  <nd ref="4605599551"/>
+  <nd ref="1168444557"/>
+  <nd ref="1990369660"/>
+  <nd ref="33152962"/>
+  <nd ref="1168445274"/>
+  <nd ref="5103928945"/>
+  <nd ref="33152963"/>
+  <nd ref="4605599554"/>
+  <nd ref="33152964"/>
+  <nd ref="865251582"/>
+  <nd ref="33152079"/>
+  <tag k="highway" v="tertiary"/>
+  <tag k="name" v="Glesborg Bygade"/>
+ </way>
+ <way id="4994264" visible="true" version="5" changeset="45131178" timestamp="2017-01-13T11:58:21Z" user="Hjart" uid="207581">
+  <nd ref="33152082"/>
+  <nd ref="1168492962"/>
+  <nd ref="1168492842"/>
+  <nd ref="1168492898"/>
+  <nd ref="4605599442"/>
+  <nd ref="1301954889"/>
+  <nd ref="1168492840"/>
+  <nd ref="1168492689"/>
+  <nd ref="1168492612"/>
+  <nd ref="33152974"/>
+  <nd ref="33152975"/>
+  <nd ref="1168493136"/>
+  <nd ref="33152976"/>
+  <nd ref="3791823564"/>
+  <nd ref="33152960"/>
+  <tag k="highway" v="tertiary"/>
+  <tag k="name" v="Gammel Rimsøvej"/>
+ </way>
+ <way id="101218373" visible="true" version="1" changeset="7374085" timestamp="2011-02-23T16:48:48Z" user="Norgaard" uid="139017">
+  <nd ref="1168493136"/>
+  <nd ref="1168492370"/>
+  <nd ref="1168492716"/>
+  <nd ref="1168492828"/>
+  <tag k="highway" v="service"/>
+ </way>
+ <way id="101218376" visible="true" version="9" changeset="55548066" timestamp="2018-01-18T12:27:36Z" user="Hjart" uid="207581">
+  <nd ref="1168492985"/>
+  <nd ref="1168492518"/>
+  <nd ref="1978467679"/>
+  <nd ref="1983307462"/>
+  <nd ref="1983307456"/>
+  <nd ref="1983307470"/>
+  <nd ref="1983307491"/>
+  <nd ref="1983307479"/>
+  <nd ref="1983307464"/>
+  <nd ref="1983307443"/>
+  <nd ref="1168492648"/>
+  <nd ref="1168492770"/>
+  <nd ref="1168492894"/>
+  <nd ref="1168492455"/>
+  <nd ref="1978467501"/>
+  <nd ref="32997374"/>
+  <nd ref="1168492585"/>
+  <nd ref="1978467597"/>
+  <nd ref="1978467729"/>
+  <nd ref="1990369714"/>
+  <nd ref="1990369666"/>
+  <nd ref="1978467493"/>
+  <nd ref="1978467625"/>
+  <nd ref="1978467735"/>
+  <nd ref="1978467651"/>
+  <nd ref="1978467698"/>
+  <nd ref="1983307440"/>
+  <nd ref="1168492726"/>
+  <nd ref="1978467558"/>
+  <nd ref="1978467548"/>
+  <nd ref="1978467536"/>
+  <nd ref="1990369655"/>
+  <nd ref="1978467725"/>
+  <nd ref="1978467655"/>
+  <nd ref="1978467657"/>
+  <nd ref="1978467587"/>
+  <nd ref="1978467552"/>
+  <nd ref="1978467688"/>
+  <nd ref="1987968787"/>
+  <nd ref="1978467542"/>
+  <nd ref="1978467595"/>
+  <nd ref="1978467565"/>
+  <nd ref="1168492799"/>
+  <nd ref="1981795101"/>
+  <nd ref="1978467723"/>
+  <nd ref="1978467575"/>
+  <nd ref="1978467556"/>
+  <nd ref="1978467550"/>
+  <nd ref="1978467544"/>
+  <nd ref="1978467539"/>
+  <nd ref="1978467720"/>
+  <nd ref="1978467675"/>
+  <nd ref="1978467682"/>
+  <nd ref="1978467737"/>
+  <nd ref="1981795368"/>
+  <nd ref="1168493058"/>
+  <nd ref="1168493248"/>
+  <nd ref="3791823620"/>
+  <nd ref="3791823618"/>
+  <nd ref="1168492663"/>
+  <nd ref="1978467578"/>
+  <nd ref="1978467603"/>
+  <nd ref="1978467634"/>
+  <nd ref="1978467686"/>
+  <nd ref="1978467589"/>
+  <nd ref="1978467637"/>
+  <nd ref="1978467653"/>
+  <nd ref="1978467498"/>
+  <nd ref="1989440389"/>
+  <nd ref="1978467554"/>
+  <nd ref="1978467541"/>
+  <nd ref="1978467627"/>
+  <nd ref="1978467639"/>
+  <nd ref="1978467579"/>
+  <nd ref="1989440398"/>
+  <nd ref="1978467455"/>
+  <nd ref="1978467584"/>
+  <nd ref="1978467491"/>
+  <nd ref="1168492985"/>
+  <tag k="is_in" v="Danmark, Jylland"/>
+  <tag k="landuse" v="residential"/>
+  <tag k="name" v="Glesborg"/>
+  <tag k="place" v="village"/>
+  <tag k="population" v="540"/>
+  <tag k="wikidata" v="Q2473259"/>
+  <tag k="wikipedia" v="da:Glesborg"/>
+ </way>
+ <way id="187699233" visible="true" version="2" changeset="13692916" timestamp="2012-10-30T23:19:34Z" user="Ernst Poulsen" uid="35273">
+  <nd ref="1983307444"/>
+  <nd ref="1983307429"/>
+  <nd ref="1990369736"/>
+  <nd ref="1983307440"/>
+  <nd ref="1168492726"/>
+  <nd ref="1978467558"/>
+  <nd ref="1978467548"/>
+  <nd ref="1983307444"/>
+  <tag k="landuse" v="forest"/>
+ </way>
+ <way id="188412289" visible="true" version="1" changeset="13692916" timestamp="2012-10-30T23:19:30Z" user="Ernst Poulsen" uid="35273">
+  <nd ref="1990369640"/>
+  <nd ref="1990369702"/>
+  <nd ref="1990369727"/>
+  <nd ref="1983386034"/>
+  <nd ref="1983386066"/>
+  <nd ref="1990369655"/>
+  <nd ref="1978467536"/>
+  <nd ref="1978467548"/>
+  <nd ref="1983307444"/>
+  <nd ref="1990369640"/>
+  <tag k="landuse" v="farmland"/>
+ </way>
+</osm>
