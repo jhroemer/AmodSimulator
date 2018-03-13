@@ -25,11 +25,20 @@ public class RandomGraphGenerator {
 //        graph.display();
 
         // TODO : make method that generates 5 random instances of each graph type and saves them in the correct folder + with edgeTo attributes set
-        Properties props = new Properties();
-        generateExperimentGraphs(props);
+//        Properties props = new Properties();
+//        generateExperimentGraphs(props);
 
-//        Graph graph = generateRandomGraph(DOROGOVTSEV, 20, 70, 1, 1, "test");
+//        Graph graph = generateRandomGraph(DOROGOVTSEV, 10, 484, 5, 20, "DOROGOVTSEV_" + 1);
 //        graph.display();
+//        Graph graph = generateRandomGraph(BARABASI, 10, 484, 5, 20, "BARABASI_" + 1);
+//        graph.display();
+
+//        for (int i = 1; i < 6; i++) {
+//            Graph graph = countrysideGraph(10);
+//            Utility.setDistances(graph);
+//            Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "COUNTRY" + "/", graph);
+//        }
+
     }
 
     private static void generateExperimentGraphs(Properties props) {
@@ -51,9 +60,9 @@ public class RandomGraphGenerator {
                 System.out.println("creating graph no. " + i + " of type: " + type);
                 Graph graph;
                 if (type == GRID) {
-                    graph = generateRandomGraph(type, seedInt, 21, 5, 20, "DOROGOVTSEV_" + i);
+                    graph = generateRandomGraph(type, seedInt, 15, 5, 20, "DOROGOVTSEV_" + i);
                 }
-                else graph = generateRandomGraph(type, seedInt, 484, 5, 20, type + "_" + i);
+                else graph = generateRandomGraph(type, seedInt, 300, 5, 20, type + "_" + i);
 
                 Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
                 Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
@@ -97,7 +106,9 @@ public class RandomGraphGenerator {
         for (int i = 0; i < size; i++) gen.nextEvents();
         gen.end();
 
-        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
 
         System.out.println(type + " had: " + graph.getNodeCount() + " nodes with size: " + size);
         return graph;
@@ -127,34 +138,35 @@ public class RandomGraphGenerator {
     /**
      * Builds a random graph that kinda resembles a rural areas with small cities
      */
-    public static Graph countrysideGraph() {
+    public static Graph countrysideGraph(long seed) {
+        Random rand = new Random(seed);
 
-        int minCitySize = 1;
-        int maxCitySize = 10;
+        int minCitySize = 5;
+        int maxCitySize = 20;
 
-        int minNumOfCities = 5;
-        int maxNumOfCities = 5;
+        int minNumOfCities = 10;
+        int maxNumOfCities = 30;
 
         int minRoadLengthCity = 1;
         int maxRoadLengthCity = 10;
 
-        int minRoadLengthNetwork = 1;
+        int minRoadLengthNetwork = 5;
         int maxRoadLengthNetwork = 100;
 
         double connectednessCity = 5.7; //svarer til 0.3 probability i algs4 udgaven
         double connectednessNetwork = 3;
 
-        int numOfCities = (int) (Math.random() * (maxNumOfCities - minNumOfCities)) + minNumOfCities;
+        int numOfCities = (int) (rand.nextDouble() * (maxNumOfCities - minNumOfCities)) + minNumOfCities;
         List<Graph> cities = new ArrayList<>();
 
         //generating a graph for each city
         for (int i = 0; i < numOfCities; i++) {
-            int citySize = (int) (Math.random() * (maxCitySize - minCitySize)) + minCitySize ;
-            cities.add(ErdosRenyiConnectedGraph("City" + i, citySize, connectednessCity, minRoadLengthCity, maxRoadLengthCity));
+            int citySize = (int) (rand.nextDouble() * (maxCitySize - minCitySize)) + minCitySize ;
+            cities.add(ErdosRenyiConnectedGraph("City" + i, citySize, connectednessCity, minRoadLengthCity, maxRoadLengthCity, rand, seed));
         }
 
         //generating a graph for the road network between cities
-        Graph roadNetwork = ErdosRenyiConnectedGraph("RoadNetwork", numOfCities, connectednessNetwork, minRoadLengthNetwork, maxRoadLengthNetwork);
+        Graph roadNetwork = ErdosRenyiConnectedGraph("RoadNetwork", numOfCities, connectednessNetwork, minRoadLengthNetwork, maxRoadLengthNetwork, rand, seed);
 
         //adding cities to the network of roads
         for (int i = 0; i < numOfCities; i++) {
@@ -194,11 +206,9 @@ public class RandomGraphGenerator {
         for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
 
         //setting the distances between all nodes in the graph
-        Utility.setDistances(roadNetwork);
+//        Utility.setDistances(roadNetwork);
 
-//        roadNetwork.display();
         //Utility.saveCompleteGraph("random1", "data/graphs/", roadNetwork);
-
         return roadNetwork;
     }
 
@@ -208,11 +218,14 @@ public class RandomGraphGenerator {
      * @param numVertices an int ...
      * @param degree
      * @param maxEdgeWeight
+     * @param rand
+     * @param seed
      * @return
      */
-    public static Graph ErdosRenyiConnectedGraph(String name, int numVertices, double degree, int minEdgeWeight, int maxEdgeWeight) {
+    public static Graph ErdosRenyiConnectedGraph(String name, int numVertices, double degree, int minEdgeWeight, int maxEdgeWeight, Random rand, long seed) {
         Graph graph = new SingleGraph(name);
         RandomGenerator gen = new RandomGenerator(degree); // GraphStream's impl. of Erdos Renyi
+        gen.setRandomSeed(seed);
 
         //making the graph
         gen.addSink(graph);
@@ -225,12 +238,12 @@ public class RandomGraphGenerator {
         cc.init(graph);
         if (cc.getConnectedComponentsCount() != 1) {
             System.out.printf("Graph %s is not connected. Number of components are %d. Calculating new graph.\n", name, cc.getConnectedComponentsCount());
-            return ErdosRenyiConnectedGraph(name, numVertices, degree, minEdgeWeight, maxEdgeWeight);
+            return ErdosRenyiConnectedGraph(name, numVertices, degree, minEdgeWeight, maxEdgeWeight, rand, seed);
         }
 
         //setting random weights between minEdgeWeights and maxEdgeWeights on all edges
         for (Edge e : graph.getEdgeSet()) {
-            int length = (int) (Math.random() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
+            int length = (int) (rand.nextDouble() * (maxEdgeWeight - minEdgeWeight)) + minEdgeWeight;
             e.setAttribute("layout.weight", length);
         }
 
