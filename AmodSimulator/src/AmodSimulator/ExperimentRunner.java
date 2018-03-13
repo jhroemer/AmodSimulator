@@ -58,13 +58,15 @@ public class ExperimentRunner {
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         AssignmentType assignmentMethod = AssignmentType.valueOf(props.getProperty("assignment"));
 
-        double totalAvgUnoccupied = 0.0;
-        double totalAvgWait = 0.0;
-
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
         for (String graphType : graphTypes) {
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
             System.out.println("starting trials on graph type: " + graphType);
+
+            int totalUnoccupied = 0;
+            int totalWait = 0;
+            double totalAvgUnoccupied = 0.0;
+            double totalAvgWait = 0.0;
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -86,20 +88,25 @@ public class ExperimentRunner {
                 int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
                 // add to total results
+                totalUnoccupied += simulator.getUnoccupiedKmDriven();
                 totalAvgUnoccupied += avgUnoccupied;
+                totalWait += simulator.getWaitingTime();
                 totalAvgWait += avgWait;
 
                 props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
                 props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
                 props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
+                props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
             // todo : check the double-int-division of totalAvgWait and trials
             // after i trials, get the average
+            props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(totalUnoccupied));
             props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
+            props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
         }
 

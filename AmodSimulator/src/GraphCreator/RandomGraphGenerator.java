@@ -51,9 +51,9 @@ public class RandomGraphGenerator {
                 System.out.println("creating graph no. " + i + " of type: " + type);
                 Graph graph;
                 if (type == GRID) {
-                    graph = generateRandomGraph(type, seedInt, 21, 5, 20, "DOROGOVTSEV_" + i);
+                    graph = generateRandomGraph(type, seedInt, 15, 5, 20, type + "_" + i);
                 }
-                else graph = generateRandomGraph(type, seedInt, 484, 5, 20, type + "_" + i);
+                else graph = generateRandomGraph(type, seedInt, 256, 5, 20, type + "_" + i);
 
                 Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
                 Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
