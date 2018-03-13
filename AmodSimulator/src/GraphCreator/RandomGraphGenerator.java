@@ -20,22 +20,11 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-//        Graph graph = null;
-//        ConnectedComponents cc = new ConnectedComponents();
-//        while (graph == null || cc.getConnectedComponentsCount() != 1) {
-//            graph = test();
-//            cc.init(graph);
-//        }
-//        if (graph != null) graph.display();
-
 //        Properties props = new Properties();
 //        generateExperimentGraphs(props);
 
-//        Graph graph = generateRandomGraph(DOROGOVTSEV, 10, 484, 5, 20, "DOROGOVTSEV_" + 1);
-//        graph.display();
-//        Graph graph = generateRandomGraph(BARABASI, 10, 30, 5, 20, "BARABASI_" + 1);
-//        graph.display();
-
+        Graph graph = generateGraph(LOBSTER, 10, "test");
+        graph.display();
         /*
         for (int i = 1; i < 6; i++) {
             System.out.println("banana: " + i);
@@ -45,50 +34,6 @@ public class RandomGraphGenerator {
             Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "BANANATREE" + "/", graph);
         }
         */
-    }
-
-    private static Graph test2(int i) {
-        int lowerBound = 30;
-        int upperBound = 30;
-        Random rand = new Random();
-
-        Graph graph = new SingleGraph("BANANATREE_" + i);
-        BaseGenerator gen = new BananaTreeGenerator(15);
-        gen.setRandomSeed(5);
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int j = 0; j < 20; j++) gen.nextEvents();
-        gen.end();
-
-        System.out.println("node count: " + graph.getNodeCount());
-
-        // TODO : I need to set edge-weights in a more consistent manner
-        for (Edge e : graph.getEdgeSet()) {
-            if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
-                System.out.println("setting edge weight for root-edge");
-                e.setAttribute("layout.weight", 250);
-            }
-            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
-        }
-        return graph;
-    }
-
-    private static Graph test() {
-        Graph graph = new SingleGraph("test");
-        BaseGenerator gen = new WattsStrogatzGenerator(200, 2, 0.6);
-        gen.setRandomSeed(5);
-
-        gen.addSink(graph);
-        gen.begin();
-        while (gen.nextEvents());
-        gen.end();
-
-        // TODO : I need to set edge-weights in a more consistent manner
-//        for (Edge e : graph.getEdgeSet()) {
-//            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
-//        }
-        return graph;
     }
 
     private static void generateExperimentGraphs(Properties props) {
@@ -110,7 +55,6 @@ public class RandomGraphGenerator {
             for (GraphType type : types) {
                 long start = System.currentTimeMillis();
                 System.out.println("creating graph no. " + i + " of type: " + type);
-
 //                Graph graph = generateRandomGraph(type, seedInt, 5, 20, type + "_" + i);
 
                 Graph graph = generateGraph(type, seedInt, type + "_" + i);
@@ -143,6 +87,7 @@ public class RandomGraphGenerator {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.exit(1);
         return null;
     }
 
@@ -168,8 +113,8 @@ public class RandomGraphGenerator {
     }
 
     private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
-        int upperBound = 20;
-        int lowerBound = 5;
+        int upperBound = 30;
+        int lowerBound = 10;
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new LobsterGenerator(2, 3);
         gen.setRandomSeed(seedInt);
@@ -228,8 +173,8 @@ public class RandomGraphGenerator {
     }
 
     private static Graph createBananatreeGraph(GraphType type, int seedInt, String name, int size) {
-        int upperBound = 20;
-        int lowerBound = 5;
+        int upperBound = 30;
+        int lowerBound = 10;
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new BananaTreeGenerator(15);
         gen.setRandomSeed(seedInt);
@@ -319,27 +264,6 @@ public class RandomGraphGenerator {
         }
     }
 
-    private static Graph randomEuclideanGraph(long randomSeed) {
-        Graph graph = new SingleGraph("random euclidean");
-        BaseGenerator gen = new RandomEuclideanGenerator();
-        gen.addSink(graph);
-        gen.setRandomSeed(randomSeed);
-
-        gen.begin();
-        ConnectedComponents cc = new ConnectedComponents();
-        cc.init(graph);
-
-        int i = 0;
-        while (i < 5 || cc.getConnectedComponentsCount() != 1) { // needed to ensure graph is connected
-            cc.init(graph);
-            gen.nextEvents();
-            i++;
-        }
-        gen.end();
-
-        return graph;
-    }
-
     /**
      * Builds a random graph that kinda resembles a rural areas with small cities
      */
@@ -408,7 +332,7 @@ public class RandomGraphGenerator {
         for (Edge e : roadNetwork.getEdgeSet()) e.setAttribute("ui.label", e.getAttribute("layout.weight").toString());
 
         // TODO: currently the weights from the city-clusters are null -- Astrid: I think we fixed this, right?
-        for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
+//        for (Edge edge : roadNetwork.getEdgeSet()) System.out.println("edge weight is: " + edge.getAttribute("layout.weight") + " and the nodes are: " + edge.getSourceNode() + " and: " + edge.getTargetNode());
 
         //setting the distances between all nodes in the graph
 //        Utility.setDistances(roadNetwork);
