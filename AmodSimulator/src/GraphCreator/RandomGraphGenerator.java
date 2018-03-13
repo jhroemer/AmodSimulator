@@ -25,8 +25,8 @@ public class RandomGraphGenerator {
 //        graph.display();
 
         // TODO : make method that generates 5 random instances of each graph type and saves them in the correct folder + with edgeTo attributes set
-//        Properties props = new Properties();
-//        generateExperimentGraphs(props);
+        Properties props = new Properties();
+        generateExperimentGraphs(props);
 
 //        Graph graph = generateRandomGraph(DOROGOVTSEV, 10, 484, 5, 20, "DOROGOVTSEV_" + 1);
 //        graph.display();
@@ -61,9 +61,9 @@ public class RandomGraphGenerator {
                 System.out.println("creating graph no. " + i + " of type: " + type);
                 Graph graph;
                 if (type == GRID) {
-                    graph = generateRandomGraph(type, seedInt, 15, 5, 20, "DOROGOVTSEV_" + i);
+                    graph = generateRandomGraph(type, seedInt, 15, 5, 20, type + "_" + i);
                 }
-                else graph = generateRandomGraph(type, seedInt, 300, 5, 20, type + "_" + i);
+                else graph = generateRandomGraph(type, seedInt, 256, 5, 20, type + "_" + i);
 
                 Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
                 Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
@@ -99,7 +99,7 @@ public class RandomGraphGenerator {
                 gen = new DorogovtsevMendesGenerator();
                 break;
             case COUNTRYSIDE:
-                return countrysideGraph(20, name);
+                return countrysideGraph(10, name);
         }
         gen.setRandomSeed(randomSeed);
         Random rand = new Random(randomSeed);

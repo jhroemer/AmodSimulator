@@ -27,6 +27,8 @@ public class AmodSimulator {
     private List<Request> assignedRequests = new ArrayList<>();
     private Map<Integer, List<Request>> predefinedRequestsMap;
     private double lambda = 0.1;
+    private int ticksDone;
+    private int idleVehiclesInTick;
 
     /**
      * Normal constructor used to initialize a simulator for running experiments
@@ -147,6 +149,9 @@ public class AmodSimulator {
 
         if (PRINT) printVacancyMap();
         if (IS_VISUAL) drawSprites(timeStep);
+
+        ticksDone++;
+        idleVehiclesInTick += idleVehicles.size();
     }
 
 
@@ -319,5 +324,9 @@ public class AmodSimulator {
      */
     public List<Request> getAssignedRequests() {
         return assignedRequests;
+    }
+
+    public double getAverageIdleVehicles() {
+        return (double) idleVehiclesInTick / (double) ticksDone;
     }
 }
