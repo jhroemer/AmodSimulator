@@ -20,11 +20,11 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-//        Properties props = new Properties();
-//        generateExperimentGraphs(props);
+        Properties props = new Properties();
+        generateExperimentGraphs(props);
 
-        Graph graph = generateGraph(LOBSTER, 10, "test");
-        graph.display();
+//        Graph graph = generateGraph(LOBSTER, 10, "test");
+//        graph.display();
         /*
         for (int i = 1; i < 6; i++) {
             System.out.println("banana: " + i);
@@ -58,6 +58,9 @@ public class RandomGraphGenerator {
 //                Graph graph = generateRandomGraph(type, seedInt, 5, 20, type + "_" + i);
 
                 Graph graph = generateGraph(type, seedInt, type + "_" + i);
+                int totalLength = 0;
+                for (Edge e : graph.getEdgeSet()) totalLength += (int) e.getAttribute("layout.weight");
+                System.out.println(type + " had: " + graph.getNodeCount() + " nodes" + " and total length of: " + totalLength);
 
                 Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
                 Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
@@ -93,7 +96,7 @@ public class RandomGraphGenerator {
 
     private static Graph createGridGraph(GraphType type, int seedInt, String name, int size) {
         int upperBound = 20;
-        int lowerBound = 5;
+        int lowerBound = 10;
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new GridGenerator();
         gen.setRandomSeed(seedInt);
@@ -107,14 +110,12 @@ public class RandomGraphGenerator {
         for (Edge e : graph.getEdgeSet()) {
             e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
         }
-
-        System.out.println(type + " had: " + graph.getNodeCount() + " nodes with size: " + size);
         return graph;
     }
 
     private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
         int upperBound = 30;
-        int lowerBound = 10;
+        int lowerBound = 20;
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new LobsterGenerator(2, 3);
         gen.setRandomSeed(seedInt);
@@ -133,8 +134,8 @@ public class RandomGraphGenerator {
     }
 
     private static Graph createBarabasiGraph(GraphType type, int seedInt, String name, int size) {
-        int upperBound = 20;
-        int lowerBound = 5;
+        int upperBound = 25;
+        int lowerBound = 10;
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new BarabasiAlbertGenerator(2);
         gen.setRandomSeed(seedInt);

@@ -68,6 +68,7 @@ public class ExperimentRunner {
             int totalWait = 0;
             double totalAvgUnoccupied = 0.0;
             double totalAvgWait = 0.0;
+            double totalAvgIdleVehicles = 0.0;
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -97,6 +98,7 @@ public class ExperimentRunner {
                 totalAvgUnoccupied += avgUnoccupied;
                 totalWait += simulator.getWaitingTime();
                 totalAvgWait += avgWait;
+                totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
 
                 props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
                 props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
@@ -113,6 +115,7 @@ public class ExperimentRunner {
             props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
             props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
+            props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(totalAvgIdleVehicles / trials));
         }
 
         Utility.saveResultsAsFile(props);
