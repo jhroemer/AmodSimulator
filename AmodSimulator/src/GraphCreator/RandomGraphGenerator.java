@@ -49,6 +49,7 @@ public class RandomGraphGenerator {
         types.add(LOBSTER);
         types.add(BARABASI);
         types.add(DOROGOVTSEV);
+        types.add(COUNTRYSIDE);
 
         for (int i = 1; i < 6; i++) {
             String seedString = i + "0";
@@ -97,6 +98,8 @@ public class RandomGraphGenerator {
             case DOROGOVTSEV:
                 gen = new DorogovtsevMendesGenerator();
                 break;
+            case COUNTRYSIDE:
+                return countrysideGraph(20, name);
         }
         gen.setRandomSeed(randomSeed);
         Random rand = new Random(randomSeed);
@@ -138,7 +141,7 @@ public class RandomGraphGenerator {
     /**
      * Builds a random graph that kinda resembles a rural areas with small cities
      */
-    public static Graph countrysideGraph(long seed) {
+    public static Graph countrysideGraph(long seed, String name) {
         Random rand = new Random(seed);
 
         int minCitySize = 5;
@@ -166,7 +169,7 @@ public class RandomGraphGenerator {
         }
 
         //generating a graph for the road network between cities
-        Graph roadNetwork = ErdosRenyiConnectedGraph("RoadNetwork", numOfCities, connectednessNetwork, minRoadLengthNetwork, maxRoadLengthNetwork, rand, seed);
+        Graph roadNetwork = ErdosRenyiConnectedGraph(name, numOfCities, connectednessNetwork, minRoadLengthNetwork, maxRoadLengthNetwork, rand, seed);
 
         //adding cities to the network of roads
         for (int i = 0; i < numOfCities; i++) {
