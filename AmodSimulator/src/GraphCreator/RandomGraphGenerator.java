@@ -19,26 +19,67 @@ public class RandomGraphGenerator {
     private static boolean DEBUG = false;
 
     public static void main(String[] args) {
-        // countrysideGraph();
 
-//        Graph graph = randomGraphWithSeed("test", 3.0, 100, 2);
-//        graph.display();
+//        Graph graph = null;
+//        ConnectedComponents cc = new ConnectedComponents();
+//        while (graph == null || cc.getConnectedComponentsCount() != 1) {
+//            graph = test();
+//            cc.init(graph);
+//        }
+//        if (graph != null) graph.display();
 
-        // TODO : make method that generates 5 random instances of each graph type and saves them in the correct folder + with edgeTo attributes set
-        Properties props = new Properties();
-        generateExperimentGraphs(props);
+//        Properties props = new Properties();
+//        generateExperimentGraphs(props);
 
 //        Graph graph = generateRandomGraph(DOROGOVTSEV, 10, 484, 5, 20, "DOROGOVTSEV_" + 1);
 //        graph.display();
 //        Graph graph = generateRandomGraph(BARABASI, 10, 484, 5, 20, "BARABASI_" + 1);
 //        graph.display();
 
-//        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 6; i++) {
 //            Graph graph = countrysideGraph(10);
-//            Utility.setDistances(graph);
-//            Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "COUNTRY" + "/", graph);
-//        }
+            Graph graph = test2(i);
+            Utility.setDistances(graph);
+            Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "BANANATREE" + "/", graph);
+        }
+    }
 
+    private static Graph test2(int i) {
+        int lowerBound = 5;
+        int upperBound = 20;
+        Random rand = new Random();
+
+        Graph graph = new SingleGraph("BANANATREE_" + i);
+        BaseGenerator gen = new BananaTreeGenerator();
+        gen.setRandomSeed(5);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int j = 0; j < 300; j++) gen.nextEvents();
+        gen.end();
+
+        // TODO : I need to set edge-weights in a more consistent manner
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
+        return graph;
+    }
+
+    private static Graph test() {
+        Graph graph = new SingleGraph("test");
+        BaseGenerator gen = new WattsStrogatzGenerator(200, 2, 0.6);
+        gen.setRandomSeed(5);
+
+        gen.addSink(graph);
+        gen.begin();
+        while (gen.nextEvents());
+        gen.end();
+
+        // TODO : I need to set edge-weights in a more consistent manner
+//        for (Edge e : graph.getEdgeSet()) {
+//            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+//        }
+        return graph;
     }
 
     private static void generateExperimentGraphs(Properties props) {
@@ -109,6 +150,7 @@ public class RandomGraphGenerator {
         for (int i = 0; i < size; i++) gen.nextEvents();
         gen.end();
 
+        // TODO : I need to set edge-weights in a more consistent manner
         for (Edge e : graph.getEdgeSet()) {
             e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
         }
