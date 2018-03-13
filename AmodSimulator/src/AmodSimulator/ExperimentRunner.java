@@ -1,5 +1,6 @@
 package AmodSimulator;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
@@ -72,6 +73,10 @@ public class ExperimentRunner {
             for (int i = 0; i < trials; i++) {
                 System.out.println("starting trial: " + i);
                 Graph graph = getCorrectGraph(i, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
+
+                int totalLength = 0;
+                for (Edge e : graph.getEdgeSet()) totalLength += (int) e.getAttribute("layout.weight");
+                System.out.println("Graph: " + graph.getId() + " had a total edge length of: " + totalLength);
 
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.

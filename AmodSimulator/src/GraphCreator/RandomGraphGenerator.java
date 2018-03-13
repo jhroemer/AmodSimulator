@@ -33,9 +33,10 @@ public class RandomGraphGenerator {
 
 //        Graph graph = generateRandomGraph(DOROGOVTSEV, 10, 484, 5, 20, "DOROGOVTSEV_" + 1);
 //        graph.display();
-//        Graph graph = generateRandomGraph(BARABASI, 10, 484, 5, 20, "BARABASI_" + 1);
+//        Graph graph = generateRandomGraph(BARABASI, 10, 30, 5, 20, "BARABASI_" + 1);
 //        graph.display();
 
+        /*
         for (int i = 1; i < 6; i++) {
             System.out.println("banana: " + i);
 //            Graph graph = countrysideGraph(10);
@@ -43,11 +44,12 @@ public class RandomGraphGenerator {
             Utility.setDistances(graph);
             Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "BANANATREE" + "/", graph);
         }
+        */
     }
 
     private static Graph test2(int i) {
-        int lowerBound = 20;
-        int upperBound = 20;
+        int lowerBound = 30;
+        int upperBound = 30;
         Random rand = new Random();
 
         Graph graph = new SingleGraph("BANANATREE_" + i);
@@ -65,7 +67,7 @@ public class RandomGraphGenerator {
         for (Edge e : graph.getEdgeSet()) {
             if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
                 System.out.println("setting edge weight for root-edge");
-                e.setAttribute("layout.weight", 200);
+                e.setAttribute("layout.weight", 250);
             }
             e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
         }
@@ -98,6 +100,7 @@ public class RandomGraphGenerator {
         types.add(BARABASI);
         types.add(DOROGOVTSEV);
         types.add(COUNTRYSIDE);
+        types.add(BANANATREE);
 
         for (int i = 1; i < 6; i++) {
             String seedString = i + "0";
@@ -107,11 +110,10 @@ public class RandomGraphGenerator {
             for (GraphType type : types) {
                 long start = System.currentTimeMillis();
                 System.out.println("creating graph no. " + i + " of type: " + type);
-                Graph graph;
-                if (type == GRID) {
-                    graph = generateRandomGraph(type, seedInt, 15, 5, 20, type + "_" + i);
-                }
-                else graph = generateRandomGraph(type, seedInt, 256, 5, 20, type + "_" + i);
+
+//                Graph graph = generateRandomGraph(type, seedInt, 5, 20, type + "_" + i);
+
+                Graph graph = generateGraph(type, seedInt, type + "_" + i);
 
                 Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
                 Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
@@ -120,50 +122,201 @@ public class RandomGraphGenerator {
         }
     }
 
-    /**
-     *
-     * @param type
-     * @param randomSeed
-     * @param size
-     * @param lowerBound
-     * @param upperBound
-     * @param name
-     * @return
-     */
-    private static Graph generateRandomGraph(GraphType type, long randomSeed, int size, int lowerBound, int upperBound, String name) {
-        Graph graph = new SingleGraph(name);
-        BaseGenerator gen = null;
+    private static Graph generateGraph(GraphType type, int seedInt, String name) {
         switch (type) {
             case GRID:
-                gen = new GridGenerator();
-                break;
-            case LOBSTER:   // TODO : lobster and barabasi are quite alike, consider using another type
-                gen = new LobsterGenerator();
-                break;
+                return createGridGraph(type, seedInt, name, 15);
+            case LOBSTER:   // TODO : lobster and barabasi are quite alike, lobster seems to perform worse than barabasi
+                return createLobsterGraph(type, seedInt, name, 256);
             case BARABASI:
-                gen = new BarabasiAlbertGenerator();
-                break;
+                return createBarabasiGraph(type, seedInt, name, 256);
             case DOROGOVTSEV:
-                gen = new DorogovtsevMendesGenerator();
-                break;
+                return createDorogovtsevGraph(type, seedInt, name, 256);
+            case BANANATREE:
+                return createBananatreeGraph(type, seedInt, name, 20);
             case COUNTRYSIDE:
-                return countrysideGraph(10, name);
+                return createCountrysideGraph(type, seedInt, name);
         }
-        gen.setRandomSeed(randomSeed);
-        Random rand = new Random(randomSeed);
+
+        try {
+            throw new Exception("problem with generateGraph()");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static Graph createGridGraph(GraphType type, int seedInt, String name, int size) {
+        int upperBound = 20;
+        int lowerBound = 5;
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new GridGenerator();
+        gen.setRandomSeed(seedInt);
+        Random rand = new Random(seedInt);
 
         gen.addSink(graph);
         gen.begin();
         for (int i = 0; i < size; i++) gen.nextEvents();
         gen.end();
 
-        // TODO : I need to set edge-weights in a more consistent manner
         for (Edge e : graph.getEdgeSet()) {
             e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
         }
 
         System.out.println(type + " had: " + graph.getNodeCount() + " nodes with size: " + size);
         return graph;
+    }
+
+    private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
+        int upperBound = 20;
+        int lowerBound = 5;
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new LobsterGenerator(2, 3);
+        gen.setRandomSeed(seedInt);
+        Random rand = new Random(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
+
+        return graph;
+    }
+
+    private static Graph createBarabasiGraph(GraphType type, int seedInt, String name, int size) {
+        int upperBound = 20;
+        int lowerBound = 5;
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new BarabasiAlbertGenerator(2);
+        gen.setRandomSeed(seedInt);
+        Random rand = new Random(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
+
+        return graph;
+    }
+
+    private static Graph createDorogovtsevGraph(GraphType type, int seedInt, String name, int size) {
+        int upperBound = 20;
+        int lowerBound = 5;
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new DorogovtsevMendesGenerator();
+        gen.setRandomSeed(seedInt);
+        Random rand = new Random(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
+
+        return graph;
+    }
+
+    private static Graph createBananatreeGraph(GraphType type, int seedInt, String name, int size) {
+        int upperBound = 20;
+        int lowerBound = 5;
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new BananaTreeGenerator(15);
+        gen.setRandomSeed(seedInt);
+        Random rand = new Random(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) {
+            if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
+                e.setAttribute("layout.weight", 250);
+            }
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
+
+        return graph;
+    }
+
+    private static Graph createCountrysideGraph(GraphType type, int seedInt, String name) {
+        return countrysideGraph(10, name);
+    }
+
+//    /**
+//     *
+//     * @param type
+//     * @param randomSeed
+//     * @param lowerBound
+//     * @param upperBound
+//     * @param name
+//     * @return
+//     */
+//    private static Graph generateRandomGraph(GraphType type, long randomSeed, int lowerBound, int upperBound, String name) {
+//        int size = (type == GRID) ? 15 : 256; // has to be lower for grid since it creates a lot of nodes
+//
+//        Graph graph = new SingleGraph(name);
+//        BaseGenerator gen = null;
+//        switch (type) {
+//            case GRID:
+//                gen = new GridGenerator();
+//                break;
+//            case LOBSTER:   // TODO : lobster and barabasi are quite alike, lobster seems to perform worse than barabasi
+//                gen = new LobsterGenerator();
+//                break;
+//            case BARABASI:
+//                gen = new BarabasiAlbertGenerator(2);
+//                break;
+//            case DOROGOVTSEV:
+//                gen = new DorogovtsevMendesGenerator();
+//                break;
+//            case BANANATREE:
+//                gen = new BananaTreeGenerator(15);
+//                break;
+//            case COUNTRYSIDE:
+//                return countrysideGraph(10, name);
+//        }
+//        gen.setRandomSeed(randomSeed);
+//
+//        gen.addSink(graph);
+//        gen.begin();
+//        for (int i = 0; i < size; i++) gen.nextEvents();
+//        gen.end();
+//
+//        setEdgeWeights(graph, type, lowerBound, upperBound, randomSeed);
+//
+//        System.out.println(type + " had: " + graph.getNodeCount() + " nodes with size: " + size);
+//        return graph;
+//    }
+
+    private static void setEdgeWeights(Graph graph, GraphType type, int lowerBound, int upperBound, long randomSeed) {
+        Random rand = new Random(randomSeed);
+
+        if (type == COUNTRYSIDE) return; // fixme : not very pretty..
+        if (type == BANANATREE) {
+            for (Edge e : graph.getEdgeSet()) {
+                if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
+                    e.setAttribute("layout.weight", 250);
+                }
+                e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+            }
+            return;
+        }
+
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+        }
     }
 
     private static Graph randomEuclideanGraph(long randomSeed) {
