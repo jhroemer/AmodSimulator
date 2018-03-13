@@ -37,6 +37,7 @@ public class RandomGraphGenerator {
 //        graph.display();
 
         for (int i = 1; i < 6; i++) {
+            System.out.println("banana: " + i);
 //            Graph graph = countrysideGraph(10);
             Graph graph = test2(i);
             Utility.setDistances(graph);
@@ -45,21 +46,27 @@ public class RandomGraphGenerator {
     }
 
     private static Graph test2(int i) {
-        int lowerBound = 5;
+        int lowerBound = 20;
         int upperBound = 20;
         Random rand = new Random();
 
         Graph graph = new SingleGraph("BANANATREE_" + i);
-        BaseGenerator gen = new BananaTreeGenerator();
+        BaseGenerator gen = new BananaTreeGenerator(15);
         gen.setRandomSeed(5);
 
         gen.addSink(graph);
         gen.begin();
-        for (int j = 0; j < 300; j++) gen.nextEvents();
+        for (int j = 0; j < 20; j++) gen.nextEvents();
         gen.end();
+
+        System.out.println("node count: " + graph.getNodeCount());
 
         // TODO : I need to set edge-weights in a more consistent manner
         for (Edge e : graph.getEdgeSet()) {
+            if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
+                System.out.println("setting edge weight for root-edge");
+                e.setAttribute("layout.weight", 200);
+            }
             e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
         }
         return graph;
