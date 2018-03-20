@@ -123,7 +123,7 @@ public class ExperimentRunner {
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
                 props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
                 for (Integer num : waitMap.keySet()) {
-                    double newNumber = totalWaitMap.get(num) + (double) waitMap.get(num);
+                    double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
                     totalWaitMap.put(num, newNumber);
                 }
             }
