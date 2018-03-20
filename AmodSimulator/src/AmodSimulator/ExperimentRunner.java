@@ -96,7 +96,16 @@ public class ExperimentRunner {
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
                 double unoccupiedPercentage = simulator.getAvgUnoccupiedPercentage();
                 int wait = simulator.getWaitingTime();
-                double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
+                double avgWait = (double) wait / (double) simulator.getAssignedRequests().size(); // fixme: unassigned aren't counted, although they might still have waited
+                Map<Integer, Integer> waitMap = new HashMap<>();
+                for (Request r : simulator.getAssignedRequests()) {
+                    if (waitMap.containsKey(r.getWaitTime())) {
+                        int number = waitMap.get(r.getWaitTime()) + 1;
+                        waitMap.put(r.getWaitTime(), number)  ;
+                    }
+                    else waitMap.put(r.getWaitTime(), 1);
+                }
+
                 // add to total results
                 totalUnoccupied += simulator.getUnoccupiedKmDriven();
                 totalAvgUnoccupied += avgUnoccupied;
@@ -108,9 +117,10 @@ public class ExperimentRunner {
                 props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
                 props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
                 props.setProperty(graphType + "_" + i + "_unoccupiedPercentage", String.valueOf(unoccupiedPercentage));
-                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
+                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime())); // todo: my wait-times are generally higher than in min-cost matching article, since few will wait less than 5 min because all travels take 5 min to finish
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
                 props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
+                // TODO : should I average the wait map results?
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");

@@ -138,11 +138,10 @@ public class AmodSimulator {
             if (e.getStartIndex() >= idleVehicles.size() || e.getEndIndex() >= requests.size()) continue;
             Vehicle veh = idleVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
-
             veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);
-            assignedRequests.add(req);
+            assignedRequests.add(req); // todo: when request is assigned it needs to be tracked how many ticks it waited
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
         }
@@ -344,17 +343,18 @@ public class AmodSimulator {
      * @return
      */
     public double getAvgUnoccupiedPercentage() {
-        int number = 0;
+        double number = 0;
         double result = 0.0;
 
         for (Vehicle v : idleVehicles) {
             number++;
-            result += v.getEmptyKilometersDriven() / (v.getEmptyKilometersDriven() + v.getOccupiedKilometersDriven());
+
+            result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
         for (Vehicle v : idleVehicles) {
             number++;
-            result += v.getEmptyKilometersDriven() / (v.getEmptyKilometersDriven() + v.getOccupiedKilometersDriven());
+            result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
         return result / number;
