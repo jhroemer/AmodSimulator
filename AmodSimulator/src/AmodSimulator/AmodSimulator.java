@@ -337,4 +337,26 @@ public class AmodSimulator {
     public List<Request> getRequests() {
         return requests;
     }
+
+    /**
+     * Gets the average percentage-wise unoccupied distance travelled by vehicles.
+     *
+     * @return
+     */
+    public double getAvgUnoccupiedPercentage() {
+        int number = 0;
+        double result = 0.0;
+
+        for (Vehicle v : idleVehicles) {
+            number++;
+            result += v.getEmptyKilometersDriven() / (v.getEmptyKilometersDriven() + v.getOccupiedKilometersDriven());
+        }
+
+        for (Vehicle v : idleVehicles) {
+            number++;
+            result += v.getEmptyKilometersDriven() / (v.getEmptyKilometersDriven() + v.getOccupiedKilometersDriven());
+        }
+
+        return result / number;
+    }
 }

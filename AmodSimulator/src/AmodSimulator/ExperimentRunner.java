@@ -65,6 +65,7 @@ public class ExperimentRunner {
             System.out.println("starting trials on graph type: " + graphType);
 
             int totalUnoccupied = 0;
+            double totalUnoccupiedPercentage = 0.0;
             int totalWait = 0;
             double totalAvgUnoccupied = 0.0;
             double totalAvgWait = 0.0;
@@ -85,25 +86,28 @@ public class ExperimentRunner {
                 // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
-                    // System.out.println("did tick no. " + j + " there are " + simulator.getRequests().size() + " unassigned requests");
 //                    System.out.println("tick: " + j);
                     if (visual) sleep(50);
                 }
+                System.out.println("Unassigned: " + simulator.getRequests().size());
 
                 // results for the i'th trial
                 int unoccupied = simulator.getUnoccupiedKmDriven();
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
-                int wait = simulator.getWaitingTime(); // TODO : waiting time numbers are way to high for some reason
+                double unoccupiedPercentage = simulator.getAvgUnoccupiedPercentage();
+                int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
                 // add to total results
                 totalUnoccupied += simulator.getUnoccupiedKmDriven();
                 totalAvgUnoccupied += avgUnoccupied;
+                totalUnoccupiedPercentage += unoccupiedPercentage;
                 totalWait += simulator.getWaitingTime();
                 totalAvgWait += avgWait;
                 totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
 
                 props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
                 props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
+                props.setProperty(graphType + "_" + i + "_unoccupiedPercentage", String.valueOf(unoccupiedPercentage));
                 props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
                 props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
@@ -115,6 +119,7 @@ public class ExperimentRunner {
             // after i trials, get the average
             props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(totalUnoccupied));
             props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / trials));
+            props.setProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage", String.valueOf(totalUnoccupiedPercentage / trials));
             props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
             props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(totalAvgIdleVehicles / trials));
