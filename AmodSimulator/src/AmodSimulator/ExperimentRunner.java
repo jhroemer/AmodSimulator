@@ -70,6 +70,7 @@ public class ExperimentRunner {
             double totalAvgUnoccupied = 0.0;
             double totalAvgWait = 0.0;
             double totalAvgIdleVehicles = 0.0;
+            Map<Integer, Double> totalWaitMap = new TreeMap<>();
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -98,6 +99,7 @@ public class ExperimentRunner {
                 int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size(); // fixme: unassigned aren't counted, although they might still have waited
                 Map<Integer, Integer> waitMap = new HashMap<>();
+                for (int j = 0; j < 21; j++) waitMap.put(j, 0);
                 for (Request r : simulator.getAssignedRequests()) {
                     if (waitMap.containsKey(r.getWaitTime())) {
                         int number = waitMap.get(r.getWaitTime()) + 1;
@@ -120,7 +122,10 @@ public class ExperimentRunner {
                 props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime())); // todo: my wait-times are generally higher than in min-cost matching article, since few will wait less than 5 min because all travels take 5 min to finish
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
                 props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
-                // TODO : should I average the wait map results?
+                for (Integer num : waitMap.keySet()) {
+                    double newNumber = totalWaitMap.get(num) + (double) waitMap.get(num);
+                    totalWaitMap.put(num, newNumber);
+                }
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
@@ -133,6 +138,11 @@ public class ExperimentRunner {
             props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
             props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(totalAvgIdleVehicles / trials));
+            for (Integer num : totalWaitMap.keySet()) {
+                double avg = totalWaitMap.get(num) / trials;
+                totalWaitMap.put(num, avg);
+            }
+            props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(totalWaitMap));
         }
 
         Utility.saveResultsAsFile(props);
