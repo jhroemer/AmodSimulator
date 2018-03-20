@@ -81,9 +81,11 @@ public class ExperimentRunner {
 
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
+
                 // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
+                    // System.out.println("did tick no. " + j + " there are " + simulator.getRequests().size() + " unassigned requests");
 //                    System.out.println("tick: " + j);
                     if (visual) sleep(50);
                 }

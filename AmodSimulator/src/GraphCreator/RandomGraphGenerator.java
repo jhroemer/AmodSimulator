@@ -21,7 +21,7 @@ public class RandomGraphGenerator {
     public static void main(String[] args) {
 
         Properties props = new Properties();
-        generateExperimentGraphs(props);
+//        generateExperimentGraphs(props);
 
 //        Graph graph = generateGraph(LOBSTER, 10, "test");
 //        graph.display();
@@ -34,6 +34,10 @@ public class RandomGraphGenerator {
             Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "BANANATREE" + "/", graph);
         }
         */
+//        Graph graph = createDorogovtsevGraph(DOROGOVTSEV, 10, "..", 50);
+        Graph graph = createLobsterGraph(LOBSTER, 10, "..", 200);
+        graph.display();
+
     }
 
     private static void generateExperimentGraphs(Properties props) {
@@ -117,7 +121,7 @@ public class RandomGraphGenerator {
         int upperBound = 30;
         int lowerBound = 20;
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new LobsterGenerator(2, 3);
+        BaseGenerator gen = new LobsterGenerator(5, 3);
         gen.setRandomSeed(seedInt);
         Random rand = new Random(seedInt);
 
@@ -127,7 +131,8 @@ public class RandomGraphGenerator {
         gen.end();
 
         for (Edge e : graph.getEdgeSet()) {
-            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+//            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+            e.setAttribute("layout.weight", 1);
         }
 
         return graph;

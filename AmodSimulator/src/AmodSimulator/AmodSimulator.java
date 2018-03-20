@@ -329,4 +329,12 @@ public class AmodSimulator {
     public double getAverageIdleVehicles() {
         return (double) idleVehiclesInTick / (double) ticksDone;
     }
+
+    /**
+     *
+     * @return
+     */
+    public List<Request> getRequests() {
+        return requests;
+    }
 }
