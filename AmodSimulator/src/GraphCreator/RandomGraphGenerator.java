@@ -35,8 +35,15 @@ public class RandomGraphGenerator {
         }
         */
 //        Graph graph = createDorogovtsevGraph(DOROGOVTSEV, 10, "..", 50);
-        Graph graph = createLobsterGraph(LOBSTER, 10, "..", 200);
-        graph.display();
+        Graph lob = createLobsterGraph(LOBSTER, 10, "..", 106);
+        lob.display();
+        Graph grid = createGridGraph(GRID, 10, "", 9);
+//        grid.display(false);
+        Graph ban = createBananatreeGraph(BANANATREE, 10, "", 7);
+        System.out.println("banana: " + ban.getNodeCount());
+        System.out.println("grid: " + grid.getNodeCount());
+        System.out.println("lob: " + lob.getNodeCount());
+//        ban.display();
 
     }
 
@@ -138,6 +145,7 @@ public class RandomGraphGenerator {
         return graph;
     }
 
+    // TODO : barabasi goes out imo
     private static Graph createBarabasiGraph(GraphType type, int seedInt, String name, int size) {
         int upperBound = 25;
         int lowerBound = 10;
@@ -152,7 +160,8 @@ public class RandomGraphGenerator {
         gen.end();
 
         for (Edge e : graph.getEdgeSet()) {
-            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+//            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+            e.setAttribute("layout.weight", 1);
         }
 
         return graph;
@@ -182,7 +191,7 @@ public class RandomGraphGenerator {
         int upperBound = 30;
         int lowerBound = 10;
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new BananaTreeGenerator(15);
+        BaseGenerator gen = new BananaTreeGenerator(14);
         gen.setRandomSeed(seedInt);
         Random rand = new Random(seedInt);
 
@@ -193,9 +202,9 @@ public class RandomGraphGenerator {
 
         for (Edge e : graph.getEdgeSet()) {
             if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
-                e.setAttribute("layout.weight", 250);
+                e.setAttribute("layout.weight", 6);
             }
-            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+            e.setAttribute("layout.weight", 1);
         }
 
         return graph;
