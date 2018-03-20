@@ -6,12 +6,13 @@ import java.util.TreeMap;
 
 public class AvgWaitParser {
     public static void main(String[] args) {
-        Properties props = Utility.loadProps("data/experimentResults/scram1exp.properties");
+        Properties props = Utility.loadProps("data/experimentResults/chapter2.properties");
 
         Map<Integer, Integer> map = new TreeMap<>();
         for (int i = 0; i != 50; i += 5) map.put(i, 0);
         System.out.println(map);
 
+        /*
         StringBuilder s = new StringBuilder();
 
         s.append("\begin{tikzpicture}");
@@ -26,28 +27,34 @@ public class AvgWaitParser {
                 "    nodes near coords,\n" +
                 "    nodes near coords align={vertical},\n" +
                 "    ]");
+        */
 
-        for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
-            System.out.println("i is: " + i);
-            String k = "medium_" + i + "_avgWait";
-            System.out.println(k);
-            System.out.println(props.getProperty(k));
-            System.out.println("\n");
+        String[] graphTypes = ExperimentRunner.getGraphTypes(props.getProperty("graphDir")); // todo: should getGraphTypes be in Utility?
 
-            double d = Double.parseDouble(props.getProperty(k));
-            int j = (int) Math.round(d);
+        for (String s : graphTypes) {
+            for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
+                System.out.println("i is: " + i);
+                String k = s + "_" + i + "_avgWait";
+                System.out.println(k);
+                System.out.println(props.getProperty(k));
+                System.out.println("\n");
 
-            System.out.println("j is: " + j);
+                double d = Double.parseDouble(props.getProperty(k));
+                int j = (int) Math.round(d);
 
-            putIntoMap(j, map);
+                System.out.println("j is: " + j);
+
+                putIntoMap(j, map);
+            }
+            System.out.println(map);
+
+            StringBuilder coordinates = new StringBuilder();
+            for (Integer i : map.keySet()) {
+                coordinates.append("(" + i + "," + map.get(i) + ")");
+            }
+            System.out.println("Coordinates for : " + s);
+            System.out.println(coordinates);
         }
-        System.out.println(map);
-
-        StringBuilder coordinates = new StringBuilder();
-        for (Integer i : map.keySet()) {
-            coordinates.append("(" + i + "," + map.get(i) + ")");
-        }
-        System.out.println(coordinates);
     }
 
     private static void putIntoMap(int j, Map<Integer, Integer> map) {

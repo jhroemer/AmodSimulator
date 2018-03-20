@@ -194,7 +194,7 @@ public class ExperimentRunner {
      * @param folderPath
      * @return
      */
-    private static String[] getGraphTypes(String folderPath) {
+    public static String[] getGraphTypes(String folderPath) {
         File file = new File(folderPath);
         return file.list((current, name) -> new File(current, name).isDirectory());
     }
