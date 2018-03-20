@@ -37,7 +37,6 @@ public class RandomGraphGenerator {
         }
         */
 
-
 //        Graph graph = createDorogovtsevGraph(DOROGOVTSEV, 10, "..", 50);
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 100);
         Graph grid = createGridGraph(GRID, 10, "grid", 9);
