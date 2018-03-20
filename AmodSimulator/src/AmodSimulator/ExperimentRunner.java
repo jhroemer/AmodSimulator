@@ -91,7 +91,7 @@ public class ExperimentRunner {
                 // results for the i'th trial
                 int unoccupied = simulator.getUnoccupiedKmDriven();
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
-                int wait = simulator.getWaitingTime();
+                int wait = simulator.getWaitingTime(); // TODO : waiting time numbers are way to high for some reason
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size();
                 // add to total results
                 totalUnoccupied += simulator.getUnoccupiedKmDriven();

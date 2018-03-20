@@ -47,7 +47,7 @@ public class AmodSimulator {
         this.lambda = lambda;
 
         activeVehicles = new ArrayList<>();
-        idleVehicles = Utility.generateVehicles(graph, numVehicles);
+        idleVehicles = Utility.generateVehicles(graph, numVehicles); // todo: do I to position vehicles less randomly?
         requests = new ArrayList<>();
 
         if (IS_VISUAL) {
