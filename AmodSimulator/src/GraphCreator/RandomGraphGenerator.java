@@ -1,6 +1,7 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
+import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -37,7 +38,22 @@ public class RandomGraphGenerator {
         }
         */
 
-//        Graph graph = createDorogovtsevGraph(DOROGOVTSEV, 10, "..", 50);
+        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 256);
+        Graph grid = createGridGraph(GRID, 10, "grid", 15);
+        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 18);
+        System.out.println("grid: " + grid.getNodeCount());
+        System.out.println("grid diameter " + Toolkit.diameter(grid));
+        System.out.println("grid density: " + Toolkit.density(grid));
+        System.out.println("lob: " + lob.getNodeCount());
+        System.out.println("lob diameter " + Toolkit.diameter(lob));
+        System.out.println("lob density: " + Toolkit.density(lob));
+        System.out.println("ban: " + ban.getNodeCount());
+        // todo : does not work correctly, it needs to include the 6-weights which it doesn't - diameter should be 16 (w. root weights = 6)
+        System.out.println("ban diameter " + Toolkit.diameter(ban, "layout.weight", false));
+        System.out.println("ban density: " + Toolkit.density(ban));
+        ban.display(true);
+
+        /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 100);
         Graph grid = createGridGraph(GRID, 10, "grid", 9);
 //        grid.display(false);
@@ -47,10 +63,10 @@ public class RandomGraphGenerator {
         System.out.println("lob: " + lob.getNodeCount());
 //        ban.display();
 
-
         saveGraphAsPicture(lob);
         saveGraphAsPicture(grid);
         saveGraphAsPicture(ban);
+        */
     }
 
     private static void generateExperimentGraphs(Properties props) {
@@ -131,7 +147,7 @@ public class RandomGraphGenerator {
 
     private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new LobsterGenerator(5, 3);
+        BaseGenerator gen = new LobsterGenerator(3, 3);
         gen.setRandomSeed(seedInt);
 
         gen.addSink(graph);
