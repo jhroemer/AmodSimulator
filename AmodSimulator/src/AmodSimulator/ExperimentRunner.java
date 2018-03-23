@@ -138,11 +138,13 @@ public class ExperimentRunner {
             props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / trials));
             props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(totalAvgIdleVehicles / trials));
+            StringBuilder waitingTimes = new StringBuilder();
             for (Integer num : totalWaitMap.keySet()) {
                 double avg = totalWaitMap.get(num) / trials;
                 totalWaitMap.put(num, avg);
+                waitingTimes.append("(").append(num).append(",").append(avg).append(")");
             }
-            props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(totalWaitMap));
+            props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
         }
 
         Utility.saveResultsAsFile(props);
