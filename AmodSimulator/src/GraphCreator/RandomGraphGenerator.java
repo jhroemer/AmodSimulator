@@ -1,7 +1,6 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
-import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -24,20 +23,10 @@ public class RandomGraphGenerator {
     public static void main(String[] args) {
 
         Properties props = new Properties();
-//        generateExperimentGraphs(props);
+        generateExperimentGraphs(props);
 
-//        Graph graph = generateGraph(LOBSTER, 10, "test");
-//        graph.display();
+
         /*
-        for (int i = 1; i < 6; i++) {
-            System.out.println("banana: " + i);
-//            Graph graph = countrysideGraph(10);
-            Graph graph = test2(i);
-            Utility.setDistances(graph);
-            Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + "BANANATREE" + "/", graph);
-        }
-        */
-
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
         Graph grid = createGridGraph(GRID, 10, "grid", 15);
         Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 16);
@@ -56,9 +45,8 @@ public class RandomGraphGenerator {
         int total = 0;
         for (Edge e : ban.getEdgeSet()) total += (int) e.getAttribute("layout.weight");
         System.out.println("ban distance: " + total);
-
-
         lob.display(true);
+        */
 
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 100);

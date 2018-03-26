@@ -81,10 +81,9 @@ public class ExperimentRunner {
                 for (Edge e : graph.getEdgeSet()) totalLength += (int) e.getAttribute("layout.weight");
                 System.out.println("Graph: " + graph.getId() + " had a total edge length of: " + totalLength);
 
+                // running the simulation
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
-
-                // running the simulation
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
 //                    System.out.println("tick: " + j);
