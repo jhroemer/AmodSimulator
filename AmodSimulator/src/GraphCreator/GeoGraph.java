@@ -75,7 +75,7 @@ public class GeoGraph {
         }
 
         Double minLat = null, minLon = null;
-        Map<String,AbstractMap.SimpleEntry<Double,Double>> positions = new HashMap<>();
+        Map<String, AbstractMap.SimpleEntry<Double,Double>> positions = new HashMap<>();
 
         String line = sc.nextLine().trim();
 
