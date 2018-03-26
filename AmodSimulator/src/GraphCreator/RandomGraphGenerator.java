@@ -38,20 +38,27 @@ public class RandomGraphGenerator {
         }
         */
 
-        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 256);
+        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
         Graph grid = createGridGraph(GRID, 10, "grid", 15);
-        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 18);
+        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 16);
         System.out.println("grid: " + grid.getNodeCount());
         System.out.println("grid diameter " + Toolkit.diameter(grid));
         System.out.println("grid density: " + Toolkit.density(grid));
+        System.out.println("grid distance: " + grid.getEdgeSet().size());
         System.out.println("lob: " + lob.getNodeCount());
         System.out.println("lob diameter " + Toolkit.diameter(lob));
         System.out.println("lob density: " + Toolkit.density(lob));
+        System.out.println("lob distance: " + lob.getEdgeSet().size());
         System.out.println("ban: " + ban.getNodeCount());
         // todo : does not work correctly, it needs to include the 6-weights which it doesn't - diameter should be 16 (w. root weights = 6)
         System.out.println("ban diameter " + Toolkit.diameter(ban, "layout.weight", false));
         System.out.println("ban density: " + Toolkit.density(ban));
-        ban.display(true);
+        int total = 0;
+        for (Edge e : ban.getEdgeSet()) total += (int) e.getAttribute("layout.weight");
+        System.out.println("ban distance: " + total);
+
+
+        lob.display(true);
 
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 100);
@@ -104,18 +111,26 @@ public class RandomGraphGenerator {
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param seedInt
+     * @param name
+     * @return
+     */
     private static Graph generateGraph(GraphType type, int seedInt, String name) {
+
         switch (type) {
             case GRID:
-                return createGridGraph(type, seedInt, name, 9);
+                return createGridGraph(type, seedInt, name, 15);
             case LOBSTER:   // TODO : lobster and barabasi are quite alike, lobster seems to perform worse than barabasi
-                return createLobsterGraph(type, seedInt, name, 100);
+                return createLobsterGraph(type, seedInt, name, 255);
             case BARABASI:
                 return createBarabasiGraph(type, seedInt, name, 256);
             case DOROGOVTSEV:
                 return createDorogovtsevGraph(type, seedInt, name, 256);
             case BANANATREE:
-                return createBananatreeGraph(type, seedInt, name, 7);
+                return createBananatreeGraph(type, seedInt, name, 16);
             case COUNTRYSIDE:
                 return createCountrysideGraph(type, seedInt, name);
         }
@@ -222,7 +237,7 @@ public class RandomGraphGenerator {
      */
     private static Graph createBananatreeGraph(GraphType type, int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new BananaTreeGenerator(14);
+        BaseGenerator gen = new BananaTreeGenerator(16);
         gen.setRandomSeed(seedInt);
 
         gen.addSink(graph);
@@ -232,9 +247,9 @@ public class RandomGraphGenerator {
 
         for (Edge e : graph.getEdgeSet()) {
             if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
-                e.setAttribute("layout.weight", 6);
+                e.setAttribute("layout.weight", 15);
             }
-            e.setAttribute("layout.weight", 1);
+            else e.setAttribute("layout.weight", 1);
         }
 
         return graph;

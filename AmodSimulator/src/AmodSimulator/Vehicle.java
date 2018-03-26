@@ -11,7 +11,7 @@ import java.util.Iterator;
 public class Vehicle implements SCRAM.Node {
     private String id;
     private ArrayList<Request> requests;
-    private int speed = 1; //distance per timestep
+    private int speed = 5; //distance per timestep, 5*12 = 60kmh
     private org.graphstream.graph.Node location; // The vehicles location if idle. If not idle, this is the destination of it's last request.
     private int vacantTime;
 
