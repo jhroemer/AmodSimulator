@@ -1,5 +1,6 @@
 package GraphCreator;
 
+import org.graphstream.algorithm.Toolkit;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
@@ -57,7 +58,7 @@ public class GeoGraph {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("Graph density: " + Toolkit.density(graph)); // TODO : good argument here, graph density for the real-world graph is very low
         System.out.println("Time taken (seconds) to make and save graph: " + (System.currentTimeMillis()-start)/1000);
     }
 
