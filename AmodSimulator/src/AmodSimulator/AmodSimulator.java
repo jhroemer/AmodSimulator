@@ -360,12 +360,12 @@ public class AmodSimulator {
             result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
-        for (Vehicle v : idleVehicles) {
+        for (Vehicle v : activeVehicles) {
             number++;
             result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
-        // TODO : I have NaN problems sometimes
+        // TODO : I have NaN problems sometimes - probably due to the 2x idlevehicles thing
         boolean isNan = Double.isNaN(result);
         assert !isNan;
         boolean isNan3 = Double.isNaN(result / number);
