@@ -27,6 +27,7 @@ public class Request implements SCRAM.Node {
     // for SCRAM
     private boolean visited;
     private Node previous;
+    private int waitCounter;
 
     /**
      *
@@ -227,5 +228,21 @@ public class Request implements SCRAM.Node {
     @Override
     public Node getType() {
         return null;
+    }
+
+    /**
+     * Used for canceling requests
+     */
+    public void incrementWaitCounter() {
+        waitCounter++;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getWaitCounter() {
+        assert waitCounter <= 6;
+        return waitCounter;
     }
 }

@@ -7,10 +7,7 @@ import org.graphstream.graph.Node;
 import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AmodSimulator {
     static boolean PRINT = false;
@@ -25,6 +22,7 @@ public class AmodSimulator {
     private Map<Integer, List<Vehicle>> vacancyMap = new HashMap<>();
     private SpriteManager sman;
     private List<Request> assignedRequests = new ArrayList<>();
+    private List<Request> unservedRequests = new ArrayList<>();
     private Map<Integer, List<Request>> predefinedRequestsMap;
     private double lambda = 0.1;
     private int ticksDone;
@@ -144,6 +142,17 @@ public class AmodSimulator {
             assignedRequests.add(req); // todo: when request is assigned it needs to be tracked how many ticks it waited
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
+        }
+
+        // tracking that a request waited
+        ListIterator<Request> requestIterator = requests.listIterator();
+        while (requestIterator.hasNext()) {
+            Request r = requestIterator.next();
+            r.incrementWaitCounter();
+            if (r.getWaitCounter() >= 6) {
+                requestIterator.remove();
+                unservedRequests.add(r);
+            }
         }
 
         if (PRINT) printVacancyMap();
@@ -343,12 +352,11 @@ public class AmodSimulator {
      * @return
      */
     public double getAvgUnoccupiedPercentage() {
-        double number = 0;
+        int number = 0;
         double result = 0.0;
 
         for (Vehicle v : idleVehicles) {
             number++;
-
             result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
@@ -357,6 +365,16 @@ public class AmodSimulator {
             result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
-        return result / number;
+        // TODO : I have NaN problems sometimes
+        boolean isNan = Double.isNaN(result);
+        assert !isNan;
+        boolean isNan3 = Double.isNaN(result / number);
+        assert !isNan3;
+
+        return result / (double) number;
+    }
+
+    public List<Request> getUnservedRequests() {
+        return unservedRequests;
     }
 }
