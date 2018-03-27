@@ -105,7 +105,7 @@ public class IndexBasedSCRAM {
             // Astrid doesn't think so, but I think this translates to: "if the end of the outgoing edge is matched
             // this looks at the outgoing edges of a node and looks for a new 'match'
             if (!visited[1-x][out[x][y].get(j)]) { // out[x][y].get(j) = is the j'th outgoing edge of the y'th vehicle/request (depending on x = 0 or 1)
-                int tmp = flood(1-x, out[x][y].get(j), y); // fixme: but is visited necessarily edge.end like in pseudo?
+                int tmp = flood(1-x, out[x][y].get(j), y);
                 if (tmp != -1) //Flood reached the endIndex
                     return tmp;
             }
@@ -177,22 +177,22 @@ public class IndexBasedSCRAM {
         resetFlooding(); // todo: resetFlooding() is run before the match-loop, which isn't how the pseudocode is
 
         int answer; // answer = current edge index
-        for (answer = 0; answer < edges.size(); answer++) { // fixme : line 28 for-loop? in this case, then n is not |vehicles| but |edges|
+        for (answer = 0; answer < edges.size(); answer++) {
 
             //std::pair <int, int>e = edges[longestEdgeWeight].second;       // gets edge between match -> to-node
             int edgeStart = edges.get(answer).getStartIndex();
             int edgeEnd = edges.get(answer).getEndIndex();
 
             //  out[0][e.first].push_back(e.second);                //
-            out[0][edgeStart].add(edgeEnd); // todo : longestEdge = edgeQ.pop() ?
+            out[0][edgeStart].add(edgeEnd);
 
             //printf("Added edge: %d %d\n", e.first, e.second);
             //if (visited[0][e.first] && !visited[1][e.second]) { // if
 
             // if the vehicle is visited and the end-node of edge is not visited
-            if (visited[0][edgeStart] && !visited[1][edgeEnd]) {    // todo: if edge starts in a vehicle and not in a request?
-                //int ans = flood(1, e.second, e.first);            // todo: where is this loop in pseudo?
-                int ans = flood(1, edgeEnd, edgeStart);          // todo: flood() always run with curNode = vehicle?
+            if (visited[0][edgeStart] && !visited[1][edgeEnd]) { // TODO : this is what's missing from pseudocode
+                //int ans = flood(1, e.second, e.first);
+                int ans = flood(1, edgeEnd, edgeStart);
                 if (ans != -1) {  //We made it to the endIndex!
                     if (--k == 0) break; // k is subtracted 1 each time a match is made
                     int start = reverse(1, ans); // start = matchedAgent, 1 = request, ans = req.no
@@ -203,8 +203,6 @@ public class IndexBasedSCRAM {
                 }
             }
         }
-
-        // FIXME :
 
         // We must use edges[longestEdgeWeight] to push k flow with minimal max edge.
         return edges.get(answer).getWeight();

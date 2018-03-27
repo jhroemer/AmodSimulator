@@ -18,6 +18,7 @@ public class AmodSimulator {
     static boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
+    private List<Vehicle> vehicles;     // for multiple request extension, in which all vehicles are considered in each tick
     private List<Request> requests;
     private Map<Integer, List<Vehicle>> vacancyMap = new HashMap<>();
     private SpriteManager sman;
