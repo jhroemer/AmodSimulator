@@ -149,7 +149,7 @@ public class AmodSimulator {
         while (requestIterator.hasNext()) {
             Request r = requestIterator.next();
             r.incrementWaitCounter();
-            if (r.getWaitCounter() >= 6) {
+            if (r.getTicksWaitingToBeAssigned() >= 6) {
                 requestIterator.remove();
                 unservedRequests.add(r);
             }

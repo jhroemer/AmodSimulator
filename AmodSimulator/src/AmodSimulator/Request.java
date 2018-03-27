@@ -27,7 +27,7 @@ public class Request implements SCRAM.Node {
     // for SCRAM
     private boolean visited;
     private Node previous;
-    private int waitCounter;
+    private int ticksWaitingToBeAssigned;
 
     /**
      *
@@ -234,15 +234,15 @@ public class Request implements SCRAM.Node {
      * Used for canceling requests
      */
     public void incrementWaitCounter() {
-        waitCounter++;
+        ticksWaitingToBeAssigned++;
     }
 
     /**
      *
      * @return
      */
-    public int getWaitCounter() {
-        assert waitCounter <= 6;
-        return waitCounter;
+    public int getTicksWaitingToBeAssigned() {
+        assert ticksWaitingToBeAssigned <= 6;
+        return ticksWaitingToBeAssigned;
     }
 }
