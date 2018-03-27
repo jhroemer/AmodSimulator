@@ -18,7 +18,6 @@ public class AmodSimulator {
     private ExtensionType extensionType;
     private AssignmentType assignmentType;
     private boolean TEST = false;
-    private int numVehicles;
     static boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
@@ -33,8 +32,6 @@ public class AmodSimulator {
     private int ticksDone;
     private int idleVehiclesInTick;
 
-    private int extension = 0;
-
     /**
      * Normal constructor used to initialize a simulator for running experiments
      *  @param graph
@@ -47,7 +44,6 @@ public class AmodSimulator {
         this.extensionType = extensionType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
-        this.numVehicles = numVehicles;
         this.lambda = lambda;
         requests = new ArrayList<>();
 
@@ -79,7 +75,6 @@ public class AmodSimulator {
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
-        numVehicles = vehicles.size();
         requests = new ArrayList<>();
         predefinedRequestsMap = requestMap;
 
