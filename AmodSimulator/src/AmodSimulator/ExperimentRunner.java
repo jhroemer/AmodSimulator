@@ -145,7 +145,7 @@ public class ExperimentRunner {
             for (Integer num : totalWaitMap.keySet()) {
                 double avg = totalWaitMap.get(num) / trials;
                 totalWaitMap.put(num, avg);
-                waitingTimes.append("(").append(num).append(",").append(avg).append(")");
+                waitingTimes.append("(").append(num*5).append(",").append(avg).append(")");
             }
             props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
         }

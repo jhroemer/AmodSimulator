@@ -8,9 +8,8 @@ public class AvgWaitParser {
     public static void main(String[] args) {
         Properties props = Utility.loadProps("data/experimentResults/chapter2.properties");
 
-        Map<Integer, Integer> map = new TreeMap<>();
-        for (int i = 0; i < 51; i += 2) map.put(i, 0);
-        System.out.println(map);
+        Map<Double, Integer> map;
+
         /*
         StringBuilder s = new StringBuilder();
 
@@ -31,6 +30,23 @@ public class AvgWaitParser {
         String[] graphTypes = ExperimentRunner.getGraphTypes(props.getProperty("graphDir")); // todo: should getGraphTypes be in Utility?
 
         for (String s : graphTypes) {
+            map = new TreeMap<>();
+            map.put(1.2, 0);
+            map.put(1.4, 0);
+            map.put(1.6, 0);
+            map.put(1.8, 0);
+            map.put(2.0, 0);
+            map.put(2.2, 0);
+            map.put(2.4, 0);
+            map.put(2.6, 0);
+            map.put(2.8, 0);
+            map.put(3.0, 0);
+            map.put(3.2, 0);
+            map.put(3.4, 0);
+            map.put(3.6, 0);
+            map.put(3.8, 0);
+            map.put(4.0, 0);
+
             for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
                 System.out.println("i is: " + i);
                 String k = s + "_" + i + "_avgWait";
@@ -44,17 +60,37 @@ public class AvgWaitParser {
                 System.out.println("j is: " + j);
 
                 // putIntoMap(j, map);
-                putIntoTwoBin(j, map);
+                // putIntoTwoBin(j, map);
+                putIntoHalfBin(d, map);
             }
             System.out.println(map);
 
             StringBuilder coordinates = new StringBuilder();
-            for (Integer i : map.keySet()) {
+            for (Double i : map.keySet()) {
                 coordinates.append("(" + i + "," + map.get(i) + ")");
             }
             System.out.println("Coordinates for : " + s);
             System.out.println(coordinates);
         }
+    }
+
+    // bin size = 0.2
+    private static void putIntoHalfBin(double j, Map<Double, Integer> map) {
+        if (j < 1.4) map.put(1.2, 1+map.get(1.2));
+        else if (j < 1.6) map.put(1.4, 1+map.get(1.4));
+        else if (j < 1.8) map.put(1.6, 1+map.get(1.6));
+        else if (j < 2.0) map.put(1.8, 1+map.get(1.8));
+        else if (j < 2.2) map.put(2.0, 1+map.get(2.0));
+        else if (j < 2.4) map.put(2.2, 1+map.get(2.2));
+        else if (j < 2.6) map.put(2.4, 1+map.get(2.4));
+        else if (j < 2.8) map.put(2.6, 1+map.get(2.6));
+        else if (j < 3.0) map.put(2.8, 1+map.get(2.8));
+        else if (j < 3.2) map.put(3.0, 1+map.get(3.0));
+        else if (j < 3.4) map.put(3.2, 1+map.get(3.2));
+        else if (j < 3.6) map.put(3.4, 1+map.get(3.4));
+        else if (j < 3.8) map.put(3.6, 1+map.get(3.6));
+        else if (j < 4.0) map.put(3.8, 1+map.get(3.8));
+        else if (j < 4.2) map.put(4.0, 1+map.get(4.0));
     }
 
     // bin size = 5

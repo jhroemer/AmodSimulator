@@ -49,14 +49,17 @@ public class RandomGraphGenerator {
         */
 
         /*
-        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 100);
+        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
         Graph grid = createGridGraph(GRID, 10, "grid", 9);
 //        grid.display(false);
         Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 7);
         System.out.println("banana: " + ban.getNodeCount());
         System.out.println("grid: " + grid.getNodeCount());
-        System.out.println("lob: " + lob.getNodeCount());
-//        ban.display();
+        System.out.println("lob nodecount: " + lob.getNodeCount());
+        System.out.println("lob diameter " + Toolkit.diameter(lob));
+        System.out.println("lob density: " + Toolkit.density(lob));
+        System.out.println("lob distance: " + lob.getEdgeSet().size());
+        lob.display();
 
         saveGraphAsPicture(lob);
         saveGraphAsPicture(grid);
@@ -150,7 +153,7 @@ public class RandomGraphGenerator {
 
     private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new LobsterGenerator(3, 3);
+        BaseGenerator gen = new LobsterGenerator(2, 3);
         gen.setRandomSeed(seedInt);
 
         gen.addSink(graph);
