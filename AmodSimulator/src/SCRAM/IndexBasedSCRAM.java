@@ -42,14 +42,14 @@ public class IndexBasedSCRAM {
     private List<Edge> edges;
 
     public IndexBasedSCRAM(List<Node> vehicles, List<Node> requests) {
-        // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
-//        if (vehicles.size() != requests.size()) try {
-//            throw new Exception("IndexBasedSCRAM called on unequal amount of Vehicles and Requests");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        if (vehicles.isEmpty() && requests.isEmpty()) System.out.println("BOTH LISTS WERE EMPTY!!!");
+        // corner-case in which there are neither vehicles nor requests - which would lead to a very rare index-out-of-bounds
+        if (vehicles.isEmpty() && requests.isEmpty()) {
+            System.out.println("BOTH LISTS WERE EMPTY!!!");
+            assignments = new ArrayList<Edge>();
+            return;
+        }
 
+        // 1. if |vehicles| != |requests| then create dummy nodes in the smaller list s.t. |vehicles| = |requests|
         if (vehicles.size() != requests.size()) {
             int difference = Math.abs(vehicles.size() - requests.size());
             if (vehicles.size() > requests.size()) addDummyNodes(requests, difference);

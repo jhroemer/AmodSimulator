@@ -9,16 +9,20 @@ import org.graphstream.ui.spriteManager.SpriteManager;
 
 import java.util.*;
 
+import static AmodSimulator.AssignmentType.IndexSCRAM;
+import static AmodSimulator.ExtensionType.*;
+
 public class AmodSimulator {
     static boolean PRINT = false;
     private static String styleSheetPath = "styles/style.css";
+    private ExtensionType extensionType;
     private AssignmentType assignmentType;
     private boolean TEST = false;
     private int numVehicles;
     static boolean IS_VISUAL = true;
     private List<Vehicle> activeVehicles;
     private List<Vehicle> idleVehicles;
-    private List<Vehicle> vehicles;     // for multiple request extension, in which all vehicles are considered in each tick
+    private List<Vehicle> allVehicles;     // for multiple request extension, in which all allVehicles are considered in each tick
     private List<Request> requests;
     private Map<Integer, List<Vehicle>> vacancyMap = new HashMap<>();
     private SpriteManager sman;
@@ -29,6 +33,8 @@ public class AmodSimulator {
     private int ticksDone;
     private int idleVehiclesInTick;
 
+    private int extension = 0;
+
     /**
      * Normal constructor used to initialize a simulator for running experiments
      *  @param graph
@@ -36,30 +42,35 @@ public class AmodSimulator {
      * @param numVehicles
      * @param lambda
      */
-    public AmodSimulator(Graph graph, boolean visual, int numVehicles, AssignmentType assignmentType, double lambda) {
-        //printing the distances in the graph for debugging
-        // Utility.printDistances(graph);
-        this.assignmentType = assignmentType;
+    public AmodSimulator(Graph graph, boolean visual, int numVehicles, ExtensionType extensionType, double lambda) {
+        this.assignmentType = IndexSCRAM;
+        this.extensionType = extensionType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         this.numVehicles = numVehicles;
         this.lambda = lambda;
-
-        activeVehicles = new ArrayList<>();
-        idleVehicles = Utility.generateVehicles(graph, numVehicles); // todo: do I to position vehicles less randomly?
         requests = new ArrayList<>();
+
+        if (extensionType == BASIC || extensionType == EXTENSION2) {
+            activeVehicles = new ArrayList<Vehicle>();
+            idleVehicles = Utility.generateVehicles(graph, numVehicles);
+        }
+        else if (extensionType == EXTENSION1 || extensionType == EXTENSION1PLUS2) {
+            allVehicles = Utility.generateVehicles(graph, numVehicles);
+        }
 
         if (IS_VISUAL) {
             setupVisuals(graph, idleVehicles);
         }
     }
 
+    @Deprecated // should at least be updated to also use allVehicles depending on extensiontype
     /**
-     * Constructor used for testing purposes with a predefined list of vehicles and requests
+     * Constructor used for testing purposes with a predefined list of allVehicles and requests
      *
      * @param graph the graph to run a simulation on
      * @param visual a boolean that decides if visuals are shown or not
-     * @param vehicles a predefined list of vehicles
+     * @param vehicles a predefined list of allVehicles
      * @param requestMap a mapping of timesteps -> list of requests for that timestep
      */
     public AmodSimulator(Graph graph, boolean visual, List<Vehicle> vehicles, Map<Integer, List<Request>> requestMap, AssignmentType assignmentType) {
@@ -68,8 +79,6 @@ public class AmodSimulator {
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
-        activeVehicles = new ArrayList<>();
-        idleVehicles = vehicles;
         numVehicles = vehicles.size();
         requests = new ArrayList<>();
         predefinedRequestsMap = requestMap;
@@ -98,35 +107,27 @@ public class AmodSimulator {
 
     /**
      * What happens within a timestep:
-     * 1. Check which vehicles have been set to idle
-     * 2. Assign idle vehicles to requests
+     * 1. Check which allVehicles have been set to idle
+     * 2. Assign idle allVehicles to requests
      * 3.
      *
      * @param graph
      */
     public void tick(Graph graph, int timeStep) {
-        if (PRINT) System.out.println("\n\n//////// TICK " + timeStep + "/////////");
-
-        // adding new vacant vehicles to idlevehicles, if vehicle does not have more requests
+        // adding new vacant allVehicles to idlevehicles, if vehicle does not have more requests
         for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
             makeIdle(veh);
-            if (PRINT) System.out.print(veh.getId() + ", ");
         }
         vacancyMap.remove(timeStep);
-        if (PRINT) System.out.println();
 
         // adding requests for current time step:
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
         else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
-//        System.out.println("idlevehicles: " + idleVehicles.size());
-//        System.out.println("requests: " + requests.size());
+        // assigning allVehicles to requests
+        List<Edge> assignments = assign();
 
-        // assigning vehicles to requests //todo no need to call this if either idleVehicles or requests are empty
-        // when multiple-assignments extension is included, in principle it will only be requests that can be empty
-        List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
-
-        // make vehicles serve the requests they are assigned
+        // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
             // object oriented check for dummynode
 //            if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
@@ -140,12 +141,12 @@ public class AmodSimulator {
             veh.serviceRequest(req);
             addToVacancyMap(veh);
             makeActive(veh);
-            assignedRequests.add(req); // todo: when request is assigned it needs to be tracked how many ticks it waited
+            assignedRequests.add(req);
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
         }
 
-        // tracking that a request waited
+        // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
         ListIterator<Request> requestIterator = requests.listIterator();
         while (requestIterator.hasNext()) {
             Request r = requestIterator.next();
@@ -163,13 +164,30 @@ public class AmodSimulator {
         idleVehiclesInTick += idleVehicles.size();
     }
 
+    /**
+     *
+     * @return
+     */
+    private List<Edge> assign() {
+        switch (this.extensionType) {
+            case BASIC:
+                return Utility.assign(assignmentType, idleVehicles, requests);
+            case EXTENSION1:
+                return Utility.assign(assignmentType, allVehicles, requests);   // todo: this does not work yet
+            case EXTENSION2:
+                return Utility.assign(assignmentType, idleVehicles, requests);  // todo: this does not work yet
+            case EXTENSION1PLUS2:
+                return Utility.assign(assignmentType, allVehicles, requests);   // todo: this does not work yet
+        }
+        throw new RuntimeException("AmodSimulator.assign() should not have gotten here");
+    }
 
     /**
      *
      * @param timeStep
      */
     private void drawSprites(int timeStep) {
-        // iterate over all vehicles and draw sprites
+        // iterate over all allVehicles and draw sprites
         for (Vehicle veh : activeVehicles) {
             SpritePosition spritePosition = veh.findAttachment(timeStep);
             Sprite s = sman.getSprite(veh.getId());
@@ -179,7 +197,6 @@ public class AmodSimulator {
             s.setAttribute("ui.class", spritePosition.getStatus());
         }
 
-        // todo : fixing that sprites didn't attach to nodes. do we have to detach, or re-attach?
         for (Vehicle veh : idleVehicles) {
             Sprite s = sman.getSprite(veh.getId());
             s.setPosition(0.0);
@@ -245,9 +262,9 @@ public class AmodSimulator {
     }
 
     /**
-     * Adds a list of vehicles to the idle vehicles in the simulator
+     * Adds a list of allVehicles to the idle allVehicles in the simulator
      *
-     * @param listOfVehicles a list of vehicles that are added to the simulator
+     * @param listOfVehicles a list of allVehicles that are added to the simulator
      */
     public void addVehicles(List<Vehicle> listOfVehicles) {
         idleVehicles.addAll(listOfVehicles);
@@ -348,7 +365,7 @@ public class AmodSimulator {
     }
 
     /**
-     * Gets the average percentage-wise unoccupied distance travelled by vehicles.
+     * Gets the average percentage-wise unoccupied distance travelled by allVehicles.
      *
      * @return
      */
