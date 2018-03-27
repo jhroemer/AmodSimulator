@@ -135,6 +135,14 @@ public class RandomGraphGenerator {
         return null;
     }
 
+    /**
+     *
+     * @param type
+     * @param seedInt
+     * @param name
+     * @param size
+     * @return
+     */
     private static Graph createGridGraph(GraphType type, int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new GridGenerator();
@@ -151,6 +159,14 @@ public class RandomGraphGenerator {
         return graph;
     }
 
+    /**
+     *
+     * @param type
+     * @param seedInt
+     * @param name
+     * @param size
+     * @return
+     */
     private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new LobsterGenerator(2, 3);
@@ -169,6 +185,15 @@ public class RandomGraphGenerator {
     }
 
     // TODO : barabasi goes out imo
+
+    /**
+     *
+     * @param type
+     * @param seedInt
+     * @param name
+     * @param size
+     * @return
+     */
     private static Graph createBarabasiGraph(GraphType type, int seedInt, String name, int size) {
         int upperBound = 25;
         int lowerBound = 10;
