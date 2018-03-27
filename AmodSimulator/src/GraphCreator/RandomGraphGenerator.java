@@ -11,7 +11,6 @@ import org.graphstream.stream.file.FileSinkImages;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 
 import static GraphCreator.GraphType.*;
@@ -22,8 +21,7 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-        Properties props = new Properties();
-        generateExperimentGraphs(props);
+         generateExperimentGraphs();
 
 
         /*
@@ -39,7 +37,6 @@ public class RandomGraphGenerator {
         System.out.println("lob density: " + Toolkit.density(lob));
         System.out.println("lob distance: " + lob.getEdgeSet().size());
         System.out.println("ban: " + ban.getNodeCount());
-        // todo : does not work correctly, it needs to include the 6-weights which it doesn't - diameter should be 16 (w. root weights = 6)
         System.out.println("ban diameter " + Toolkit.diameter(ban, "layout.weight", false));
         System.out.println("ban density: " + Toolkit.density(ban));
         int total = 0;
@@ -52,24 +49,27 @@ public class RandomGraphGenerator {
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
         Graph grid = createGridGraph(GRID, 10, "grid", 9);
 //        grid.display(false);
-        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 7);
+        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 16);
         System.out.println("banana: " + ban.getNodeCount());
+        System.out.println("ban diameter " + Toolkit.diameter(ban, "layout.weight", false));
+        System.out.println("ban density: " + Toolkit.density(ban));
         System.out.println("grid: " + grid.getNodeCount());
         System.out.println("lob nodecount: " + lob.getNodeCount());
         System.out.println("lob diameter " + Toolkit.diameter(lob));
         System.out.println("lob density: " + Toolkit.density(lob));
         System.out.println("lob distance: " + lob.getEdgeSet().size());
-        lob.display();
-
+        ban.display();
+        /*
         saveGraphAsPicture(lob);
         saveGraphAsPicture(grid);
         saveGraphAsPicture(ban);
         */
     }
 
-    private static void generateExperimentGraphs(Properties props) {
-        // TODO get params from props
-
+    /**
+     *
+     */
+    private static void generateExperimentGraphs() {
         List<GraphType> types = new ArrayList<>();
         types.add(GRID);
         types.add(LOBSTER);
