@@ -1,6 +1,5 @@
 package AmodSimulator;
 
-import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSource;
@@ -78,10 +77,6 @@ public class ExperimentRunner {
                 System.out.println("starting trial: " + i);
                 Graph graph = getCorrectGraph(i, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
 
-                int totalLength = 0;
-                for (Edge e : graph.getEdgeSet()) totalLength += (int) e.getAttribute("layout.weight");
-                System.out.println("Graph: " + graph.getId() + " had a total edge length of: " + totalLength);
-
 
                 ////////// running the simulation //////////
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, assignmentMethod, lambda);
@@ -94,7 +89,8 @@ public class ExperimentRunner {
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
-                // results for the i'th trial
+
+                ////////// collecting results for the i'th trial //////////
                 int unoccupied = simulator.getUnoccupiedKmDriven();
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
                 double unoccupiedPercentage = simulator.getAvgUnoccupiedPercentage();
@@ -109,19 +105,14 @@ public class ExperimentRunner {
                     }
                     else waitMap.put(r.getWaitTime(), 1);
                 }
+                ////////// done collecting results //////////
 
-                // add to total results
-                totalUnoccupied += simulator.getUnoccupiedKmDriven();
-                totalAvgUnoccupied += avgUnoccupied;
-                totalUnoccupiedPercentage += unoccupiedPercentage;
-                totalWait += simulator.getWaitingTime();
-                totalAvgWait += avgWait;
-                totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
 
+                ////////// set results and add to total //////////
                 props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
                 props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
                 props.setProperty(graphType + "_" + i + "_unoccupiedPercentage", String.valueOf(unoccupiedPercentage));
-                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime())); // todo: my wait-times are generally higher than in min-cost matching article, since few will wait less than 5 min because all travels take 5 min to finish
+                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
                 props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
                 props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getUnservedRequests().size()));
@@ -129,6 +120,14 @@ public class ExperimentRunner {
                     double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
                     totalWaitMap.put(num, newNumber);
                 }
+                // add to total
+                totalUnoccupied += simulator.getUnoccupiedKmDriven();
+                totalAvgUnoccupied += avgUnoccupied;
+                totalUnoccupiedPercentage += unoccupiedPercentage;
+                totalWait += simulator.getWaitingTime();
+                totalAvgWait += avgWait;
+                totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
+                ////////// done //////////
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
