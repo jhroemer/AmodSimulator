@@ -14,23 +14,26 @@ import static AmodSimulator.ExtensionType.*;
 
 public class AmodSimulator {
     static boolean PRINT = false;
-    private static String styleSheetPath = "styles/style.css";
     private ExtensionType extensionType;
     private AssignmentType assignmentType;
     private boolean TEST = false;
-    static boolean IS_VISUAL = true;
-    private List<Vehicle> activeVehicles;
-    private List<Vehicle> idleVehicles;
-    private List<Vehicle> allVehicles;     // for multiple request extension, in which all allVehicles are considered in each tick
     private List<Request> requests;
     private Map<Integer, List<Vehicle>> vacancyMap = new HashMap<>();
-    private SpriteManager sman;
     private List<Request> assignedRequests = new ArrayList<>();
     private List<Request> unservedRequests = new ArrayList<>();
     private Map<Integer, List<Request>> predefinedRequestsMap;
     private double lambda = 0.1;
     private int ticksDone;
-    private int idleVehiclesInTick;
+    private int idleVehiclesCounter; // keeps track of the amount of idlevehicles in simulation
+    // visual stuff
+    static boolean IS_VISUAL = true;
+    private SpriteManager sman;
+    private static String styleSheetPath = "styles/style.css";
+    // for basic without extensions
+    private List<Vehicle> activeVehicles;
+    private List<Vehicle> idleVehicles;
+    // for extension 1
+    private List<Vehicle> allVehicles;
 
     /**
      * Normal constructor used to initialize a simulator for running experiments
@@ -156,7 +159,7 @@ public class AmodSimulator {
         if (IS_VISUAL) drawSprites(timeStep);
 
         ticksDone++;
-        idleVehiclesInTick += idleVehicles.size();
+        idleVehiclesCounter += idleVehicles.size();
     }
 
     /**
@@ -347,8 +350,12 @@ public class AmodSimulator {
         return assignedRequests;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getAverageIdleVehicles() {
-        return (double) idleVehiclesInTick / (double) ticksDone;
+        return (double) idleVehiclesCounter / (double) ticksDone;
     }
 
     /**
