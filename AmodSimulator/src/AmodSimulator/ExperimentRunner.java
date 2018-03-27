@@ -56,7 +56,6 @@ public class ExperimentRunner {
         double lambda = Double.parseDouble(props.getProperty("requestsPerDay")) / 288.0; // there are 288 5min intervals per day
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
-        AssignmentType assignmentMethod = AssignmentType.valueOf(props.getProperty("assignment")); // todo: goes out again
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
 
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
