@@ -7,70 +7,64 @@ import java.util.TreeMap;
 public class AvgWaitParser {
     public static void main(String[] args) {
         Properties props = Utility.loadProps("data/experimentResults/chapter2.properties");
+        double interval = 0.1;
 
         Map<Double, Integer> map;
-
-        /*
-        StringBuilder s = new StringBuilder();
-
-        s.append("\begin{tikzpicture}");
-        s.append("\uFEFF\\begin{axis}[\n" +
-                "    ybar,\n" +
-                "    enlargelimits=0.15,\n" +
-                "    legend style={at={(0.5,-0.15)},\n" +
-                "      anchor=north,legend columns=-1},\n" +
-                "    ylabel={Avg. unoccpupied km's driven},\n" +
-                "    symbolic x coords={1,2,3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},\n" +
-                "    xtick=data,\n" +
-                "    nodes near coords,\n" +
-                "    nodes near coords align={vertical},\n" +
-                "    ]");
-        */
-
         String[] graphTypes = ExperimentRunner.getGraphTypes(props.getProperty("graphDir")); // todo: should getGraphTypes be in Utility?
 
         for (String s : graphTypes) {
             map = new TreeMap<>();
-            map.put(1.2, 0);
-            map.put(1.4, 0);
-            map.put(1.6, 0);
-            map.put(1.8, 0);
-            map.put(2.0, 0);
-            map.put(2.2, 0);
-            map.put(2.4, 0);
-            map.put(2.6, 0);
-            map.put(2.8, 0);
-            map.put(3.0, 0);
-            map.put(3.2, 0);
-            map.put(3.4, 0);
-            map.put(3.6, 0);
-            map.put(3.8, 0);
-            map.put(4.0, 0);
-
-            for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
-                System.out.println("i is: " + i);
-                String k = s + "_" + i + "_avgWait";
-                System.out.println(k);
-                System.out.println(props.getProperty(k));
-                System.out.println("\n");
-
-                double d = Double.parseDouble(props.getProperty(k));
-                int j = (int) Math.round(d);
-
-                System.out.println("j is: " + j);
-
-                // putIntoMap(j, map);
-                // putIntoTwoBin(j, map);
-                putIntoHalfBin(d, map);
+            for (int n = 0; n <= 200; n++) { // adding 0 for each interval
+                double i = interval * n;
+                int scale = (int) Math.pow(100, 1);
+                double currentBin = (double) Math.round(i * scale) / scale;
+                map.put(currentBin, 0);
             }
-            System.out.println(map);
+
+            // go through trials, add the avgWait value to the correct bin in map
+            for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
+//                System.out.println("i is: " + i);
+                String k = s + "_" + i + "_avgWait";
+
+//                System.out.println(k);
+//                System.out.println(props.getProperty(k));
+//                System.out.println("\n");
+
+                double avgWait = Double.parseDouble(props.getProperty(k));
+                double avgWaitMinutes = avgWait * 5;
+                System.out.println("AVG WAIT MINUTES, " + s + ": " + avgWaitMinutes);
+
+                putIntoBin(avgWaitMinutes, map, interval);
+            }
 
             StringBuilder coordinates = new StringBuilder();
+            boolean notZero = false;
             for (Double i : map.keySet()) {
-                coordinates.append("(" + i + "," + map.get(i) + ")");
+                if (map.get(i) != 0) notZero = true;
+                if (notZero) coordinates.append("(" + i + "," + map.get(i) + ")");
             }
             System.out.println("Coordinates for : " + s);
             System.out.println(coordinates);
+        }
+    }
+
+    /**
+     *
+     * @param avgWait
+     * @param map
+     */
+    private static void putIntoBin(double avgWait, Map<Double, Integer> map, double interval) {
+        double latestBin = 0.0;
+
+        for (int n = 0; n <= 200; n++) { // finding out which interval value corresponds to
+            double i = interval * n; // floating point
+            int scale = (int) Math.pow(100, 1);
+            double currentBin = (double) Math.round(i * scale) / scale;
+            if (avgWait < currentBin) {
+                map.put(latestBin, 1+map.get(latestBin));
+                break;
+            }
+            latestBin = currentBin;
         }
     }
 

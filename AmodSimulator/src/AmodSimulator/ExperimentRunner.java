@@ -70,6 +70,7 @@ public class ExperimentRunner {
             double totalAvgUnoccupied = 0.0;
             double totalAvgWait = 0.0;
             double totalAvgIdleVehicles = 0.0;
+            double totalWaitVariance = 0.0;
             Map<Integer, Double> totalWaitMap = new TreeMap<>();
 
             long start = System.currentTimeMillis();
@@ -96,6 +97,7 @@ public class ExperimentRunner {
                 double unoccupiedPercentage = simulator.getAvgUnoccupiedPercentage();
                 int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size(); // fixme: unassigned aren't counted, although they might still have waited
+                double waitVariance = simulator.getWaitVariance(avgWait) * 5;
                 Map<Integer, Integer> waitMap = new HashMap<>();
                 for (int j = 0; j < 21; j++) waitMap.put(j, 0);
                 for (Request r : simulator.getAssignedRequests()) {
@@ -105,7 +107,7 @@ public class ExperimentRunner {
                     }
                     else waitMap.put(r.getWaitTime(), 1);
                 }
-                ////////// done collecting results //////////
+                ////////// done collecting results for i'th trial //////////
 
 
                 ////////// set results and add to total //////////
@@ -116,6 +118,8 @@ public class ExperimentRunner {
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
                 props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
                 props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getUnservedRequests().size()));
+                props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
+                props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
                 for (Integer num : waitMap.keySet()) {
                     double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
                     totalWaitMap.put(num, newNumber);
@@ -127,6 +131,7 @@ public class ExperimentRunner {
                 totalWait += simulator.getWaitingTime();
                 totalAvgWait += avgWait;
                 totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
+                totalWaitVariance += waitVariance;
                 ////////// done //////////
             }
 
@@ -140,6 +145,7 @@ public class ExperimentRunner {
             props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
             props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / (double) trials));
             props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(totalAvgIdleVehicles / (double) trials));
+            props.setProperty("TOTAL_" + graphType + "_avgWaitVariance", String.valueOf(totalWaitVariance / (double) trials));
             StringBuilder waitingTimes = new StringBuilder();
             for (Integer num : totalWaitMap.keySet()) {
                 double avg = totalWaitMap.get(num) / trials;

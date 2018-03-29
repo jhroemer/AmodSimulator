@@ -397,4 +397,20 @@ public class AmodSimulator {
     public List<Request> getUnservedRequests() {
         return unservedRequests;
     }
+
+    /**
+     * Calculates the variance in waiting time
+     *
+     * @param avgWait
+     * @return
+     */
+    public double getWaitVariance(double avgWait) {
+        double waitVariance = 0.0;
+        for (Request r : assignedRequests) {
+            double difference = ((double) r.getWaitTime()) - avgWait;
+            waitVariance += Math.sqrt(Math.abs(difference));
+        }
+        waitVariance = waitVariance / ((double) assignedRequests.size());
+        return waitVariance;
+    }
 }
