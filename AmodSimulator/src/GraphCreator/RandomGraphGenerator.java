@@ -1,6 +1,7 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
+import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -21,8 +22,19 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-         generateExperimentGraphs();
+        generateExperimentGraphs();
 
+        Graph graph = new SingleGraph("t");
+        BaseGenerator gen = new IncompleteGridGenerator(false, 0.5f, 8, 2);
+        gen.setRandomSeed(5);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < 16; i++) gen.nextEvents();
+        gen.end();
+        System.out.println("Grid: " + graph.getNodeCount());
+        System.out.println("grid density: " + Toolkit.density(graph));
+        graph.display(false);
 
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
@@ -236,9 +248,9 @@ public class RandomGraphGenerator {
         for (int i = 0; i < size; i++) gen.nextEvents();
         gen.end();
 
-        for (Edge e : graph.getEdgeSet()) {
-            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
-        }
+//        for (Edge e : graph.getEdgeSet()) {
+//            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
+//        }
 
         return graph;
     }
