@@ -375,17 +375,17 @@ public class AmodSimulator {
         int number = 0;
         double result = 0.0;
 
+        // TODO this needs to be updated st. it works with extension 1 and variable allVehicles
+
         for (Vehicle v : idleVehicles) {
             number++;
             result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
-
         for (Vehicle v : activeVehicles) {
             number++;
             result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
         }
 
-        // TODO : I have NaN problems sometimes - probably due to the 2x idlevehicles thing
         boolean isNan = Double.isNaN(result);
         assert !isNan;
         boolean isNan3 = Double.isNaN(result / number);
@@ -408,9 +408,14 @@ public class AmodSimulator {
         double waitVariance = 0.0;
         for (Request r : assignedRequests) {
             double difference = ((double) r.getWaitTime()) - avgWait;
-            waitVariance += Math.sqrt(Math.abs(difference));
+            System.out.println("Wait time: " + r.getWaitTime() + " is different from mean: " + avgWait + " by:" + difference);
+            waitVariance += difference * difference;
         }
+
+        System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
+
         waitVariance = waitVariance / ((double) assignedRequests.size());
+        System.out.println("return wait variance of: " + waitVariance + " ticks");
         return waitVariance;
     }
 }

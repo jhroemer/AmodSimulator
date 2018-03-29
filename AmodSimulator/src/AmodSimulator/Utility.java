@@ -197,4 +197,14 @@ public class Utility {
             e.printStackTrace();
         }
     }
+
+    public static double calculateStandardDeviation(List<Double> unoccupiedPercentageList, double avg) {
+        double variance = 0.0;
+        for (Double d : unoccupiedPercentageList) {
+            double difference = d - avg;
+            variance += difference * difference;
+        }
+        variance = variance / (double) unoccupiedPercentageList.size();
+        return Math.sqrt(variance);
+    }
 }

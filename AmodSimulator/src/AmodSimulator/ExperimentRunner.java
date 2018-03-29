@@ -41,8 +41,6 @@ public class ExperimentRunner {
             System.out.println("running experiment: " + props.getProperty("name"));
             runExperiment(props);
         }
-
-        // TODO : fetch/parse results into latex table
     }
 
     /**
@@ -71,6 +69,7 @@ public class ExperimentRunner {
             double totalAvgWait = 0.0;
             double totalAvgIdleVehicles = 0.0;
             double totalWaitVariance = 0.0;
+            List<Double> unoccupiedPercentageList = new ArrayList<>();
             Map<Integer, Double> totalWaitMap = new TreeMap<>();
 
             long start = System.currentTimeMillis();
@@ -95,9 +94,10 @@ public class ExperimentRunner {
                 int unoccupied = simulator.getUnoccupiedKmDriven();
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
                 double unoccupiedPercentage = simulator.getAvgUnoccupiedPercentage();
+                unoccupiedPercentageList.add(unoccupiedPercentage);
                 int wait = simulator.getWaitingTime();
                 double avgWait = (double) wait / (double) simulator.getAssignedRequests().size(); // fixme: unassigned aren't counted, although they might still have waited
-                double waitVariance = simulator.getWaitVariance(avgWait) * 5;
+                double waitVariance = simulator.getWaitVariance(avgWait) * 5; // fixme: should i multiply by 5 elsewhere?
                 Map<Integer, Integer> waitMap = new HashMap<>();
                 for (int j = 0; j < 21; j++) waitMap.put(j, 0);
                 for (Request r : simulator.getAssignedRequests()) {
@@ -153,6 +153,7 @@ public class ExperimentRunner {
                 waitingTimes.append("(").append(num*5).append(",").append(avg).append(")");
             }
             props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
+            props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(Utility.calculateStandardDeviation(unoccupiedPercentageList, totalUnoccupiedPercentage / (double) trials)));
         }
 
         Utility.saveResultsAsFile(props);
