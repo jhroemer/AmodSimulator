@@ -1,7 +1,6 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
-import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -22,39 +21,27 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-//        generateExperimentGraphs();
-        Random rand = new Random();
-        Graph graph = new SingleGraph("t");
-        BaseGenerator gen = new IncompleteGridGenerator(false, 0.7f, 4, 3);
-        gen.setRandomSeed(rand.nextInt(200));
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int i = 0; i < 16; i++) gen.nextEvents();
-        gen.end();
-        System.out.println("Grid: " + graph.getNodeCount());
-        System.out.println("grid density: " + Toolkit.density(graph));
-        System.out.println("grid diameter " + Toolkit.diameter(graph));
-//        graph.display(false);
-
-
-        // TODO : this should check for connected components
-        Random rand2 = new Random();
-        rand2.setSeed(56);
-        Graph graph2 = new SingleGraph("g");
-        BaseGenerator gen2 = new GridGenerator();
-        gen2.setRandomSeed(10);
-        gen2.addSink(graph2);
-        gen2.begin();
-        for (int i = 0; i < 16; i++) gen2.nextEvents();
-        gen2.end();
-
-        for (int i = 0; i < 40; i++) {
-            Node node = graph2.removeNode(rand2.nextInt(graph2.getNodeCount()));
-            for (Edge e : graph2.getEdgeSet()) if (e.getSourceNode() == node || e.getTargetNode() == node) graph2.removeEdge(e);
-        }
-        graph2.display(false);
-
+        generateExperimentGraphs();
+//        Random rand = new Random();
+//        Graph graph = new SingleGraph("t");
+//        BaseGenerator gen = new IncompleteGridGenerator(false, 0.7f, 4, 3);
+//        gen.setRandomSeed(rand.nextInt(200));
+//
+//        gen.addSink(graph);
+//        gen.begin();
+//        for (int i = 0; i < 16; i++) gen.nextEvents();
+//        gen.end();
+//        System.out.println("Grid: " + graph.getNodeCount());
+//        System.out.println("grid density: " + Toolkit.density(graph));
+//        System.out.println("grid diameter " + Toolkit.diameter(graph));
+////        graph.display(false);
+//
+//
+//        Graph graphy = createManualIncompleteGridGraph(102, "test", 16);
+//        graphy.display(false);
+//        System.out.println("graphy: " + graphy.getNodeCount());
+//        System.out.println("graphy density: " + Toolkit.density(graphy));
+//        System.out.println("graphy diameter " + Toolkit.diameter(graphy));
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
         Graph grid = createGridGraph(GRID, 10, "grid", 15);
@@ -145,17 +132,17 @@ public class RandomGraphGenerator {
 
         switch (type) {
             case GRID:
-                return createGridGraph(type, seedInt, name, 15);
+                return createGridGraph(seedInt, name, 15);
             case INCOMPLETEGRID:
-                return createIncompleteGridGraph(type, seedInt, name, 16);
+                return createManualIncompleteGridGraph(seedInt, name, 16);
             case LOBSTER:   // TODO : lobster and barabasi are quite alike, lobster seems to perform worse than barabasi
-                return createLobsterGraph(type, seedInt, name, 255);
+                return createLobsterGraph(seedInt, name, 255);
             case BARABASI:
                 return createBarabasiGraph(type, seedInt, name, 256);
             case DOROGOVTSEV:
                 return createDorogovtsevGraph(type, seedInt, name, 256);
             case BANANATREE:
-                return createBananatreeGraph(type, seedInt, name, 16);
+                return createBananatreeGraph(seedInt, name, 16);
             case COUNTRYSIDE:
                 return createCountrysideGraph(type, seedInt, name);
         }
@@ -171,13 +158,12 @@ public class RandomGraphGenerator {
 
     /**
      *
-     * @param type
      * @param seedInt
      * @param name
      * @param size
      * @return
      */
-    private static Graph createGridGraph(GraphType type, int seedInt, String name, int size) {
+    private static Graph createGridGraph(int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new GridGenerator();
         gen.setRandomSeed(seedInt);
@@ -193,15 +179,53 @@ public class RandomGraphGenerator {
     }
 
     /**
-     * Creates an incomplete grid graph
      *
-     * @param type
      * @param seedInt
      * @param name
      * @param size
      * @return
      */
-    private static Graph createIncompleteGridGraph(GraphType type, int seedInt, String name, int size) {
+    private static Graph createManualIncompleteGridGraph(int seedInt, String name, int size) {
+        boolean hasOnlyOneCC = false;
+
+        Random rand = new Random();
+        rand.setSeed(56);
+        Graph graph = null;
+
+        while (!hasOnlyOneCC) {
+            graph = new SingleGraph(name);
+            BaseGenerator gen = new GridGenerator();
+            gen.setRandomSeed(10);
+            gen.addSink(graph);
+            gen.begin();
+            for (int i = 0; i < size; i++) gen.nextEvents();
+            gen.end();
+
+            for (int i = 0; i < 40; i++) {
+                Node node = graph.removeNode(rand.nextInt(graph.getNodeCount()));
+                for (Edge e : graph.getEdgeSet())
+                    if (e.getSourceNode() == node || e.getTargetNode() == node) graph.removeEdge(e);
+            }
+            ConnectedComponents cc = new ConnectedComponents();
+            cc.init(graph);
+            if (cc.getConnectedComponentsCount() == 1) hasOnlyOneCC = true;
+        }
+
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", 1);
+
+        assert graph != null;
+        return graph;
+    }
+
+    /**
+     * Creates an incomplete grid graph
+     *
+     * @param seedInt
+     * @param name
+     * @param size
+     * @return
+     */
+    private static Graph createIncompleteGridGraph(int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new IncompleteGridGenerator(false, 0.5f, 5, 3);
         gen.setRandomSeed(seedInt);
@@ -218,13 +242,12 @@ public class RandomGraphGenerator {
 
     /**
      *
-     * @param type
      * @param seedInt
      * @param name
      * @param size
      * @return
      */
-    private static Graph createLobsterGraph(GraphType type, int seedInt, String name, int size) {
+    private static Graph createLobsterGraph(int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new LobsterGenerator(2, 3);
         gen.setRandomSeed(seedInt);
@@ -240,8 +263,6 @@ public class RandomGraphGenerator {
 
         return graph;
     }
-
-    // TODO : barabasi goes out imo
 
     /**
      *
@@ -302,13 +323,12 @@ public class RandomGraphGenerator {
 
     /**
      *
-     * @param type
      * @param seedInt
      * @param name
      * @param size
      * @return
      */
-    private static Graph createBananatreeGraph(GraphType type, int seedInt, String name, int size) {
+    private static Graph createBananatreeGraph(int seedInt, String name, int size) {
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new BananaTreeGenerator(16);
         gen.setRandomSeed(seedInt);
