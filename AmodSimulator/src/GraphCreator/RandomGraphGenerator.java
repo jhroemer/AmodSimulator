@@ -1,7 +1,6 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
-import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -23,18 +22,19 @@ public class RandomGraphGenerator {
     public static void main(String[] args) {
 
         generateExperimentGraphs();
-
-        Graph graph = new SingleGraph("t");
-        BaseGenerator gen = new IncompleteGridGenerator(false, 0.5f, 8, 2);
-        gen.setRandomSeed(5);
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int i = 0; i < 16; i++) gen.nextEvents();
-        gen.end();
-        System.out.println("Grid: " + graph.getNodeCount());
-        System.out.println("grid density: " + Toolkit.density(graph));
-        graph.display(false);
+//        Random rand = new Random();
+//        Graph graph = new SingleGraph("t");
+//        BaseGenerator gen = new IncompleteGridGenerator(false, 0.5f, 5, 3);
+//        gen.setRandomSeed(rand.nextInt(100));
+//
+//        gen.addSink(graph);
+//        gen.begin();
+//        for (int i = 0; i < 16; i++) gen.nextEvents();
+//        gen.end();
+//        System.out.println("Grid: " + graph.getNodeCount());
+//        System.out.println("grid density: " + Toolkit.density(graph));
+//        System.out.println("grid diameter " + Toolkit.diameter(graph));
+//        graph.display(false);
 
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
@@ -84,6 +84,7 @@ public class RandomGraphGenerator {
     private static void generateExperimentGraphs() {
         List<GraphType> types = new ArrayList<>();
         types.add(GRID);
+        types.add(INCOMPLETEGRID);
         types.add(LOBSTER);
         // types.add(BARABASI);
         // types.add(DOROGOVTSEV);
@@ -126,6 +127,8 @@ public class RandomGraphGenerator {
         switch (type) {
             case GRID:
                 return createGridGraph(type, seedInt, name, 15);
+            case INCOMPLETEGRID:
+                return createIncompleteGridGraph(type, seedInt, name, 16);
             case LOBSTER:   // TODO : lobster and barabasi are quite alike, lobster seems to perform worse than barabasi
                 return createLobsterGraph(type, seedInt, name, 255);
             case BARABASI:
@@ -165,9 +168,32 @@ public class RandomGraphGenerator {
         for (int i = 0; i < size; i++) gen.nextEvents();
         gen.end();
 
-        for (Edge e : graph.getEdgeSet()) {
-            e.setAttribute("layout.weight", 1);
-        }
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", 1);
+
+        return graph;
+    }
+
+    /**
+     * Creates an incomplete grid graph
+     *
+     * @param type
+     * @param seedInt
+     * @param name
+     * @param size
+     * @return
+     */
+    private static Graph createIncompleteGridGraph(GraphType type, int seedInt, String name, int size) {
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new IncompleteGridGenerator(false, 0.5f, 5, 3);
+        gen.setRandomSeed(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", 1);
+
         return graph;
     }
 

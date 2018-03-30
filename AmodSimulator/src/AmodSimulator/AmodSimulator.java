@@ -408,14 +408,14 @@ public class AmodSimulator {
         double waitVariance = 0.0;
         for (Request r : assignedRequests) {
             double difference = ((double) r.getWaitTime()) - avgWait;
-            System.out.println("Wait time: " + r.getWaitTime() + " is different from mean: " + avgWait + " by:" + difference);
+            // System.out.println("Wait time: " + r.getWaitTime() + " is different from mean: " + avgWait + " by:" + difference);
             waitVariance += difference * difference;
         }
 
-        System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
+        // System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
 
         waitVariance = waitVariance / ((double) assignedRequests.size());
-        System.out.println("return wait variance of: " + waitVariance + " ticks");
+        // System.out.println("return wait variance of: " + waitVariance + " ticks");
         return waitVariance;
     }
 }

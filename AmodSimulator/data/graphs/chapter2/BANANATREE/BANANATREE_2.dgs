@@ -125,6 +125,7 @@ cn "root"  "distToS00_12":17
 cn "root"  "distToS00_13":17
 cn "root"  "distToS00_10":17
 cn "root"  "distToS00_11":17
+cn "root"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1b84f475"
 cn "root"  "distToS00_14":17
 cn "root"  "distToS00_15":17
 cn "root"  "distToS06_02":17
@@ -254,7 +255,6 @@ cn "root"  "distToS12_11":17
 cn "root"  "distToS12_14":17
 cn "root"  "distToS12_13":17
 cn "root"  "distToS12_10":17
-cn "root"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@65f8f5ae"
 cn "root"  "distToS01_13":17
 cn "root"  "distToS01_14":17
 cn "root"  "distToS01_11":17
@@ -386,6 +386,7 @@ cn "S00_00"  "distToS00_12":1
 cn "S00_00"  "distToS00_13":1
 cn "S00_00"  "distToS00_10":1
 cn "S00_00"  "distToS00_11":1
+cn "S00_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7749bf93"
 cn "S00_00"  "distToS00_14":1
 cn "S00_00"  "distToS00_15":1
 cn "S00_00"  "distToS06_02":33
@@ -515,7 +516,6 @@ cn "S00_00"  "distToS12_11":33
 cn "S00_00"  "distToS12_14":33
 cn "S00_00"  "distToS12_13":33
 cn "S00_00"  "distToS12_10":33
-cn "S00_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@431cd9b2"
 cn "S00_00"  "distToS01_13":33
 cn "S00_00"  "distToS01_14":33
 cn "S00_00"  "distToS01_11":33
@@ -647,6 +647,7 @@ cn "S00_01"  "distToS00_12":2
 cn "S00_01"  "distToS00_13":2
 cn "S00_01"  "distToS00_10":2
 cn "S00_01"  "distToS00_11":2
+cn "S00_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@13330ac6"
 cn "S00_01"  "distToS00_14":2
 cn "S00_01"  "distToS00_15":2
 cn "S00_01"  "distToS06_02":32
@@ -776,7 +777,6 @@ cn "S00_01"  "distToS12_11":32
 cn "S00_01"  "distToS12_14":32
 cn "S00_01"  "distToS12_13":32
 cn "S00_01"  "distToS12_10":32
-cn "S00_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@38467116"
 cn "S00_01"  "distToS01_13":32
 cn "S00_01"  "distToS01_14":32
 cn "S00_01"  "distToS01_11":32
@@ -908,6 +908,7 @@ cn "S00_02"  "distToS00_12":2
 cn "S00_02"  "distToS00_13":2
 cn "S00_02"  "distToS00_10":2
 cn "S00_02"  "distToS00_11":2
+cn "S00_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@539d019"
 cn "S00_02"  "distToS00_14":2
 cn "S00_02"  "distToS00_15":2
 cn "S00_02"  "distToS06_02":34
@@ -1037,7 +1038,6 @@ cn "S00_02"  "distToS12_11":34
 cn "S00_02"  "distToS12_14":34
 cn "S00_02"  "distToS12_13":34
 cn "S00_02"  "distToS12_10":34
-cn "S00_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5b7a7f33"
 cn "S00_02"  "distToS01_13":34
 cn "S00_02"  "distToS01_14":34
 cn "S00_02"  "distToS01_11":34
@@ -1169,6 +1169,7 @@ cn "S00_03"  "distToS00_12":2
 cn "S00_03"  "distToS00_13":2
 cn "S00_03"  "distToS00_10":2
 cn "S00_03"  "distToS00_11":2
+cn "S00_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@39a2bb97"
 cn "S00_03"  "distToS00_14":2
 cn "S00_03"  "distToS00_15":2
 cn "S00_03"  "distToS06_02":34
@@ -1298,7 +1299,6 @@ cn "S00_03"  "distToS12_11":34
 cn "S00_03"  "distToS12_14":34
 cn "S00_03"  "distToS12_13":34
 cn "S00_03"  "distToS12_10":34
-cn "S00_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@790da477"
 cn "S00_03"  "distToS01_13":34
 cn "S00_03"  "distToS01_14":34
 cn "S00_03"  "distToS01_11":34
@@ -1430,6 +1430,7 @@ cn "S00_04"  "distToS00_12":2
 cn "S00_04"  "distToS00_13":2
 cn "S00_04"  "distToS00_10":2
 cn "S00_04"  "distToS00_11":2
+cn "S00_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3ad2e17"
 cn "S00_04"  "distToS00_14":2
 cn "S00_04"  "distToS00_15":2
 cn "S00_04"  "distToS06_02":34
@@ -1559,7 +1560,6 @@ cn "S00_04"  "distToS12_11":34
 cn "S00_04"  "distToS12_14":34
 cn "S00_04"  "distToS12_13":34
 cn "S00_04"  "distToS12_10":34
-cn "S00_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5c7933ad"
 cn "S00_04"  "distToS01_13":34
 cn "S00_04"  "distToS01_14":34
 cn "S00_04"  "distToS01_11":34
@@ -1691,6 +1691,7 @@ cn "S00_05"  "distToS00_12":2
 cn "S00_05"  "distToS00_13":2
 cn "S00_05"  "distToS00_10":2
 cn "S00_05"  "distToS00_11":2
+cn "S00_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@8c3619e"
 cn "S00_05"  "distToS00_14":2
 cn "S00_05"  "distToS00_15":2
 cn "S00_05"  "distToS06_02":34
@@ -1820,7 +1821,6 @@ cn "S00_05"  "distToS12_11":34
 cn "S00_05"  "distToS12_14":34
 cn "S00_05"  "distToS12_13":34
 cn "S00_05"  "distToS12_10":34
-cn "S00_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@57bc27f5"
 cn "S00_05"  "distToS01_13":34
 cn "S00_05"  "distToS01_14":34
 cn "S00_05"  "distToS01_11":34
@@ -1952,6 +1952,7 @@ cn "S00_06"  "distToS00_12":2
 cn "S00_06"  "distToS00_13":2
 cn "S00_06"  "distToS00_10":2
 cn "S00_06"  "distToS00_11":2
+cn "S00_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4331d187"
 cn "S00_06"  "distToS00_14":2
 cn "S00_06"  "distToS00_15":2
 cn "S00_06"  "distToS06_02":34
@@ -2081,7 +2082,6 @@ cn "S00_06"  "distToS12_11":34
 cn "S00_06"  "distToS12_14":34
 cn "S00_06"  "distToS12_13":34
 cn "S00_06"  "distToS12_10":34
-cn "S00_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5fb759d6"
 cn "S00_06"  "distToS01_13":34
 cn "S00_06"  "distToS01_14":34
 cn "S00_06"  "distToS01_11":34
@@ -2213,6 +2213,7 @@ cn "S00_07"  "distToS00_12":2
 cn "S00_07"  "distToS00_13":2
 cn "S00_07"  "distToS00_10":2
 cn "S00_07"  "distToS00_11":2
+cn "S00_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6f63b475"
 cn "S00_07"  "distToS00_14":2
 cn "S00_07"  "distToS00_15":2
 cn "S00_07"  "distToS06_02":34
@@ -2342,7 +2343,6 @@ cn "S00_07"  "distToS12_11":34
 cn "S00_07"  "distToS12_14":34
 cn "S00_07"  "distToS12_13":34
 cn "S00_07"  "distToS12_10":34
-cn "S00_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4b8d604b"
 cn "S00_07"  "distToS01_13":34
 cn "S00_07"  "distToS01_14":34
 cn "S00_07"  "distToS01_11":34
@@ -2474,6 +2474,7 @@ cn "S00_08"  "distToS00_12":2
 cn "S00_08"  "distToS00_13":2
 cn "S00_08"  "distToS00_10":2
 cn "S00_08"  "distToS00_11":2
+cn "S00_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@554e218"
 cn "S00_08"  "distToS00_14":2
 cn "S00_08"  "distToS00_15":2
 cn "S00_08"  "distToS06_02":34
@@ -2603,7 +2604,6 @@ cn "S00_08"  "distToS12_11":34
 cn "S00_08"  "distToS12_14":34
 cn "S00_08"  "distToS12_13":34
 cn "S00_08"  "distToS12_10":34
-cn "S00_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5e7cd6cc"
 cn "S00_08"  "distToS01_13":34
 cn "S00_08"  "distToS01_14":34
 cn "S00_08"  "distToS01_11":34
@@ -2735,6 +2735,7 @@ cn "S00_09"  "distToS00_12":2
 cn "S00_09"  "distToS00_13":2
 cn "S00_09"  "distToS00_10":2
 cn "S00_09"  "distToS00_11":2
+cn "S00_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1608bcbd"
 cn "S00_09"  "distToS00_14":2
 cn "S00_09"  "distToS00_15":2
 cn "S00_09"  "distToS06_02":34
@@ -2864,7 +2865,6 @@ cn "S00_09"  "distToS12_11":34
 cn "S00_09"  "distToS12_14":34
 cn "S00_09"  "distToS12_13":34
 cn "S00_09"  "distToS12_10":34
-cn "S00_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@68c9d179"
 cn "S00_09"  "distToS01_13":34
 cn "S00_09"  "distToS01_14":34
 cn "S00_09"  "distToS01_11":34
@@ -2996,6 +2996,7 @@ cn "S00_10"  "distToS00_12":2
 cn "S00_10"  "distToS00_13":2
 cn "S00_10"  "distToS00_10":0
 cn "S00_10"  "distToS00_11":2
+cn "S00_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5bf8fa12"
 cn "S00_10"  "distToS00_14":2
 cn "S00_10"  "distToS00_15":2
 cn "S00_10"  "distToS06_02":34
@@ -3125,7 +3126,6 @@ cn "S00_10"  "distToS12_11":34
 cn "S00_10"  "distToS12_14":34
 cn "S00_10"  "distToS12_13":34
 cn "S00_10"  "distToS12_10":34
-cn "S00_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@d554c5f"
 cn "S00_10"  "distToS01_13":34
 cn "S00_10"  "distToS01_14":34
 cn "S00_10"  "distToS01_11":34
@@ -3257,6 +3257,7 @@ cn "S00_11"  "distToS00_12":2
 cn "S00_11"  "distToS00_13":2
 cn "S00_11"  "distToS00_10":2
 cn "S00_11"  "distToS00_11":0
+cn "S00_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@29ca3d04"
 cn "S00_11"  "distToS00_14":2
 cn "S00_11"  "distToS00_15":2
 cn "S00_11"  "distToS06_02":34
@@ -3386,7 +3387,6 @@ cn "S00_11"  "distToS12_11":34
 cn "S00_11"  "distToS12_14":34
 cn "S00_11"  "distToS12_13":34
 cn "S00_11"  "distToS12_10":34
-cn "S00_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2dfaea86"
 cn "S00_11"  "distToS01_13":34
 cn "S00_11"  "distToS01_14":34
 cn "S00_11"  "distToS01_11":34
@@ -3518,6 +3518,7 @@ cn "S00_12"  "distToS00_12":0
 cn "S00_12"  "distToS00_13":2
 cn "S00_12"  "distToS00_10":2
 cn "S00_12"  "distToS00_11":2
+cn "S00_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@b2c5e07"
 cn "S00_12"  "distToS00_14":2
 cn "S00_12"  "distToS00_15":2
 cn "S00_12"  "distToS06_02":34
@@ -3647,7 +3648,6 @@ cn "S00_12"  "distToS12_11":34
 cn "S00_12"  "distToS12_14":34
 cn "S00_12"  "distToS12_13":34
 cn "S00_12"  "distToS12_10":34
-cn "S00_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@15888343"
 cn "S00_12"  "distToS01_13":34
 cn "S00_12"  "distToS01_14":34
 cn "S00_12"  "distToS01_11":34
@@ -3779,6 +3779,7 @@ cn "S00_13"  "distToS00_12":2
 cn "S00_13"  "distToS00_13":0
 cn "S00_13"  "distToS00_10":2
 cn "S00_13"  "distToS00_11":2
+cn "S00_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5812f68b"
 cn "S00_13"  "distToS00_14":2
 cn "S00_13"  "distToS00_15":2
 cn "S00_13"  "distToS06_02":34
@@ -3908,7 +3909,6 @@ cn "S00_13"  "distToS12_11":34
 cn "S00_13"  "distToS12_14":34
 cn "S00_13"  "distToS12_13":34
 cn "S00_13"  "distToS12_10":34
-cn "S00_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@33ecda92"
 cn "S00_13"  "distToS01_13":34
 cn "S00_13"  "distToS01_14":34
 cn "S00_13"  "distToS01_11":34
@@ -4040,6 +4040,7 @@ cn "S00_14"  "distToS00_12":2
 cn "S00_14"  "distToS00_13":2
 cn "S00_14"  "distToS00_10":2
 cn "S00_14"  "distToS00_11":2
+cn "S00_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4426bff1"
 cn "S00_14"  "distToS00_14":0
 cn "S00_14"  "distToS00_15":2
 cn "S00_14"  "distToS06_02":34
@@ -4169,7 +4170,6 @@ cn "S00_14"  "distToS12_11":34
 cn "S00_14"  "distToS12_14":34
 cn "S00_14"  "distToS12_13":34
 cn "S00_14"  "distToS12_10":34
-cn "S00_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@14fc5f04"
 cn "S00_14"  "distToS01_13":34
 cn "S00_14"  "distToS01_14":34
 cn "S00_14"  "distToS01_11":34
@@ -4301,6 +4301,7 @@ cn "S00_15"  "distToS00_12":2
 cn "S00_15"  "distToS00_13":2
 cn "S00_15"  "distToS00_10":2
 cn "S00_15"  "distToS00_11":2
+cn "S00_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3c7c886c"
 cn "S00_15"  "distToS00_14":2
 cn "S00_15"  "distToS00_15":0
 cn "S00_15"  "distToS06_02":34
@@ -4430,7 +4431,6 @@ cn "S00_15"  "distToS12_11":34
 cn "S00_15"  "distToS12_14":34
 cn "S00_15"  "distToS12_13":34
 cn "S00_15"  "distToS12_10":34
-cn "S00_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6e2829c7"
 cn "S00_15"  "distToS01_13":34
 cn "S00_15"  "distToS01_14":34
 cn "S00_15"  "distToS01_11":34
@@ -4562,6 +4562,7 @@ cn "S01_00"  "distToS00_12":33
 cn "S01_00"  "distToS00_13":33
 cn "S01_00"  "distToS00_10":33
 cn "S01_00"  "distToS00_11":33
+cn "S01_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@55493582"
 cn "S01_00"  "distToS00_14":33
 cn "S01_00"  "distToS00_15":33
 cn "S01_00"  "distToS06_02":33
@@ -4691,7 +4692,6 @@ cn "S01_00"  "distToS12_11":33
 cn "S01_00"  "distToS12_14":33
 cn "S01_00"  "distToS12_13":33
 cn "S01_00"  "distToS12_10":33
-cn "S01_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3feb2dda"
 cn "S01_00"  "distToS01_13":1
 cn "S01_00"  "distToS01_14":1
 cn "S01_00"  "distToS01_11":1
@@ -4823,6 +4823,7 @@ cn "S01_01"  "distToS00_12":32
 cn "S01_01"  "distToS00_13":32
 cn "S01_01"  "distToS00_10":32
 cn "S01_01"  "distToS00_11":32
+cn "S01_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1a20270e"
 cn "S01_01"  "distToS00_14":32
 cn "S01_01"  "distToS00_15":32
 cn "S01_01"  "distToS06_02":32
@@ -4952,7 +4953,6 @@ cn "S01_01"  "distToS12_11":32
 cn "S01_01"  "distToS12_14":32
 cn "S01_01"  "distToS12_13":32
 cn "S01_01"  "distToS12_10":32
-cn "S01_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6a8658ff"
 cn "S01_01"  "distToS01_13":2
 cn "S01_01"  "distToS01_14":2
 cn "S01_01"  "distToS01_11":2
@@ -5084,6 +5084,7 @@ cn "S01_02"  "distToS00_12":34
 cn "S01_02"  "distToS00_13":34
 cn "S01_02"  "distToS00_10":34
 cn "S01_02"  "distToS00_11":34
+cn "S01_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6b88ca8c"
 cn "S01_02"  "distToS00_14":34
 cn "S01_02"  "distToS00_15":34
 cn "S01_02"  "distToS06_02":34
@@ -5213,7 +5214,6 @@ cn "S01_02"  "distToS12_11":34
 cn "S01_02"  "distToS12_14":34
 cn "S01_02"  "distToS12_13":34
 cn "S01_02"  "distToS12_10":34
-cn "S01_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1c742ed4"
 cn "S01_02"  "distToS01_13":2
 cn "S01_02"  "distToS01_14":2
 cn "S01_02"  "distToS01_11":2
@@ -5345,6 +5345,7 @@ cn "S01_03"  "distToS00_12":34
 cn "S01_03"  "distToS00_13":34
 cn "S01_03"  "distToS00_10":34
 cn "S01_03"  "distToS00_11":34
+cn "S01_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@336f1079"
 cn "S01_03"  "distToS00_14":34
 cn "S01_03"  "distToS00_15":34
 cn "S01_03"  "distToS06_02":34
@@ -5474,7 +5475,6 @@ cn "S01_03"  "distToS12_11":34
 cn "S01_03"  "distToS12_14":34
 cn "S01_03"  "distToS12_13":34
 cn "S01_03"  "distToS12_10":34
-cn "S01_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@333d4a8c"
 cn "S01_03"  "distToS01_13":2
 cn "S01_03"  "distToS01_14":2
 cn "S01_03"  "distToS01_11":2
@@ -5606,6 +5606,7 @@ cn "S01_04"  "distToS00_12":34
 cn "S01_04"  "distToS00_13":34
 cn "S01_04"  "distToS00_10":34
 cn "S01_04"  "distToS00_11":34
+cn "S01_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2f16c6b3"
 cn "S01_04"  "distToS00_14":34
 cn "S01_04"  "distToS00_15":34
 cn "S01_04"  "distToS06_02":34
@@ -5735,7 +5736,6 @@ cn "S01_04"  "distToS12_11":34
 cn "S01_04"  "distToS12_14":34
 cn "S01_04"  "distToS12_13":34
 cn "S01_04"  "distToS12_10":34
-cn "S01_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@55de24cc"
 cn "S01_04"  "distToS01_13":2
 cn "S01_04"  "distToS01_14":2
 cn "S01_04"  "distToS01_11":2
@@ -5867,6 +5867,7 @@ cn "S01_05"  "distToS00_12":34
 cn "S01_05"  "distToS00_13":34
 cn "S01_05"  "distToS00_10":34
 cn "S01_05"  "distToS00_11":34
+cn "S01_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@34158c08"
 cn "S01_05"  "distToS00_14":34
 cn "S01_05"  "distToS00_15":34
 cn "S01_05"  "distToS06_02":34
@@ -5996,7 +5997,6 @@ cn "S01_05"  "distToS12_11":34
 cn "S01_05"  "distToS12_14":34
 cn "S01_05"  "distToS12_13":34
 cn "S01_05"  "distToS12_10":34
-cn "S01_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@dc7df28"
 cn "S01_05"  "distToS01_13":2
 cn "S01_05"  "distToS01_14":2
 cn "S01_05"  "distToS01_11":2
@@ -6128,6 +6128,7 @@ cn "S01_06"  "distToS00_12":34
 cn "S01_06"  "distToS00_13":34
 cn "S01_06"  "distToS00_10":34
 cn "S01_06"  "distToS00_11":34
+cn "S01_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@19e4fcac"
 cn "S01_06"  "distToS00_14":34
 cn "S01_06"  "distToS00_15":34
 cn "S01_06"  "distToS06_02":34
@@ -6257,7 +6258,6 @@ cn "S01_06"  "distToS12_11":34
 cn "S01_06"  "distToS12_14":34
 cn "S01_06"  "distToS12_13":34
 cn "S01_06"  "distToS12_10":34
-cn "S01_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@30f842ca"
 cn "S01_06"  "distToS01_13":2
 cn "S01_06"  "distToS01_14":2
 cn "S01_06"  "distToS01_11":2
@@ -6389,6 +6389,7 @@ cn "S01_07"  "distToS00_12":34
 cn "S01_07"  "distToS00_13":34
 cn "S01_07"  "distToS00_10":34
 cn "S01_07"  "distToS00_11":34
+cn "S01_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@52c3cb31"
 cn "S01_07"  "distToS00_14":34
 cn "S01_07"  "distToS00_15":34
 cn "S01_07"  "distToS06_02":34
@@ -6518,7 +6519,6 @@ cn "S01_07"  "distToS12_11":34
 cn "S01_07"  "distToS12_14":34
 cn "S01_07"  "distToS12_13":34
 cn "S01_07"  "distToS12_10":34
-cn "S01_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@69c81773"
 cn "S01_07"  "distToS01_13":2
 cn "S01_07"  "distToS01_14":2
 cn "S01_07"  "distToS01_11":2
@@ -6650,6 +6650,7 @@ cn "S01_08"  "distToS00_12":34
 cn "S01_08"  "distToS00_13":34
 cn "S01_08"  "distToS00_10":34
 cn "S01_08"  "distToS00_11":34
+cn "S01_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4b79ac84"
 cn "S01_08"  "distToS00_14":34
 cn "S01_08"  "distToS00_15":34
 cn "S01_08"  "distToS06_02":34
@@ -6779,7 +6780,6 @@ cn "S01_08"  "distToS12_11":34
 cn "S01_08"  "distToS12_14":34
 cn "S01_08"  "distToS12_13":34
 cn "S01_08"  "distToS12_10":34
-cn "S01_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4d14b6c2"
 cn "S01_08"  "distToS01_13":2
 cn "S01_08"  "distToS01_14":2
 cn "S01_08"  "distToS01_11":2
@@ -6911,6 +6911,7 @@ cn "S01_09"  "distToS00_12":34
 cn "S01_09"  "distToS00_13":34
 cn "S01_09"  "distToS00_10":34
 cn "S01_09"  "distToS00_11":34
+cn "S01_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@53941c2f"
 cn "S01_09"  "distToS00_14":34
 cn "S01_09"  "distToS00_15":34
 cn "S01_09"  "distToS06_02":34
@@ -7040,7 +7041,6 @@ cn "S01_09"  "distToS12_11":34
 cn "S01_09"  "distToS12_14":34
 cn "S01_09"  "distToS12_13":34
 cn "S01_09"  "distToS12_10":34
-cn "S01_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7e990ed7"
 cn "S01_09"  "distToS01_13":2
 cn "S01_09"  "distToS01_14":2
 cn "S01_09"  "distToS01_11":2
@@ -7172,6 +7172,7 @@ cn "S01_10"  "distToS00_12":34
 cn "S01_10"  "distToS00_13":34
 cn "S01_10"  "distToS00_10":34
 cn "S01_10"  "distToS00_11":34
+cn "S01_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6dab9b6d"
 cn "S01_10"  "distToS00_14":34
 cn "S01_10"  "distToS00_15":34
 cn "S01_10"  "distToS06_02":34
@@ -7301,7 +7302,6 @@ cn "S01_10"  "distToS12_11":34
 cn "S01_10"  "distToS12_14":34
 cn "S01_10"  "distToS12_13":34
 cn "S01_10"  "distToS12_10":34
-cn "S01_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@c05fddc"
 cn "S01_10"  "distToS01_13":2
 cn "S01_10"  "distToS01_14":2
 cn "S01_10"  "distToS01_11":2
@@ -7433,6 +7433,7 @@ cn "S01_11"  "distToS00_12":34
 cn "S01_11"  "distToS00_13":34
 cn "S01_11"  "distToS00_10":34
 cn "S01_11"  "distToS00_11":34
+cn "S01_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@21fd5faa"
 cn "S01_11"  "distToS00_14":34
 cn "S01_11"  "distToS00_15":34
 cn "S01_11"  "distToS06_02":34
@@ -7562,7 +7563,6 @@ cn "S01_11"  "distToS12_11":34
 cn "S01_11"  "distToS12_14":34
 cn "S01_11"  "distToS12_13":34
 cn "S01_11"  "distToS12_10":34
-cn "S01_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@25df00a0"
 cn "S01_11"  "distToS01_13":2
 cn "S01_11"  "distToS01_14":2
 cn "S01_11"  "distToS01_11":0
@@ -7694,6 +7694,7 @@ cn "S01_12"  "distToS00_12":34
 cn "S01_12"  "distToS00_13":34
 cn "S01_12"  "distToS00_10":34
 cn "S01_12"  "distToS00_11":34
+cn "S01_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2766ca9d"
 cn "S01_12"  "distToS00_14":34
 cn "S01_12"  "distToS00_15":34
 cn "S01_12"  "distToS06_02":34
@@ -7823,7 +7824,6 @@ cn "S01_12"  "distToS12_11":34
 cn "S01_12"  "distToS12_14":34
 cn "S01_12"  "distToS12_13":34
 cn "S01_12"  "distToS12_10":34
-cn "S01_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4d15107f"
 cn "S01_12"  "distToS01_13":2
 cn "S01_12"  "distToS01_14":2
 cn "S01_12"  "distToS01_11":2
@@ -7955,6 +7955,7 @@ cn "S01_13"  "distToS00_12":34
 cn "S01_13"  "distToS00_13":34
 cn "S01_13"  "distToS00_10":34
 cn "S01_13"  "distToS00_11":34
+cn "S01_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5460cf3a"
 cn "S01_13"  "distToS00_14":34
 cn "S01_13"  "distToS00_15":34
 cn "S01_13"  "distToS06_02":34
@@ -8084,7 +8085,6 @@ cn "S01_13"  "distToS12_11":34
 cn "S01_13"  "distToS12_14":34
 cn "S01_13"  "distToS12_13":34
 cn "S01_13"  "distToS12_10":34
-cn "S01_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7b4c50bc"
 cn "S01_13"  "distToS01_13":0
 cn "S01_13"  "distToS01_14":2
 cn "S01_13"  "distToS01_11":2
@@ -8216,6 +8216,7 @@ cn "S01_14"  "distToS00_12":34
 cn "S01_14"  "distToS00_13":34
 cn "S01_14"  "distToS00_10":34
 cn "S01_14"  "distToS00_11":34
+cn "S01_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@65a15628"
 cn "S01_14"  "distToS00_14":34
 cn "S01_14"  "distToS00_15":34
 cn "S01_14"  "distToS06_02":34
@@ -8345,7 +8346,6 @@ cn "S01_14"  "distToS12_11":34
 cn "S01_14"  "distToS12_14":34
 cn "S01_14"  "distToS12_13":34
 cn "S01_14"  "distToS12_10":34
-cn "S01_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5884a914"
 cn "S01_14"  "distToS01_13":2
 cn "S01_14"  "distToS01_14":0
 cn "S01_14"  "distToS01_11":2
@@ -8477,6 +8477,7 @@ cn "S01_15"  "distToS00_12":34
 cn "S01_15"  "distToS00_13":34
 cn "S01_15"  "distToS00_10":34
 cn "S01_15"  "distToS00_11":34
+cn "S01_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2e6a5539"
 cn "S01_15"  "distToS00_14":34
 cn "S01_15"  "distToS00_15":34
 cn "S01_15"  "distToS06_02":34
@@ -8606,7 +8607,6 @@ cn "S01_15"  "distToS12_11":34
 cn "S01_15"  "distToS12_14":34
 cn "S01_15"  "distToS12_13":34
 cn "S01_15"  "distToS12_10":34
-cn "S01_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@50378a4"
 cn "S01_15"  "distToS01_13":2
 cn "S01_15"  "distToS01_14":2
 cn "S01_15"  "distToS01_11":2
@@ -8738,6 +8738,7 @@ cn "S02_00"  "distToS00_12":33
 cn "S02_00"  "distToS00_13":33
 cn "S02_00"  "distToS00_10":33
 cn "S02_00"  "distToS00_11":33
+cn "S02_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3fc9504b"
 cn "S02_00"  "distToS00_14":33
 cn "S02_00"  "distToS00_15":33
 cn "S02_00"  "distToS06_02":33
@@ -8867,7 +8868,6 @@ cn "S02_00"  "distToS12_11":33
 cn "S02_00"  "distToS12_14":33
 cn "S02_00"  "distToS12_13":33
 cn "S02_00"  "distToS12_10":33
-cn "S02_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@60f00693"
 cn "S02_00"  "distToS01_13":33
 cn "S02_00"  "distToS01_14":33
 cn "S02_00"  "distToS01_11":33
@@ -8999,6 +8999,7 @@ cn "S02_01"  "distToS00_12":32
 cn "S02_01"  "distToS00_13":32
 cn "S02_01"  "distToS00_10":32
 cn "S02_01"  "distToS00_11":32
+cn "S02_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6d025197"
 cn "S02_01"  "distToS00_14":32
 cn "S02_01"  "distToS00_15":32
 cn "S02_01"  "distToS06_02":32
@@ -9128,7 +9129,6 @@ cn "S02_01"  "distToS12_11":32
 cn "S02_01"  "distToS12_14":32
 cn "S02_01"  "distToS12_13":32
 cn "S02_01"  "distToS12_10":32
-cn "S02_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@79207381"
 cn "S02_01"  "distToS01_13":32
 cn "S02_01"  "distToS01_14":32
 cn "S02_01"  "distToS01_11":32
@@ -9260,6 +9260,7 @@ cn "S02_02"  "distToS00_12":34
 cn "S02_02"  "distToS00_13":34
 cn "S02_02"  "distToS00_10":34
 cn "S02_02"  "distToS00_11":34
+cn "S02_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@27d4a09"
 cn "S02_02"  "distToS00_14":34
 cn "S02_02"  "distToS00_15":34
 cn "S02_02"  "distToS06_02":34
@@ -9389,7 +9390,6 @@ cn "S02_02"  "distToS12_11":34
 cn "S02_02"  "distToS12_14":34
 cn "S02_02"  "distToS12_13":34
 cn "S02_02"  "distToS12_10":34
-cn "S02_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@491b9b8"
 cn "S02_02"  "distToS01_13":34
 cn "S02_02"  "distToS01_14":34
 cn "S02_02"  "distToS01_11":34
@@ -9521,6 +9521,7 @@ cn "S02_03"  "distToS00_12":34
 cn "S02_03"  "distToS00_13":34
 cn "S02_03"  "distToS00_10":34
 cn "S02_03"  "distToS00_11":34
+cn "S02_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7e4204e2"
 cn "S02_03"  "distToS00_14":34
 cn "S02_03"  "distToS00_15":34
 cn "S02_03"  "distToS06_02":34
@@ -9650,7 +9651,6 @@ cn "S02_03"  "distToS12_11":34
 cn "S02_03"  "distToS12_14":34
 cn "S02_03"  "distToS12_13":34
 cn "S02_03"  "distToS12_10":34
-cn "S02_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1a4927d6"
 cn "S02_03"  "distToS01_13":34
 cn "S02_03"  "distToS01_14":34
 cn "S02_03"  "distToS01_11":34
@@ -9782,6 +9782,7 @@ cn "S02_04"  "distToS00_12":34
 cn "S02_04"  "distToS00_13":34
 cn "S02_04"  "distToS00_10":34
 cn "S02_04"  "distToS00_11":34
+cn "S02_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@b7c4869"
 cn "S02_04"  "distToS00_14":34
 cn "S02_04"  "distToS00_15":34
 cn "S02_04"  "distToS06_02":34
@@ -9911,7 +9912,6 @@ cn "S02_04"  "distToS12_11":34
 cn "S02_04"  "distToS12_14":34
 cn "S02_04"  "distToS12_13":34
 cn "S02_04"  "distToS12_10":34
-cn "S02_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7a6d7e92"
 cn "S02_04"  "distToS01_13":34
 cn "S02_04"  "distToS01_14":34
 cn "S02_04"  "distToS01_11":34
@@ -10043,6 +10043,7 @@ cn "S02_05"  "distToS00_12":34
 cn "S02_05"  "distToS00_13":34
 cn "S02_05"  "distToS00_10":34
 cn "S02_05"  "distToS00_11":34
+cn "S02_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@740d2e78"
 cn "S02_05"  "distToS00_14":34
 cn "S02_05"  "distToS00_15":34
 cn "S02_05"  "distToS06_02":34
@@ -10172,7 +10173,6 @@ cn "S02_05"  "distToS12_11":34
 cn "S02_05"  "distToS12_14":34
 cn "S02_05"  "distToS12_13":34
 cn "S02_05"  "distToS12_10":34
-cn "S02_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@aba625"
 cn "S02_05"  "distToS01_13":34
 cn "S02_05"  "distToS01_14":34
 cn "S02_05"  "distToS01_11":34
@@ -10304,6 +10304,7 @@ cn "S02_06"  "distToS00_12":34
 cn "S02_06"  "distToS00_13":34
 cn "S02_06"  "distToS00_10":34
 cn "S02_06"  "distToS00_11":34
+cn "S02_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1c481ff2"
 cn "S02_06"  "distToS00_14":34
 cn "S02_06"  "distToS00_15":34
 cn "S02_06"  "distToS06_02":34
@@ -10433,7 +10434,6 @@ cn "S02_06"  "distToS12_11":34
 cn "S02_06"  "distToS12_14":34
 cn "S02_06"  "distToS12_13":34
 cn "S02_06"  "distToS12_10":34
-cn "S02_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@97e93f1"
 cn "S02_06"  "distToS01_13":34
 cn "S02_06"  "distToS01_14":34
 cn "S02_06"  "distToS01_11":34
@@ -10565,6 +10565,7 @@ cn "S02_07"  "distToS00_12":34
 cn "S02_07"  "distToS00_13":34
 cn "S02_07"  "distToS00_10":34
 cn "S02_07"  "distToS00_11":34
+cn "S02_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@72437d8d"
 cn "S02_07"  "distToS00_14":34
 cn "S02_07"  "distToS00_15":34
 cn "S02_07"  "distToS06_02":34
@@ -10694,7 +10695,6 @@ cn "S02_07"  "distToS12_11":34
 cn "S02_07"  "distToS12_14":34
 cn "S02_07"  "distToS12_13":34
 cn "S02_07"  "distToS12_10":34
-cn "S02_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5a5a729f"
 cn "S02_07"  "distToS01_13":34
 cn "S02_07"  "distToS01_14":34
 cn "S02_07"  "distToS01_11":34
@@ -10826,6 +10826,7 @@ cn "S02_08"  "distToS00_12":34
 cn "S02_08"  "distToS00_13":34
 cn "S02_08"  "distToS00_10":34
 cn "S02_08"  "distToS00_11":34
+cn "S02_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1b955cac"
 cn "S02_08"  "distToS00_14":34
 cn "S02_08"  "distToS00_15":34
 cn "S02_08"  "distToS06_02":34
@@ -10955,7 +10956,6 @@ cn "S02_08"  "distToS12_11":34
 cn "S02_08"  "distToS12_14":34
 cn "S02_08"  "distToS12_13":34
 cn "S02_08"  "distToS12_10":34
-cn "S02_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4b520ea8"
 cn "S02_08"  "distToS01_13":34
 cn "S02_08"  "distToS01_14":34
 cn "S02_08"  "distToS01_11":34
@@ -11087,6 +11087,7 @@ cn "S02_09"  "distToS00_12":34
 cn "S02_09"  "distToS00_13":34
 cn "S02_09"  "distToS00_10":34
 cn "S02_09"  "distToS00_11":34
+cn "S02_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@676cf48"
 cn "S02_09"  "distToS00_14":34
 cn "S02_09"  "distToS00_15":34
 cn "S02_09"  "distToS06_02":34
@@ -11216,7 +11217,6 @@ cn "S02_09"  "distToS12_11":34
 cn "S02_09"  "distToS12_14":34
 cn "S02_09"  "distToS12_13":34
 cn "S02_09"  "distToS12_10":34
-cn "S02_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@16150369"
 cn "S02_09"  "distToS01_13":34
 cn "S02_09"  "distToS01_14":34
 cn "S02_09"  "distToS01_11":34
@@ -11348,6 +11348,7 @@ cn "S02_10"  "distToS00_12":34
 cn "S02_10"  "distToS00_13":34
 cn "S02_10"  "distToS00_10":34
 cn "S02_10"  "distToS00_11":34
+cn "S02_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5a1de7fb"
 cn "S02_10"  "distToS00_14":34
 cn "S02_10"  "distToS00_15":34
 cn "S02_10"  "distToS06_02":34
@@ -11477,7 +11478,6 @@ cn "S02_10"  "distToS12_11":34
 cn "S02_10"  "distToS12_14":34
 cn "S02_10"  "distToS12_13":34
 cn "S02_10"  "distToS12_10":34
-cn "S02_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6b09fb41"
 cn "S02_10"  "distToS01_13":34
 cn "S02_10"  "distToS01_14":34
 cn "S02_10"  "distToS01_11":34
@@ -11609,6 +11609,7 @@ cn "S02_11"  "distToS00_12":34
 cn "S02_11"  "distToS00_13":34
 cn "S02_11"  "distToS00_10":34
 cn "S02_11"  "distToS00_11":34
+cn "S02_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@335b5620"
 cn "S02_11"  "distToS00_14":34
 cn "S02_11"  "distToS00_15":34
 cn "S02_11"  "distToS06_02":34
@@ -11738,7 +11739,6 @@ cn "S02_11"  "distToS12_11":34
 cn "S02_11"  "distToS12_14":34
 cn "S02_11"  "distToS12_13":34
 cn "S02_11"  "distToS12_10":34
-cn "S02_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@624ea235"
 cn "S02_11"  "distToS01_13":34
 cn "S02_11"  "distToS01_14":34
 cn "S02_11"  "distToS01_11":34
@@ -11870,6 +11870,7 @@ cn "S02_12"  "distToS00_12":34
 cn "S02_12"  "distToS00_13":34
 cn "S02_12"  "distToS00_10":34
 cn "S02_12"  "distToS00_11":34
+cn "S02_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@29a0cdb"
 cn "S02_12"  "distToS00_14":34
 cn "S02_12"  "distToS00_15":34
 cn "S02_12"  "distToS06_02":34
@@ -11999,7 +12000,6 @@ cn "S02_12"  "distToS12_11":34
 cn "S02_12"  "distToS12_14":34
 cn "S02_12"  "distToS12_13":34
 cn "S02_12"  "distToS12_10":34
-cn "S02_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3932c79a"
 cn "S02_12"  "distToS01_13":34
 cn "S02_12"  "distToS01_14":34
 cn "S02_12"  "distToS01_11":34
@@ -12131,6 +12131,7 @@ cn "S02_13"  "distToS00_12":34
 cn "S02_13"  "distToS00_13":34
 cn "S02_13"  "distToS00_10":34
 cn "S02_13"  "distToS00_11":34
+cn "S02_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@32a68f4f"
 cn "S02_13"  "distToS00_14":34
 cn "S02_13"  "distToS00_15":34
 cn "S02_13"  "distToS06_02":34
@@ -12260,7 +12261,6 @@ cn "S02_13"  "distToS12_11":34
 cn "S02_13"  "distToS12_14":34
 cn "S02_13"  "distToS12_13":34
 cn "S02_13"  "distToS12_10":34
-cn "S02_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@782859e"
 cn "S02_13"  "distToS01_13":34
 cn "S02_13"  "distToS01_14":34
 cn "S02_13"  "distToS01_11":34
@@ -12392,6 +12392,7 @@ cn "S02_14"  "distToS00_12":34
 cn "S02_14"  "distToS00_13":34
 cn "S02_14"  "distToS00_10":34
 cn "S02_14"  "distToS00_11":34
+cn "S02_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@73194df"
 cn "S02_14"  "distToS00_14":34
 cn "S02_14"  "distToS00_15":34
 cn "S02_14"  "distToS06_02":34
@@ -12521,7 +12522,6 @@ cn "S02_14"  "distToS12_11":34
 cn "S02_14"  "distToS12_14":34
 cn "S02_14"  "distToS12_13":34
 cn "S02_14"  "distToS12_10":34
-cn "S02_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@23f5b5dc"
 cn "S02_14"  "distToS01_13":34
 cn "S02_14"  "distToS01_14":34
 cn "S02_14"  "distToS01_11":34
@@ -12653,6 +12653,7 @@ cn "S02_15"  "distToS00_12":34
 cn "S02_15"  "distToS00_13":34
 cn "S02_15"  "distToS00_10":34
 cn "S02_15"  "distToS00_11":34
+cn "S02_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6eb2384f"
 cn "S02_15"  "distToS00_14":34
 cn "S02_15"  "distToS00_15":34
 cn "S02_15"  "distToS06_02":34
@@ -12782,7 +12783,6 @@ cn "S02_15"  "distToS12_11":34
 cn "S02_15"  "distToS12_14":34
 cn "S02_15"  "distToS12_13":34
 cn "S02_15"  "distToS12_10":34
-cn "S02_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@34bde49d"
 cn "S02_15"  "distToS01_13":34
 cn "S02_15"  "distToS01_14":34
 cn "S02_15"  "distToS01_11":34
@@ -12914,6 +12914,7 @@ cn "S03_00"  "distToS00_12":33
 cn "S03_00"  "distToS00_13":33
 cn "S03_00"  "distToS00_10":33
 cn "S03_00"  "distToS00_11":33
+cn "S03_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3c9c0d96"
 cn "S03_00"  "distToS00_14":33
 cn "S03_00"  "distToS00_15":33
 cn "S03_00"  "distToS06_02":33
@@ -13043,7 +13044,6 @@ cn "S03_00"  "distToS12_11":33
 cn "S03_00"  "distToS12_14":33
 cn "S03_00"  "distToS12_13":33
 cn "S03_00"  "distToS12_10":33
-cn "S03_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1b1cfb87"
 cn "S03_00"  "distToS01_13":33
 cn "S03_00"  "distToS01_14":33
 cn "S03_00"  "distToS01_11":33
@@ -13175,6 +13175,7 @@ cn "S03_01"  "distToS00_12":32
 cn "S03_01"  "distToS00_13":32
 cn "S03_01"  "distToS00_10":32
 cn "S03_01"  "distToS00_11":32
+cn "S03_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3a4621bd"
 cn "S03_01"  "distToS00_14":32
 cn "S03_01"  "distToS00_15":32
 cn "S03_01"  "distToS06_02":32
@@ -13304,7 +13305,6 @@ cn "S03_01"  "distToS12_11":32
 cn "S03_01"  "distToS12_14":32
 cn "S03_01"  "distToS12_13":32
 cn "S03_01"  "distToS12_10":32
-cn "S03_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@821330f"
 cn "S03_01"  "distToS01_13":32
 cn "S03_01"  "distToS01_14":32
 cn "S03_01"  "distToS01_11":32
@@ -13436,6 +13436,7 @@ cn "S03_02"  "distToS00_12":34
 cn "S03_02"  "distToS00_13":34
 cn "S03_02"  "distToS00_10":34
 cn "S03_02"  "distToS00_11":34
+cn "S03_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@31dadd46"
 cn "S03_02"  "distToS00_14":34
 cn "S03_02"  "distToS00_15":34
 cn "S03_02"  "distToS06_02":34
@@ -13565,7 +13566,6 @@ cn "S03_02"  "distToS12_11":34
 cn "S03_02"  "distToS12_14":34
 cn "S03_02"  "distToS12_13":34
 cn "S03_02"  "distToS12_10":34
-cn "S03_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6f43c82"
 cn "S03_02"  "distToS01_13":34
 cn "S03_02"  "distToS01_14":34
 cn "S03_02"  "distToS01_11":34
@@ -13697,6 +13697,7 @@ cn "S03_03"  "distToS00_12":34
 cn "S03_03"  "distToS00_13":34
 cn "S03_03"  "distToS00_10":34
 cn "S03_03"  "distToS00_11":34
+cn "S03_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4ed5eb72"
 cn "S03_03"  "distToS00_14":34
 cn "S03_03"  "distToS00_15":34
 cn "S03_03"  "distToS06_02":34
@@ -13826,7 +13827,6 @@ cn "S03_03"  "distToS12_11":34
 cn "S03_03"  "distToS12_14":34
 cn "S03_03"  "distToS12_13":34
 cn "S03_03"  "distToS12_10":34
-cn "S03_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5db6b9cd"
 cn "S03_03"  "distToS01_13":34
 cn "S03_03"  "distToS01_14":34
 cn "S03_03"  "distToS01_11":34
@@ -13958,6 +13958,7 @@ cn "S03_04"  "distToS00_12":34
 cn "S03_04"  "distToS00_13":34
 cn "S03_04"  "distToS00_10":34
 cn "S03_04"  "distToS00_11":34
+cn "S03_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@12f9af83"
 cn "S03_04"  "distToS00_14":34
 cn "S03_04"  "distToS00_15":34
 cn "S03_04"  "distToS06_02":34
@@ -14087,7 +14088,6 @@ cn "S03_04"  "distToS12_11":34
 cn "S03_04"  "distToS12_14":34
 cn "S03_04"  "distToS12_13":34
 cn "S03_04"  "distToS12_10":34
-cn "S03_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@210ab13f"
 cn "S03_04"  "distToS01_13":34
 cn "S03_04"  "distToS01_14":34
 cn "S03_04"  "distToS01_11":34
@@ -14219,6 +14219,7 @@ cn "S03_05"  "distToS00_12":34
 cn "S03_05"  "distToS00_13":34
 cn "S03_05"  "distToS00_10":34
 cn "S03_05"  "distToS00_11":34
+cn "S03_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@19b93fa8"
 cn "S03_05"  "distToS00_14":34
 cn "S03_05"  "distToS00_15":34
 cn "S03_05"  "distToS06_02":34
@@ -14348,7 +14349,6 @@ cn "S03_05"  "distToS12_11":34
 cn "S03_05"  "distToS12_14":34
 cn "S03_05"  "distToS12_13":34
 cn "S03_05"  "distToS12_10":34
-cn "S03_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@20b2475a"
 cn "S03_05"  "distToS01_13":34
 cn "S03_05"  "distToS01_14":34
 cn "S03_05"  "distToS01_11":34
@@ -14480,6 +14480,7 @@ cn "S03_06"  "distToS00_12":34
 cn "S03_06"  "distToS00_13":34
 cn "S03_06"  "distToS00_10":34
 cn "S03_06"  "distToS00_11":34
+cn "S03_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7e6ef134"
 cn "S03_06"  "distToS00_14":34
 cn "S03_06"  "distToS00_15":34
 cn "S03_06"  "distToS06_02":34
@@ -14609,7 +14610,6 @@ cn "S03_06"  "distToS12_11":34
 cn "S03_06"  "distToS12_14":34
 cn "S03_06"  "distToS12_13":34
 cn "S03_06"  "distToS12_10":34
-cn "S03_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7857fe2"
 cn "S03_06"  "distToS01_13":34
 cn "S03_06"  "distToS01_14":34
 cn "S03_06"  "distToS01_11":34
@@ -14741,6 +14741,7 @@ cn "S03_07"  "distToS00_12":34
 cn "S03_07"  "distToS00_13":34
 cn "S03_07"  "distToS00_10":34
 cn "S03_07"  "distToS00_11":34
+cn "S03_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1f010bf0"
 cn "S03_07"  "distToS00_14":34
 cn "S03_07"  "distToS00_15":34
 cn "S03_07"  "distToS06_02":34
@@ -14870,7 +14871,6 @@ cn "S03_07"  "distToS12_11":34
 cn "S03_07"  "distToS12_14":34
 cn "S03_07"  "distToS12_13":34
 cn "S03_07"  "distToS12_10":34
-cn "S03_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6f15d60e"
 cn "S03_07"  "distToS01_13":34
 cn "S03_07"  "distToS01_14":34
 cn "S03_07"  "distToS01_11":34
@@ -15002,6 +15002,7 @@ cn "S03_08"  "distToS00_12":34
 cn "S03_08"  "distToS00_13":34
 cn "S03_08"  "distToS00_10":34
 cn "S03_08"  "distToS00_11":34
+cn "S03_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@40db2a24"
 cn "S03_08"  "distToS00_14":34
 cn "S03_08"  "distToS00_15":34
 cn "S03_08"  "distToS06_02":34
@@ -15131,7 +15132,6 @@ cn "S03_08"  "distToS12_11":34
 cn "S03_08"  "distToS12_14":34
 cn "S03_08"  "distToS12_13":34
 cn "S03_08"  "distToS12_10":34
-cn "S03_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1be2019a"
 cn "S03_08"  "distToS01_13":34
 cn "S03_08"  "distToS01_14":34
 cn "S03_08"  "distToS01_11":34
@@ -15263,6 +15263,7 @@ cn "S03_09"  "distToS00_12":34
 cn "S03_09"  "distToS00_13":34
 cn "S03_09"  "distToS00_10":34
 cn "S03_09"  "distToS00_11":34
+cn "S03_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@10cf09e8"
 cn "S03_09"  "distToS00_14":34
 cn "S03_09"  "distToS00_15":34
 cn "S03_09"  "distToS06_02":34
@@ -15392,7 +15393,6 @@ cn "S03_09"  "distToS12_11":34
 cn "S03_09"  "distToS12_14":34
 cn "S03_09"  "distToS12_13":34
 cn "S03_09"  "distToS12_10":34
-cn "S03_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@29d80d2b"
 cn "S03_09"  "distToS01_13":34
 cn "S03_09"  "distToS01_14":34
 cn "S03_09"  "distToS01_11":34
@@ -15524,6 +15524,7 @@ cn "S03_10"  "distToS00_12":34
 cn "S03_10"  "distToS00_13":34
 cn "S03_10"  "distToS00_10":34
 cn "S03_10"  "distToS00_11":34
+cn "S03_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1921ad94"
 cn "S03_10"  "distToS00_14":34
 cn "S03_10"  "distToS00_15":34
 cn "S03_10"  "distToS06_02":34
@@ -15653,7 +15654,6 @@ cn "S03_10"  "distToS12_11":34
 cn "S03_10"  "distToS12_14":34
 cn "S03_10"  "distToS12_13":34
 cn "S03_10"  "distToS12_10":34
-cn "S03_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@58e1d9d"
 cn "S03_10"  "distToS01_13":34
 cn "S03_10"  "distToS01_14":34
 cn "S03_10"  "distToS01_11":34
@@ -15785,6 +15785,7 @@ cn "S03_11"  "distToS00_12":34
 cn "S03_11"  "distToS00_13":34
 cn "S03_11"  "distToS00_10":34
 cn "S03_11"  "distToS00_11":34
+cn "S03_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@ee86bcb"
 cn "S03_11"  "distToS00_14":34
 cn "S03_11"  "distToS00_15":34
 cn "S03_11"  "distToS06_02":34
@@ -15914,7 +15915,6 @@ cn "S03_11"  "distToS12_11":34
 cn "S03_11"  "distToS12_14":34
 cn "S03_11"  "distToS12_13":34
 cn "S03_11"  "distToS12_10":34
-cn "S03_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@446a1e84"
 cn "S03_11"  "distToS01_13":34
 cn "S03_11"  "distToS01_14":34
 cn "S03_11"  "distToS01_11":34
@@ -16046,6 +16046,7 @@ cn "S03_12"  "distToS00_12":34
 cn "S03_12"  "distToS00_13":34
 cn "S03_12"  "distToS00_10":34
 cn "S03_12"  "distToS00_11":34
+cn "S03_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@177bea38"
 cn "S03_12"  "distToS00_14":34
 cn "S03_12"  "distToS00_15":34
 cn "S03_12"  "distToS06_02":34
@@ -16175,7 +16176,6 @@ cn "S03_12"  "distToS12_11":34
 cn "S03_12"  "distToS12_14":34
 cn "S03_12"  "distToS12_13":34
 cn "S03_12"  "distToS12_10":34
-cn "S03_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4f0f2942"
 cn "S03_12"  "distToS01_13":34
 cn "S03_12"  "distToS01_14":34
 cn "S03_12"  "distToS01_11":34
@@ -16307,6 +16307,7 @@ cn "S03_13"  "distToS00_12":34
 cn "S03_13"  "distToS00_13":34
 cn "S03_13"  "distToS00_10":34
 cn "S03_13"  "distToS00_11":34
+cn "S03_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7f132176"
 cn "S03_13"  "distToS00_14":34
 cn "S03_13"  "distToS00_15":34
 cn "S03_13"  "distToS06_02":34
@@ -16436,7 +16437,6 @@ cn "S03_13"  "distToS12_11":34
 cn "S03_13"  "distToS12_14":34
 cn "S03_13"  "distToS12_13":34
 cn "S03_13"  "distToS12_10":34
-cn "S03_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2657d4dd"
 cn "S03_13"  "distToS01_13":34
 cn "S03_13"  "distToS01_14":34
 cn "S03_13"  "distToS01_11":34
@@ -16568,6 +16568,7 @@ cn "S03_14"  "distToS00_12":34
 cn "S03_14"  "distToS00_13":34
 cn "S03_14"  "distToS00_10":34
 cn "S03_14"  "distToS00_11":34
+cn "S03_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6bca7e0d"
 cn "S03_14"  "distToS00_14":34
 cn "S03_14"  "distToS00_15":34
 cn "S03_14"  "distToS06_02":34
@@ -16697,7 +16698,6 @@ cn "S03_14"  "distToS12_11":34
 cn "S03_14"  "distToS12_14":34
 cn "S03_14"  "distToS12_13":34
 cn "S03_14"  "distToS12_10":34
-cn "S03_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5340477f"
 cn "S03_14"  "distToS01_13":34
 cn "S03_14"  "distToS01_14":34
 cn "S03_14"  "distToS01_11":34
@@ -16829,6 +16829,7 @@ cn "S03_15"  "distToS00_12":34
 cn "S03_15"  "distToS00_13":34
 cn "S03_15"  "distToS00_10":34
 cn "S03_15"  "distToS00_11":34
+cn "S03_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2631f68c"
 cn "S03_15"  "distToS00_14":34
 cn "S03_15"  "distToS00_15":34
 cn "S03_15"  "distToS06_02":34
@@ -16958,7 +16959,6 @@ cn "S03_15"  "distToS12_11":34
 cn "S03_15"  "distToS12_14":34
 cn "S03_15"  "distToS12_13":34
 cn "S03_15"  "distToS12_10":34
-cn "S03_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@47caedad"
 cn "S03_15"  "distToS01_13":34
 cn "S03_15"  "distToS01_14":34
 cn "S03_15"  "distToS01_11":34
@@ -17090,6 +17090,7 @@ cn "S04_00"  "distToS00_12":33
 cn "S04_00"  "distToS00_13":33
 cn "S04_00"  "distToS00_10":33
 cn "S04_00"  "distToS00_11":33
+cn "S04_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6ed3f258"
 cn "S04_00"  "distToS00_14":33
 cn "S04_00"  "distToS00_15":33
 cn "S04_00"  "distToS06_02":33
@@ -17219,7 +17220,6 @@ cn "S04_00"  "distToS12_11":33
 cn "S04_00"  "distToS12_14":33
 cn "S04_00"  "distToS12_13":33
 cn "S04_00"  "distToS12_10":33
-cn "S04_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7139992f"
 cn "S04_00"  "distToS01_13":33
 cn "S04_00"  "distToS01_14":33
 cn "S04_00"  "distToS01_11":33
@@ -17351,6 +17351,7 @@ cn "S04_01"  "distToS00_12":32
 cn "S04_01"  "distToS00_13":32
 cn "S04_01"  "distToS00_10":32
 cn "S04_01"  "distToS00_11":32
+cn "S04_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@8ad6665"
 cn "S04_01"  "distToS00_14":32
 cn "S04_01"  "distToS00_15":32
 cn "S04_01"  "distToS06_02":32
@@ -17480,7 +17481,6 @@ cn "S04_01"  "distToS12_11":32
 cn "S04_01"  "distToS12_14":32
 cn "S04_01"  "distToS12_13":32
 cn "S04_01"  "distToS12_10":32
-cn "S04_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@69504ae9"
 cn "S04_01"  "distToS01_13":32
 cn "S04_01"  "distToS01_14":32
 cn "S04_01"  "distToS01_11":32
@@ -17612,6 +17612,7 @@ cn "S04_02"  "distToS00_12":34
 cn "S04_02"  "distToS00_13":34
 cn "S04_02"  "distToS00_10":34
 cn "S04_02"  "distToS00_11":34
+cn "S04_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@30af5b6b"
 cn "S04_02"  "distToS00_14":34
 cn "S04_02"  "distToS00_15":34
 cn "S04_02"  "distToS06_02":34
@@ -17741,7 +17742,6 @@ cn "S04_02"  "distToS12_11":34
 cn "S04_02"  "distToS12_14":34
 cn "S04_02"  "distToS12_13":34
 cn "S04_02"  "distToS12_10":34
-cn "S04_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@387a8303"
 cn "S04_02"  "distToS01_13":34
 cn "S04_02"  "distToS01_14":34
 cn "S04_02"  "distToS01_11":34
@@ -17873,6 +17873,7 @@ cn "S04_03"  "distToS00_12":34
 cn "S04_03"  "distToS00_13":34
 cn "S04_03"  "distToS00_10":34
 cn "S04_03"  "distToS00_11":34
+cn "S04_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@19835e64"
 cn "S04_03"  "distToS00_14":34
 cn "S04_03"  "distToS00_15":34
 cn "S04_03"  "distToS06_02":34
@@ -18002,7 +18003,6 @@ cn "S04_03"  "distToS12_11":34
 cn "S04_03"  "distToS12_14":34
 cn "S04_03"  "distToS12_13":34
 cn "S04_03"  "distToS12_10":34
-cn "S04_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@28cda624"
 cn "S04_03"  "distToS01_13":34
 cn "S04_03"  "distToS01_14":34
 cn "S04_03"  "distToS01_11":34
@@ -18134,6 +18134,7 @@ cn "S04_04"  "distToS00_12":34
 cn "S04_04"  "distToS00_13":34
 cn "S04_04"  "distToS00_10":34
 cn "S04_04"  "distToS00_11":34
+cn "S04_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@68b32e3e"
 cn "S04_04"  "distToS00_14":34
 cn "S04_04"  "distToS00_15":34
 cn "S04_04"  "distToS06_02":34
@@ -18263,7 +18264,6 @@ cn "S04_04"  "distToS12_11":34
 cn "S04_04"  "distToS12_14":34
 cn "S04_04"  "distToS12_13":34
 cn "S04_04"  "distToS12_10":34
-cn "S04_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1500b2f3"
 cn "S04_04"  "distToS01_13":34
 cn "S04_04"  "distToS01_14":34
 cn "S04_04"  "distToS01_11":34
@@ -18395,6 +18395,7 @@ cn "S04_05"  "distToS00_12":34
 cn "S04_05"  "distToS00_13":34
 cn "S04_05"  "distToS00_10":34
 cn "S04_05"  "distToS00_11":34
+cn "S04_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@bcef303"
 cn "S04_05"  "distToS00_14":34
 cn "S04_05"  "distToS00_15":34
 cn "S04_05"  "distToS06_02":34
@@ -18524,7 +18525,6 @@ cn "S04_05"  "distToS12_11":34
 cn "S04_05"  "distToS12_14":34
 cn "S04_05"  "distToS12_13":34
 cn "S04_05"  "distToS12_10":34
-cn "S04_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7eecb5b8"
 cn "S04_05"  "distToS01_13":34
 cn "S04_05"  "distToS01_14":34
 cn "S04_05"  "distToS01_11":34
@@ -18656,6 +18656,7 @@ cn "S04_06"  "distToS00_12":34
 cn "S04_06"  "distToS00_13":34
 cn "S04_06"  "distToS00_10":34
 cn "S04_06"  "distToS00_11":34
+cn "S04_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@41709512"
 cn "S04_06"  "distToS00_14":34
 cn "S04_06"  "distToS00_15":34
 cn "S04_06"  "distToS06_02":34
@@ -18785,7 +18786,6 @@ cn "S04_06"  "distToS12_11":34
 cn "S04_06"  "distToS12_14":34
 cn "S04_06"  "distToS12_13":34
 cn "S04_06"  "distToS12_10":34
-cn "S04_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@126253fd"
 cn "S04_06"  "distToS01_13":34
 cn "S04_06"  "distToS01_14":34
 cn "S04_06"  "distToS01_11":34
@@ -18917,6 +18917,7 @@ cn "S04_07"  "distToS00_12":34
 cn "S04_07"  "distToS00_13":34
 cn "S04_07"  "distToS00_10":34
 cn "S04_07"  "distToS00_11":34
+cn "S04_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@42039326"
 cn "S04_07"  "distToS00_14":34
 cn "S04_07"  "distToS00_15":34
 cn "S04_07"  "distToS06_02":34
@@ -19046,7 +19047,6 @@ cn "S04_07"  "distToS12_11":34
 cn "S04_07"  "distToS12_14":34
 cn "S04_07"  "distToS12_13":34
 cn "S04_07"  "distToS12_10":34
-cn "S04_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@57db2b13"
 cn "S04_07"  "distToS01_13":34
 cn "S04_07"  "distToS01_14":34
 cn "S04_07"  "distToS01_11":34
@@ -19178,6 +19178,7 @@ cn "S04_08"  "distToS00_12":34
 cn "S04_08"  "distToS00_13":34
 cn "S04_08"  "distToS00_10":34
 cn "S04_08"  "distToS00_11":34
+cn "S04_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@33308786"
 cn "S04_08"  "distToS00_14":34
 cn "S04_08"  "distToS00_15":34
 cn "S04_08"  "distToS06_02":34
@@ -19307,7 +19308,6 @@ cn "S04_08"  "distToS12_11":34
 cn "S04_08"  "distToS12_14":34
 cn "S04_08"  "distToS12_13":34
 cn "S04_08"  "distToS12_10":34
-cn "S04_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@475c9c31"
 cn "S04_08"  "distToS01_13":34
 cn "S04_08"  "distToS01_14":34
 cn "S04_08"  "distToS01_11":34
@@ -19439,6 +19439,7 @@ cn "S04_09"  "distToS00_12":34
 cn "S04_09"  "distToS00_13":34
 cn "S04_09"  "distToS00_10":34
 cn "S04_09"  "distToS00_11":34
+cn "S04_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4f9a2c08"
 cn "S04_09"  "distToS00_14":34
 cn "S04_09"  "distToS00_15":34
 cn "S04_09"  "distToS06_02":34
@@ -19568,7 +19569,6 @@ cn "S04_09"  "distToS12_11":34
 cn "S04_09"  "distToS12_14":34
 cn "S04_09"  "distToS12_13":34
 cn "S04_09"  "distToS12_10":34
-cn "S04_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5c86a017"
 cn "S04_09"  "distToS01_13":34
 cn "S04_09"  "distToS01_14":34
 cn "S04_09"  "distToS01_11":34
@@ -19700,6 +19700,7 @@ cn "S04_10"  "distToS00_12":34
 cn "S04_10"  "distToS00_13":34
 cn "S04_10"  "distToS00_10":34
 cn "S04_10"  "distToS00_11":34
+cn "S04_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@a87f8ec"
 cn "S04_10"  "distToS00_14":34
 cn "S04_10"  "distToS00_15":34
 cn "S04_10"  "distToS06_02":34
@@ -19829,7 +19830,6 @@ cn "S04_10"  "distToS12_11":34
 cn "S04_10"  "distToS12_14":34
 cn "S04_10"  "distToS12_13":34
 cn "S04_10"  "distToS12_10":34
-cn "S04_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5c7bfdc1"
 cn "S04_10"  "distToS01_13":34
 cn "S04_10"  "distToS01_14":34
 cn "S04_10"  "distToS01_11":34
@@ -19961,6 +19961,7 @@ cn "S04_11"  "distToS00_12":34
 cn "S04_11"  "distToS00_13":34
 cn "S04_11"  "distToS00_10":34
 cn "S04_11"  "distToS00_11":34
+cn "S04_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5443d039"
 cn "S04_11"  "distToS00_14":34
 cn "S04_11"  "distToS00_15":34
 cn "S04_11"  "distToS06_02":34
@@ -20090,7 +20091,6 @@ cn "S04_11"  "distToS12_11":34
 cn "S04_11"  "distToS12_14":34
 cn "S04_11"  "distToS12_13":34
 cn "S04_11"  "distToS12_10":34
-cn "S04_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5276d6ee"
 cn "S04_11"  "distToS01_13":34
 cn "S04_11"  "distToS01_14":34
 cn "S04_11"  "distToS01_11":34
@@ -20222,6 +20222,7 @@ cn "S04_12"  "distToS00_12":34
 cn "S04_12"  "distToS00_13":34
 cn "S04_12"  "distToS00_10":34
 cn "S04_12"  "distToS00_11":34
+cn "S04_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@63787180"
 cn "S04_12"  "distToS00_14":34
 cn "S04_12"  "distToS00_15":34
 cn "S04_12"  "distToS06_02":34
@@ -20351,7 +20352,6 @@ cn "S04_12"  "distToS12_11":34
 cn "S04_12"  "distToS12_14":34
 cn "S04_12"  "distToS12_13":34
 cn "S04_12"  "distToS12_10":34
-cn "S04_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@71687585"
 cn "S04_12"  "distToS01_13":34
 cn "S04_12"  "distToS01_14":34
 cn "S04_12"  "distToS01_11":34
@@ -20483,6 +20483,7 @@ cn "S04_13"  "distToS00_12":34
 cn "S04_13"  "distToS00_13":34
 cn "S04_13"  "distToS00_10":34
 cn "S04_13"  "distToS00_11":34
+cn "S04_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7d1cfb8b"
 cn "S04_13"  "distToS00_14":34
 cn "S04_13"  "distToS00_15":34
 cn "S04_13"  "distToS06_02":34
@@ -20612,7 +20613,6 @@ cn "S04_13"  "distToS12_11":34
 cn "S04_13"  "distToS12_14":34
 cn "S04_13"  "distToS12_13":34
 cn "S04_13"  "distToS12_10":34
-cn "S04_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1807f5a7"
 cn "S04_13"  "distToS01_13":34
 cn "S04_13"  "distToS01_14":34
 cn "S04_13"  "distToS01_11":34
@@ -20744,6 +20744,7 @@ cn "S04_14"  "distToS00_12":34
 cn "S04_14"  "distToS00_13":34
 cn "S04_14"  "distToS00_10":34
 cn "S04_14"  "distToS00_11":34
+cn "S04_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@48e92c5c"
 cn "S04_14"  "distToS00_14":34
 cn "S04_14"  "distToS00_15":34
 cn "S04_14"  "distToS06_02":34
@@ -20873,7 +20874,6 @@ cn "S04_14"  "distToS12_11":34
 cn "S04_14"  "distToS12_14":34
 cn "S04_14"  "distToS12_13":34
 cn "S04_14"  "distToS12_10":34
-cn "S04_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1b919693"
 cn "S04_14"  "distToS01_13":34
 cn "S04_14"  "distToS01_14":34
 cn "S04_14"  "distToS01_11":34
@@ -21005,6 +21005,7 @@ cn "S04_15"  "distToS00_12":34
 cn "S04_15"  "distToS00_13":34
 cn "S04_15"  "distToS00_10":34
 cn "S04_15"  "distToS00_11":34
+cn "S04_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2e1ef60"
 cn "S04_15"  "distToS00_14":34
 cn "S04_15"  "distToS00_15":34
 cn "S04_15"  "distToS06_02":34
@@ -21134,7 +21135,6 @@ cn "S04_15"  "distToS12_11":34
 cn "S04_15"  "distToS12_14":34
 cn "S04_15"  "distToS12_13":34
 cn "S04_15"  "distToS12_10":34
-cn "S04_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7fb4f2a9"
 cn "S04_15"  "distToS01_13":34
 cn "S04_15"  "distToS01_14":34
 cn "S04_15"  "distToS01_11":34
@@ -21266,6 +21266,7 @@ cn "S05_00"  "distToS00_12":33
 cn "S05_00"  "distToS00_13":33
 cn "S05_00"  "distToS00_10":33
 cn "S05_00"  "distToS00_11":33
+cn "S05_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@22356acd"
 cn "S05_00"  "distToS00_14":33
 cn "S05_00"  "distToS00_15":33
 cn "S05_00"  "distToS06_02":33
@@ -21395,7 +21396,6 @@ cn "S05_00"  "distToS12_11":33
 cn "S05_00"  "distToS12_14":33
 cn "S05_00"  "distToS12_13":33
 cn "S05_00"  "distToS12_10":33
-cn "S05_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4dc27487"
 cn "S05_00"  "distToS01_13":33
 cn "S05_00"  "distToS01_14":33
 cn "S05_00"  "distToS01_11":33
@@ -21527,6 +21527,7 @@ cn "S05_01"  "distToS00_12":32
 cn "S05_01"  "distToS00_13":32
 cn "S05_01"  "distToS00_10":32
 cn "S05_01"  "distToS00_11":32
+cn "S05_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@386f0da3"
 cn "S05_01"  "distToS00_14":32
 cn "S05_01"  "distToS00_15":32
 cn "S05_01"  "distToS06_02":32
@@ -21656,7 +21657,6 @@ cn "S05_01"  "distToS12_11":32
 cn "S05_01"  "distToS12_14":32
 cn "S05_01"  "distToS12_13":32
 cn "S05_01"  "distToS12_10":32
-cn "S05_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6a4f1a55"
 cn "S05_01"  "distToS01_13":32
 cn "S05_01"  "distToS01_14":32
 cn "S05_01"  "distToS01_11":32
@@ -21788,6 +21788,7 @@ cn "S05_02"  "distToS00_12":34
 cn "S05_02"  "distToS00_13":34
 cn "S05_02"  "distToS00_10":34
 cn "S05_02"  "distToS00_11":34
+cn "S05_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@39655d3e"
 cn "S05_02"  "distToS00_14":34
 cn "S05_02"  "distToS00_15":34
 cn "S05_02"  "distToS06_02":34
@@ -21917,7 +21918,6 @@ cn "S05_02"  "distToS12_11":34
 cn "S05_02"  "distToS12_14":34
 cn "S05_02"  "distToS12_13":34
 cn "S05_02"  "distToS12_10":34
-cn "S05_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7dfd3c81"
 cn "S05_02"  "distToS01_13":34
 cn "S05_02"  "distToS01_14":34
 cn "S05_02"  "distToS01_11":34
@@ -22049,6 +22049,7 @@ cn "S05_03"  "distToS00_12":34
 cn "S05_03"  "distToS00_13":34
 cn "S05_03"  "distToS00_10":34
 cn "S05_03"  "distToS00_11":34
+cn "S05_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@34f22f9d"
 cn "S05_03"  "distToS00_14":34
 cn "S05_03"  "distToS00_15":34
 cn "S05_03"  "distToS06_02":34
@@ -22178,7 +22179,6 @@ cn "S05_03"  "distToS12_11":34
 cn "S05_03"  "distToS12_14":34
 cn "S05_03"  "distToS12_13":34
 cn "S05_03"  "distToS12_10":34
-cn "S05_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2584b82d"
 cn "S05_03"  "distToS01_13":34
 cn "S05_03"  "distToS01_14":34
 cn "S05_03"  "distToS01_11":34
@@ -22310,6 +22310,7 @@ cn "S05_04"  "distToS00_12":34
 cn "S05_04"  "distToS00_13":34
 cn "S05_04"  "distToS00_10":34
 cn "S05_04"  "distToS00_11":34
+cn "S05_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3d1848cc"
 cn "S05_04"  "distToS00_14":34
 cn "S05_04"  "distToS00_15":34
 cn "S05_04"  "distToS06_02":34
@@ -22439,7 +22440,6 @@ cn "S05_04"  "distToS12_11":34
 cn "S05_04"  "distToS12_14":34
 cn "S05_04"  "distToS12_13":34
 cn "S05_04"  "distToS12_10":34
-cn "S05_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7bbc8656"
 cn "S05_04"  "distToS01_13":34
 cn "S05_04"  "distToS01_14":34
 cn "S05_04"  "distToS01_11":34
@@ -22571,6 +22571,7 @@ cn "S05_05"  "distToS00_12":34
 cn "S05_05"  "distToS00_13":34
 cn "S05_05"  "distToS00_10":34
 cn "S05_05"  "distToS00_11":34
+cn "S05_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7dda48d9"
 cn "S05_05"  "distToS00_14":34
 cn "S05_05"  "distToS00_15":34
 cn "S05_05"  "distToS06_02":34
@@ -22700,7 +22701,6 @@ cn "S05_05"  "distToS12_11":34
 cn "S05_05"  "distToS12_14":34
 cn "S05_05"  "distToS12_13":34
 cn "S05_05"  "distToS12_10":34
-cn "S05_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6933b6c6"
 cn "S05_05"  "distToS01_13":34
 cn "S05_05"  "distToS01_14":34
 cn "S05_05"  "distToS01_11":34
@@ -22832,6 +22832,7 @@ cn "S05_06"  "distToS00_12":34
 cn "S05_06"  "distToS00_13":34
 cn "S05_06"  "distToS00_10":34
 cn "S05_06"  "distToS00_11":34
+cn "S05_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6e4566f1"
 cn "S05_06"  "distToS00_14":34
 cn "S05_06"  "distToS00_15":34
 cn "S05_06"  "distToS06_02":34
@@ -22961,7 +22962,6 @@ cn "S05_06"  "distToS12_11":34
 cn "S05_06"  "distToS12_14":34
 cn "S05_06"  "distToS12_13":34
 cn "S05_06"  "distToS12_10":34
-cn "S05_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7d3e8655"
 cn "S05_06"  "distToS01_13":34
 cn "S05_06"  "distToS01_14":34
 cn "S05_06"  "distToS01_11":34
@@ -23093,6 +23093,7 @@ cn "S05_07"  "distToS00_12":34
 cn "S05_07"  "distToS00_13":34
 cn "S05_07"  "distToS00_10":34
 cn "S05_07"  "distToS00_11":34
+cn "S05_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4b6e2263"
 cn "S05_07"  "distToS00_14":34
 cn "S05_07"  "distToS00_15":34
 cn "S05_07"  "distToS06_02":34
@@ -23222,7 +23223,6 @@ cn "S05_07"  "distToS12_11":34
 cn "S05_07"  "distToS12_14":34
 cn "S05_07"  "distToS12_13":34
 cn "S05_07"  "distToS12_10":34
-cn "S05_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7dfb0c0f"
 cn "S05_07"  "distToS01_13":34
 cn "S05_07"  "distToS01_14":34
 cn "S05_07"  "distToS01_11":34
@@ -23354,6 +23354,7 @@ cn "S05_08"  "distToS00_12":34
 cn "S05_08"  "distToS00_13":34
 cn "S05_08"  "distToS00_10":34
 cn "S05_08"  "distToS00_11":34
+cn "S05_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@344f4dea"
 cn "S05_08"  "distToS00_14":34
 cn "S05_08"  "distToS00_15":34
 cn "S05_08"  "distToS06_02":34
@@ -23483,7 +23484,6 @@ cn "S05_08"  "distToS12_11":34
 cn "S05_08"  "distToS12_14":34
 cn "S05_08"  "distToS12_13":34
 cn "S05_08"  "distToS12_10":34
-cn "S05_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@626abbd0"
 cn "S05_08"  "distToS01_13":34
 cn "S05_08"  "distToS01_14":34
 cn "S05_08"  "distToS01_11":34
@@ -23615,6 +23615,7 @@ cn "S05_09"  "distToS00_12":34
 cn "S05_09"  "distToS00_13":34
 cn "S05_09"  "distToS00_10":34
 cn "S05_09"  "distToS00_11":34
+cn "S05_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1b7c473a"
 cn "S05_09"  "distToS00_14":34
 cn "S05_09"  "distToS00_15":34
 cn "S05_09"  "distToS06_02":34
@@ -23744,7 +23745,6 @@ cn "S05_09"  "distToS12_11":34
 cn "S05_09"  "distToS12_14":34
 cn "S05_09"  "distToS12_13":34
 cn "S05_09"  "distToS12_10":34
-cn "S05_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@169bb4dd"
 cn "S05_09"  "distToS01_13":34
 cn "S05_09"  "distToS01_14":34
 cn "S05_09"  "distToS01_11":34
@@ -23876,6 +23876,7 @@ cn "S05_10"  "distToS00_12":34
 cn "S05_10"  "distToS00_13":34
 cn "S05_10"  "distToS00_10":34
 cn "S05_10"  "distToS00_11":34
+cn "S05_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5e4bd84a"
 cn "S05_10"  "distToS00_14":34
 cn "S05_10"  "distToS00_15":34
 cn "S05_10"  "distToS06_02":34
@@ -24005,7 +24006,6 @@ cn "S05_10"  "distToS12_11":34
 cn "S05_10"  "distToS12_14":34
 cn "S05_10"  "distToS12_13":34
 cn "S05_10"  "distToS12_10":34
-cn "S05_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1f9e9475"
 cn "S05_10"  "distToS01_13":34
 cn "S05_10"  "distToS01_14":34
 cn "S05_10"  "distToS01_11":34
@@ -24137,6 +24137,7 @@ cn "S05_11"  "distToS00_12":34
 cn "S05_11"  "distToS00_13":34
 cn "S05_11"  "distToS00_10":34
 cn "S05_11"  "distToS00_11":34
+cn "S05_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@648c94da"
 cn "S05_11"  "distToS00_14":34
 cn "S05_11"  "distToS00_15":34
 cn "S05_11"  "distToS06_02":34
@@ -24266,7 +24267,6 @@ cn "S05_11"  "distToS12_11":34
 cn "S05_11"  "distToS12_14":34
 cn "S05_11"  "distToS12_13":34
 cn "S05_11"  "distToS12_10":34
-cn "S05_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3aa078fd"
 cn "S05_11"  "distToS01_13":34
 cn "S05_11"  "distToS01_14":34
 cn "S05_11"  "distToS01_11":34
@@ -24398,6 +24398,7 @@ cn "S05_12"  "distToS00_12":34
 cn "S05_12"  "distToS00_13":34
 cn "S05_12"  "distToS00_10":34
 cn "S05_12"  "distToS00_11":34
+cn "S05_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2a62b5bc"
 cn "S05_12"  "distToS00_14":34
 cn "S05_12"  "distToS00_15":34
 cn "S05_12"  "distToS06_02":34
@@ -24527,7 +24528,6 @@ cn "S05_12"  "distToS12_11":34
 cn "S05_12"  "distToS12_14":34
 cn "S05_12"  "distToS12_13":34
 cn "S05_12"  "distToS12_10":34
-cn "S05_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@d23e042"
 cn "S05_12"  "distToS01_13":34
 cn "S05_12"  "distToS01_14":34
 cn "S05_12"  "distToS01_11":34
@@ -24659,6 +24659,7 @@ cn "S05_13"  "distToS00_12":34
 cn "S05_13"  "distToS00_13":34
 cn "S05_13"  "distToS00_10":34
 cn "S05_13"  "distToS00_11":34
+cn "S05_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@53de625d"
 cn "S05_13"  "distToS00_14":34
 cn "S05_13"  "distToS00_15":34
 cn "S05_13"  "distToS06_02":34
@@ -24788,7 +24789,6 @@ cn "S05_13"  "distToS12_11":34
 cn "S05_13"  "distToS12_14":34
 cn "S05_13"  "distToS12_13":34
 cn "S05_13"  "distToS12_10":34
-cn "S05_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@46d59067"
 cn "S05_13"  "distToS01_13":34
 cn "S05_13"  "distToS01_14":34
 cn "S05_13"  "distToS01_11":34
@@ -24920,6 +24920,7 @@ cn "S05_14"  "distToS00_12":34
 cn "S05_14"  "distToS00_13":34
 cn "S05_14"  "distToS00_10":34
 cn "S05_14"  "distToS00_11":34
+cn "S05_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@535779e4"
 cn "S05_14"  "distToS00_14":34
 cn "S05_14"  "distToS00_15":34
 cn "S05_14"  "distToS06_02":34
@@ -25049,7 +25050,6 @@ cn "S05_14"  "distToS12_11":34
 cn "S05_14"  "distToS12_14":34
 cn "S05_14"  "distToS12_13":34
 cn "S05_14"  "distToS12_10":34
-cn "S05_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2d0399f4"
 cn "S05_14"  "distToS01_13":34
 cn "S05_14"  "distToS01_14":34
 cn "S05_14"  "distToS01_11":34
@@ -25181,6 +25181,7 @@ cn "S05_15"  "distToS00_12":34
 cn "S05_15"  "distToS00_13":34
 cn "S05_15"  "distToS00_10":34
 cn "S05_15"  "distToS00_11":34
+cn "S05_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@53fd0d10"
 cn "S05_15"  "distToS00_14":34
 cn "S05_15"  "distToS00_15":34
 cn "S05_15"  "distToS06_02":34
@@ -25310,7 +25311,6 @@ cn "S05_15"  "distToS12_11":34
 cn "S05_15"  "distToS12_14":34
 cn "S05_15"  "distToS12_13":34
 cn "S05_15"  "distToS12_10":34
-cn "S05_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@14dd7b39"
 cn "S05_15"  "distToS01_13":34
 cn "S05_15"  "distToS01_14":34
 cn "S05_15"  "distToS01_11":34
@@ -25442,6 +25442,7 @@ cn "S06_00"  "distToS00_12":33
 cn "S06_00"  "distToS00_13":33
 cn "S06_00"  "distToS00_10":33
 cn "S06_00"  "distToS00_11":33
+cn "S06_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6c0d9d86"
 cn "S06_00"  "distToS00_14":33
 cn "S06_00"  "distToS00_15":33
 cn "S06_00"  "distToS06_02":1
@@ -25571,7 +25572,6 @@ cn "S06_00"  "distToS12_11":33
 cn "S06_00"  "distToS12_14":33
 cn "S06_00"  "distToS12_13":33
 cn "S06_00"  "distToS12_10":33
-cn "S06_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@66ea810"
 cn "S06_00"  "distToS01_13":33
 cn "S06_00"  "distToS01_14":33
 cn "S06_00"  "distToS01_11":33
@@ -25703,6 +25703,7 @@ cn "S06_01"  "distToS00_12":32
 cn "S06_01"  "distToS00_13":32
 cn "S06_01"  "distToS00_10":32
 cn "S06_01"  "distToS00_11":32
+cn "S06_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4ce1d6d0"
 cn "S06_01"  "distToS00_14":32
 cn "S06_01"  "distToS00_15":32
 cn "S06_01"  "distToS06_02":2
@@ -25832,7 +25833,6 @@ cn "S06_01"  "distToS12_11":32
 cn "S06_01"  "distToS12_14":32
 cn "S06_01"  "distToS12_13":32
 cn "S06_01"  "distToS12_10":32
-cn "S06_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6cd24612"
 cn "S06_01"  "distToS01_13":32
 cn "S06_01"  "distToS01_14":32
 cn "S06_01"  "distToS01_11":32
@@ -25964,6 +25964,7 @@ cn "S06_02"  "distToS00_12":34
 cn "S06_02"  "distToS00_13":34
 cn "S06_02"  "distToS00_10":34
 cn "S06_02"  "distToS00_11":34
+cn "S06_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@24111ef1"
 cn "S06_02"  "distToS00_14":34
 cn "S06_02"  "distToS00_15":34
 cn "S06_02"  "distToS06_02":0
@@ -26093,7 +26094,6 @@ cn "S06_02"  "distToS12_11":34
 cn "S06_02"  "distToS12_14":34
 cn "S06_02"  "distToS12_13":34
 cn "S06_02"  "distToS12_10":34
-cn "S06_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5dafbe45"
 cn "S06_02"  "distToS01_13":34
 cn "S06_02"  "distToS01_14":34
 cn "S06_02"  "distToS01_11":34
@@ -26225,6 +26225,7 @@ cn "S06_03"  "distToS00_12":34
 cn "S06_03"  "distToS00_13":34
 cn "S06_03"  "distToS00_10":34
 cn "S06_03"  "distToS00_11":34
+cn "S06_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1f3f02ee"
 cn "S06_03"  "distToS00_14":34
 cn "S06_03"  "distToS00_15":34
 cn "S06_03"  "distToS06_02":2
@@ -26354,7 +26355,6 @@ cn "S06_03"  "distToS12_11":34
 cn "S06_03"  "distToS12_14":34
 cn "S06_03"  "distToS12_13":34
 cn "S06_03"  "distToS12_10":34
-cn "S06_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2254127a"
 cn "S06_03"  "distToS01_13":34
 cn "S06_03"  "distToS01_14":34
 cn "S06_03"  "distToS01_11":34
@@ -26486,6 +26486,7 @@ cn "S06_04"  "distToS00_12":34
 cn "S06_04"  "distToS00_13":34
 cn "S06_04"  "distToS00_10":34
 cn "S06_04"  "distToS00_11":34
+cn "S06_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1fde5d22"
 cn "S06_04"  "distToS00_14":34
 cn "S06_04"  "distToS00_15":34
 cn "S06_04"  "distToS06_02":2
@@ -26615,7 +26616,6 @@ cn "S06_04"  "distToS12_11":34
 cn "S06_04"  "distToS12_14":34
 cn "S06_04"  "distToS12_13":34
 cn "S06_04"  "distToS12_10":34
-cn "S06_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@51891008"
 cn "S06_04"  "distToS01_13":34
 cn "S06_04"  "distToS01_14":34
 cn "S06_04"  "distToS01_11":34
@@ -26747,6 +26747,7 @@ cn "S06_05"  "distToS00_12":34
 cn "S06_05"  "distToS00_13":34
 cn "S06_05"  "distToS00_10":34
 cn "S06_05"  "distToS00_11":34
+cn "S06_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5dcb4f5f"
 cn "S06_05"  "distToS00_14":34
 cn "S06_05"  "distToS00_15":34
 cn "S06_05"  "distToS06_02":2
@@ -26876,7 +26877,6 @@ cn "S06_05"  "distToS12_11":34
 cn "S06_05"  "distToS12_14":34
 cn "S06_05"  "distToS12_13":34
 cn "S06_05"  "distToS12_10":34
-cn "S06_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2f953efd"
 cn "S06_05"  "distToS01_13":34
 cn "S06_05"  "distToS01_14":34
 cn "S06_05"  "distToS01_11":34
@@ -27008,6 +27008,7 @@ cn "S06_06"  "distToS00_12":34
 cn "S06_06"  "distToS00_13":34
 cn "S06_06"  "distToS00_10":34
 cn "S06_06"  "distToS00_11":34
+cn "S06_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@71812481"
 cn "S06_06"  "distToS00_14":34
 cn "S06_06"  "distToS00_15":34
 cn "S06_06"  "distToS06_02":2
@@ -27137,7 +27138,6 @@ cn "S06_06"  "distToS12_11":34
 cn "S06_06"  "distToS12_14":34
 cn "S06_06"  "distToS12_13":34
 cn "S06_06"  "distToS12_10":34
-cn "S06_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@f68f0dc"
 cn "S06_06"  "distToS01_13":34
 cn "S06_06"  "distToS01_14":34
 cn "S06_06"  "distToS01_11":34
@@ -27269,6 +27269,7 @@ cn "S06_07"  "distToS00_12":34
 cn "S06_07"  "distToS00_13":34
 cn "S06_07"  "distToS00_10":34
 cn "S06_07"  "distToS00_11":34
+cn "S06_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@16ce702d"
 cn "S06_07"  "distToS00_14":34
 cn "S06_07"  "distToS00_15":34
 cn "S06_07"  "distToS06_02":2
@@ -27398,7 +27399,6 @@ cn "S06_07"  "distToS12_11":34
 cn "S06_07"  "distToS12_14":34
 cn "S06_07"  "distToS12_13":34
 cn "S06_07"  "distToS12_10":34
-cn "S06_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@d2de489"
 cn "S06_07"  "distToS01_13":34
 cn "S06_07"  "distToS01_14":34
 cn "S06_07"  "distToS01_11":34
@@ -27530,6 +27530,7 @@ cn "S06_08"  "distToS00_12":34
 cn "S06_08"  "distToS00_13":34
 cn "S06_08"  "distToS00_10":34
 cn "S06_08"  "distToS00_11":34
+cn "S06_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7b94089b"
 cn "S06_08"  "distToS00_14":34
 cn "S06_08"  "distToS00_15":34
 cn "S06_08"  "distToS06_02":2
@@ -27659,7 +27660,6 @@ cn "S06_08"  "distToS12_11":34
 cn "S06_08"  "distToS12_14":34
 cn "S06_08"  "distToS12_13":34
 cn "S06_08"  "distToS12_10":34
-cn "S06_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@14bdbc74"
 cn "S06_08"  "distToS01_13":34
 cn "S06_08"  "distToS01_14":34
 cn "S06_08"  "distToS01_11":34
@@ -27791,6 +27791,7 @@ cn "S06_09"  "distToS00_12":34
 cn "S06_09"  "distToS00_13":34
 cn "S06_09"  "distToS00_10":34
 cn "S06_09"  "distToS00_11":34
+cn "S06_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7ca20101"
 cn "S06_09"  "distToS00_14":34
 cn "S06_09"  "distToS00_15":34
 cn "S06_09"  "distToS06_02":2
@@ -27920,7 +27921,6 @@ cn "S06_09"  "distToS12_11":34
 cn "S06_09"  "distToS12_14":34
 cn "S06_09"  "distToS12_13":34
 cn "S06_09"  "distToS12_10":34
-cn "S06_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@12591ac8"
 cn "S06_09"  "distToS01_13":34
 cn "S06_09"  "distToS01_14":34
 cn "S06_09"  "distToS01_11":34
@@ -28052,6 +28052,7 @@ cn "S06_10"  "distToS00_12":34
 cn "S06_10"  "distToS00_13":34
 cn "S06_10"  "distToS00_10":34
 cn "S06_10"  "distToS00_11":34
+cn "S06_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@47f9738"
 cn "S06_10"  "distToS00_14":34
 cn "S06_10"  "distToS00_15":34
 cn "S06_10"  "distToS06_02":2
@@ -28181,7 +28182,6 @@ cn "S06_10"  "distToS12_11":34
 cn "S06_10"  "distToS12_14":34
 cn "S06_10"  "distToS12_13":34
 cn "S06_10"  "distToS12_10":34
-cn "S06_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5a7fe64f"
 cn "S06_10"  "distToS01_13":34
 cn "S06_10"  "distToS01_14":34
 cn "S06_10"  "distToS01_11":34
@@ -28313,6 +28313,7 @@ cn "S06_11"  "distToS00_12":34
 cn "S06_11"  "distToS00_13":34
 cn "S06_11"  "distToS00_10":34
 cn "S06_11"  "distToS00_11":34
+cn "S06_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6155d082"
 cn "S06_11"  "distToS00_14":34
 cn "S06_11"  "distToS00_15":34
 cn "S06_11"  "distToS06_02":2
@@ -28442,7 +28443,6 @@ cn "S06_11"  "distToS12_11":34
 cn "S06_11"  "distToS12_14":34
 cn "S06_11"  "distToS12_13":34
 cn "S06_11"  "distToS12_10":34
-cn "S06_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@38145825"
 cn "S06_11"  "distToS01_13":34
 cn "S06_11"  "distToS01_14":34
 cn "S06_11"  "distToS01_11":34
@@ -28574,6 +28574,7 @@ cn "S06_12"  "distToS00_12":34
 cn "S06_12"  "distToS00_13":34
 cn "S06_12"  "distToS00_10":34
 cn "S06_12"  "distToS00_11":34
+cn "S06_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3a5ecce3"
 cn "S06_12"  "distToS00_14":34
 cn "S06_12"  "distToS00_15":34
 cn "S06_12"  "distToS06_02":2
@@ -28703,7 +28704,6 @@ cn "S06_12"  "distToS12_11":34
 cn "S06_12"  "distToS12_14":34
 cn "S06_12"  "distToS12_13":34
 cn "S06_12"  "distToS12_10":34
-cn "S06_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@41330d4f"
 cn "S06_12"  "distToS01_13":34
 cn "S06_12"  "distToS01_14":34
 cn "S06_12"  "distToS01_11":34
@@ -28835,6 +28835,7 @@ cn "S06_13"  "distToS00_12":34
 cn "S06_13"  "distToS00_13":34
 cn "S06_13"  "distToS00_10":34
 cn "S06_13"  "distToS00_11":34
+cn "S06_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@561868a0"
 cn "S06_13"  "distToS00_14":34
 cn "S06_13"  "distToS00_15":34
 cn "S06_13"  "distToS06_02":2
@@ -28964,7 +28965,6 @@ cn "S06_13"  "distToS12_11":34
 cn "S06_13"  "distToS12_14":34
 cn "S06_13"  "distToS12_13":34
 cn "S06_13"  "distToS12_10":34
-cn "S06_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1b66c0fb"
 cn "S06_13"  "distToS01_13":34
 cn "S06_13"  "distToS01_14":34
 cn "S06_13"  "distToS01_11":34
@@ -29096,6 +29096,7 @@ cn "S06_14"  "distToS00_12":34
 cn "S06_14"  "distToS00_13":34
 cn "S06_14"  "distToS00_10":34
 cn "S06_14"  "distToS00_11":34
+cn "S06_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2ea6e30c"
 cn "S06_14"  "distToS00_14":34
 cn "S06_14"  "distToS00_15":34
 cn "S06_14"  "distToS06_02":2
@@ -29225,7 +29226,6 @@ cn "S06_14"  "distToS12_11":34
 cn "S06_14"  "distToS12_14":34
 cn "S06_14"  "distToS12_13":34
 cn "S06_14"  "distToS12_10":34
-cn "S06_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3e0e1046"
 cn "S06_14"  "distToS01_13":34
 cn "S06_14"  "distToS01_14":34
 cn "S06_14"  "distToS01_11":34
@@ -29357,6 +29357,7 @@ cn "S06_15"  "distToS00_12":34
 cn "S06_15"  "distToS00_13":34
 cn "S06_15"  "distToS00_10":34
 cn "S06_15"  "distToS00_11":34
+cn "S06_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6138e79a"
 cn "S06_15"  "distToS00_14":34
 cn "S06_15"  "distToS00_15":34
 cn "S06_15"  "distToS06_02":2
@@ -29486,7 +29487,6 @@ cn "S06_15"  "distToS12_11":34
 cn "S06_15"  "distToS12_14":34
 cn "S06_15"  "distToS12_13":34
 cn "S06_15"  "distToS12_10":34
-cn "S06_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@24c1b2d2"
 cn "S06_15"  "distToS01_13":34
 cn "S06_15"  "distToS01_14":34
 cn "S06_15"  "distToS01_11":34
@@ -29618,6 +29618,7 @@ cn "S07_00"  "distToS00_12":33
 cn "S07_00"  "distToS00_13":33
 cn "S07_00"  "distToS00_10":33
 cn "S07_00"  "distToS00_11":33
+cn "S07_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2dcd168a"
 cn "S07_00"  "distToS00_14":33
 cn "S07_00"  "distToS00_15":33
 cn "S07_00"  "distToS06_02":33
@@ -29747,7 +29748,6 @@ cn "S07_00"  "distToS12_11":33
 cn "S07_00"  "distToS12_14":33
 cn "S07_00"  "distToS12_13":33
 cn "S07_00"  "distToS12_10":33
-cn "S07_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7dc19a70"
 cn "S07_00"  "distToS01_13":33
 cn "S07_00"  "distToS01_14":33
 cn "S07_00"  "distToS01_11":33
@@ -29879,6 +29879,7 @@ cn "S07_01"  "distToS00_12":32
 cn "S07_01"  "distToS00_13":32
 cn "S07_01"  "distToS00_10":32
 cn "S07_01"  "distToS00_11":32
+cn "S07_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@388526fb"
 cn "S07_01"  "distToS00_14":32
 cn "S07_01"  "distToS00_15":32
 cn "S07_01"  "distToS06_02":32
@@ -30008,7 +30009,6 @@ cn "S07_01"  "distToS12_11":32
 cn "S07_01"  "distToS12_14":32
 cn "S07_01"  "distToS12_13":32
 cn "S07_01"  "distToS12_10":32
-cn "S07_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@508dec2b"
 cn "S07_01"  "distToS01_13":32
 cn "S07_01"  "distToS01_14":32
 cn "S07_01"  "distToS01_11":32
@@ -30140,6 +30140,7 @@ cn "S07_02"  "distToS00_12":34
 cn "S07_02"  "distToS00_13":34
 cn "S07_02"  "distToS00_10":34
 cn "S07_02"  "distToS00_11":34
+cn "S07_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@21a21c64"
 cn "S07_02"  "distToS00_14":34
 cn "S07_02"  "distToS00_15":34
 cn "S07_02"  "distToS06_02":34
@@ -30269,7 +30270,6 @@ cn "S07_02"  "distToS12_11":34
 cn "S07_02"  "distToS12_14":34
 cn "S07_02"  "distToS12_13":34
 cn "S07_02"  "distToS12_10":34
-cn "S07_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1e4f4a5c"
 cn "S07_02"  "distToS01_13":34
 cn "S07_02"  "distToS01_14":34
 cn "S07_02"  "distToS01_11":34
@@ -30401,6 +30401,7 @@ cn "S07_03"  "distToS00_12":34
 cn "S07_03"  "distToS00_13":34
 cn "S07_03"  "distToS00_10":34
 cn "S07_03"  "distToS00_11":34
+cn "S07_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7803bfd"
 cn "S07_03"  "distToS00_14":34
 cn "S07_03"  "distToS00_15":34
 cn "S07_03"  "distToS06_02":34
@@ -30530,7 +30531,6 @@ cn "S07_03"  "distToS12_11":34
 cn "S07_03"  "distToS12_14":34
 cn "S07_03"  "distToS12_13":34
 cn "S07_03"  "distToS12_10":34
-cn "S07_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@37313c65"
 cn "S07_03"  "distToS01_13":34
 cn "S07_03"  "distToS01_14":34
 cn "S07_03"  "distToS01_11":34
@@ -30662,6 +30662,7 @@ cn "S07_04"  "distToS00_12":34
 cn "S07_04"  "distToS00_13":34
 cn "S07_04"  "distToS00_10":34
 cn "S07_04"  "distToS00_11":34
+cn "S07_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@42bc14c1"
 cn "S07_04"  "distToS00_14":34
 cn "S07_04"  "distToS00_15":34
 cn "S07_04"  "distToS06_02":34
@@ -30791,7 +30792,6 @@ cn "S07_04"  "distToS12_11":34
 cn "S07_04"  "distToS12_14":34
 cn "S07_04"  "distToS12_13":34
 cn "S07_04"  "distToS12_10":34
-cn "S07_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@465232e9"
 cn "S07_04"  "distToS01_13":34
 cn "S07_04"  "distToS01_14":34
 cn "S07_04"  "distToS01_11":34
@@ -30923,6 +30923,7 @@ cn "S07_05"  "distToS00_12":34
 cn "S07_05"  "distToS00_13":34
 cn "S07_05"  "distToS00_10":34
 cn "S07_05"  "distToS00_11":34
+cn "S07_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@531f4093"
 cn "S07_05"  "distToS00_14":34
 cn "S07_05"  "distToS00_15":34
 cn "S07_05"  "distToS06_02":34
@@ -31052,7 +31053,6 @@ cn "S07_05"  "distToS12_11":34
 cn "S07_05"  "distToS12_14":34
 cn "S07_05"  "distToS12_13":34
 cn "S07_05"  "distToS12_10":34
-cn "S07_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@798162bc"
 cn "S07_05"  "distToS01_13":34
 cn "S07_05"  "distToS01_14":34
 cn "S07_05"  "distToS01_11":34
@@ -31184,6 +31184,7 @@ cn "S07_06"  "distToS00_12":34
 cn "S07_06"  "distToS00_13":34
 cn "S07_06"  "distToS00_10":34
 cn "S07_06"  "distToS00_11":34
+cn "S07_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@62ef27a8"
 cn "S07_06"  "distToS00_14":34
 cn "S07_06"  "distToS00_15":34
 cn "S07_06"  "distToS06_02":34
@@ -31313,7 +31314,6 @@ cn "S07_06"  "distToS12_11":34
 cn "S07_06"  "distToS12_14":34
 cn "S07_06"  "distToS12_13":34
 cn "S07_06"  "distToS12_10":34
-cn "S07_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1df8da7a"
 cn "S07_06"  "distToS01_13":34
 cn "S07_06"  "distToS01_14":34
 cn "S07_06"  "distToS01_11":34
@@ -31445,6 +31445,7 @@ cn "S07_07"  "distToS00_12":34
 cn "S07_07"  "distToS00_13":34
 cn "S07_07"  "distToS00_10":34
 cn "S07_07"  "distToS00_11":34
+cn "S07_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6436a7db"
 cn "S07_07"  "distToS00_14":34
 cn "S07_07"  "distToS00_15":34
 cn "S07_07"  "distToS06_02":34
@@ -31574,7 +31575,6 @@ cn "S07_07"  "distToS12_11":34
 cn "S07_07"  "distToS12_14":34
 cn "S07_07"  "distToS12_13":34
 cn "S07_07"  "distToS12_10":34
-cn "S07_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@23941fb4"
 cn "S07_07"  "distToS01_13":34
 cn "S07_07"  "distToS01_14":34
 cn "S07_07"  "distToS01_11":34
@@ -31706,6 +31706,7 @@ cn "S07_08"  "distToS00_12":34
 cn "S07_08"  "distToS00_13":34
 cn "S07_08"  "distToS00_10":34
 cn "S07_08"  "distToS00_11":34
+cn "S07_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@460ebd80"
 cn "S07_08"  "distToS00_14":34
 cn "S07_08"  "distToS00_15":34
 cn "S07_08"  "distToS06_02":34
@@ -31835,7 +31836,6 @@ cn "S07_08"  "distToS12_11":34
 cn "S07_08"  "distToS12_14":34
 cn "S07_08"  "distToS12_13":34
 cn "S07_08"  "distToS12_10":34
-cn "S07_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7486b455"
 cn "S07_08"  "distToS01_13":34
 cn "S07_08"  "distToS01_14":34
 cn "S07_08"  "distToS01_11":34
@@ -31967,6 +31967,7 @@ cn "S07_09"  "distToS00_12":34
 cn "S07_09"  "distToS00_13":34
 cn "S07_09"  "distToS00_10":34
 cn "S07_09"  "distToS00_11":34
+cn "S07_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6f3c660a"
 cn "S07_09"  "distToS00_14":34
 cn "S07_09"  "distToS00_15":34
 cn "S07_09"  "distToS06_02":34
@@ -32096,7 +32097,6 @@ cn "S07_09"  "distToS12_11":34
 cn "S07_09"  "distToS12_14":34
 cn "S07_09"  "distToS12_13":34
 cn "S07_09"  "distToS12_10":34
-cn "S07_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@660acfb"
 cn "S07_09"  "distToS01_13":34
 cn "S07_09"  "distToS01_14":34
 cn "S07_09"  "distToS01_11":34
@@ -32228,6 +32228,7 @@ cn "S07_10"  "distToS00_12":34
 cn "S07_10"  "distToS00_13":34
 cn "S07_10"  "distToS00_10":34
 cn "S07_10"  "distToS00_11":34
+cn "S07_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@74f5ce22"
 cn "S07_10"  "distToS00_14":34
 cn "S07_10"  "distToS00_15":34
 cn "S07_10"  "distToS06_02":34
@@ -32357,7 +32358,6 @@ cn "S07_10"  "distToS12_11":34
 cn "S07_10"  "distToS12_14":34
 cn "S07_10"  "distToS12_13":34
 cn "S07_10"  "distToS12_10":34
-cn "S07_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5d908d47"
 cn "S07_10"  "distToS01_13":34
 cn "S07_10"  "distToS01_14":34
 cn "S07_10"  "distToS01_11":34
@@ -32489,6 +32489,7 @@ cn "S07_11"  "distToS00_12":34
 cn "S07_11"  "distToS00_13":34
 cn "S07_11"  "distToS00_10":34
 cn "S07_11"  "distToS00_11":34
+cn "S07_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@25aca718"
 cn "S07_11"  "distToS00_14":34
 cn "S07_11"  "distToS00_15":34
 cn "S07_11"  "distToS06_02":34
@@ -32618,7 +32619,6 @@ cn "S07_11"  "distToS12_11":34
 cn "S07_11"  "distToS12_14":34
 cn "S07_11"  "distToS12_13":34
 cn "S07_11"  "distToS12_10":34
-cn "S07_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5efa40fe"
 cn "S07_11"  "distToS01_13":34
 cn "S07_11"  "distToS01_14":34
 cn "S07_11"  "distToS01_11":34
@@ -32750,6 +32750,7 @@ cn "S07_12"  "distToS00_12":34
 cn "S07_12"  "distToS00_13":34
 cn "S07_12"  "distToS00_10":34
 cn "S07_12"  "distToS00_11":34
+cn "S07_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@16fdec90"
 cn "S07_12"  "distToS00_14":34
 cn "S07_12"  "distToS00_15":34
 cn "S07_12"  "distToS06_02":34
@@ -32879,7 +32880,6 @@ cn "S07_12"  "distToS12_11":34
 cn "S07_12"  "distToS12_14":34
 cn "S07_12"  "distToS12_13":34
 cn "S07_12"  "distToS12_10":34
-cn "S07_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1f9f6368"
 cn "S07_12"  "distToS01_13":34
 cn "S07_12"  "distToS01_14":34
 cn "S07_12"  "distToS01_11":34
@@ -33011,6 +33011,7 @@ cn "S07_13"  "distToS00_12":34
 cn "S07_13"  "distToS00_13":34
 cn "S07_13"  "distToS00_10":34
 cn "S07_13"  "distToS00_11":34
+cn "S07_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1afdd473"
 cn "S07_13"  "distToS00_14":34
 cn "S07_13"  "distToS00_15":34
 cn "S07_13"  "distToS06_02":34
@@ -33140,7 +33141,6 @@ cn "S07_13"  "distToS12_11":34
 cn "S07_13"  "distToS12_14":34
 cn "S07_13"  "distToS12_13":34
 cn "S07_13"  "distToS12_10":34
-cn "S07_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1c9b0314"
 cn "S07_13"  "distToS01_13":34
 cn "S07_13"  "distToS01_14":34
 cn "S07_13"  "distToS01_11":34
@@ -33272,6 +33272,7 @@ cn "S07_14"  "distToS00_12":34
 cn "S07_14"  "distToS00_13":34
 cn "S07_14"  "distToS00_10":34
 cn "S07_14"  "distToS00_11":34
+cn "S07_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@40238dd0"
 cn "S07_14"  "distToS00_14":34
 cn "S07_14"  "distToS00_15":34
 cn "S07_14"  "distToS06_02":34
@@ -33401,7 +33402,6 @@ cn "S07_14"  "distToS12_11":34
 cn "S07_14"  "distToS12_14":34
 cn "S07_14"  "distToS12_13":34
 cn "S07_14"  "distToS12_10":34
-cn "S07_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@45385f75"
 cn "S07_14"  "distToS01_13":34
 cn "S07_14"  "distToS01_14":34
 cn "S07_14"  "distToS01_11":34
@@ -33533,6 +33533,7 @@ cn "S07_15"  "distToS00_12":34
 cn "S07_15"  "distToS00_13":34
 cn "S07_15"  "distToS00_10":34
 cn "S07_15"  "distToS00_11":34
+cn "S07_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7776ab"
 cn "S07_15"  "distToS00_14":34
 cn "S07_15"  "distToS00_15":34
 cn "S07_15"  "distToS06_02":34
@@ -33662,7 +33663,6 @@ cn "S07_15"  "distToS12_11":34
 cn "S07_15"  "distToS12_14":34
 cn "S07_15"  "distToS12_13":34
 cn "S07_15"  "distToS12_10":34
-cn "S07_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@49c90a9c"
 cn "S07_15"  "distToS01_13":34
 cn "S07_15"  "distToS01_14":34
 cn "S07_15"  "distToS01_11":34
@@ -33794,6 +33794,7 @@ cn "S08_00"  "distToS00_12":33
 cn "S08_00"  "distToS00_13":33
 cn "S08_00"  "distToS00_10":33
 cn "S08_00"  "distToS00_11":33
+cn "S08_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@79179359"
 cn "S08_00"  "distToS00_14":33
 cn "S08_00"  "distToS00_15":33
 cn "S08_00"  "distToS06_02":33
@@ -33923,7 +33924,6 @@ cn "S08_00"  "distToS12_11":33
 cn "S08_00"  "distToS12_14":33
 cn "S08_00"  "distToS12_13":33
 cn "S08_00"  "distToS12_10":33
-cn "S08_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2d29b4ee"
 cn "S08_00"  "distToS01_13":33
 cn "S08_00"  "distToS01_14":33
 cn "S08_00"  "distToS01_11":33
@@ -34055,6 +34055,7 @@ cn "S08_01"  "distToS00_12":32
 cn "S08_01"  "distToS00_13":32
 cn "S08_01"  "distToS00_10":32
 cn "S08_01"  "distToS00_11":32
+cn "S08_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@dbd8e44"
 cn "S08_01"  "distToS00_14":32
 cn "S08_01"  "distToS00_15":32
 cn "S08_01"  "distToS06_02":32
@@ -34184,7 +34185,6 @@ cn "S08_01"  "distToS12_11":32
 cn "S08_01"  "distToS12_14":32
 cn "S08_01"  "distToS12_13":32
 cn "S08_01"  "distToS12_10":32
-cn "S08_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@69ee81fc"
 cn "S08_01"  "distToS01_13":32
 cn "S08_01"  "distToS01_14":32
 cn "S08_01"  "distToS01_11":32
@@ -34316,6 +34316,7 @@ cn "S08_02"  "distToS00_12":34
 cn "S08_02"  "distToS00_13":34
 cn "S08_02"  "distToS00_10":34
 cn "S08_02"  "distToS00_11":34
+cn "S08_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@51acdf2e"
 cn "S08_02"  "distToS00_14":34
 cn "S08_02"  "distToS00_15":34
 cn "S08_02"  "distToS06_02":34
@@ -34445,7 +34446,6 @@ cn "S08_02"  "distToS12_11":34
 cn "S08_02"  "distToS12_14":34
 cn "S08_02"  "distToS12_13":34
 cn "S08_02"  "distToS12_10":34
-cn "S08_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6e2aa843"
 cn "S08_02"  "distToS01_13":34
 cn "S08_02"  "distToS01_14":34
 cn "S08_02"  "distToS01_11":34
@@ -34577,6 +34577,7 @@ cn "S08_03"  "distToS00_12":34
 cn "S08_03"  "distToS00_13":34
 cn "S08_03"  "distToS00_10":34
 cn "S08_03"  "distToS00_11":34
+cn "S08_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6a55299e"
 cn "S08_03"  "distToS00_14":34
 cn "S08_03"  "distToS00_15":34
 cn "S08_03"  "distToS06_02":34
@@ -34706,7 +34707,6 @@ cn "S08_03"  "distToS12_11":34
 cn "S08_03"  "distToS12_14":34
 cn "S08_03"  "distToS12_13":34
 cn "S08_03"  "distToS12_10":34
-cn "S08_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6f36c2f0"
 cn "S08_03"  "distToS01_13":34
 cn "S08_03"  "distToS01_14":34
 cn "S08_03"  "distToS01_11":34
@@ -34838,6 +34838,7 @@ cn "S08_04"  "distToS00_12":34
 cn "S08_04"  "distToS00_13":34
 cn "S08_04"  "distToS00_10":34
 cn "S08_04"  "distToS00_11":34
+cn "S08_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2f1de2d6"
 cn "S08_04"  "distToS00_14":34
 cn "S08_04"  "distToS00_15":34
 cn "S08_04"  "distToS06_02":34
@@ -34967,7 +34968,6 @@ cn "S08_04"  "distToS12_11":34
 cn "S08_04"  "distToS12_14":34
 cn "S08_04"  "distToS12_13":34
 cn "S08_04"  "distToS12_10":34
-cn "S08_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@f58853c"
 cn "S08_04"  "distToS01_13":34
 cn "S08_04"  "distToS01_14":34
 cn "S08_04"  "distToS01_11":34
@@ -35099,6 +35099,7 @@ cn "S08_05"  "distToS00_12":34
 cn "S08_05"  "distToS00_13":34
 cn "S08_05"  "distToS00_10":34
 cn "S08_05"  "distToS00_11":34
+cn "S08_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4eb386df"
 cn "S08_05"  "distToS00_14":34
 cn "S08_05"  "distToS00_15":34
 cn "S08_05"  "distToS06_02":34
@@ -35228,7 +35229,6 @@ cn "S08_05"  "distToS12_11":34
 cn "S08_05"  "distToS12_14":34
 cn "S08_05"  "distToS12_13":34
 cn "S08_05"  "distToS12_10":34
-cn "S08_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1224144a"
 cn "S08_05"  "distToS01_13":34
 cn "S08_05"  "distToS01_14":34
 cn "S08_05"  "distToS01_11":34
@@ -35360,6 +35360,7 @@ cn "S08_06"  "distToS00_12":34
 cn "S08_06"  "distToS00_13":34
 cn "S08_06"  "distToS00_10":34
 cn "S08_06"  "distToS00_11":34
+cn "S08_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@79517588"
 cn "S08_06"  "distToS00_14":34
 cn "S08_06"  "distToS00_15":34
 cn "S08_06"  "distToS06_02":34
@@ -35489,7 +35490,6 @@ cn "S08_06"  "distToS12_11":34
 cn "S08_06"  "distToS12_14":34
 cn "S08_06"  "distToS12_13":34
 cn "S08_06"  "distToS12_10":34
-cn "S08_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@29f7cefd"
 cn "S08_06"  "distToS01_13":34
 cn "S08_06"  "distToS01_14":34
 cn "S08_06"  "distToS01_11":34
@@ -35621,6 +35621,7 @@ cn "S08_07"  "distToS00_12":34
 cn "S08_07"  "distToS00_13":34
 cn "S08_07"  "distToS00_10":34
 cn "S08_07"  "distToS00_11":34
+cn "S08_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3a0baae5"
 cn "S08_07"  "distToS00_14":34
 cn "S08_07"  "distToS00_15":34
 cn "S08_07"  "distToS06_02":34
@@ -35750,7 +35751,6 @@ cn "S08_07"  "distToS12_11":34
 cn "S08_07"  "distToS12_14":34
 cn "S08_07"  "distToS12_13":34
 cn "S08_07"  "distToS12_10":34
-cn "S08_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@700fb871"
 cn "S08_07"  "distToS01_13":34
 cn "S08_07"  "distToS01_14":34
 cn "S08_07"  "distToS01_11":34
@@ -35882,6 +35882,7 @@ cn "S08_08"  "distToS00_12":34
 cn "S08_08"  "distToS00_13":34
 cn "S08_08"  "distToS00_10":34
 cn "S08_08"  "distToS00_11":34
+cn "S08_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7ac0e420"
 cn "S08_08"  "distToS00_14":34
 cn "S08_08"  "distToS00_15":34
 cn "S08_08"  "distToS06_02":34
@@ -36011,7 +36012,6 @@ cn "S08_08"  "distToS12_11":34
 cn "S08_08"  "distToS12_14":34
 cn "S08_08"  "distToS12_13":34
 cn "S08_08"  "distToS12_10":34
-cn "S08_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3b35a229"
 cn "S08_08"  "distToS01_13":34
 cn "S08_08"  "distToS01_14":34
 cn "S08_08"  "distToS01_11":34
@@ -36143,6 +36143,7 @@ cn "S08_09"  "distToS00_12":34
 cn "S08_09"  "distToS00_13":34
 cn "S08_09"  "distToS00_10":34
 cn "S08_09"  "distToS00_11":34
+cn "S08_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@289710d9"
 cn "S08_09"  "distToS00_14":34
 cn "S08_09"  "distToS00_15":34
 cn "S08_09"  "distToS06_02":34
@@ -36272,7 +36273,6 @@ cn "S08_09"  "distToS12_11":34
 cn "S08_09"  "distToS12_14":34
 cn "S08_09"  "distToS12_13":34
 cn "S08_09"  "distToS12_10":34
-cn "S08_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@9816741"
 cn "S08_09"  "distToS01_13":34
 cn "S08_09"  "distToS01_14":34
 cn "S08_09"  "distToS01_11":34
@@ -36404,6 +36404,7 @@ cn "S08_10"  "distToS00_12":34
 cn "S08_10"  "distToS00_13":34
 cn "S08_10"  "distToS00_10":34
 cn "S08_10"  "distToS00_11":34
+cn "S08_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5a18cd76"
 cn "S08_10"  "distToS00_14":34
 cn "S08_10"  "distToS00_15":34
 cn "S08_10"  "distToS06_02":34
@@ -36533,7 +36534,6 @@ cn "S08_10"  "distToS12_11":34
 cn "S08_10"  "distToS12_14":34
 cn "S08_10"  "distToS12_13":34
 cn "S08_10"  "distToS12_10":34
-cn "S08_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1e16c0aa"
 cn "S08_10"  "distToS01_13":34
 cn "S08_10"  "distToS01_14":34
 cn "S08_10"  "distToS01_11":34
@@ -36665,6 +36665,7 @@ cn "S08_11"  "distToS00_12":34
 cn "S08_11"  "distToS00_13":34
 cn "S08_11"  "distToS00_10":34
 cn "S08_11"  "distToS00_11":34
+cn "S08_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3da30852"
 cn "S08_11"  "distToS00_14":34
 cn "S08_11"  "distToS00_15":34
 cn "S08_11"  "distToS06_02":34
@@ -36794,7 +36795,6 @@ cn "S08_11"  "distToS12_11":34
 cn "S08_11"  "distToS12_14":34
 cn "S08_11"  "distToS12_13":34
 cn "S08_11"  "distToS12_10":34
-cn "S08_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@13d73f29"
 cn "S08_11"  "distToS01_13":34
 cn "S08_11"  "distToS01_14":34
 cn "S08_11"  "distToS01_11":34
@@ -36926,6 +36926,7 @@ cn "S08_12"  "distToS00_12":34
 cn "S08_12"  "distToS00_13":34
 cn "S08_12"  "distToS00_10":34
 cn "S08_12"  "distToS00_11":34
+cn "S08_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@403f0a22"
 cn "S08_12"  "distToS00_14":34
 cn "S08_12"  "distToS00_15":34
 cn "S08_12"  "distToS06_02":34
@@ -37055,7 +37056,6 @@ cn "S08_12"  "distToS12_11":34
 cn "S08_12"  "distToS12_14":34
 cn "S08_12"  "distToS12_13":34
 cn "S08_12"  "distToS12_10":34
-cn "S08_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@565f390"
 cn "S08_12"  "distToS01_13":34
 cn "S08_12"  "distToS01_14":34
 cn "S08_12"  "distToS01_11":34
@@ -37187,6 +37187,7 @@ cn "S08_13"  "distToS00_12":34
 cn "S08_13"  "distToS00_13":34
 cn "S08_13"  "distToS00_10":34
 cn "S08_13"  "distToS00_11":34
+cn "S08_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@503ecb24"
 cn "S08_13"  "distToS00_14":34
 cn "S08_13"  "distToS00_15":34
 cn "S08_13"  "distToS06_02":34
@@ -37316,7 +37317,6 @@ cn "S08_13"  "distToS12_11":34
 cn "S08_13"  "distToS12_14":34
 cn "S08_13"  "distToS12_13":34
 cn "S08_13"  "distToS12_10":34
-cn "S08_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7dc3712"
 cn "S08_13"  "distToS01_13":34
 cn "S08_13"  "distToS01_14":34
 cn "S08_13"  "distToS01_11":34
@@ -37448,6 +37448,7 @@ cn "S08_14"  "distToS00_12":34
 cn "S08_14"  "distToS00_13":34
 cn "S08_14"  "distToS00_10":34
 cn "S08_14"  "distToS00_11":34
+cn "S08_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4c51cf28"
 cn "S08_14"  "distToS00_14":34
 cn "S08_14"  "distToS00_15":34
 cn "S08_14"  "distToS06_02":34
@@ -37577,7 +37578,6 @@ cn "S08_14"  "distToS12_11":34
 cn "S08_14"  "distToS12_14":34
 cn "S08_14"  "distToS12_13":34
 cn "S08_14"  "distToS12_10":34
-cn "S08_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2f67a4d3"
 cn "S08_14"  "distToS01_13":34
 cn "S08_14"  "distToS01_14":34
 cn "S08_14"  "distToS01_11":34
@@ -37709,6 +37709,7 @@ cn "S08_15"  "distToS00_12":34
 cn "S08_15"  "distToS00_13":34
 cn "S08_15"  "distToS00_10":34
 cn "S08_15"  "distToS00_11":34
+cn "S08_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6995bf68"
 cn "S08_15"  "distToS00_14":34
 cn "S08_15"  "distToS00_15":34
 cn "S08_15"  "distToS06_02":34
@@ -37838,7 +37839,6 @@ cn "S08_15"  "distToS12_11":34
 cn "S08_15"  "distToS12_14":34
 cn "S08_15"  "distToS12_13":34
 cn "S08_15"  "distToS12_10":34
-cn "S08_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5e3f861"
 cn "S08_15"  "distToS01_13":34
 cn "S08_15"  "distToS01_14":34
 cn "S08_15"  "distToS01_11":34
@@ -37970,6 +37970,7 @@ cn "S09_00"  "distToS00_12":33
 cn "S09_00"  "distToS00_13":33
 cn "S09_00"  "distToS00_10":33
 cn "S09_00"  "distToS00_11":33
+cn "S09_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5143c662"
 cn "S09_00"  "distToS00_14":33
 cn "S09_00"  "distToS00_15":33
 cn "S09_00"  "distToS06_02":33
@@ -38099,7 +38100,6 @@ cn "S09_00"  "distToS12_11":33
 cn "S09_00"  "distToS12_14":33
 cn "S09_00"  "distToS12_13":33
 cn "S09_00"  "distToS12_10":33
-cn "S09_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2fb0623e"
 cn "S09_00"  "distToS01_13":33
 cn "S09_00"  "distToS01_14":33
 cn "S09_00"  "distToS01_11":33
@@ -38231,6 +38231,7 @@ cn "S09_01"  "distToS00_12":32
 cn "S09_01"  "distToS00_13":32
 cn "S09_01"  "distToS00_10":32
 cn "S09_01"  "distToS00_11":32
+cn "S09_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@77825085"
 cn "S09_01"  "distToS00_14":32
 cn "S09_01"  "distToS00_15":32
 cn "S09_01"  "distToS06_02":32
@@ -38360,7 +38361,6 @@ cn "S09_01"  "distToS12_11":32
 cn "S09_01"  "distToS12_14":32
 cn "S09_01"  "distToS12_13":32
 cn "S09_01"  "distToS12_10":32
-cn "S09_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@49b2a47d"
 cn "S09_01"  "distToS01_13":32
 cn "S09_01"  "distToS01_14":32
 cn "S09_01"  "distToS01_11":32
@@ -38492,6 +38492,7 @@ cn "S09_02"  "distToS00_12":34
 cn "S09_02"  "distToS00_13":34
 cn "S09_02"  "distToS00_10":34
 cn "S09_02"  "distToS00_11":34
+cn "S09_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3568f9d2"
 cn "S09_02"  "distToS00_14":34
 cn "S09_02"  "distToS00_15":34
 cn "S09_02"  "distToS06_02":34
@@ -38621,7 +38622,6 @@ cn "S09_02"  "distToS12_11":34
 cn "S09_02"  "distToS12_14":34
 cn "S09_02"  "distToS12_13":34
 cn "S09_02"  "distToS12_10":34
-cn "S09_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5be1d0a4"
 cn "S09_02"  "distToS01_13":34
 cn "S09_02"  "distToS01_14":34
 cn "S09_02"  "distToS01_11":34
@@ -38753,6 +38753,7 @@ cn "S09_03"  "distToS00_12":34
 cn "S09_03"  "distToS00_13":34
 cn "S09_03"  "distToS00_10":34
 cn "S09_03"  "distToS00_11":34
+cn "S09_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@71c27ee8"
 cn "S09_03"  "distToS00_14":34
 cn "S09_03"  "distToS00_15":34
 cn "S09_03"  "distToS06_02":34
@@ -38882,7 +38883,6 @@ cn "S09_03"  "distToS12_11":34
 cn "S09_03"  "distToS12_14":34
 cn "S09_03"  "distToS12_13":34
 cn "S09_03"  "distToS12_10":34
-cn "S09_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@415b0b49"
 cn "S09_03"  "distToS01_13":34
 cn "S09_03"  "distToS01_14":34
 cn "S09_03"  "distToS01_11":34
@@ -39014,6 +39014,7 @@ cn "S09_04"  "distToS00_12":34
 cn "S09_04"  "distToS00_13":34
 cn "S09_04"  "distToS00_10":34
 cn "S09_04"  "distToS00_11":34
+cn "S09_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3e7dd664"
 cn "S09_04"  "distToS00_14":34
 cn "S09_04"  "distToS00_15":34
 cn "S09_04"  "distToS06_02":34
@@ -39143,7 +39144,6 @@ cn "S09_04"  "distToS12_11":34
 cn "S09_04"  "distToS12_14":34
 cn "S09_04"  "distToS12_13":34
 cn "S09_04"  "distToS12_10":34
-cn "S09_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6d5620ce"
 cn "S09_04"  "distToS01_13":34
 cn "S09_04"  "distToS01_14":34
 cn "S09_04"  "distToS01_11":34
@@ -39275,6 +39275,7 @@ cn "S09_05"  "distToS00_12":34
 cn "S09_05"  "distToS00_13":34
 cn "S09_05"  "distToS00_10":34
 cn "S09_05"  "distToS00_11":34
+cn "S09_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5b1ebf56"
 cn "S09_05"  "distToS00_14":34
 cn "S09_05"  "distToS00_15":34
 cn "S09_05"  "distToS06_02":34
@@ -39404,7 +39405,6 @@ cn "S09_05"  "distToS12_11":34
 cn "S09_05"  "distToS12_14":34
 cn "S09_05"  "distToS12_13":34
 cn "S09_05"  "distToS12_10":34
-cn "S09_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@311bf055"
 cn "S09_05"  "distToS01_13":34
 cn "S09_05"  "distToS01_14":34
 cn "S09_05"  "distToS01_11":34
@@ -39536,6 +39536,7 @@ cn "S09_06"  "distToS00_12":34
 cn "S09_06"  "distToS00_13":34
 cn "S09_06"  "distToS00_10":34
 cn "S09_06"  "distToS00_11":34
+cn "S09_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@294a6b8e"
 cn "S09_06"  "distToS00_14":34
 cn "S09_06"  "distToS00_15":34
 cn "S09_06"  "distToS06_02":34
@@ -39665,7 +39666,6 @@ cn "S09_06"  "distToS12_11":34
 cn "S09_06"  "distToS12_14":34
 cn "S09_06"  "distToS12_13":34
 cn "S09_06"  "distToS12_10":34
-cn "S09_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@642a7222"
 cn "S09_06"  "distToS01_13":34
 cn "S09_06"  "distToS01_14":34
 cn "S09_06"  "distToS01_11":34
@@ -39797,6 +39797,7 @@ cn "S09_07"  "distToS00_12":34
 cn "S09_07"  "distToS00_13":34
 cn "S09_07"  "distToS00_10":34
 cn "S09_07"  "distToS00_11":34
+cn "S09_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4b1d6571"
 cn "S09_07"  "distToS00_14":34
 cn "S09_07"  "distToS00_15":34
 cn "S09_07"  "distToS06_02":34
@@ -39926,7 +39927,6 @@ cn "S09_07"  "distToS12_11":34
 cn "S09_07"  "distToS12_14":34
 cn "S09_07"  "distToS12_13":34
 cn "S09_07"  "distToS12_10":34
-cn "S09_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7d322cad"
 cn "S09_07"  "distToS01_13":34
 cn "S09_07"  "distToS01_14":34
 cn "S09_07"  "distToS01_11":34
@@ -40058,6 +40058,7 @@ cn "S09_08"  "distToS00_12":34
 cn "S09_08"  "distToS00_13":34
 cn "S09_08"  "distToS00_10":34
 cn "S09_08"  "distToS00_11":34
+cn "S09_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1b835480"
 cn "S09_08"  "distToS00_14":34
 cn "S09_08"  "distToS00_15":34
 cn "S09_08"  "distToS06_02":34
@@ -40187,7 +40188,6 @@ cn "S09_08"  "distToS12_11":34
 cn "S09_08"  "distToS12_14":34
 cn "S09_08"  "distToS12_13":34
 cn "S09_08"  "distToS12_10":34
-cn "S09_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@21be3395"
 cn "S09_08"  "distToS01_13":34
 cn "S09_08"  "distToS01_14":34
 cn "S09_08"  "distToS01_11":34
@@ -40319,6 +40319,7 @@ cn "S09_09"  "distToS00_12":34
 cn "S09_09"  "distToS00_13":34
 cn "S09_09"  "distToS00_10":34
 cn "S09_09"  "distToS00_11":34
+cn "S09_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3549bca9"
 cn "S09_09"  "distToS00_14":34
 cn "S09_09"  "distToS00_15":34
 cn "S09_09"  "distToS06_02":34
@@ -40448,7 +40449,6 @@ cn "S09_09"  "distToS12_11":34
 cn "S09_09"  "distToS12_14":34
 cn "S09_09"  "distToS12_13":34
 cn "S09_09"  "distToS12_10":34
-cn "S09_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4f49f6af"
 cn "S09_09"  "distToS01_13":34
 cn "S09_09"  "distToS01_14":34
 cn "S09_09"  "distToS01_11":34
@@ -40580,6 +40580,7 @@ cn "S09_10"  "distToS00_12":34
 cn "S09_10"  "distToS00_13":34
 cn "S09_10"  "distToS00_10":34
 cn "S09_10"  "distToS00_11":34
+cn "S09_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4f25b795"
 cn "S09_10"  "distToS00_14":34
 cn "S09_10"  "distToS00_15":34
 cn "S09_10"  "distToS06_02":34
@@ -40709,7 +40710,6 @@ cn "S09_10"  "distToS12_11":34
 cn "S09_10"  "distToS12_14":34
 cn "S09_10"  "distToS12_13":34
 cn "S09_10"  "distToS12_10":34
-cn "S09_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@78452606"
 cn "S09_10"  "distToS01_13":34
 cn "S09_10"  "distToS01_14":34
 cn "S09_10"  "distToS01_11":34
@@ -40841,6 +40841,7 @@ cn "S09_11"  "distToS00_12":34
 cn "S09_11"  "distToS00_13":34
 cn "S09_11"  "distToS00_10":34
 cn "S09_11"  "distToS00_11":34
+cn "S09_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6fb365ed"
 cn "S09_11"  "distToS00_14":34
 cn "S09_11"  "distToS00_15":34
 cn "S09_11"  "distToS06_02":34
@@ -40970,7 +40971,6 @@ cn "S09_11"  "distToS12_11":34
 cn "S09_11"  "distToS12_14":34
 cn "S09_11"  "distToS12_13":34
 cn "S09_11"  "distToS12_10":34
-cn "S09_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@147e2ae7"
 cn "S09_11"  "distToS01_13":34
 cn "S09_11"  "distToS01_14":34
 cn "S09_11"  "distToS01_11":34
@@ -41102,6 +41102,7 @@ cn "S09_12"  "distToS00_12":34
 cn "S09_12"  "distToS00_13":34
 cn "S09_12"  "distToS00_10":34
 cn "S09_12"  "distToS00_11":34
+cn "S09_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6e950bcf"
 cn "S09_12"  "distToS00_14":34
 cn "S09_12"  "distToS00_15":34
 cn "S09_12"  "distToS06_02":34
@@ -41231,7 +41232,6 @@ cn "S09_12"  "distToS12_11":34
 cn "S09_12"  "distToS12_14":34
 cn "S09_12"  "distToS12_13":34
 cn "S09_12"  "distToS12_10":34
-cn "S09_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@448c8166"
 cn "S09_12"  "distToS01_13":34
 cn "S09_12"  "distToS01_14":34
 cn "S09_12"  "distToS01_11":34
@@ -41363,6 +41363,7 @@ cn "S09_13"  "distToS00_12":34
 cn "S09_13"  "distToS00_13":34
 cn "S09_13"  "distToS00_10":34
 cn "S09_13"  "distToS00_11":34
+cn "S09_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@16414e40"
 cn "S09_13"  "distToS00_14":34
 cn "S09_13"  "distToS00_15":34
 cn "S09_13"  "distToS06_02":34
@@ -41492,7 +41493,6 @@ cn "S09_13"  "distToS12_11":34
 cn "S09_13"  "distToS12_14":34
 cn "S09_13"  "distToS12_13":34
 cn "S09_13"  "distToS12_10":34
-cn "S09_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4470fbd6"
 cn "S09_13"  "distToS01_13":34
 cn "S09_13"  "distToS01_14":34
 cn "S09_13"  "distToS01_11":34
@@ -41624,6 +41624,7 @@ cn "S09_14"  "distToS00_12":34
 cn "S09_14"  "distToS00_13":34
 cn "S09_14"  "distToS00_10":34
 cn "S09_14"  "distToS00_11":34
+cn "S09_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@74bada02"
 cn "S09_14"  "distToS00_14":34
 cn "S09_14"  "distToS00_15":34
 cn "S09_14"  "distToS06_02":34
@@ -41753,7 +41754,6 @@ cn "S09_14"  "distToS12_11":34
 cn "S09_14"  "distToS12_14":34
 cn "S09_14"  "distToS12_13":34
 cn "S09_14"  "distToS12_10":34
-cn "S09_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@15d49048"
 cn "S09_14"  "distToS01_13":34
 cn "S09_14"  "distToS01_14":34
 cn "S09_14"  "distToS01_11":34
@@ -41885,6 +41885,7 @@ cn "S09_15"  "distToS00_12":34
 cn "S09_15"  "distToS00_13":34
 cn "S09_15"  "distToS00_10":34
 cn "S09_15"  "distToS00_11":34
+cn "S09_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@525575"
 cn "S09_15"  "distToS00_14":34
 cn "S09_15"  "distToS00_15":34
 cn "S09_15"  "distToS06_02":34
@@ -42014,7 +42015,6 @@ cn "S09_15"  "distToS12_11":34
 cn "S09_15"  "distToS12_14":34
 cn "S09_15"  "distToS12_13":34
 cn "S09_15"  "distToS12_10":34
-cn "S09_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7098b907"
 cn "S09_15"  "distToS01_13":34
 cn "S09_15"  "distToS01_14":34
 cn "S09_15"  "distToS01_11":34
@@ -42146,6 +42146,7 @@ cn "S10_00"  "distToS00_12":33
 cn "S10_00"  "distToS00_13":33
 cn "S10_00"  "distToS00_10":33
 cn "S10_00"  "distToS00_11":33
+cn "S10_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@46dffdc3"
 cn "S10_00"  "distToS00_14":33
 cn "S10_00"  "distToS00_15":33
 cn "S10_00"  "distToS06_02":33
@@ -42275,7 +42276,6 @@ cn "S10_00"  "distToS12_11":33
 cn "S10_00"  "distToS12_14":33
 cn "S10_00"  "distToS12_13":33
 cn "S10_00"  "distToS12_10":33
-cn "S10_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@503f91c3"
 cn "S10_00"  "distToS01_13":33
 cn "S10_00"  "distToS01_14":33
 cn "S10_00"  "distToS01_11":33
@@ -42407,6 +42407,7 @@ cn "S10_01"  "distToS00_12":32
 cn "S10_01"  "distToS00_13":32
 cn "S10_01"  "distToS00_10":32
 cn "S10_01"  "distToS00_11":32
+cn "S10_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5a709816"
 cn "S10_01"  "distToS00_14":32
 cn "S10_01"  "distToS00_15":32
 cn "S10_01"  "distToS06_02":32
@@ -42536,7 +42537,6 @@ cn "S10_01"  "distToS12_11":32
 cn "S10_01"  "distToS12_14":32
 cn "S10_01"  "distToS12_13":32
 cn "S10_01"  "distToS12_10":32
-cn "S10_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@13526e59"
 cn "S10_01"  "distToS01_13":32
 cn "S10_01"  "distToS01_14":32
 cn "S10_01"  "distToS01_11":32
@@ -42668,6 +42668,7 @@ cn "S10_02"  "distToS00_12":34
 cn "S10_02"  "distToS00_13":34
 cn "S10_02"  "distToS00_10":34
 cn "S10_02"  "distToS00_11":34
+cn "S10_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@78383390"
 cn "S10_02"  "distToS00_14":34
 cn "S10_02"  "distToS00_15":34
 cn "S10_02"  "distToS06_02":34
@@ -42797,7 +42798,6 @@ cn "S10_02"  "distToS12_11":34
 cn "S10_02"  "distToS12_14":34
 cn "S10_02"  "distToS12_13":34
 cn "S10_02"  "distToS12_10":34
-cn "S10_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2235eaab"
 cn "S10_02"  "distToS01_13":34
 cn "S10_02"  "distToS01_14":34
 cn "S10_02"  "distToS01_11":34
@@ -42929,6 +42929,7 @@ cn "S10_03"  "distToS00_12":34
 cn "S10_03"  "distToS00_13":34
 cn "S10_03"  "distToS00_10":34
 cn "S10_03"  "distToS00_11":34
+cn "S10_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6ad3381f"
 cn "S10_03"  "distToS00_14":34
 cn "S10_03"  "distToS00_15":34
 cn "S10_03"  "distToS06_02":34
@@ -43058,7 +43059,6 @@ cn "S10_03"  "distToS12_11":34
 cn "S10_03"  "distToS12_14":34
 cn "S10_03"  "distToS12_13":34
 cn "S10_03"  "distToS12_10":34
-cn "S10_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@17503f6b"
 cn "S10_03"  "distToS01_13":34
 cn "S10_03"  "distToS01_14":34
 cn "S10_03"  "distToS01_11":34
@@ -43190,6 +43190,7 @@ cn "S10_04"  "distToS00_12":34
 cn "S10_04"  "distToS00_13":34
 cn "S10_04"  "distToS00_10":34
 cn "S10_04"  "distToS00_11":34
+cn "S10_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@53dbe163"
 cn "S10_04"  "distToS00_14":34
 cn "S10_04"  "distToS00_15":34
 cn "S10_04"  "distToS06_02":34
@@ -43319,7 +43320,6 @@ cn "S10_04"  "distToS12_11":34
 cn "S10_04"  "distToS12_14":34
 cn "S10_04"  "distToS12_13":34
 cn "S10_04"  "distToS12_10":34
-cn "S10_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3bcd05cb"
 cn "S10_04"  "distToS01_13":34
 cn "S10_04"  "distToS01_14":34
 cn "S10_04"  "distToS01_11":34
@@ -43451,6 +43451,7 @@ cn "S10_05"  "distToS00_12":34
 cn "S10_05"  "distToS00_13":34
 cn "S10_05"  "distToS00_10":34
 cn "S10_05"  "distToS00_11":34
+cn "S10_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@db57326"
 cn "S10_05"  "distToS00_14":34
 cn "S10_05"  "distToS00_15":34
 cn "S10_05"  "distToS06_02":34
@@ -43580,7 +43581,6 @@ cn "S10_05"  "distToS12_11":34
 cn "S10_05"  "distToS12_14":34
 cn "S10_05"  "distToS12_13":34
 cn "S10_05"  "distToS12_10":34
-cn "S10_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3b6d844d"
 cn "S10_05"  "distToS01_13":34
 cn "S10_05"  "distToS01_14":34
 cn "S10_05"  "distToS01_11":34
@@ -43712,6 +43712,7 @@ cn "S10_06"  "distToS00_12":34
 cn "S10_06"  "distToS00_13":34
 cn "S10_06"  "distToS00_10":34
 cn "S10_06"  "distToS00_11":34
+cn "S10_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@34a875b3"
 cn "S10_06"  "distToS00_14":34
 cn "S10_06"  "distToS00_15":34
 cn "S10_06"  "distToS06_02":34
@@ -43841,7 +43842,6 @@ cn "S10_06"  "distToS12_11":34
 cn "S10_06"  "distToS12_14":34
 cn "S10_06"  "distToS12_13":34
 cn "S10_06"  "distToS12_10":34
-cn "S10_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@36804139"
 cn "S10_06"  "distToS01_13":34
 cn "S10_06"  "distToS01_14":34
 cn "S10_06"  "distToS01_11":34
@@ -43973,6 +43973,7 @@ cn "S10_07"  "distToS00_12":34
 cn "S10_07"  "distToS00_13":34
 cn "S10_07"  "distToS00_10":34
 cn "S10_07"  "distToS00_11":34
+cn "S10_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4748a0f9"
 cn "S10_07"  "distToS00_14":34
 cn "S10_07"  "distToS00_15":34
 cn "S10_07"  "distToS06_02":34
@@ -44102,7 +44103,6 @@ cn "S10_07"  "distToS12_11":34
 cn "S10_07"  "distToS12_14":34
 cn "S10_07"  "distToS12_13":34
 cn "S10_07"  "distToS12_10":34
-cn "S10_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@20bd8be5"
 cn "S10_07"  "distToS01_13":34
 cn "S10_07"  "distToS01_14":34
 cn "S10_07"  "distToS01_11":34
@@ -44234,6 +44234,7 @@ cn "S10_08"  "distToS00_12":34
 cn "S10_08"  "distToS00_13":34
 cn "S10_08"  "distToS00_10":34
 cn "S10_08"  "distToS00_11":34
+cn "S10_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4b14918a"
 cn "S10_08"  "distToS00_14":34
 cn "S10_08"  "distToS00_15":34
 cn "S10_08"  "distToS06_02":34
@@ -44363,7 +44364,6 @@ cn "S10_08"  "distToS12_11":34
 cn "S10_08"  "distToS12_14":34
 cn "S10_08"  "distToS12_13":34
 cn "S10_08"  "distToS12_10":34
-cn "S10_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@730d2164"
 cn "S10_08"  "distToS01_13":34
 cn "S10_08"  "distToS01_14":34
 cn "S10_08"  "distToS01_11":34
@@ -44495,6 +44495,7 @@ cn "S10_09"  "distToS00_12":34
 cn "S10_09"  "distToS00_13":34
 cn "S10_09"  "distToS00_10":34
 cn "S10_09"  "distToS00_11":34
+cn "S10_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6d1ef78d"
 cn "S10_09"  "distToS00_14":34
 cn "S10_09"  "distToS00_15":34
 cn "S10_09"  "distToS06_02":34
@@ -44624,7 +44625,6 @@ cn "S10_09"  "distToS12_11":34
 cn "S10_09"  "distToS12_14":34
 cn "S10_09"  "distToS12_13":34
 cn "S10_09"  "distToS12_10":34
-cn "S10_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@24959ca4"
 cn "S10_09"  "distToS01_13":34
 cn "S10_09"  "distToS01_14":34
 cn "S10_09"  "distToS01_11":34
@@ -44756,6 +44756,7 @@ cn "S10_10"  "distToS00_12":34
 cn "S10_10"  "distToS00_13":34
 cn "S10_10"  "distToS00_10":34
 cn "S10_10"  "distToS00_11":34
+cn "S10_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1a6c1270"
 cn "S10_10"  "distToS00_14":34
 cn "S10_10"  "distToS00_15":34
 cn "S10_10"  "distToS06_02":34
@@ -44885,7 +44886,6 @@ cn "S10_10"  "distToS12_11":34
 cn "S10_10"  "distToS12_14":34
 cn "S10_10"  "distToS12_13":34
 cn "S10_10"  "distToS12_10":34
-cn "S10_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@10289886"
 cn "S10_10"  "distToS01_13":34
 cn "S10_10"  "distToS01_14":34
 cn "S10_10"  "distToS01_11":34
@@ -45017,6 +45017,7 @@ cn "S10_11"  "distToS00_12":34
 cn "S10_11"  "distToS00_13":34
 cn "S10_11"  "distToS00_10":34
 cn "S10_11"  "distToS00_11":34
+cn "S10_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@18a136ac"
 cn "S10_11"  "distToS00_14":34
 cn "S10_11"  "distToS00_15":34
 cn "S10_11"  "distToS06_02":34
@@ -45146,7 +45147,6 @@ cn "S10_11"  "distToS12_11":34
 cn "S10_11"  "distToS12_14":34
 cn "S10_11"  "distToS12_13":34
 cn "S10_11"  "distToS12_10":34
-cn "S10_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5c86dbc5"
 cn "S10_11"  "distToS01_13":34
 cn "S10_11"  "distToS01_14":34
 cn "S10_11"  "distToS01_11":34
@@ -45278,6 +45278,7 @@ cn "S10_12"  "distToS00_12":34
 cn "S10_12"  "distToS00_13":34
 cn "S10_12"  "distToS00_10":34
 cn "S10_12"  "distToS00_11":34
+cn "S10_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@77d67cf3"
 cn "S10_12"  "distToS00_14":34
 cn "S10_12"  "distToS00_15":34
 cn "S10_12"  "distToS06_02":34
@@ -45407,7 +45408,6 @@ cn "S10_12"  "distToS12_11":34
 cn "S10_12"  "distToS12_14":34
 cn "S10_12"  "distToS12_13":34
 cn "S10_12"  "distToS12_10":34
-cn "S10_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@461ad730"
 cn "S10_12"  "distToS01_13":34
 cn "S10_12"  "distToS01_14":34
 cn "S10_12"  "distToS01_11":34
@@ -45539,6 +45539,7 @@ cn "S10_13"  "distToS00_12":34
 cn "S10_13"  "distToS00_13":34
 cn "S10_13"  "distToS00_10":34
 cn "S10_13"  "distToS00_11":34
+cn "S10_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6dee4f1b"
 cn "S10_13"  "distToS00_14":34
 cn "S10_13"  "distToS00_15":34
 cn "S10_13"  "distToS06_02":34
@@ -45668,7 +45669,6 @@ cn "S10_13"  "distToS12_11":34
 cn "S10_13"  "distToS12_14":34
 cn "S10_13"  "distToS12_13":34
 cn "S10_13"  "distToS12_10":34
-cn "S10_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4ee203eb"
 cn "S10_13"  "distToS01_13":34
 cn "S10_13"  "distToS01_14":34
 cn "S10_13"  "distToS01_11":34
@@ -45800,6 +45800,7 @@ cn "S10_14"  "distToS00_12":34
 cn "S10_14"  "distToS00_13":34
 cn "S10_14"  "distToS00_10":34
 cn "S10_14"  "distToS00_11":34
+cn "S10_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@176b3f44"
 cn "S10_14"  "distToS00_14":34
 cn "S10_14"  "distToS00_15":34
 cn "S10_14"  "distToS06_02":34
@@ -45929,7 +45930,6 @@ cn "S10_14"  "distToS12_11":34
 cn "S10_14"  "distToS12_14":34
 cn "S10_14"  "distToS12_13":34
 cn "S10_14"  "distToS12_10":34
-cn "S10_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1a5a4e19"
 cn "S10_14"  "distToS01_13":34
 cn "S10_14"  "distToS01_14":34
 cn "S10_14"  "distToS01_11":34
@@ -46061,6 +46061,7 @@ cn "S10_15"  "distToS00_12":34
 cn "S10_15"  "distToS00_13":34
 cn "S10_15"  "distToS00_10":34
 cn "S10_15"  "distToS00_11":34
+cn "S10_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6ee6f53"
 cn "S10_15"  "distToS00_14":34
 cn "S10_15"  "distToS00_15":34
 cn "S10_15"  "distToS06_02":34
@@ -46190,7 +46191,6 @@ cn "S10_15"  "distToS12_11":34
 cn "S10_15"  "distToS12_14":34
 cn "S10_15"  "distToS12_13":34
 cn "S10_15"  "distToS12_10":34
-cn "S10_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7068e664"
 cn "S10_15"  "distToS01_13":34
 cn "S10_15"  "distToS01_14":34
 cn "S10_15"  "distToS01_11":34
@@ -46322,6 +46322,7 @@ cn "S11_00"  "distToS00_12":33
 cn "S11_00"  "distToS00_13":33
 cn "S11_00"  "distToS00_10":33
 cn "S11_00"  "distToS00_11":33
+cn "S11_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@421bba99"
 cn "S11_00"  "distToS00_14":33
 cn "S11_00"  "distToS00_15":33
 cn "S11_00"  "distToS06_02":33
@@ -46451,7 +46452,6 @@ cn "S11_00"  "distToS12_11":33
 cn "S11_00"  "distToS12_14":33
 cn "S11_00"  "distToS12_13":33
 cn "S11_00"  "distToS12_10":33
-cn "S11_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@60db1c0e"
 cn "S11_00"  "distToS01_13":33
 cn "S11_00"  "distToS01_14":33
 cn "S11_00"  "distToS01_11":33
@@ -46583,6 +46583,7 @@ cn "S11_01"  "distToS00_12":32
 cn "S11_01"  "distToS00_13":32
 cn "S11_01"  "distToS00_10":32
 cn "S11_01"  "distToS00_11":32
+cn "S11_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5d12a356"
 cn "S11_01"  "distToS00_14":32
 cn "S11_01"  "distToS00_15":32
 cn "S11_01"  "distToS06_02":32
@@ -46712,7 +46713,6 @@ cn "S11_01"  "distToS12_11":32
 cn "S11_01"  "distToS12_14":32
 cn "S11_01"  "distToS12_13":32
 cn "S11_01"  "distToS12_10":32
-cn "S11_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3e78b6a5"
 cn "S11_01"  "distToS01_13":32
 cn "S11_01"  "distToS01_14":32
 cn "S11_01"  "distToS01_11":32
@@ -46844,6 +46844,7 @@ cn "S11_02"  "distToS00_12":34
 cn "S11_02"  "distToS00_13":34
 cn "S11_02"  "distToS00_10":34
 cn "S11_02"  "distToS00_11":34
+cn "S11_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@134d26af"
 cn "S11_02"  "distToS00_14":34
 cn "S11_02"  "distToS00_15":34
 cn "S11_02"  "distToS06_02":34
@@ -46973,7 +46974,6 @@ cn "S11_02"  "distToS12_11":34
 cn "S11_02"  "distToS12_14":34
 cn "S11_02"  "distToS12_13":34
 cn "S11_02"  "distToS12_10":34
-cn "S11_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@769a1df5"
 cn "S11_02"  "distToS01_13":34
 cn "S11_02"  "distToS01_14":34
 cn "S11_02"  "distToS01_11":34
@@ -47105,6 +47105,7 @@ cn "S11_03"  "distToS00_12":34
 cn "S11_03"  "distToS00_13":34
 cn "S11_03"  "distToS00_10":34
 cn "S11_03"  "distToS00_11":34
+cn "S11_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@66ac5762"
 cn "S11_03"  "distToS00_14":34
 cn "S11_03"  "distToS00_15":34
 cn "S11_03"  "distToS06_02":34
@@ -47234,7 +47235,6 @@ cn "S11_03"  "distToS12_11":34
 cn "S11_03"  "distToS12_14":34
 cn "S11_03"  "distToS12_13":34
 cn "S11_03"  "distToS12_10":34
-cn "S11_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@41f69e84"
 cn "S11_03"  "distToS01_13":34
 cn "S11_03"  "distToS01_14":34
 cn "S11_03"  "distToS01_11":34
@@ -47366,6 +47366,7 @@ cn "S11_04"  "distToS00_12":34
 cn "S11_04"  "distToS00_13":34
 cn "S11_04"  "distToS00_10":34
 cn "S11_04"  "distToS00_11":34
+cn "S11_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@797cf65c"
 cn "S11_04"  "distToS00_14":34
 cn "S11_04"  "distToS00_15":34
 cn "S11_04"  "distToS06_02":34
@@ -47495,7 +47496,6 @@ cn "S11_04"  "distToS12_11":34
 cn "S11_04"  "distToS12_14":34
 cn "S11_04"  "distToS12_13":34
 cn "S11_04"  "distToS12_10":34
-cn "S11_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7975d1d8"
 cn "S11_04"  "distToS01_13":34
 cn "S11_04"  "distToS01_14":34
 cn "S11_04"  "distToS01_11":34
@@ -47627,6 +47627,7 @@ cn "S11_05"  "distToS00_12":34
 cn "S11_05"  "distToS00_13":34
 cn "S11_05"  "distToS00_10":34
 cn "S11_05"  "distToS00_11":34
+cn "S11_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@31bcf236"
 cn "S11_05"  "distToS00_14":34
 cn "S11_05"  "distToS00_15":34
 cn "S11_05"  "distToS06_02":34
@@ -47756,7 +47757,6 @@ cn "S11_05"  "distToS12_11":34
 cn "S11_05"  "distToS12_14":34
 cn "S11_05"  "distToS12_13":34
 cn "S11_05"  "distToS12_10":34
-cn "S11_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2438dcd"
 cn "S11_05"  "distToS01_13":34
 cn "S11_05"  "distToS01_14":34
 cn "S11_05"  "distToS01_11":34
@@ -47888,6 +47888,7 @@ cn "S11_06"  "distToS00_12":34
 cn "S11_06"  "distToS00_13":34
 cn "S11_06"  "distToS00_10":34
 cn "S11_06"  "distToS00_11":34
+cn "S11_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4b3ed2f0"
 cn "S11_06"  "distToS00_14":34
 cn "S11_06"  "distToS00_15":34
 cn "S11_06"  "distToS06_02":34
@@ -48017,7 +48018,6 @@ cn "S11_06"  "distToS12_11":34
 cn "S11_06"  "distToS12_14":34
 cn "S11_06"  "distToS12_13":34
 cn "S11_06"  "distToS12_10":34
-cn "S11_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@24105dc5"
 cn "S11_06"  "distToS01_13":34
 cn "S11_06"  "distToS01_14":34
 cn "S11_06"  "distToS01_11":34
@@ -48149,6 +48149,7 @@ cn "S11_07"  "distToS00_12":34
 cn "S11_07"  "distToS00_13":34
 cn "S11_07"  "distToS00_10":34
 cn "S11_07"  "distToS00_11":34
+cn "S11_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4fad9bb2"
 cn "S11_07"  "distToS00_14":34
 cn "S11_07"  "distToS00_15":34
 cn "S11_07"  "distToS06_02":34
@@ -48278,7 +48279,6 @@ cn "S11_07"  "distToS12_11":34
 cn "S11_07"  "distToS12_14":34
 cn "S11_07"  "distToS12_13":34
 cn "S11_07"  "distToS12_10":34
-cn "S11_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5167f57d"
 cn "S11_07"  "distToS01_13":34
 cn "S11_07"  "distToS01_14":34
 cn "S11_07"  "distToS01_11":34
@@ -48410,6 +48410,7 @@ cn "S11_08"  "distToS00_12":34
 cn "S11_08"  "distToS00_13":34
 cn "S11_08"  "distToS00_10":34
 cn "S11_08"  "distToS00_11":34
+cn "S11_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@517d4a0d"
 cn "S11_08"  "distToS00_14":34
 cn "S11_08"  "distToS00_15":34
 cn "S11_08"  "distToS06_02":34
@@ -48539,7 +48540,6 @@ cn "S11_08"  "distToS12_11":34
 cn "S11_08"  "distToS12_14":34
 cn "S11_08"  "distToS12_13":34
 cn "S11_08"  "distToS12_10":34
-cn "S11_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@64b0598"
 cn "S11_08"  "distToS01_13":34
 cn "S11_08"  "distToS01_14":34
 cn "S11_08"  "distToS01_11":34
@@ -48671,6 +48671,7 @@ cn "S11_09"  "distToS00_12":34
 cn "S11_09"  "distToS00_13":34
 cn "S11_09"  "distToS00_10":34
 cn "S11_09"  "distToS00_11":34
+cn "S11_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7862f56"
 cn "S11_09"  "distToS00_14":34
 cn "S11_09"  "distToS00_15":34
 cn "S11_09"  "distToS06_02":34
@@ -48800,7 +48801,6 @@ cn "S11_09"  "distToS12_11":34
 cn "S11_09"  "distToS12_14":34
 cn "S11_09"  "distToS12_13":34
 cn "S11_09"  "distToS12_10":34
-cn "S11_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@18f8cd79"
 cn "S11_09"  "distToS01_13":34
 cn "S11_09"  "distToS01_14":34
 cn "S11_09"  "distToS01_11":34
@@ -48932,6 +48932,7 @@ cn "S11_10"  "distToS00_12":34
 cn "S11_10"  "distToS00_13":34
 cn "S11_10"  "distToS00_10":34
 cn "S11_10"  "distToS00_11":34
+cn "S11_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3a12c404"
 cn "S11_10"  "distToS00_14":34
 cn "S11_10"  "distToS00_15":34
 cn "S11_10"  "distToS06_02":34
@@ -49061,7 +49062,6 @@ cn "S11_10"  "distToS12_11":34
 cn "S11_10"  "distToS12_14":34
 cn "S11_10"  "distToS12_13":34
 cn "S11_10"  "distToS12_10":34
-cn "S11_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3e2055d6"
 cn "S11_10"  "distToS01_13":34
 cn "S11_10"  "distToS01_14":34
 cn "S11_10"  "distToS01_11":34
@@ -49193,6 +49193,7 @@ cn "S11_11"  "distToS00_12":34
 cn "S11_11"  "distToS00_13":34
 cn "S11_11"  "distToS00_10":34
 cn "S11_11"  "distToS00_11":34
+cn "S11_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1941a8ff"
 cn "S11_11"  "distToS00_14":34
 cn "S11_11"  "distToS00_15":34
 cn "S11_11"  "distToS06_02":34
@@ -49322,7 +49323,6 @@ cn "S11_11"  "distToS12_11":34
 cn "S11_11"  "distToS12_14":34
 cn "S11_11"  "distToS12_13":34
 cn "S11_11"  "distToS12_10":34
-cn "S11_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@50029372"
 cn "S11_11"  "distToS01_13":34
 cn "S11_11"  "distToS01_14":34
 cn "S11_11"  "distToS01_11":34
@@ -49454,6 +49454,7 @@ cn "S11_12"  "distToS00_12":34
 cn "S11_12"  "distToS00_13":34
 cn "S11_12"  "distToS00_10":34
 cn "S11_12"  "distToS00_11":34
+cn "S11_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@22d7b4f8"
 cn "S11_12"  "distToS00_14":34
 cn "S11_12"  "distToS00_15":34
 cn "S11_12"  "distToS06_02":34
@@ -49583,7 +49584,6 @@ cn "S11_12"  "distToS12_11":34
 cn "S11_12"  "distToS12_14":34
 cn "S11_12"  "distToS12_13":34
 cn "S11_12"  "distToS12_10":34
-cn "S11_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@e3b3b2f"
 cn "S11_12"  "distToS01_13":34
 cn "S11_12"  "distToS01_14":34
 cn "S11_12"  "distToS01_11":34
@@ -49715,6 +49715,7 @@ cn "S11_13"  "distToS00_12":34
 cn "S11_13"  "distToS00_13":34
 cn "S11_13"  "distToS00_10":34
 cn "S11_13"  "distToS00_11":34
+cn "S11_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@149dd36b"
 cn "S11_13"  "distToS00_14":34
 cn "S11_13"  "distToS00_15":34
 cn "S11_13"  "distToS06_02":34
@@ -49844,7 +49845,6 @@ cn "S11_13"  "distToS12_11":34
 cn "S11_13"  "distToS12_14":34
 cn "S11_13"  "distToS12_13":34
 cn "S11_13"  "distToS12_10":34
-cn "S11_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@50f6ac94"
 cn "S11_13"  "distToS01_13":34
 cn "S11_13"  "distToS01_14":34
 cn "S11_13"  "distToS01_11":34
@@ -49976,6 +49976,7 @@ cn "S11_14"  "distToS00_12":34
 cn "S11_14"  "distToS00_13":34
 cn "S11_14"  "distToS00_10":34
 cn "S11_14"  "distToS00_11":34
+cn "S11_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@38831718"
 cn "S11_14"  "distToS00_14":34
 cn "S11_14"  "distToS00_15":34
 cn "S11_14"  "distToS06_02":34
@@ -50105,7 +50106,6 @@ cn "S11_14"  "distToS12_11":34
 cn "S11_14"  "distToS12_14":34
 cn "S11_14"  "distToS12_13":34
 cn "S11_14"  "distToS12_10":34
-cn "S11_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6cc4cdb9"
 cn "S11_14"  "distToS01_13":34
 cn "S11_14"  "distToS01_14":34
 cn "S11_14"  "distToS01_11":34
@@ -50237,6 +50237,7 @@ cn "S11_15"  "distToS00_12":34
 cn "S11_15"  "distToS00_13":34
 cn "S11_15"  "distToS00_10":34
 cn "S11_15"  "distToS00_11":34
+cn "S11_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2c1156a7"
 cn "S11_15"  "distToS00_14":34
 cn "S11_15"  "distToS00_15":34
 cn "S11_15"  "distToS06_02":34
@@ -50366,7 +50367,6 @@ cn "S11_15"  "distToS12_11":34
 cn "S11_15"  "distToS12_14":34
 cn "S11_15"  "distToS12_13":34
 cn "S11_15"  "distToS12_10":34
-cn "S11_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@28194a50"
 cn "S11_15"  "distToS01_13":34
 cn "S11_15"  "distToS01_14":34
 cn "S11_15"  "distToS01_11":34
@@ -50498,6 +50498,7 @@ cn "S12_00"  "distToS00_12":33
 cn "S12_00"  "distToS00_13":33
 cn "S12_00"  "distToS00_10":33
 cn "S12_00"  "distToS00_11":33
+cn "S12_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@33fe57a9"
 cn "S12_00"  "distToS00_14":33
 cn "S12_00"  "distToS00_15":33
 cn "S12_00"  "distToS06_02":33
@@ -50627,7 +50628,6 @@ cn "S12_00"  "distToS12_11":1
 cn "S12_00"  "distToS12_14":1
 cn "S12_00"  "distToS12_13":1
 cn "S12_00"  "distToS12_10":1
-cn "S12_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7f2cfe3f"
 cn "S12_00"  "distToS01_13":33
 cn "S12_00"  "distToS01_14":33
 cn "S12_00"  "distToS01_11":33
@@ -50759,6 +50759,7 @@ cn "S12_01"  "distToS00_12":32
 cn "S12_01"  "distToS00_13":32
 cn "S12_01"  "distToS00_10":32
 cn "S12_01"  "distToS00_11":32
+cn "S12_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4982cc36"
 cn "S12_01"  "distToS00_14":32
 cn "S12_01"  "distToS00_15":32
 cn "S12_01"  "distToS06_02":32
@@ -50888,7 +50889,6 @@ cn "S12_01"  "distToS12_11":2
 cn "S12_01"  "distToS12_14":2
 cn "S12_01"  "distToS12_13":2
 cn "S12_01"  "distToS12_10":2
-cn "S12_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1a5b6f42"
 cn "S12_01"  "distToS01_13":32
 cn "S12_01"  "distToS01_14":32
 cn "S12_01"  "distToS01_11":32
@@ -51020,6 +51020,7 @@ cn "S12_02"  "distToS00_12":34
 cn "S12_02"  "distToS00_13":34
 cn "S12_02"  "distToS00_10":34
 cn "S12_02"  "distToS00_11":34
+cn "S12_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@691939c9"
 cn "S12_02"  "distToS00_14":34
 cn "S12_02"  "distToS00_15":34
 cn "S12_02"  "distToS06_02":34
@@ -51149,7 +51150,6 @@ cn "S12_02"  "distToS12_11":2
 cn "S12_02"  "distToS12_14":2
 cn "S12_02"  "distToS12_13":2
 cn "S12_02"  "distToS12_10":2
-cn "S12_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5038d0b5"
 cn "S12_02"  "distToS01_13":34
 cn "S12_02"  "distToS01_14":34
 cn "S12_02"  "distToS01_11":34
@@ -51281,6 +51281,7 @@ cn "S12_03"  "distToS00_12":34
 cn "S12_03"  "distToS00_13":34
 cn "S12_03"  "distToS00_10":34
 cn "S12_03"  "distToS00_11":34
+cn "S12_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4f1bfe23"
 cn "S12_03"  "distToS00_14":34
 cn "S12_03"  "distToS00_15":34
 cn "S12_03"  "distToS06_02":34
@@ -51410,7 +51411,6 @@ cn "S12_03"  "distToS12_11":2
 cn "S12_03"  "distToS12_14":2
 cn "S12_03"  "distToS12_13":2
 cn "S12_03"  "distToS12_10":2
-cn "S12_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@32115b28"
 cn "S12_03"  "distToS01_13":34
 cn "S12_03"  "distToS01_14":34
 cn "S12_03"  "distToS01_11":34
@@ -51542,6 +51542,7 @@ cn "S12_04"  "distToS00_12":34
 cn "S12_04"  "distToS00_13":34
 cn "S12_04"  "distToS00_10":34
 cn "S12_04"  "distToS00_11":34
+cn "S12_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@e19bb76"
 cn "S12_04"  "distToS00_14":34
 cn "S12_04"  "distToS00_15":34
 cn "S12_04"  "distToS06_02":34
@@ -51671,7 +51672,6 @@ cn "S12_04"  "distToS12_11":2
 cn "S12_04"  "distToS12_14":2
 cn "S12_04"  "distToS12_13":2
 cn "S12_04"  "distToS12_10":2
-cn "S12_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2ad48653"
 cn "S12_04"  "distToS01_13":34
 cn "S12_04"  "distToS01_14":34
 cn "S12_04"  "distToS01_11":34
@@ -51803,6 +51803,7 @@ cn "S12_05"  "distToS00_12":34
 cn "S12_05"  "distToS00_13":34
 cn "S12_05"  "distToS00_10":34
 cn "S12_05"  "distToS00_11":34
+cn "S12_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@512535ff"
 cn "S12_05"  "distToS00_14":34
 cn "S12_05"  "distToS00_15":34
 cn "S12_05"  "distToS06_02":34
@@ -51932,7 +51933,6 @@ cn "S12_05"  "distToS12_11":2
 cn "S12_05"  "distToS12_14":2
 cn "S12_05"  "distToS12_13":2
 cn "S12_05"  "distToS12_10":2
-cn "S12_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6bb4dd34"
 cn "S12_05"  "distToS01_13":34
 cn "S12_05"  "distToS01_14":34
 cn "S12_05"  "distToS01_11":34
@@ -52064,6 +52064,7 @@ cn "S12_06"  "distToS00_12":34
 cn "S12_06"  "distToS00_13":34
 cn "S12_06"  "distToS00_10":34
 cn "S12_06"  "distToS00_11":34
+cn "S12_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@71529963"
 cn "S12_06"  "distToS00_14":34
 cn "S12_06"  "distToS00_15":34
 cn "S12_06"  "distToS06_02":34
@@ -52193,7 +52194,6 @@ cn "S12_06"  "distToS12_11":2
 cn "S12_06"  "distToS12_14":2
 cn "S12_06"  "distToS12_13":2
 cn "S12_06"  "distToS12_10":2
-cn "S12_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7d9f158f"
 cn "S12_06"  "distToS01_13":34
 cn "S12_06"  "distToS01_14":34
 cn "S12_06"  "distToS01_11":34
@@ -52325,6 +52325,7 @@ cn "S12_07"  "distToS00_12":34
 cn "S12_07"  "distToS00_13":34
 cn "S12_07"  "distToS00_10":34
 cn "S12_07"  "distToS00_11":34
+cn "S12_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@61a88b8c"
 cn "S12_07"  "distToS00_14":34
 cn "S12_07"  "distToS00_15":34
 cn "S12_07"  "distToS06_02":34
@@ -52454,7 +52455,6 @@ cn "S12_07"  "distToS12_11":2
 cn "S12_07"  "distToS12_14":2
 cn "S12_07"  "distToS12_13":2
 cn "S12_07"  "distToS12_10":2
-cn "S12_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@45efd90f"
 cn "S12_07"  "distToS01_13":34
 cn "S12_07"  "distToS01_14":34
 cn "S12_07"  "distToS01_11":34
@@ -52586,6 +52586,7 @@ cn "S12_08"  "distToS00_12":34
 cn "S12_08"  "distToS00_13":34
 cn "S12_08"  "distToS00_10":34
 cn "S12_08"  "distToS00_11":34
+cn "S12_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@22295ec4"
 cn "S12_08"  "distToS00_14":34
 cn "S12_08"  "distToS00_15":34
 cn "S12_08"  "distToS06_02":34
@@ -52715,7 +52716,6 @@ cn "S12_08"  "distToS12_11":2
 cn "S12_08"  "distToS12_14":2
 cn "S12_08"  "distToS12_13":2
 cn "S12_08"  "distToS12_10":2
-cn "S12_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4b8729ff"
 cn "S12_08"  "distToS01_13":34
 cn "S12_08"  "distToS01_14":34
 cn "S12_08"  "distToS01_11":34
@@ -52847,6 +52847,7 @@ cn "S12_09"  "distToS00_12":34
 cn "S12_09"  "distToS00_13":34
 cn "S12_09"  "distToS00_10":34
 cn "S12_09"  "distToS00_11":34
+cn "S12_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5adb0db3"
 cn "S12_09"  "distToS00_14":34
 cn "S12_09"  "distToS00_15":34
 cn "S12_09"  "distToS06_02":34
@@ -52976,7 +52977,6 @@ cn "S12_09"  "distToS12_11":2
 cn "S12_09"  "distToS12_14":2
 cn "S12_09"  "distToS12_13":2
 cn "S12_09"  "distToS12_10":2
-cn "S12_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@61710c6"
 cn "S12_09"  "distToS01_13":34
 cn "S12_09"  "distToS01_14":34
 cn "S12_09"  "distToS01_11":34
@@ -53108,6 +53108,7 @@ cn "S12_10"  "distToS00_12":34
 cn "S12_10"  "distToS00_13":34
 cn "S12_10"  "distToS00_10":34
 cn "S12_10"  "distToS00_11":34
+cn "S12_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@3f270e0a"
 cn "S12_10"  "distToS00_14":34
 cn "S12_10"  "distToS00_15":34
 cn "S12_10"  "distToS06_02":34
@@ -53237,7 +53238,6 @@ cn "S12_10"  "distToS12_11":2
 cn "S12_10"  "distToS12_14":2
 cn "S12_10"  "distToS12_13":2
 cn "S12_10"  "distToS12_10":0
-cn "S12_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3214ee6"
 cn "S12_10"  "distToS01_13":34
 cn "S12_10"  "distToS01_14":34
 cn "S12_10"  "distToS01_11":34
@@ -53369,6 +53369,7 @@ cn "S12_11"  "distToS00_12":34
 cn "S12_11"  "distToS00_13":34
 cn "S12_11"  "distToS00_10":34
 cn "S12_11"  "distToS00_11":34
+cn "S12_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@1a760689"
 cn "S12_11"  "distToS00_14":34
 cn "S12_11"  "distToS00_15":34
 cn "S12_11"  "distToS06_02":34
@@ -53498,7 +53499,6 @@ cn "S12_11"  "distToS12_11":0
 cn "S12_11"  "distToS12_14":2
 cn "S12_11"  "distToS12_13":2
 cn "S12_11"  "distToS12_10":2
-cn "S12_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@383dc82c"
 cn "S12_11"  "distToS01_13":34
 cn "S12_11"  "distToS01_14":34
 cn "S12_11"  "distToS01_11":34
@@ -53630,6 +53630,7 @@ cn "S12_12"  "distToS00_12":34
 cn "S12_12"  "distToS00_13":34
 cn "S12_12"  "distToS00_10":34
 cn "S12_12"  "distToS00_11":34
+cn "S12_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7241a47d"
 cn "S12_12"  "distToS00_14":34
 cn "S12_12"  "distToS00_15":34
 cn "S12_12"  "distToS06_02":34
@@ -53759,7 +53760,6 @@ cn "S12_12"  "distToS12_11":2
 cn "S12_12"  "distToS12_14":2
 cn "S12_12"  "distToS12_13":2
 cn "S12_12"  "distToS12_10":2
-cn "S12_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4a07d605"
 cn "S12_12"  "distToS01_13":34
 cn "S12_12"  "distToS01_14":34
 cn "S12_12"  "distToS01_11":34
@@ -53891,6 +53891,7 @@ cn "S12_13"  "distToS00_12":34
 cn "S12_13"  "distToS00_13":34
 cn "S12_13"  "distToS00_10":34
 cn "S12_13"  "distToS00_11":34
+cn "S12_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@70f59913"
 cn "S12_13"  "distToS00_14":34
 cn "S12_13"  "distToS00_15":34
 cn "S12_13"  "distToS06_02":34
@@ -54020,7 +54021,6 @@ cn "S12_13"  "distToS12_11":2
 cn "S12_13"  "distToS12_14":2
 cn "S12_13"  "distToS12_13":0
 cn "S12_13"  "distToS12_10":2
-cn "S12_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@74287ea3"
 cn "S12_13"  "distToS01_13":34
 cn "S12_13"  "distToS01_14":34
 cn "S12_13"  "distToS01_11":34
@@ -54152,6 +54152,7 @@ cn "S12_14"  "distToS00_12":34
 cn "S12_14"  "distToS00_13":34
 cn "S12_14"  "distToS00_10":34
 cn "S12_14"  "distToS00_11":34
+cn "S12_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@77258e59"
 cn "S12_14"  "distToS00_14":34
 cn "S12_14"  "distToS00_15":34
 cn "S12_14"  "distToS06_02":34
@@ -54281,7 +54282,6 @@ cn "S12_14"  "distToS12_11":2
 cn "S12_14"  "distToS12_14":0
 cn "S12_14"  "distToS12_13":2
 cn "S12_14"  "distToS12_10":2
-cn "S12_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7d7758be"
 cn "S12_14"  "distToS01_13":34
 cn "S12_14"  "distToS01_14":34
 cn "S12_14"  "distToS01_11":34
@@ -54413,6 +54413,7 @@ cn "S12_15"  "distToS00_12":34
 cn "S12_15"  "distToS00_13":34
 cn "S12_15"  "distToS00_10":34
 cn "S12_15"  "distToS00_11":34
+cn "S12_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5dcd8c7a"
 cn "S12_15"  "distToS00_14":34
 cn "S12_15"  "distToS00_15":34
 cn "S12_15"  "distToS06_02":34
@@ -54542,7 +54543,6 @@ cn "S12_15"  "distToS12_11":2
 cn "S12_15"  "distToS12_14":2
 cn "S12_15"  "distToS12_13":2
 cn "S12_15"  "distToS12_10":2
-cn "S12_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2bdd8394"
 cn "S12_15"  "distToS01_13":34
 cn "S12_15"  "distToS01_14":34
 cn "S12_15"  "distToS01_11":34
@@ -54674,6 +54674,7 @@ cn "S13_00"  "distToS00_12":33
 cn "S13_00"  "distToS00_13":33
 cn "S13_00"  "distToS00_10":33
 cn "S13_00"  "distToS00_11":33
+cn "S13_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2250b9f2"
 cn "S13_00"  "distToS00_14":33
 cn "S13_00"  "distToS00_15":33
 cn "S13_00"  "distToS06_02":33
@@ -54803,7 +54804,6 @@ cn "S13_00"  "distToS12_11":33
 cn "S13_00"  "distToS12_14":33
 cn "S13_00"  "distToS12_13":33
 cn "S13_00"  "distToS12_10":33
-cn "S13_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5f9edf14"
 cn "S13_00"  "distToS01_13":33
 cn "S13_00"  "distToS01_14":33
 cn "S13_00"  "distToS01_11":33
@@ -54935,6 +54935,7 @@ cn "S13_01"  "distToS00_12":32
 cn "S13_01"  "distToS00_13":32
 cn "S13_01"  "distToS00_10":32
 cn "S13_01"  "distToS00_11":32
+cn "S13_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7e3181aa"
 cn "S13_01"  "distToS00_14":32
 cn "S13_01"  "distToS00_15":32
 cn "S13_01"  "distToS06_02":32
@@ -55064,7 +55065,6 @@ cn "S13_01"  "distToS12_11":32
 cn "S13_01"  "distToS12_14":32
 cn "S13_01"  "distToS12_13":32
 cn "S13_01"  "distToS12_10":32
-cn "S13_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@68746f22"
 cn "S13_01"  "distToS01_13":32
 cn "S13_01"  "distToS01_14":32
 cn "S13_01"  "distToS01_11":32
@@ -55196,6 +55196,7 @@ cn "S13_02"  "distToS00_12":34
 cn "S13_02"  "distToS00_13":34
 cn "S13_02"  "distToS00_10":34
 cn "S13_02"  "distToS00_11":34
+cn "S13_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@253d9f73"
 cn "S13_02"  "distToS00_14":34
 cn "S13_02"  "distToS00_15":34
 cn "S13_02"  "distToS06_02":34
@@ -55325,7 +55326,6 @@ cn "S13_02"  "distToS12_11":34
 cn "S13_02"  "distToS12_14":34
 cn "S13_02"  "distToS12_13":34
 cn "S13_02"  "distToS12_10":34
-cn "S13_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2f01783a"
 cn "S13_02"  "distToS01_13":34
 cn "S13_02"  "distToS01_14":34
 cn "S13_02"  "distToS01_11":34
@@ -55457,6 +55457,7 @@ cn "S13_03"  "distToS00_12":34
 cn "S13_03"  "distToS00_13":34
 cn "S13_03"  "distToS00_10":34
 cn "S13_03"  "distToS00_11":34
+cn "S13_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@142269f2"
 cn "S13_03"  "distToS00_14":34
 cn "S13_03"  "distToS00_15":34
 cn "S13_03"  "distToS06_02":34
@@ -55586,7 +55587,6 @@ cn "S13_03"  "distToS12_11":34
 cn "S13_03"  "distToS12_14":34
 cn "S13_03"  "distToS12_13":34
 cn "S13_03"  "distToS12_10":34
-cn "S13_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@68878f6d"
 cn "S13_03"  "distToS01_13":34
 cn "S13_03"  "distToS01_14":34
 cn "S13_03"  "distToS01_11":34
@@ -55718,6 +55718,7 @@ cn "S13_04"  "distToS00_12":34
 cn "S13_04"  "distToS00_13":34
 cn "S13_04"  "distToS00_10":34
 cn "S13_04"  "distToS00_11":34
+cn "S13_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@331acdad"
 cn "S13_04"  "distToS00_14":34
 cn "S13_04"  "distToS00_15":34
 cn "S13_04"  "distToS06_02":34
@@ -55847,7 +55848,6 @@ cn "S13_04"  "distToS12_11":34
 cn "S13_04"  "distToS12_14":34
 cn "S13_04"  "distToS12_13":34
 cn "S13_04"  "distToS12_10":34
-cn "S13_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@41488b16"
 cn "S13_04"  "distToS01_13":34
 cn "S13_04"  "distToS01_14":34
 cn "S13_04"  "distToS01_11":34
@@ -55979,6 +55979,7 @@ cn "S13_05"  "distToS00_12":34
 cn "S13_05"  "distToS00_13":34
 cn "S13_05"  "distToS00_10":34
 cn "S13_05"  "distToS00_11":34
+cn "S13_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@41d426b5"
 cn "S13_05"  "distToS00_14":34
 cn "S13_05"  "distToS00_15":34
 cn "S13_05"  "distToS06_02":34
@@ -56108,7 +56109,6 @@ cn "S13_05"  "distToS12_11":34
 cn "S13_05"  "distToS12_14":34
 cn "S13_05"  "distToS12_13":34
 cn "S13_05"  "distToS12_10":34
-cn "S13_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@a8ef162"
 cn "S13_05"  "distToS01_13":34
 cn "S13_05"  "distToS01_14":34
 cn "S13_05"  "distToS01_11":34
@@ -56240,6 +56240,7 @@ cn "S13_06"  "distToS00_12":34
 cn "S13_06"  "distToS00_13":34
 cn "S13_06"  "distToS00_10":34
 cn "S13_06"  "distToS00_11":34
+cn "S13_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@8dbfffb"
 cn "S13_06"  "distToS00_14":34
 cn "S13_06"  "distToS00_15":34
 cn "S13_06"  "distToS06_02":34
@@ -56369,7 +56370,6 @@ cn "S13_06"  "distToS12_11":34
 cn "S13_06"  "distToS12_14":34
 cn "S13_06"  "distToS12_13":34
 cn "S13_06"  "distToS12_10":34
-cn "S13_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2eea88a1"
 cn "S13_06"  "distToS01_13":34
 cn "S13_06"  "distToS01_14":34
 cn "S13_06"  "distToS01_11":34
@@ -56501,6 +56501,7 @@ cn "S13_07"  "distToS00_12":34
 cn "S13_07"  "distToS00_13":34
 cn "S13_07"  "distToS00_10":34
 cn "S13_07"  "distToS00_11":34
+cn "S13_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@f316aeb"
 cn "S13_07"  "distToS00_14":34
 cn "S13_07"  "distToS00_15":34
 cn "S13_07"  "distToS06_02":34
@@ -56630,7 +56631,6 @@ cn "S13_07"  "distToS12_11":34
 cn "S13_07"  "distToS12_14":34
 cn "S13_07"  "distToS12_13":34
 cn "S13_07"  "distToS12_10":34
-cn "S13_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7ac296f6"
 cn "S13_07"  "distToS01_13":34
 cn "S13_07"  "distToS01_14":34
 cn "S13_07"  "distToS01_11":34
@@ -56762,6 +56762,7 @@ cn "S13_08"  "distToS00_12":34
 cn "S13_08"  "distToS00_13":34
 cn "S13_08"  "distToS00_10":34
 cn "S13_08"  "distToS00_11":34
+cn "S13_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6aa3a905"
 cn "S13_08"  "distToS00_14":34
 cn "S13_08"  "distToS00_15":34
 cn "S13_08"  "distToS06_02":34
@@ -56891,7 +56892,6 @@ cn "S13_08"  "distToS12_11":34
 cn "S13_08"  "distToS12_14":34
 cn "S13_08"  "distToS12_13":34
 cn "S13_08"  "distToS12_10":34
-cn "S13_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7fd7a283"
 cn "S13_08"  "distToS01_13":34
 cn "S13_08"  "distToS01_14":34
 cn "S13_08"  "distToS01_11":34
@@ -57023,6 +57023,7 @@ cn "S13_09"  "distToS00_12":34
 cn "S13_09"  "distToS00_13":34
 cn "S13_09"  "distToS00_10":34
 cn "S13_09"  "distToS00_11":34
+cn "S13_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@a22cb6a"
 cn "S13_09"  "distToS00_14":34
 cn "S13_09"  "distToS00_15":34
 cn "S13_09"  "distToS06_02":34
@@ -57152,7 +57153,6 @@ cn "S13_09"  "distToS12_11":34
 cn "S13_09"  "distToS12_14":34
 cn "S13_09"  "distToS12_13":34
 cn "S13_09"  "distToS12_10":34
-cn "S13_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@22f59fa"
 cn "S13_09"  "distToS01_13":34
 cn "S13_09"  "distToS01_14":34
 cn "S13_09"  "distToS01_11":34
@@ -57284,6 +57284,7 @@ cn "S13_10"  "distToS00_12":34
 cn "S13_10"  "distToS00_13":34
 cn "S13_10"  "distToS00_10":34
 cn "S13_10"  "distToS00_11":34
+cn "S13_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5dd1c9f2"
 cn "S13_10"  "distToS00_14":34
 cn "S13_10"  "distToS00_15":34
 cn "S13_10"  "distToS06_02":34
@@ -57413,7 +57414,6 @@ cn "S13_10"  "distToS12_11":34
 cn "S13_10"  "distToS12_14":34
 cn "S13_10"  "distToS12_13":34
 cn "S13_10"  "distToS12_10":34
-cn "S13_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@78fa769e"
 cn "S13_10"  "distToS01_13":34
 cn "S13_10"  "distToS01_14":34
 cn "S13_10"  "distToS01_11":34
@@ -57545,6 +57545,7 @@ cn "S13_11"  "distToS00_12":34
 cn "S13_11"  "distToS00_13":34
 cn "S13_11"  "distToS00_10":34
 cn "S13_11"  "distToS00_11":34
+cn "S13_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@59b38691"
 cn "S13_11"  "distToS00_14":34
 cn "S13_11"  "distToS00_15":34
 cn "S13_11"  "distToS06_02":34
@@ -57674,7 +57675,6 @@ cn "S13_11"  "distToS12_11":34
 cn "S13_11"  "distToS12_14":34
 cn "S13_11"  "distToS12_13":34
 cn "S13_11"  "distToS12_10":34
-cn "S13_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@16612a51"
 cn "S13_11"  "distToS01_13":34
 cn "S13_11"  "distToS01_14":34
 cn "S13_11"  "distToS01_11":34
@@ -57806,6 +57806,7 @@ cn "S13_12"  "distToS00_12":34
 cn "S13_12"  "distToS00_13":34
 cn "S13_12"  "distToS00_10":34
 cn "S13_12"  "distToS00_11":34
+cn "S13_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2e2ff723"
 cn "S13_12"  "distToS00_14":34
 cn "S13_12"  "distToS00_15":34
 cn "S13_12"  "distToS06_02":34
@@ -57935,7 +57936,6 @@ cn "S13_12"  "distToS12_11":34
 cn "S13_12"  "distToS12_14":34
 cn "S13_12"  "distToS12_13":34
 cn "S13_12"  "distToS12_10":34
-cn "S13_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@54e041a4"
 cn "S13_12"  "distToS01_13":34
 cn "S13_12"  "distToS01_14":34
 cn "S13_12"  "distToS01_11":34
@@ -58067,6 +58067,7 @@ cn "S13_13"  "distToS00_12":34
 cn "S13_13"  "distToS00_13":34
 cn "S13_13"  "distToS00_10":34
 cn "S13_13"  "distToS00_11":34
+cn "S13_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@324a0017"
 cn "S13_13"  "distToS00_14":34
 cn "S13_13"  "distToS00_15":34
 cn "S13_13"  "distToS06_02":34
@@ -58196,7 +58197,6 @@ cn "S13_13"  "distToS12_11":34
 cn "S13_13"  "distToS12_14":34
 cn "S13_13"  "distToS12_13":34
 cn "S13_13"  "distToS12_10":34
-cn "S13_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@2c78324b"
 cn "S13_13"  "distToS01_13":34
 cn "S13_13"  "distToS01_14":34
 cn "S13_13"  "distToS01_11":34
@@ -58328,6 +58328,7 @@ cn "S13_14"  "distToS00_12":34
 cn "S13_14"  "distToS00_13":34
 cn "S13_14"  "distToS00_10":34
 cn "S13_14"  "distToS00_11":34
+cn "S13_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@6187d1f5"
 cn "S13_14"  "distToS00_14":34
 cn "S13_14"  "distToS00_15":34
 cn "S13_14"  "distToS06_02":34
@@ -58457,7 +58458,6 @@ cn "S13_14"  "distToS12_11":34
 cn "S13_14"  "distToS12_14":34
 cn "S13_14"  "distToS12_13":34
 cn "S13_14"  "distToS12_10":34
-cn "S13_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@79defdc"
 cn "S13_14"  "distToS01_13":34
 cn "S13_14"  "distToS01_14":34
 cn "S13_14"  "distToS01_11":34
@@ -58589,6 +58589,7 @@ cn "S13_15"  "distToS00_12":34
 cn "S13_15"  "distToS00_13":34
 cn "S13_15"  "distToS00_10":34
 cn "S13_15"  "distToS00_11":34
+cn "S13_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2445445a"
 cn "S13_15"  "distToS00_14":34
 cn "S13_15"  "distToS00_15":34
 cn "S13_15"  "distToS06_02":34
@@ -58718,7 +58719,6 @@ cn "S13_15"  "distToS12_11":34
 cn "S13_15"  "distToS12_14":34
 cn "S13_15"  "distToS12_13":34
 cn "S13_15"  "distToS12_10":34
-cn "S13_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@18317edc"
 cn "S13_15"  "distToS01_13":34
 cn "S13_15"  "distToS01_14":34
 cn "S13_15"  "distToS01_11":34
@@ -58850,6 +58850,7 @@ cn "S14_00"  "distToS00_12":33
 cn "S14_00"  "distToS00_13":33
 cn "S14_00"  "distToS00_10":33
 cn "S14_00"  "distToS00_11":33
+cn "S14_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@7502291e"
 cn "S14_00"  "distToS00_14":33
 cn "S14_00"  "distToS00_15":33
 cn "S14_00"  "distToS06_02":33
@@ -58979,7 +58980,6 @@ cn "S14_00"  "distToS12_11":33
 cn "S14_00"  "distToS12_14":33
 cn "S14_00"  "distToS12_13":33
 cn "S14_00"  "distToS12_10":33
-cn "S14_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4e0ae11f"
 cn "S14_00"  "distToS01_13":33
 cn "S14_00"  "distToS01_14":33
 cn "S14_00"  "distToS01_11":33
@@ -59111,6 +59111,7 @@ cn "S14_01"  "distToS00_12":32
 cn "S14_01"  "distToS00_13":32
 cn "S14_01"  "distToS00_10":32
 cn "S14_01"  "distToS00_11":32
+cn "S14_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@17aad511"
 cn "S14_01"  "distToS00_14":32
 cn "S14_01"  "distToS00_15":32
 cn "S14_01"  "distToS06_02":32
@@ -59240,7 +59241,6 @@ cn "S14_01"  "distToS12_11":32
 cn "S14_01"  "distToS12_14":32
 cn "S14_01"  "distToS12_13":32
 cn "S14_01"  "distToS12_10":32
-cn "S14_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@238d68ff"
 cn "S14_01"  "distToS01_13":32
 cn "S14_01"  "distToS01_14":32
 cn "S14_01"  "distToS01_11":32
@@ -59372,6 +59372,7 @@ cn "S14_02"  "distToS00_12":34
 cn "S14_02"  "distToS00_13":34
 cn "S14_02"  "distToS00_10":34
 cn "S14_02"  "distToS00_11":34
+cn "S14_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@487db668"
 cn "S14_02"  "distToS00_14":34
 cn "S14_02"  "distToS00_15":34
 cn "S14_02"  "distToS06_02":34
@@ -59501,7 +59502,6 @@ cn "S14_02"  "distToS12_11":34
 cn "S14_02"  "distToS12_14":34
 cn "S14_02"  "distToS12_13":34
 cn "S14_02"  "distToS12_10":34
-cn "S14_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4b86805d"
 cn "S14_02"  "distToS01_13":34
 cn "S14_02"  "distToS01_14":34
 cn "S14_02"  "distToS01_11":34
@@ -59633,6 +59633,7 @@ cn "S14_03"  "distToS00_12":34
 cn "S14_03"  "distToS00_13":34
 cn "S14_03"  "distToS00_10":34
 cn "S14_03"  "distToS00_11":34
+cn "S14_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@46944ca9"
 cn "S14_03"  "distToS00_14":34
 cn "S14_03"  "distToS00_15":34
 cn "S14_03"  "distToS06_02":34
@@ -59762,7 +59763,6 @@ cn "S14_03"  "distToS12_11":34
 cn "S14_03"  "distToS12_14":34
 cn "S14_03"  "distToS12_13":34
 cn "S14_03"  "distToS12_10":34
-cn "S14_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@5852c06f"
 cn "S14_03"  "distToS01_13":34
 cn "S14_03"  "distToS01_14":34
 cn "S14_03"  "distToS01_11":34
@@ -59894,6 +59894,7 @@ cn "S14_04"  "distToS00_12":34
 cn "S14_04"  "distToS00_13":34
 cn "S14_04"  "distToS00_10":34
 cn "S14_04"  "distToS00_11":34
+cn "S14_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@22bac7bc"
 cn "S14_04"  "distToS00_14":34
 cn "S14_04"  "distToS00_15":34
 cn "S14_04"  "distToS06_02":34
@@ -60023,7 +60024,6 @@ cn "S14_04"  "distToS12_11":34
 cn "S14_04"  "distToS12_14":34
 cn "S14_04"  "distToS12_13":34
 cn "S14_04"  "distToS12_10":34
-cn "S14_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4149c063"
 cn "S14_04"  "distToS01_13":34
 cn "S14_04"  "distToS01_14":34
 cn "S14_04"  "distToS01_11":34
@@ -60155,6 +60155,7 @@ cn "S14_05"  "distToS00_12":34
 cn "S14_05"  "distToS00_13":34
 cn "S14_05"  "distToS00_10":34
 cn "S14_05"  "distToS00_11":34
+cn "S14_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@63798ca7"
 cn "S14_05"  "distToS00_14":34
 cn "S14_05"  "distToS00_15":34
 cn "S14_05"  "distToS06_02":34
@@ -60284,7 +60285,6 @@ cn "S14_05"  "distToS12_11":34
 cn "S14_05"  "distToS12_14":34
 cn "S14_05"  "distToS12_13":34
 cn "S14_05"  "distToS12_10":34
-cn "S14_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@9cb8225"
 cn "S14_05"  "distToS01_13":34
 cn "S14_05"  "distToS01_14":34
 cn "S14_05"  "distToS01_11":34
@@ -60416,6 +60416,7 @@ cn "S14_06"  "distToS00_12":34
 cn "S14_06"  "distToS00_13":34
 cn "S14_06"  "distToS00_10":34
 cn "S14_06"  "distToS00_11":34
+cn "S14_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4612b856"
 cn "S14_06"  "distToS00_14":34
 cn "S14_06"  "distToS00_15":34
 cn "S14_06"  "distToS06_02":34
@@ -60545,7 +60546,6 @@ cn "S14_06"  "distToS12_11":34
 cn "S14_06"  "distToS12_14":34
 cn "S14_06"  "distToS12_13":34
 cn "S14_06"  "distToS12_10":34
-cn "S14_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@76b07f29"
 cn "S14_06"  "distToS01_13":34
 cn "S14_06"  "distToS01_14":34
 cn "S14_06"  "distToS01_11":34
@@ -60677,6 +60677,7 @@ cn "S14_07"  "distToS00_12":34
 cn "S14_07"  "distToS00_13":34
 cn "S14_07"  "distToS00_10":34
 cn "S14_07"  "distToS00_11":34
+cn "S14_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@22875539"
 cn "S14_07"  "distToS00_14":34
 cn "S14_07"  "distToS00_15":34
 cn "S14_07"  "distToS06_02":34
@@ -60806,7 +60807,6 @@ cn "S14_07"  "distToS12_11":34
 cn "S14_07"  "distToS12_14":34
 cn "S14_07"  "distToS12_13":34
 cn "S14_07"  "distToS12_10":34
-cn "S14_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@38af9828"
 cn "S14_07"  "distToS01_13":34
 cn "S14_07"  "distToS01_14":34
 cn "S14_07"  "distToS01_11":34
@@ -60938,6 +60938,7 @@ cn "S14_08"  "distToS00_12":34
 cn "S14_08"  "distToS00_13":34
 cn "S14_08"  "distToS00_10":34
 cn "S14_08"  "distToS00_11":34
+cn "S14_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5674e1f2"
 cn "S14_08"  "distToS00_14":34
 cn "S14_08"  "distToS00_15":34
 cn "S14_08"  "distToS06_02":34
@@ -61067,7 +61068,6 @@ cn "S14_08"  "distToS12_11":34
 cn "S14_08"  "distToS12_14":34
 cn "S14_08"  "distToS12_13":34
 cn "S14_08"  "distToS12_10":34
-cn "S14_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@376a0d86"
 cn "S14_08"  "distToS01_13":34
 cn "S14_08"  "distToS01_14":34
 cn "S14_08"  "distToS01_11":34
@@ -61199,6 +61199,7 @@ cn "S14_09"  "distToS00_12":34
 cn "S14_09"  "distToS00_13":34
 cn "S14_09"  "distToS00_10":34
 cn "S14_09"  "distToS00_11":34
+cn "S14_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@79c7532f"
 cn "S14_09"  "distToS00_14":34
 cn "S14_09"  "distToS00_15":34
 cn "S14_09"  "distToS06_02":34
@@ -61328,7 +61329,6 @@ cn "S14_09"  "distToS12_11":34
 cn "S14_09"  "distToS12_14":34
 cn "S14_09"  "distToS12_13":34
 cn "S14_09"  "distToS12_10":34
-cn "S14_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@62656be4"
 cn "S14_09"  "distToS01_13":34
 cn "S14_09"  "distToS01_14":34
 cn "S14_09"  "distToS01_11":34
@@ -61460,6 +61460,7 @@ cn "S14_10"  "distToS00_12":34
 cn "S14_10"  "distToS00_13":34
 cn "S14_10"  "distToS00_10":34
 cn "S14_10"  "distToS00_11":34
+cn "S14_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2a448449"
 cn "S14_10"  "distToS00_14":34
 cn "S14_10"  "distToS00_15":34
 cn "S14_10"  "distToS06_02":34
@@ -61589,7 +61590,6 @@ cn "S14_10"  "distToS12_11":34
 cn "S14_10"  "distToS12_14":34
 cn "S14_10"  "distToS12_13":34
 cn "S14_10"  "distToS12_10":34
-cn "S14_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@17d919b6"
 cn "S14_10"  "distToS01_13":34
 cn "S14_10"  "distToS01_14":34
 cn "S14_10"  "distToS01_11":34
@@ -61721,6 +61721,7 @@ cn "S14_11"  "distToS00_12":34
 cn "S14_11"  "distToS00_13":34
 cn "S14_11"  "distToS00_10":34
 cn "S14_11"  "distToS00_11":34
+cn "S14_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@32f232a5"
 cn "S14_11"  "distToS00_14":34
 cn "S14_11"  "distToS00_15":34
 cn "S14_11"  "distToS06_02":34
@@ -61850,7 +61851,6 @@ cn "S14_11"  "distToS12_11":34
 cn "S14_11"  "distToS12_14":34
 cn "S14_11"  "distToS12_13":34
 cn "S14_11"  "distToS12_10":34
-cn "S14_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@53f3bdbd"
 cn "S14_11"  "distToS01_13":34
 cn "S14_11"  "distToS01_14":34
 cn "S14_11"  "distToS01_11":34
@@ -61982,6 +61982,7 @@ cn "S14_12"  "distToS00_12":34
 cn "S14_12"  "distToS00_13":34
 cn "S14_12"  "distToS00_10":34
 cn "S14_12"  "distToS00_11":34
+cn "S14_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@43f82e78"
 cn "S14_12"  "distToS00_14":34
 cn "S14_12"  "distToS00_15":34
 cn "S14_12"  "distToS06_02":34
@@ -62111,7 +62112,6 @@ cn "S14_12"  "distToS12_11":34
 cn "S14_12"  "distToS12_14":34
 cn "S14_12"  "distToS12_13":34
 cn "S14_12"  "distToS12_10":34
-cn "S14_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@34129c78"
 cn "S14_12"  "distToS01_13":34
 cn "S14_12"  "distToS01_14":34
 cn "S14_12"  "distToS01_11":34
@@ -62243,6 +62243,7 @@ cn "S14_13"  "distToS00_12":34
 cn "S14_13"  "distToS00_13":34
 cn "S14_13"  "distToS00_10":34
 cn "S14_13"  "distToS00_11":34
+cn "S14_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@e54303"
 cn "S14_13"  "distToS00_14":34
 cn "S14_13"  "distToS00_15":34
 cn "S14_13"  "distToS06_02":34
@@ -62372,7 +62373,6 @@ cn "S14_13"  "distToS12_11":34
 cn "S14_13"  "distToS12_14":34
 cn "S14_13"  "distToS12_13":34
 cn "S14_13"  "distToS12_10":34
-cn "S14_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7d61eb55"
 cn "S14_13"  "distToS01_13":34
 cn "S14_13"  "distToS01_14":34
 cn "S14_13"  "distToS01_11":34
@@ -62504,6 +62504,7 @@ cn "S14_14"  "distToS00_12":34
 cn "S14_14"  "distToS00_13":34
 cn "S14_14"  "distToS00_10":34
 cn "S14_14"  "distToS00_11":34
+cn "S14_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@e8df99a"
 cn "S14_14"  "distToS00_14":34
 cn "S14_14"  "distToS00_15":34
 cn "S14_14"  "distToS06_02":34
@@ -62633,7 +62634,6 @@ cn "S14_14"  "distToS12_11":34
 cn "S14_14"  "distToS12_14":34
 cn "S14_14"  "distToS12_13":34
 cn "S14_14"  "distToS12_10":34
-cn "S14_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@222a59e6"
 cn "S14_14"  "distToS01_13":34
 cn "S14_14"  "distToS01_14":34
 cn "S14_14"  "distToS01_11":34
@@ -62765,6 +62765,7 @@ cn "S14_15"  "distToS00_12":34
 cn "S14_15"  "distToS00_13":34
 cn "S14_15"  "distToS00_10":34
 cn "S14_15"  "distToS00_11":34
+cn "S14_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2dc995f4"
 cn "S14_15"  "distToS00_14":34
 cn "S14_15"  "distToS00_15":34
 cn "S14_15"  "distToS06_02":34
@@ -62894,7 +62895,6 @@ cn "S14_15"  "distToS12_11":34
 cn "S14_15"  "distToS12_14":34
 cn "S14_15"  "distToS12_13":34
 cn "S14_15"  "distToS12_10":34
-cn "S14_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@6c7a164b"
 cn "S14_15"  "distToS01_13":34
 cn "S14_15"  "distToS01_14":34
 cn "S14_15"  "distToS01_11":34
@@ -63026,6 +63026,7 @@ cn "S15_00"  "distToS00_12":33
 cn "S15_00"  "distToS00_13":33
 cn "S15_00"  "distToS00_10":33
 cn "S15_00"  "distToS00_11":33
+cn "S15_00"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2f40e5db"
 cn "S15_00"  "distToS00_14":33
 cn "S15_00"  "distToS00_15":33
 cn "S15_00"  "distToS06_02":33
@@ -63155,7 +63156,6 @@ cn "S15_00"  "distToS12_11":33
 cn "S15_00"  "distToS12_14":33
 cn "S15_00"  "distToS12_13":33
 cn "S15_00"  "distToS12_10":33
-cn "S15_00"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4c2bb6e0"
 cn "S15_00"  "distToS01_13":33
 cn "S15_00"  "distToS01_14":33
 cn "S15_00"  "distToS01_11":33
@@ -63287,6 +63287,7 @@ cn "S15_01"  "distToS00_12":32
 cn "S15_01"  "distToS00_13":32
 cn "S15_01"  "distToS00_10":32
 cn "S15_01"  "distToS00_11":32
+cn "S15_01"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@517566b"
 cn "S15_01"  "distToS00_14":32
 cn "S15_01"  "distToS00_15":32
 cn "S15_01"  "distToS06_02":32
@@ -63416,7 +63417,6 @@ cn "S15_01"  "distToS12_11":32
 cn "S15_01"  "distToS12_14":32
 cn "S15_01"  "distToS12_13":32
 cn "S15_01"  "distToS12_10":32
-cn "S15_01"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3e62d773"
 cn "S15_01"  "distToS01_13":32
 cn "S15_01"  "distToS01_14":32
 cn "S15_01"  "distToS01_11":32
@@ -63548,6 +63548,7 @@ cn "S15_02"  "distToS00_12":34
 cn "S15_02"  "distToS00_13":34
 cn "S15_02"  "distToS00_10":34
 cn "S15_02"  "distToS00_11":34
+cn "S15_02"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@64b73e7a"
 cn "S15_02"  "distToS00_14":34
 cn "S15_02"  "distToS00_15":34
 cn "S15_02"  "distToS06_02":34
@@ -63677,7 +63678,6 @@ cn "S15_02"  "distToS12_11":34
 cn "S15_02"  "distToS12_14":34
 cn "S15_02"  "distToS12_13":34
 cn "S15_02"  "distToS12_10":34
-cn "S15_02"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4ef74c30"
 cn "S15_02"  "distToS01_13":34
 cn "S15_02"  "distToS01_14":34
 cn "S15_02"  "distToS01_11":34
@@ -63809,6 +63809,7 @@ cn "S15_03"  "distToS00_12":34
 cn "S15_03"  "distToS00_13":34
 cn "S15_03"  "distToS00_10":34
 cn "S15_03"  "distToS00_11":34
+cn "S15_03"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@530712d"
 cn "S15_03"  "distToS00_14":34
 cn "S15_03"  "distToS00_15":34
 cn "S15_03"  "distToS06_02":34
@@ -63938,7 +63939,6 @@ cn "S15_03"  "distToS12_11":34
 cn "S15_03"  "distToS12_14":34
 cn "S15_03"  "distToS12_13":34
 cn "S15_03"  "distToS12_10":34
-cn "S15_03"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@7283d3eb"
 cn "S15_03"  "distToS01_13":34
 cn "S15_03"  "distToS01_14":34
 cn "S15_03"  "distToS01_11":34
@@ -64070,6 +64070,7 @@ cn "S15_04"  "distToS00_12":34
 cn "S15_04"  "distToS00_13":34
 cn "S15_04"  "distToS00_10":34
 cn "S15_04"  "distToS00_11":34
+cn "S15_04"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2df6226d"
 cn "S15_04"  "distToS00_14":34
 cn "S15_04"  "distToS00_15":34
 cn "S15_04"  "distToS06_02":34
@@ -64199,7 +64200,6 @@ cn "S15_04"  "distToS12_11":34
 cn "S15_04"  "distToS12_14":34
 cn "S15_04"  "distToS12_13":34
 cn "S15_04"  "distToS12_10":34
-cn "S15_04"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@638ef7ed"
 cn "S15_04"  "distToS01_13":34
 cn "S15_04"  "distToS01_14":34
 cn "S15_04"  "distToS01_11":34
@@ -64331,6 +64331,7 @@ cn "S15_05"  "distToS00_12":34
 cn "S15_05"  "distToS00_13":34
 cn "S15_05"  "distToS00_10":34
 cn "S15_05"  "distToS00_11":34
+cn "S15_05"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@12ed9db6"
 cn "S15_05"  "distToS00_14":34
 cn "S15_05"  "distToS00_15":34
 cn "S15_05"  "distToS06_02":34
@@ -64460,7 +64461,6 @@ cn "S15_05"  "distToS12_11":34
 cn "S15_05"  "distToS12_14":34
 cn "S15_05"  "distToS12_13":34
 cn "S15_05"  "distToS12_10":34
-cn "S15_05"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@4bff7da0"
 cn "S15_05"  "distToS01_13":34
 cn "S15_05"  "distToS01_14":34
 cn "S15_05"  "distToS01_11":34
@@ -64592,6 +64592,7 @@ cn "S15_06"  "distToS00_12":34
 cn "S15_06"  "distToS00_13":34
 cn "S15_06"  "distToS00_10":34
 cn "S15_06"  "distToS00_11":34
+cn "S15_06"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@4ff4357f"
 cn "S15_06"  "distToS00_14":34
 cn "S15_06"  "distToS00_15":34
 cn "S15_06"  "distToS06_02":34
@@ -64721,7 +64722,6 @@ cn "S15_06"  "distToS12_11":34
 cn "S15_06"  "distToS12_14":34
 cn "S15_06"  "distToS12_13":34
 cn "S15_06"  "distToS12_10":34
-cn "S15_06"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3f1d2e23"
 cn "S15_06"  "distToS01_13":34
 cn "S15_06"  "distToS01_14":34
 cn "S15_06"  "distToS01_11":34
@@ -64853,6 +64853,7 @@ cn "S15_07"  "distToS00_12":34
 cn "S15_07"  "distToS00_13":34
 cn "S15_07"  "distToS00_10":34
 cn "S15_07"  "distToS00_11":34
+cn "S15_07"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@49cb9cb5"
 cn "S15_07"  "distToS00_14":34
 cn "S15_07"  "distToS00_15":34
 cn "S15_07"  "distToS06_02":34
@@ -64982,7 +64983,6 @@ cn "S15_07"  "distToS12_11":34
 cn "S15_07"  "distToS12_14":34
 cn "S15_07"  "distToS12_13":34
 cn "S15_07"  "distToS12_10":34
-cn "S15_07"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@536dbea0"
 cn "S15_07"  "distToS01_13":34
 cn "S15_07"  "distToS01_14":34
 cn "S15_07"  "distToS01_11":34
@@ -65114,6 +65114,7 @@ cn "S15_08"  "distToS00_12":34
 cn "S15_08"  "distToS00_13":34
 cn "S15_08"  "distToS00_10":34
 cn "S15_08"  "distToS00_11":34
+cn "S15_08"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@55322aab"
 cn "S15_08"  "distToS00_14":34
 cn "S15_08"  "distToS00_15":34
 cn "S15_08"  "distToS06_02":34
@@ -65243,7 +65244,6 @@ cn "S15_08"  "distToS12_11":34
 cn "S15_08"  "distToS12_14":34
 cn "S15_08"  "distToS12_13":34
 cn "S15_08"  "distToS12_10":34
-cn "S15_08"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@47c81abf"
 cn "S15_08"  "distToS01_13":34
 cn "S15_08"  "distToS01_14":34
 cn "S15_08"  "distToS01_11":34
@@ -65375,6 +65375,7 @@ cn "S15_09"  "distToS00_12":34
 cn "S15_09"  "distToS00_13":34
 cn "S15_09"  "distToS00_10":34
 cn "S15_09"  "distToS00_11":34
+cn "S15_09"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@2b4c1d96"
 cn "S15_09"  "distToS00_14":34
 cn "S15_09"  "distToS00_15":34
 cn "S15_09"  "distToS06_02":34
@@ -65504,7 +65505,6 @@ cn "S15_09"  "distToS12_11":34
 cn "S15_09"  "distToS12_14":34
 cn "S15_09"  "distToS12_13":34
 cn "S15_09"  "distToS12_10":34
-cn "S15_09"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@776a6d9b"
 cn "S15_09"  "distToS01_13":34
 cn "S15_09"  "distToS01_14":34
 cn "S15_09"  "distToS01_11":34
@@ -65636,6 +65636,7 @@ cn "S15_10"  "distToS00_12":34
 cn "S15_10"  "distToS00_13":34
 cn "S15_10"  "distToS00_10":34
 cn "S15_10"  "distToS00_11":34
+cn "S15_10"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@45fd9a4d"
 cn "S15_10"  "distToS00_14":34
 cn "S15_10"  "distToS00_15":34
 cn "S15_10"  "distToS06_02":34
@@ -65765,7 +65766,6 @@ cn "S15_10"  "distToS12_11":34
 cn "S15_10"  "distToS12_14":34
 cn "S15_10"  "distToS12_13":34
 cn "S15_10"  "distToS12_10":34
-cn "S15_10"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@21d03963"
 cn "S15_10"  "distToS01_13":34
 cn "S15_10"  "distToS01_14":34
 cn "S15_10"  "distToS01_11":34
@@ -65897,6 +65897,7 @@ cn "S15_11"  "distToS00_12":34
 cn "S15_11"  "distToS00_13":34
 cn "S15_11"  "distToS00_10":34
 cn "S15_11"  "distToS00_11":34
+cn "S15_11"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@50468873"
 cn "S15_11"  "distToS00_14":34
 cn "S15_11"  "distToS00_15":34
 cn "S15_11"  "distToS06_02":34
@@ -66026,7 +66027,6 @@ cn "S15_11"  "distToS12_11":34
 cn "S15_11"  "distToS12_14":34
 cn "S15_11"  "distToS12_13":34
 cn "S15_11"  "distToS12_10":34
-cn "S15_11"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1f760b47"
 cn "S15_11"  "distToS01_13":34
 cn "S15_11"  "distToS01_14":34
 cn "S15_11"  "distToS01_11":34
@@ -66158,6 +66158,7 @@ cn "S15_12"  "distToS00_12":34
 cn "S15_12"  "distToS00_13":34
 cn "S15_12"  "distToS00_10":34
 cn "S15_12"  "distToS00_11":34
+cn "S15_12"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@146587a2"
 cn "S15_12"  "distToS00_14":34
 cn "S15_12"  "distToS00_15":34
 cn "S15_12"  "distToS06_02":34
@@ -66287,7 +66288,6 @@ cn "S15_12"  "distToS12_11":34
 cn "S15_12"  "distToS12_14":34
 cn "S15_12"  "distToS12_13":34
 cn "S15_12"  "distToS12_10":34
-cn "S15_12"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@18ece7f4"
 cn "S15_12"  "distToS01_13":34
 cn "S15_12"  "distToS01_14":34
 cn "S15_12"  "distToS01_11":34
@@ -66419,6 +66419,7 @@ cn "S15_13"  "distToS00_12":34
 cn "S15_13"  "distToS00_13":34
 cn "S15_13"  "distToS00_10":34
 cn "S15_13"  "distToS00_11":34
+cn "S15_13"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@5f0e9815"
 cn "S15_13"  "distToS00_14":34
 cn "S15_13"  "distToS00_15":34
 cn "S15_13"  "distToS06_02":34
@@ -66548,7 +66549,6 @@ cn "S15_13"  "distToS12_11":34
 cn "S15_13"  "distToS12_14":34
 cn "S15_13"  "distToS12_13":34
 cn "S15_13"  "distToS12_10":34
-cn "S15_13"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@3cce57c7"
 cn "S15_13"  "distToS01_13":34
 cn "S15_13"  "distToS01_14":34
 cn "S15_13"  "distToS01_11":34
@@ -66680,6 +66680,7 @@ cn "S15_14"  "distToS00_12":34
 cn "S15_14"  "distToS00_13":34
 cn "S15_14"  "distToS00_10":34
 cn "S15_14"  "distToS00_11":34
+cn "S15_14"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@76884e4b"
 cn "S15_14"  "distToS00_14":34
 cn "S15_14"  "distToS00_15":34
 cn "S15_14"  "distToS06_02":34
@@ -66809,7 +66810,6 @@ cn "S15_14"  "distToS12_11":34
 cn "S15_14"  "distToS12_14":34
 cn "S15_14"  "distToS12_13":34
 cn "S15_14"  "distToS12_10":34
-cn "S15_14"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@1cf56a1c"
 cn "S15_14"  "distToS01_13":34
 cn "S15_14"  "distToS01_14":34
 cn "S15_14"  "distToS01_11":34
@@ -66941,6 +66941,7 @@ cn "S15_15"  "distToS00_12":34
 cn "S15_15"  "distToS00_13":34
 cn "S15_15"  "distToS00_10":34
 cn "S15_15"  "distToS00_11":34
+cn "S15_15"  "org.graphstream.algorithm.Dijkstra@6bffbc6d_result_":"org.graphstream.algorithm.Dijkstra$Data@126945f9"
 cn "S15_15"  "distToS00_14":34
 cn "S15_15"  "distToS00_15":34
 cn "S15_15"  "distToS06_02":34
@@ -67070,7 +67071,6 @@ cn "S15_15"  "distToS12_11":34
 cn "S15_15"  "distToS12_14":34
 cn "S15_15"  "distToS12_13":34
 cn "S15_15"  "distToS12_10":34
-cn "S15_15"  "org.graphstream.algorithm.Dijkstra@72c8e7b_result_":"org.graphstream.algorithm.Dijkstra$Data@33f676f6"
 cn "S15_15"  "distToS01_13":34
 cn "S15_15"  "distToS01_14":34
 cn "S15_15"  "distToS01_11":34
