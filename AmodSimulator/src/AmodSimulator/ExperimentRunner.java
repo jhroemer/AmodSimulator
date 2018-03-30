@@ -116,7 +116,7 @@ public class ExperimentRunner {
                 props.setProperty(graphType + "_" + i + "_unoccupiedPercentage", String.valueOf(unoccupiedPercentage));
                 props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
                 props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
-                props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles()));
+                props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles())); // FIXME : will not work in extensions
                 props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getUnservedRequests().size()));
                 props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
                 props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));

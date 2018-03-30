@@ -50,6 +50,7 @@ public class AmodSimulator {
         this.lambda = lambda;
         requests = new ArrayList<>();
 
+        // use two- or a single list for vehicles, depending on extension
         if (extensionType == BASIC || extensionType == EXTENSION2) {
             activeVehicles = new ArrayList<Vehicle>();
             idleVehicles = Utility.generateVehicles(graph, numVehicles);
@@ -58,7 +59,7 @@ public class AmodSimulator {
             allVehicles = Utility.generateVehicles(graph, numVehicles);
         }
 
-        if (IS_VISUAL) {
+        if (IS_VISUAL) { // TODO : update w. allvehicles
             setupVisuals(graph, idleVehicles);
         }
     }
@@ -112,27 +113,51 @@ public class AmodSimulator {
      * @param graph
      */
     public void tick(Graph graph, int timeStep) {
-        // adding new vacant allVehicles to idlevehicles, if vehicle does not have more requests
-        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
-            makeIdle(veh);
-        }
-        vacancyMap.remove(timeStep);
-
         // adding requests for current time step:
-        if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>()));
+        if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>())); // TODO ALL
         else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
+
+        switch (this.extensionType) {
+            case BASIC:
+                tickBasic(graph, timeStep);
+                break;
+            case EXTENSION1:
+                tickExt1(graph, timeStep);
+                break;
+            case EXTENSION2:
+                tickExt2(graph, timeStep);
+                break;
+            case EXTENSION1PLUS2:
+                tickExt1Plus2(graph, timeStep);
+                break;
+        }
+
+        if (PRINT) printVacancyMap();
+        if (IS_VISUAL) drawSprites(timeStep);
+
+        ticksDone++;
+    }
+
+    /**
+     *
+     * @param graph
+     * @param timeStep
+     */
+    private void tickBasic(Graph graph, int timeStep) {
+        // adding new vacant allVehicles to idlevehicles, if vehicle does not have more requests
+        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
+            makeIdle(veh); // TODO ONLY BASIC AND EXT 2
+        }
+
+        vacancyMap.remove(timeStep); // TODO ALL
+
         // assigning allVehicles to requests
-        List<Edge> assignments = assign();
+        List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
 
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
-            // object oriented check for dummynode
-//            if (e.hasDummyNode()) continue; // if an edge has a dummynode in it, then we skip it
-//            Vehicle veh = e.getVehicle();
-//            Request req = e.getRequest();
-
-            // indexbased check for dummynode
+            // indexbased check for dummynode // TODO DIFFERENT BETWEEN EXTENSIONS
             if (e.getStartIndex() >= idleVehicles.size() || e.getEndIndex() >= requests.size()) continue;
             Vehicle veh = idleVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
@@ -154,12 +179,69 @@ public class AmodSimulator {
                 unservedRequests.add(r);
             }
         }
-
-        if (PRINT) printVacancyMap();
-        if (IS_VISUAL) drawSprites(timeStep);
-
-        ticksDone++;
         idleVehiclesCounter += idleVehicles.size();
+    }
+
+    /**
+     *
+     * @param graph
+     * @param timeStep
+     */
+    private void tickExt1(Graph graph, int timeStep) {
+        // adding new vacant allVehicles to idlevehicles, if vehicle does not have more requests
+        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
+            makeIdle(veh); // TODO ONLY BASIC AND EXT 2
+        }
+
+        vacancyMap.remove(timeStep);
+
+        // assigning allVehicles to requests
+        List<Edge> assignments = Utility.assign(assignmentType, allVehicles, requests);
+
+        // make allVehicles serve the requests they are assigned
+        for (Edge e : assignments) {
+            // indexbased check for dummynode // TODO DIFFERENT BETWEEN EXTENSIONS
+            if (e.getStartIndex() >= allVehicles.size() || e.getEndIndex() >= requests.size()) continue;
+            Vehicle veh = allVehicles.get(e.getStartIndex());
+            Request req = requests.get(e.getEndIndex());
+            veh.serviceRequest(req);
+            addToVacancyMap(veh);
+            // TODO should also remove last position in vacancymap
+            makeActive(veh);
+            assignedRequests.add(req);
+            requests.remove(req);
+            if (IS_VISUAL) veh.addRequest(req);
+        }
+
+        // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
+        ListIterator<Request> requestIterator = requests.listIterator();
+        while (requestIterator.hasNext()) {
+            Request r = requestIterator.next();
+            r.incrementWaitCounter();
+            if (r.getTicksWaitingToBeAssigned() >= 6) {
+                requestIterator.remove();
+                unservedRequests.add(r);
+            }
+        }
+        idleVehiclesCounter += idleVehicles.size();
+    }
+
+    /**
+     *
+     * @param graph
+     * @param timeStep
+     */
+    private void tickExt2(Graph graph, int timeStep) {
+        throw new RuntimeException("tickExt2() method not implemented yet!");
+    }
+
+    /**
+     *
+     * @param graph
+     * @param timeStep
+     */
+    private void tickExt1Plus2(Graph graph, int timeStep) {
+        throw new RuntimeException("tickExt1Plus2() method not implemented yet!");
     }
 
     /**
