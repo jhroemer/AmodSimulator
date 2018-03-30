@@ -1,6 +1,7 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
+import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -21,20 +22,38 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-        generateExperimentGraphs();
-//        Random rand = new Random();
-//        Graph graph = new SingleGraph("t");
-//        BaseGenerator gen = new IncompleteGridGenerator(false, 0.5f, 5, 3);
-//        gen.setRandomSeed(rand.nextInt(100));
-//
-//        gen.addSink(graph);
-//        gen.begin();
-//        for (int i = 0; i < 16; i++) gen.nextEvents();
-//        gen.end();
-//        System.out.println("Grid: " + graph.getNodeCount());
-//        System.out.println("grid density: " + Toolkit.density(graph));
-//        System.out.println("grid diameter " + Toolkit.diameter(graph));
+//        generateExperimentGraphs();
+        Random rand = new Random();
+        Graph graph = new SingleGraph("t");
+        BaseGenerator gen = new IncompleteGridGenerator(false, 0.7f, 4, 3);
+        gen.setRandomSeed(rand.nextInt(200));
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < 16; i++) gen.nextEvents();
+        gen.end();
+        System.out.println("Grid: " + graph.getNodeCount());
+        System.out.println("grid density: " + Toolkit.density(graph));
+        System.out.println("grid diameter " + Toolkit.diameter(graph));
 //        graph.display(false);
+
+
+        // TODO : this should check for connected components
+        Random rand2 = new Random();
+        rand2.setSeed(56);
+        Graph graph2 = new SingleGraph("g");
+        BaseGenerator gen2 = new GridGenerator();
+        gen2.setRandomSeed(10);
+        gen2.addSink(graph2);
+        gen2.begin();
+        for (int i = 0; i < 16; i++) gen2.nextEvents();
+        gen2.end();
+
+        for (int i = 0; i < 40; i++) {
+            Node node = graph2.removeNode(rand2.nextInt(graph2.getNodeCount()));
+            for (Edge e : graph2.getEdgeSet()) if (e.getSourceNode() == node || e.getTargetNode() == node) graph2.removeEdge(e);
+        }
+        graph2.display(false);
 
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
