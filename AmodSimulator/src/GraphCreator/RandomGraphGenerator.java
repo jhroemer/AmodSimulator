@@ -42,6 +42,7 @@ public class RandomGraphGenerator {
 //        System.out.println("graphy: " + graphy.getNodeCount());
 //        System.out.println("graphy density: " + Toolkit.density(graphy));
 //        System.out.println("graphy diameter " + Toolkit.diameter(graphy));
+
         /*
         Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
         Graph grid = createGridGraph(GRID, 10, "grid", 15);
@@ -189,7 +190,7 @@ public class RandomGraphGenerator {
         boolean hasOnlyOneCC = false;
 
         Random rand = new Random();
-        rand.setSeed(56);
+        rand.setSeed(seedInt);
         Graph graph = null;
 
         while (!hasOnlyOneCC) {
@@ -476,7 +477,8 @@ public class RandomGraphGenerator {
     private static void saveGraphAsPicture(Graph graph) {
         FileSinkImages pic = new FileSinkImages(FileSinkImages.OutputType.PNG, FileSinkImages.Resolutions.VGA);
 
-        pic.setLayoutPolicy(FileSinkImages.LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
+//        pic.setLayoutPolicy(FileSinkImages.LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
+        pic.setLayoutPolicy(FileSinkImages.LayoutPolicy.NO_LAYOUT);
 
         try {
             pic.writeAll(graph, "data/pictures/" + graph.getId() + ".png");
