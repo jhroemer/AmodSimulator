@@ -161,24 +161,19 @@ public class AmodSimulator {
             if (e.getStartIndex() >= idleVehicles.size() || e.getEndIndex() >= requests.size()) continue;
             Vehicle veh = idleVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
+
             veh.serviceRequest(req);
-            addToVacancyMap(veh);
+            addToVacancyMap(veh, 0, timeStep);
+
             makeActive(veh);
             assignedRequests.add(req);
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
         }
 
-        // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
-        ListIterator<Request> requestIterator = requests.listIterator();
-        while (requestIterator.hasNext()) {
-            Request r = requestIterator.next();
-            r.incrementWaitCounter();
-            if (r.getTicksWaitingToBeAssigned() >= 6) {
-                requestIterator.remove();
-                unservedRequests.add(r);
-            }
-        }
+        // tracking that a request waited
+        trackRequestsWaiting();
+
         idleVehiclesCounter += idleVehicles.size();
     }
 
@@ -211,22 +206,31 @@ public class AmodSimulator {
 
             // TODO should also remove last position in vacancymap
             // makeActive(veh);
+
             assignedRequests.add(req);
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
         }
 
         // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
+        trackRequestsWaiting();
+
+        idleVehiclesCounter += idleVehicles.size();
+    }
+
+    /**
+     *
+     */
+    private void trackRequestsWaiting() {
         ListIterator<Request> requestIterator = requests.listIterator();
         while (requestIterator.hasNext()) {
             Request r = requestIterator.next();
             r.incrementWaitCounter();
-            if (r.getTicksWaitingToBeAssigned() >= 6) {
+            if (r.getTicksWaitingToBeAssigned() >= 6) { // todo: only if we're not on extension 2
                 requestIterator.remove();
                 unservedRequests.add(r);
             }
         }
-        idleVehiclesCounter += idleVehicles.size();
     }
 
     /**
@@ -313,7 +317,9 @@ public class AmodSimulator {
      */
     private void addToVacancyMap(Vehicle veh, int oldVacancyTime, int timeStep) {
         // if the old vacancy time was larger than timestep, it means its still active - therefore we have to remove it from the vacancymap
-        if (oldVacancyTime > timeStep) vacancyMap.get(oldVacancyTime).remove(veh);
+        if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+            if (oldVacancyTime > timeStep) vacancyMap.get(oldVacancyTime).remove(veh);
+        }
 
         int updatedVacancyTime = veh.getVacantTime();
 
