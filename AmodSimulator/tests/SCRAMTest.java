@@ -70,7 +70,7 @@ public class SCRAMTest {
         graph.getNode("v4").setAttribute("distTor2", 1000);
         graph.getNode("v4").setAttribute("distTor3", 1000);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(6, s.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
@@ -141,7 +141,7 @@ public class SCRAMTest {
         graph.getNode("v4").setAttribute("distTor2", 1000);
         graph.getNode("v4").setAttribute("distTor3", 1000);
 
-        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList, timeStep);
+        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(6, s2.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentListIndex = new ArrayList<Edge>(s2.getAssignments());
@@ -207,7 +207,7 @@ public class SCRAMTest {
         requestList.add(r3);
         requestList.add(r4);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(13, s.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
@@ -275,7 +275,7 @@ public class SCRAMTest {
         requestList.add(r3);
         requestList.add(r4);
 
-        IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleList, requestList, timeStep);
+        IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(13, s.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
@@ -334,7 +334,7 @@ public class SCRAMTest {
         requestList.add(r2);
         requestList.add(r3);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(6, s.getLongestEdgeWeight());
 //        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
@@ -394,7 +394,7 @@ public class SCRAMTest {
         requestList.add(r2);
         requestList.add(r3);
 
-        IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleList, requestList, timeStep);
+        IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(6, s.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<>(s.getAssignments());
@@ -441,7 +441,7 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        SCRAM s = new SCRAM(vehicleList, requestList);
+        SCRAM s = new SCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(8, s.getLongestEdgeWeight());
 //        IndexBasedSCRAM s2 = new IndexBasedSCRAM(vehicleList, requestList);
 //        Assert.assertEquals(3, s2.getLongestEdgeWeight());
@@ -491,7 +491,7 @@ public class SCRAMTest {
         requestList.add(r3);
         Utility.setDistances(graph);
 
-        IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleList, requestList, timeStep);
+        IndexBasedSCRAM s = new IndexBasedSCRAM(vehicleList, requestList, 0);
         Assert.assertEquals(8, s.getLongestEdgeWeight());
 
         List<Edge> sortedAssignmentList = new ArrayList<Edge>(s.getAssignments());

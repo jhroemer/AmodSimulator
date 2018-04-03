@@ -14,11 +14,6 @@ import static AmodSimulator.AmodSimulator.PRINT;
 
 public class Utility {
 
-    public static Map<org.graphstream.graph.Node,Map<org.graphstream.graph.Node,Integer>> produceLookupTable(Graph graph) {
-        //todo
-        return null;
-    }
-
     /**
      * Generater vehicles and places them at random nodes in the graph
      * @param graph
@@ -58,6 +53,7 @@ public class Utility {
         return styleSheet;
     }
 
+    // fixme: is this still needed? the only thing I use is IndexSCRAM..
     static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests, int timeStep) {
 
         // done to avoid major and annoying generic refactoring in AmodSimulator - adds some (linear) running time
@@ -66,11 +62,11 @@ public class Utility {
 
         switch (type) {
             case SCHWACHSINN:
-                return schwachsinnAssign(vehicleNodeList, requestNodeList);
+                return schwachsinnAssign(vehicleNodeList, requestNodeList, timeStep);
             case HUNGARIAN:
 //                return hungarianAssign(vehicles,requests);
             case ObjectSCRAM:
-                SCRAM scram = new SCRAM(vehicleNodeList, requestNodeList);
+                SCRAM scram = new SCRAM(vehicleNodeList, requestNodeList, timeStep);
 //                System.out.println("SCRAM TOOK: " + (System.currentTimeMillis() - start) + " ms");
                 return scram.getAssignments();
             case IndexSCRAM:
@@ -89,13 +85,13 @@ public class Utility {
     }
 
     /**
-     * Assigns vehicles to requests by simply matching first vehicle to first request, second vehicle
-     * to second request and so on, until either vehicles or requests are used up.
+     *
      * @param vehicles
      * @param requests
+     * @param timeStep
      * @return
      */
-    private static List<Edge> schwachsinnAssign(List<Node> vehicles, List<Node> requests) {
+    private static List<Edge> schwachsinnAssign(List<Node> vehicles, List<Node> requests, int timeStep) {
 
         List<Edge> assignments = new ArrayList<>();
 
@@ -104,17 +100,27 @@ public class Utility {
         if (PRINT && numToAssign != 0) System.out.println("\nAssigning");
 
         for (int i = 0; i < numToAssign; i++) {
-            assignments.add(new Edge(vehicles.get(i), requests.get(i)));
+            assignments.add(new Edge(vehicles.get(i), requests.get(i), timeStep));
             if (PRINT) System.out.println("\tVehicle "+ vehicles.get(i).getInfo() + " <-- request " + requests.get(i).getInfo());
         }
 
         return assignments;
     }
 
+    /**
+     *
+     * @param origin
+     * @param destination
+     * @return
+     */
     public static int getDist(org.graphstream.graph.Node origin, org.graphstream.graph.Node destination) {
         return origin.getAttribute("distTo"+ destination.getId());
     }
 
+    /**
+     *
+     * @param graph
+     */
     public static void printDistances(Graph graph) {
         int n = graph.getNodeCount();
         System.out.print("\t\t");
@@ -129,7 +135,7 @@ public class Utility {
         }
     }
 
-
+    // FIXME: ready to be deleted?
     private static void addDummyNodes(org.jgrapht.Graph<Node, Assignment> graph, Set<Node> vehicles, Set<Node> requests) {
 
         int numVeh = vehicles.size();
@@ -198,6 +204,12 @@ public class Utility {
         }
     }
 
+    /**
+     *
+     * @param unoccupiedPercentageList
+     * @param avg
+     * @return
+     */
     public static double calculateStandardDeviation(List<Double> unoccupiedPercentageList, double avg) {
         double variance = 0.0;
         for (Double d : unoccupiedPercentageList) {

@@ -21,7 +21,7 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-        generateExperimentGraphs();
+        generateExperimentGraphs("chapter5");
 //        Random rand = new Random();
 //        Graph graph = new SingleGraph("t");
 //        BaseGenerator gen = new IncompleteGridGenerator(false, 0.7f, 4, 3);
@@ -87,8 +87,9 @@ public class RandomGraphGenerator {
 
     /**
      *
+     * @param chapter
      */
-    private static void generateExperimentGraphs() {
+    private static void generateExperimentGraphs(String chapter) {
         List<GraphType> types = new ArrayList<>();
         types.add(GRID);
         types.add(INCOMPLETEGRID);
@@ -115,8 +116,8 @@ public class RandomGraphGenerator {
                 for (Edge e : graph.getEdgeSet()) totalLength += (int) e.getAttribute("layout.weight");
                 System.out.println(type + " had: " + graph.getNodeCount() + " nodes" + " and total length of: " + totalLength);
 
-                Utility.setDistances(graph); // fixme: this takes time, a graph w. 1000 nodes has to run dijkstra 1 million times
-                Utility.saveCompleteGraph(graph.getId(), "data/graphs/chapter2/" + type + "/", graph);
+                Utility.setDistances(graph);
+                Utility.saveCompleteGraph(graph.getId(), "data/graphs/" + chapter + "/" + type + "/", graph);
                 System.out.println("TOOK: " + (System.currentTimeMillis() - start) + "ms to create graph");
             }
         }

@@ -200,14 +200,17 @@ public class AmodSimulator {
 
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
-            // indexbased check for dummynode // TODO DIFFERENT BETWEEN EXTENSIONS
+            // indexbased check for dummynode
             if (e.getStartIndex() >= allVehicles.size() || e.getEndIndex() >= requests.size()) continue;
             Vehicle veh = allVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
+
+            int oldVacancyTime = veh.getVacantTime();
             veh.serviceRequest(req);
-            addToVacancyMap(veh);
+            addToVacancyMap(veh, oldVacancyTime, timeStep);
+
             // TODO should also remove last position in vacancymap
-            makeActive(veh);
+            // makeActive(veh);
             assignedRequests.add(req);
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
@@ -308,17 +311,18 @@ public class AmodSimulator {
      *
      * @param veh
      */
-    private void addToVacancyMap(Vehicle veh) {
-        //todo Should also delete if the vehicle is already on the Map
-        //todo (needs old finish time for this) but it is not necessary for
-        //todo the one-request version.
-        int vacancyTime = veh.getVacantTime();
-        if (vacancyMap.containsKey(vacancyTime)) vacancyMap.get(vacancyTime).add(veh);
+    private void addToVacancyMap(Vehicle veh, int oldVacancyTime, int timeStep) {
+        // if the old vacancy time was larger than timestep, it means its still active - therefore we have to remove it from the vacancymap
+        if (oldVacancyTime > timeStep) vacancyMap.get(oldVacancyTime).remove(veh);
+
+        int updatedVacancyTime = veh.getVacantTime();
+
+        if (vacancyMap.containsKey(updatedVacancyTime)) vacancyMap.get(updatedVacancyTime).add(veh);
         else {
             ArrayList<Vehicle> list = new ArrayList<Vehicle>();
             list.add(veh);
 
-            vacancyMap.put(vacancyTime, list);
+            vacancyMap.put(updatedVacancyTime, list);
         }
     }
 

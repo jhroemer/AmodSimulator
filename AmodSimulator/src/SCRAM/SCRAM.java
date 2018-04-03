@@ -25,7 +25,7 @@ public class SCRAM {
      * @param vehicles
      * @param requests
      */
-    public SCRAM(List<Node> vehicles, List<Node> requests) {
+    public SCRAM(List<Node> vehicles, List<Node> requests, int timeStep) {
         // if either of the lists is empty, we can't make any assignments
         if (vehicles.isEmpty() || requests.isEmpty()) {
             assignments = new ArrayList<>();
@@ -50,7 +50,7 @@ public class SCRAM {
 
         long start = System.currentTimeMillis();
         // 2. create edges for the bipartite matching-graph
-        createMatchingEdges(); // w. current setup 1 million matching edges will be created
+        createMatchingEdges(timeStep); // w. current setup 1 million matching edges will be created
 //        System.out.println("createMatchingEdges took: " + (System.currentTimeMillis() - start));
 
         start = System.currentTimeMillis();
@@ -204,11 +204,12 @@ public class SCRAM {
 
     /**
      *
+     * @param timeStep
      */
-    private void createMatchingEdges() {
+    private void createMatchingEdges(int timeStep) {
         for (Node veh : vehicles) {
             for (Node req : requests) {
-                Edge s = new Edge(veh, req);
+                Edge s = new Edge(veh, req, timeStep);
                 edges.add(s);
                 // System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
             }

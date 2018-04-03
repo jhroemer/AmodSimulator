@@ -63,7 +63,7 @@ public class IndexBasedSCRAM {
             for (int j = 0; j < n; j++) {
                 //int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
                 int weight = vehicles.get(i).getDistance(requests.get(j), timeStep);
-                edges.add(new Edge(i, j, weight));
+                edges.add(new Edge(i, j, weight)); // todo: consider if the other SCRAM.Edge-constructor should be used
             }
         }
 
@@ -224,18 +224,16 @@ public class IndexBasedSCRAM {
         return assignments;
     }
 
+    // todo : safe delete?
+//    private void createMatchingEdges() {
+//        for (Node veh : vehicles) {
+//            for (Node req : requests) {
+//                Edge s = new Edge(veh, req);
+//                edges.add(s);
+//                // System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
+//            }
+//        }
+//    }
 
-    /**
-     *
-     */
-    private void createMatchingEdges() {
-        for (Node veh : vehicles) {
-            for (Node req : requests) {
-                Edge s = new Edge(veh, req);
-                edges.add(s);
-                // System.out.println("created edge from: " + s.getStartNode().getInfo() + " to: " + s.getEndNode().getInfo() + " with weight: " + s.getWeight());
-            }
-        }
-    }
 }
 
