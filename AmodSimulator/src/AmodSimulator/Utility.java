@@ -58,7 +58,7 @@ public class Utility {
         return styleSheet;
     }
 
-    static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests) {
+    static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests, int timeStep) {
 
         // done to avoid major and annoying generic refactoring in AmodSimulator - adds some (linear) running time
         List<Node> vehicleNodeList = new ArrayList<>(vehicles);
@@ -75,7 +75,7 @@ public class Utility {
                 return scram.getAssignments();
             case IndexSCRAM:
 //                long start = System.currentTimeMillis();
-                IndexBasedSCRAM idxScram = new IndexBasedSCRAM(vehicleNodeList, requestNodeList);
+                IndexBasedSCRAM idxScram = new IndexBasedSCRAM(vehicleNodeList, requestNodeList, timeStep);
 //                System.out.println("SCRAM TOOK: " + (System.currentTimeMillis() - start) + " ms");
                 return idxScram.getAssignments();
         }

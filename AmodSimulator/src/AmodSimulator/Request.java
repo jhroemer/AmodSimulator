@@ -5,6 +5,8 @@ import SCRAM.Node;
 import org.graphstream.graph.Path;
 
 import static AmodSimulator.AmodSimulator.PRINT;
+import static AmodSimulator.ExtensionType.EXTENSION1;
+import static AmodSimulator.ExtensionType.EXTENSION1PLUS2;
 
 // todo: in Fagnant & Kockelman requests also have a departure time
 public class Request implements SCRAM.Node {
@@ -183,13 +185,25 @@ public class Request implements SCRAM.Node {
     }
 
     /**
+     * This is called from SCRAM, and is used to set the weight of the edge between the Vehicle- and Request node
+     * in the bipartite matching graph.
      *
      * @param node
+     * @param timeStep
      * @return
      */
     @Override
-    public int getDistance(Node node) {
-        if (node instanceof Vehicle) return origin.getAttribute("distTo" + ((Vehicle) node).getLocation().getId());
+    public int getDistance(Node node, int timeStep) {
+        if (node instanceof Vehicle) {
+            // TODO : is this actually called on requests also?
+            int distanceUntilVacant = 0;
+
+            // for extension 1, if the vehicle is not vacant now, we add the distance that is left until the vehicle is vacant
+            if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+                if (timeStep <= ((Vehicle) node).getVacantTime()) distanceUntilVacant = ((Vehicle) node).getDistanceUntilVacant(timeStep);
+            }
+            return distanceUntilVacant + (int) origin.getAttribute("distTo" + ((Vehicle) node).getLocation().getId());
+        }
         if (node instanceof DummyNode) return 0;
         try {
             throw new Exception("Request.getDistance() called with a Request as parameter");

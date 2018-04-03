@@ -41,7 +41,7 @@ public class IndexBasedSCRAM {
     private List<Node> requests;
     private List<Edge> edges;
 
-    public IndexBasedSCRAM(List<Node> vehicles, List<Node> requests) {
+    public IndexBasedSCRAM(List<Node> vehicles, List<Node> requests, int timeStep) {
         // corner-case in which there are neither vehicles nor requests - which would lead to a very rare index-out-of-bounds
         if (vehicles.isEmpty() && requests.isEmpty()) {
             System.out.println("BOTH LISTS WERE EMPTY!!!");
@@ -62,7 +62,7 @@ public class IndexBasedSCRAM {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 //int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
-                int weight = vehicles.get(i).getDistance(requests.get(j));
+                int weight = vehicles.get(i).getDistance(requests.get(j), timeStep);
                 edges.add(new Edge(i, j, weight));
             }
         }

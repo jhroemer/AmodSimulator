@@ -14,7 +14,7 @@ import static AmodSimulator.ExtensionType.*;
 
 public class AmodSimulator {
     static boolean PRINT = false;
-    private ExtensionType extensionType;
+    public static ExtensionType extensionType = BASIC;
     private AssignmentType assignmentType;
     private boolean TEST = false;
     private List<Request> requests;
@@ -150,10 +150,10 @@ public class AmodSimulator {
             makeIdle(veh); // TODO ONLY BASIC AND EXT 2
         }
 
-        vacancyMap.remove(timeStep); // TODO ALL
+        vacancyMap.remove(timeStep);
 
         // assigning allVehicles to requests
-        List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests);
+        List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests, timeStep);
 
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
@@ -189,14 +189,14 @@ public class AmodSimulator {
      */
     private void tickExt1(Graph graph, int timeStep) {
         // adding new vacant allVehicles to idlevehicles, if vehicle does not have more requests
-        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
-            makeIdle(veh); // TODO ONLY BASIC AND EXT 2
-        }
+//        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
+//            makeIdle(veh); // TODO ONLY BASIC AND EXT 2
+//        }
 
         vacancyMap.remove(timeStep);
 
         // assigning allVehicles to requests
-        List<Edge> assignments = Utility.assign(assignmentType, allVehicles, requests);
+        List<Edge> assignments = Utility.assign(assignmentType, allVehicles, requests, timeStep);
 
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
@@ -248,16 +248,16 @@ public class AmodSimulator {
      *
      * @return
      */
-    private List<Edge> assign() {
-        switch (this.extensionType) {
+    private List<Edge> assign(int timeStep) {
+        switch (AmodSimulator.extensionType) {
             case BASIC:
-                return Utility.assign(assignmentType, idleVehicles, requests);
+                return Utility.assign(assignmentType, idleVehicles, requests, timeStep);
             case EXTENSION1:
-                return Utility.assign(assignmentType, allVehicles, requests);   // todo: this does not work yet
+                return Utility.assign(assignmentType, allVehicles, requests, timeStep);   // todo: this does not work yet
             case EXTENSION2:
-                return Utility.assign(assignmentType, idleVehicles, requests);  // todo: this does not work yet
+                return Utility.assign(assignmentType, idleVehicles, requests, timeStep);  // todo: this does not work yet
             case EXTENSION1PLUS2:
-                return Utility.assign(assignmentType, allVehicles, requests);   // todo: this does not work yet
+                return Utility.assign(assignmentType, allVehicles, requests, timeStep);   // todo: this does not work yet
         }
         throw new RuntimeException("AmodSimulator.assign() should not have gotten here");
     }

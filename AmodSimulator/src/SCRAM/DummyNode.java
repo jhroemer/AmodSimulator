@@ -5,7 +5,7 @@ public class DummyNode implements Node {
     private Node previous;
 
     @Override
-    public int getDistance(Node node) {
+    public int getDistance(Node node, int timeStep) {
         return 0;
     }
 

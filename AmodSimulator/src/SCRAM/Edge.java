@@ -12,7 +12,7 @@ public class Edge implements Comparable<Edge> {
     int endIndex;
 
     public Edge(Node start, Node end) {
-        this.weight = start.getDistance(end);
+        this.weight = start.getDistance(end, timeStep);
         this.startNode = start;
         this.endNode = end;
     }

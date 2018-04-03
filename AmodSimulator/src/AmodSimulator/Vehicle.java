@@ -8,6 +8,9 @@ import org.graphstream.graph.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static AmodSimulator.ExtensionType.EXTENSION1;
+import static AmodSimulator.ExtensionType.EXTENSION1PLUS2;
+
 public class Vehicle implements SCRAM.Node {
     private String id;
     private ArrayList<Request> requests;
@@ -169,8 +172,20 @@ public class Vehicle implements SCRAM.Node {
     }
 
     @Override
-    public int getDistance(Node node) {
-        if (node instanceof Request) return location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
+    /**
+     * Returns how far a vehicle is from a node.
+     *
+     * For extension 1, if the vehicle is currently active (timestep <= vacantTime) then we also get the exact distance
+     * left to travel before the vehicle is vacant, because we want to consider it when assigning requests.
+     */
+    public int getDistance(Node node, int timeStep) {
+        if (node instanceof Request) {
+            int distanceUntilVacant = 0;
+            if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+                if (timeStep <= vacantTime) distanceUntilVacant = getDistanceUntilVacant(timeStep);
+            }
+            return distanceUntilVacant + (int) location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
+        }
         if (node instanceof DummyNode) return 0;
         try {
             throw new Exception("Vehicle.getDistance() called with a Vehicle as parameter");
@@ -179,6 +194,25 @@ public class Vehicle implements SCRAM.Node {
             System.exit(0);
         }
         return 0;
+    }
+
+    /**
+     * How much distance is left to travel before this vehicle is vacant.
+     * Should never be called on a vehicle that is idle!
+     * 
+     * @param timeStep
+     * @return
+     */
+    public int getDistanceUntilVacant(int timeStep) {
+        return (vacantTime - timeStep) * speed;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getSpeed() {
+        return speed;
     }
 
     @Override
