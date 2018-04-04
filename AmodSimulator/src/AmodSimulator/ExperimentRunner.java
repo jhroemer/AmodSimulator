@@ -124,7 +124,7 @@ public class ExperimentRunner {
                     double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
                     totalWaitMap.put(num, newNumber);
                 }
-                // add to total
+                // add to total todo: consider setting these in a separate method
                 totalUnoccupied += simulator.getUnoccupiedKmDriven();
                 totalAvgUnoccupied += avgUnoccupied;
                 totalUnoccupiedPercentage += unoccupiedPercentage;

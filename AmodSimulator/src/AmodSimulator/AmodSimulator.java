@@ -24,7 +24,7 @@ public class AmodSimulator {
     private Map<Integer, List<Request>> predefinedRequestsMap;
     private double lambda = 0.1;
     private int ticksDone;
-    private int idleVehiclesCounter; // keeps track of the amount of idlevehicles in simulation
+    private int idleVehiclesCounter = 0; // keeps track of the amount of idlevehicles in simulation
     // visual stuff
     static boolean IS_VISUAL = true;
     private SpriteManager sman;
@@ -118,7 +118,7 @@ public class AmodSimulator {
         else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
 
-        switch (this.extensionType) {
+        switch (AmodSimulator.extensionType) {
             case BASIC:
                 tickBasic(graph, timeStep);
                 break;
@@ -183,11 +183,6 @@ public class AmodSimulator {
      * @param timeStep
      */
     private void tickExt1(Graph graph, int timeStep) {
-        // adding new vacant allVehicles to idlevehicles, if vehicle does not have more requests
-//        for (Vehicle veh : vacancyMap.getOrDefault(timeStep, new ArrayList<>())) {
-//            makeIdle(veh); // TODO ONLY BASIC AND EXT 2
-//        }
-
         vacancyMap.remove(timeStep);
 
         // assigning allVehicles to requests
@@ -204,9 +199,6 @@ public class AmodSimulator {
             veh.serviceRequest(req);
             addToVacancyMap(veh, oldVacancyTime, timeStep);
 
-            // TODO should also remove last position in vacancymap
-            // makeActive(veh);
-
             assignedRequests.add(req);
             requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
@@ -215,7 +207,8 @@ public class AmodSimulator {
         // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
         trackRequestsWaiting();
 
-        idleVehiclesCounter += idleVehicles.size();
+        // todo : do I still wan't to check idlevehicles?
+        // idleVehiclesCounter += idleVehicles.size();
     }
 
     /**
@@ -416,8 +409,13 @@ public class AmodSimulator {
     public int getUnoccupiedKmDriven() {
         int result = 0;
 
-        for (Vehicle v : idleVehicles) result += v.getEmptyKilometersDriven();
-        for (Vehicle v : activeVehicles) result += v.getEmptyKilometersDriven(); // TODO : should not count km's that are not within the simulation
+        if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+            for (Vehicle v : allVehicles) result += v.getEmptyKilometersDriven();
+        }
+        else {
+            for (Vehicle v : idleVehicles) result += v.getEmptyKilometersDriven();
+            for (Vehicle v : activeVehicles) result += v.getEmptyKilometersDriven(); // TODO : should not count km's that are not within the simulation
+        }
 
         return result;
     }
@@ -467,15 +465,21 @@ public class AmodSimulator {
         int number = 0;
         double result = 0.0;
 
-        // TODO this needs to be updated st. it works with extension 1 and variable allVehicles
-
-        for (Vehicle v : idleVehicles) {
-            number++;
-            result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
+        if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+            for (Vehicle v : allVehicles) {
+                number++;
+                result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
+            }
         }
-        for (Vehicle v : activeVehicles) {
-            number++;
-            result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
+        else {
+            for (Vehicle v : idleVehicles) {
+                number++;
+                result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
+            }
+            for (Vehicle v : activeVehicles) {
+                number++;
+                result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
+            }
         }
 
         boolean isNan = Double.isNaN(result);
