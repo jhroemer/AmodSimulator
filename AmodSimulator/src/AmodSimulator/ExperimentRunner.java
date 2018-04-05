@@ -133,6 +133,8 @@ public class ExperimentRunner {
                 totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
                 totalWaitVariance += waitVariance;
                 ////////// done //////////
+
+                System.out.println("AVG. UNOCCUPIED: " + unoccupiedPercentage);
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
