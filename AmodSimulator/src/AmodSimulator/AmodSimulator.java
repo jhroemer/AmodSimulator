@@ -79,6 +79,7 @@ public class AmodSimulator {
         this.assignmentType = assignmentType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
+        idleVehicles = vehicles;
         requests = new ArrayList<>();
         predefinedRequestsMap = requestMap;
 
