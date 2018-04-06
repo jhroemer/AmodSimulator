@@ -63,6 +63,7 @@ public class ExperimentRunner {
             System.out.println();
             System.out.println("starting trials on graph type: " + graphType);
 
+            /*
             int totalUnoccupied = 0;
             double totalUnoccupiedPercentage = 0.0;
             int totalWait = 0;
@@ -72,6 +73,8 @@ public class ExperimentRunner {
             double totalWaitVariance = 0.0;
             List<Double> unoccupiedPercentageList = new ArrayList<>();
             Map<Integer, Double> totalWaitMap = new TreeMap<>();
+            */
+
             Map<Integer, Integer> newTotalWaitMap = new TreeMap<>();
             for (int j = 0; j < 21; j++) newTotalWaitMap.put(j, 0);
 
@@ -94,6 +97,7 @@ public class ExperimentRunner {
 
                 collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, newTotalWaitMap);
 
+                /*
                 ////////// collecting results for the i'th trial //////////
                 int unoccupied = simulator.getUnoccupiedKmDriven();
                 double avgUnoccupied = (double) unoccupied / (double) numVehicles;
@@ -137,12 +141,14 @@ public class ExperimentRunner {
                 totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
                 totalWaitVariance += waitVariance;
                 ////////// done //////////
+                */
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
-            collectTotals(props, trials, newTotalWaitMap, graphType);
+            collectTotals(props, trials, newTotalWaitMap, graphType, vehicleSpeed);
 
+            /*
             // todo : check the double-int-division of totalAvgWait and trials
             // after i trials, get the average
             props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(totalUnoccupied));
@@ -161,6 +167,7 @@ public class ExperimentRunner {
 
             props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
             props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(Utility.calculateStandardDeviation(unoccupiedPercentageList, totalUnoccupiedPercentage / (double) trials)));
+            */
         }
 
         Utility.saveResultsAsFile(props);
@@ -177,7 +184,7 @@ public class ExperimentRunner {
      */
     private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i, Map<Integer, Integer> totalWaitMap) {
         double avgWait = (double) simulator.getWaitingTime() / (double) simulator.getAssignedRequests().size();
-        double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed;
+        double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed; // todo: use the Utility method instead?
 
         props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
         props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf((double) simulator.getUnoccupiedKmDriven() / (double) numVehicles));
@@ -199,13 +206,13 @@ public class ExperimentRunner {
     }
 
     /**
-     *
-     * @param props
+     *  @param props
      * @param trials
      * @param totalWaitMap
      * @param graphType
+     * @param vehicleSpeed
      */
-    private static void collectTotals(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType) {
+    private static void collectTotals(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType, int vehicleSpeed) {
         getTotalOfProp(props, graphType, "waitVariance");
         double totalUnoccupiedPercentage = getTotalOfProp(props, graphType, "unoccupiedPercentage");
 
@@ -219,8 +226,7 @@ public class ExperimentRunner {
         StringBuilder waitingTimes = new StringBuilder();
         for (Integer num : totalWaitMap.keySet()) {
             double avg = totalWaitMap.get(num) / trials;
-//            totalWaitMap.put(num, avg);
-            waitingTimes.append("(").append(num*5).append(",").append(avg).append(")");
+            waitingTimes.append("(").append(num * vehicleSpeed).append(",").append(avg).append(")"); // todo : use vehicleSpeed instead of 5
         }
 
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
