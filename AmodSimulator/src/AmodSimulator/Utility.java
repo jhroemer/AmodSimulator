@@ -244,4 +244,34 @@ public class Utility {
         }
         return variance / (double) list.size();
     }
+
+    /**
+     *
+     * @param waitMap
+     * @return
+     */
+    public static String formatMap(Map<Integer, Integer> waitMap) {
+        StringBuilder s = new StringBuilder();
+        for (Integer i : waitMap.keySet()) {
+            s.append(i).append("=").append(waitMap.get(i)).append(",");
+        }
+        s.deleteCharAt(s.length()-1); // delete the last comma
+        return s.toString();
+    }
+
+    /**
+     * todo: currently hardcoded to waitingTimes
+     *
+     * @param props
+     * @return
+     */
+    public static Map<Integer, Integer> parsePropsMap(Properties props) {
+        Map<Integer, Integer> map = new HashMap<>();
+        String[] values = props.getProperty("LOBSTER" + "_" + 0 + "_waitingTimes").split(",");
+        for (String s : values) {
+            String[] splitValues = s.split("=");
+            map.put(Integer.valueOf(splitValues[0]), Integer.valueOf(splitValues[1]));
+        }
+        return map;
+    }
 }

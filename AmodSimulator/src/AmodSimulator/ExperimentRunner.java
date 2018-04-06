@@ -57,117 +57,38 @@ public class ExperimentRunner {
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
 
+        // TODO: perform warm-up to figure out correct vehicle-request relationship?
+
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
         for (String graphType : graphTypes) {
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
             System.out.println();
             System.out.println("starting trials on graph type: " + graphType);
 
-            /*
-            int totalUnoccupied = 0;
-            double totalUnoccupiedPercentage = 0.0;
-            int totalWait = 0;
-            double totalAvgUnoccupied = 0.0;
-            double totalAvgWait = 0.0;
-            double totalAvgIdleVehicles = 0.0;
-            double totalWaitVariance = 0.0;
-            List<Double> unoccupiedPercentageList = new ArrayList<>();
-            Map<Integer, Double> totalWaitMap = new TreeMap<>();
-            */
-
-            Map<Integer, Integer> newTotalWaitMap = new TreeMap<>();
-            for (int j = 0; j < 21; j++) newTotalWaitMap.put(j, 0);
+            Map<Integer, Integer> totalWaitMap = new TreeMap<>();
+            for (int j = 0; j < 21; j++) totalWaitMap.put(j, 0);
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
                 System.out.println("starting trial: " + i);
                 Graph graph = getCorrectGraph(i, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
 
-
                 ////////// running the simulation //////////
                 AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, extensionType, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
-//                    System.out.println("tick: " + j);
                     if (visual) sleep(50);
                 }
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
-                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, newTotalWaitMap);
-
-                /*
-                ////////// collecting results for the i'th trial //////////
-                int unoccupied = simulator.getUnoccupiedKmDriven();
-                double avgUnoccupied = (double) unoccupied / (double) numVehicles;
-                double unoccupiedPercentage = simulator.getAvgUnoccupiedPercentage();
-                unoccupiedPercentageList.add(unoccupiedPercentage);
-                int wait = simulator.getWaitingTime();
-                double avgWait = (double) wait / (double) simulator.getAssignedRequests().size(); // fixme: unassigned aren't counted, although they might still have waited
-                double waitVariance = simulator.getWaitVariance(avgWait) * 5; // fixme: should i multiply by 5 elsewhere?
-                Map<Integer, Integer> waitMap = new HashMap<>();
-                for (int j = 0; j < 21; j++) waitMap.put(j, 0);
-                for (Request r : simulator.getAssignedRequests()) {
-                    if (waitMap.containsKey(r.getWaitTime())) {
-                        int number = waitMap.get(r.getWaitTime()) + 1;
-                        waitMap.put(r.getWaitTime(), number)  ;
-                    }
-                    else waitMap.put(r.getWaitTime(), 1);
-                }
-                ////////// done collecting results for i'th trial //////////
-
-
-                ////////// set results and add to total //////////
-                props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
-                props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf(avgUnoccupied));
-                props.setProperty(graphType + "_" + i + "_unoccupiedPercentage", String.valueOf(unoccupiedPercentage));
-                props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
-                props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
-                props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles())); // FIXME : will not work in extensions
-                props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getUnservedRequests().size()));
-                props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
-                props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
-                for (Integer num : waitMap.keySet()) {
-                    double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
-                    totalWaitMap.put(num, newNumber);
-                }
-                // add to total todo: consider setting these in a separate method
-                totalUnoccupied += simulator.getUnoccupiedKmDriven();
-                totalAvgUnoccupied += avgUnoccupied;
-                totalUnoccupiedPercentage += unoccupiedPercentage;
-                totalWait += simulator.getWaitingTime();
-                totalAvgWait += avgWait;
-                totalAvgIdleVehicles += simulator.getAverageIdleVehicles();
-                totalWaitVariance += waitVariance;
-                ////////// done //////////
-                */
+                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, totalWaitMap);
             }
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
-            collectTotals(props, trials, newTotalWaitMap, graphType, vehicleSpeed);
-
-            /*
-            // todo : check the double-int-division of totalAvgWait and trials
-            // after i trials, get the average
-            props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(totalUnoccupied));
-            props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(totalAvgUnoccupied / (double) trials));
-            props.setProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage", String.valueOf(totalUnoccupiedPercentage / (double) trials));
-            props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(totalWait));
-            props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(totalAvgWait / (double) trials));
-            props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(totalAvgIdleVehicles / (double) trials));
-            props.setProperty("TOTAL_" + graphType + "_avgWaitVariance", String.valueOf(totalWaitVariance / (double) trials));
-            StringBuilder waitingTimes = new StringBuilder();
-            for (Integer num : totalWaitMap.keySet()) {
-                double avg = totalWaitMap.get(num) / trials;
-                totalWaitMap.put(num, avg);
-                waitingTimes.append("(").append(num*5).append(",").append(avg).append(")");
-            }
-
-            props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
-            props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(Utility.calculateStandardDeviation(unoccupiedPercentageList, totalUnoccupiedPercentage / (double) trials)));
-            */
+            collectTotalResults(props, trials, totalWaitMap, graphType, vehicleSpeed);
         }
 
         Utility.saveResultsAsFile(props);
@@ -175,7 +96,8 @@ public class ExperimentRunner {
 
     /**
      * Collects result for the i'th trial
-     *  @param simulator
+     *
+     * @param simulator
      * @param props
      * @param graphType
      * @param numVehicles
@@ -196,24 +118,42 @@ public class ExperimentRunner {
         props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
         props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
 
+        // TODO: has this become redundant?
         for (Request r : simulator.getAssignedRequests()) {
             if (totalWaitMap.containsKey(r.getWaitTime())) {
                 int number = totalWaitMap.get(r.getWaitTime()) + 1;
-                totalWaitMap.put(r.getWaitTime(), number)  ;
+                totalWaitMap.put(r.getWaitTime(), number);
             }
             else totalWaitMap.put(r.getWaitTime(), 1);
         }
+
+
+        Map<Integer, Integer> waitMap = new HashMap<>();
+        for (int j = 0; j < 21; j++) waitMap.put(j, 0);
+        for (Request r : simulator.getAssignedRequests()) {
+            if (waitMap.containsKey(r.getWaitTime())) {
+                int number = waitMap.get(r.getWaitTime()) + 1;
+                waitMap.put(r.getWaitTime(), number)  ;
+            }
+            else waitMap.put(r.getWaitTime(), 1);
+        }
+
+        System.out.println("TO STRING OF WAITMAP: " + waitMap);
+        props.setProperty(graphType + "_" + i + "_waitingTimes", Utility.formatMap(waitMap));
+//        Utility.parsePropsMap(props);
     }
 
     /**
-     *  @param props
+     *
+     *
+     * @param props
      * @param trials
      * @param totalWaitMap
      * @param graphType
      * @param vehicleSpeed
      */
-    private static void collectTotals(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType, int vehicleSpeed) {
-        getTotalOfProp(props, graphType, "waitVariance");
+    private static void collectTotalResults(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType, int vehicleSpeed) {
+//        getTotalOfProp(props, graphType, "waitVariance");
         double totalUnoccupiedPercentage = getTotalOfProp(props, graphType, "unoccupiedPercentage");
 
         props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(getTotalOfProp(props, graphType, "unoccupied")));
