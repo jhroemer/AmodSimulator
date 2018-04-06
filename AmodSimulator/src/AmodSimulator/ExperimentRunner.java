@@ -93,7 +93,7 @@ public class ExperimentRunner {
 
         Utility.saveResultsAsFile(props);
 
-        Utility.updatePlots(props);
+        Utility.updatePlots(props); // todo
     }
 
     /**
@@ -176,6 +176,9 @@ public class ExperimentRunner {
 
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
+
+        // todo: make total waiting times by looping over: graphType + "_" + i + "_waitingTimes" + calculate std. dev. per interval
+        // getTotalWaitingTimes();
     }
 
     /**

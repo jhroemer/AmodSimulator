@@ -270,7 +270,7 @@ public class Utility {
     }
 
     /**
-     * 
+     *
      * @param props
      */
     public static void updatePlots(Properties props) {
