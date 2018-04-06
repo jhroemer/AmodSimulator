@@ -192,6 +192,7 @@ public class AmodSimulator {
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
             // indexbased check for dummynode
+            // if the nodeindex is larger than the size of it's original list, then it was added = is a dummynode
             if (e.getStartIndex() >= allVehicles.size() || e.getEndIndex() >= requests.size()) continue;
             Vehicle veh = allVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
@@ -468,7 +469,7 @@ public class AmodSimulator {
 
         if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
             for (Vehicle v : allVehicles) {
-                number++;
+                number++;          // no. of empty km               <<<<<<<<<<<<<<<<<<<<<<<<<<   total km driven      >>>>>>>>>>>>>>>>>>>>>>>>>>
                 result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
             }
         }
@@ -483,6 +484,7 @@ public class AmodSimulator {
             }
         }
 
+        // checking for NaN issues
         boolean isNan = Double.isNaN(result);
         assert !isNan;
         boolean isNan3 = Double.isNaN(result / number);

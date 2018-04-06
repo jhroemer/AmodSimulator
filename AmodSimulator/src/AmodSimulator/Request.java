@@ -53,6 +53,80 @@ public class Request implements SCRAM.Node {
 
     /**
      *
+     * @param vehicleVacantTime
+     * @param source
+     * @param speed
+     */
+    public void setUp(int vehicleVacantTime, org.graphstream.graph.Node source, int speed) {
+        // when does this request start being serviced
+        // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
+        startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
+
+        originPathLength = Utility.getDist(source, origin);
+        destinationPathLength = Utility.getDist(origin, destination);
+
+        // when is origin and destination reached?
+        originTime = (origin == source) ? startTime : startTime + (int) Math.ceil(originPathLength / (double) speed) -1; //-1 because we also drive within the starttime-timestep
+        destinationTime = startTime + (int) Math.ceil((originPathLength + destinationPathLength) / (double) speed) -1; //-1 because we also drive within the starttime-timestep
+
+        // WAITtotal = WAITmatching + WAITtravel, min-cost-matching p. 4
+        waitTime = originTime - generationTime;
+
+        if (AmodSimulator.IS_VISUAL) {
+            pathToOrigin = TripPlanner.getPath(source, origin);
+            pathToDestination = TripPlanner.getPath(origin, destination);
+        }
+
+        if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
+    }
+
+    /**
+     * This is called from SCRAM, and is used to set the weight of the edge between the Vehicle- and Request node
+     * in the bipartite matching graph.
+     *
+     * @param node
+     * @param timeStep
+     * @return
+     */
+    @Override
+    public int getDistance(Node node, int timeStep) {
+        if (node instanceof Vehicle) {
+            int distanceUntilVacant = 0;
+
+            // for extension 1, if the vehicle is not vacant now, we add the distance that is left until the vehicle is vacant
+            if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+                if (timeStep <= ((Vehicle) node).getVacantTime()) distanceUntilVacant = ((Vehicle) node).getDistanceUntilVacant(timeStep);
+            }
+            return distanceUntilVacant + (int) origin.getAttribute("distTo" + ((Vehicle) node).getLocation().getId());
+        }
+        if (node instanceof DummyNode) return 0;
+        try {
+            throw new Exception("Request.getDistance() called with a Request as parameter");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return 0;
+    }
+
+    /**
+     * Used for canceling requests
+     */
+    public void incrementWaitCounter() {
+        ticksWaitingToBeAssigned++;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getTicksWaitingToBeAssigned() {
+        assert ticksWaitingToBeAssigned <= 6;
+        return ticksWaitingToBeAssigned;
+    }
+
+    /**
+     *
      * @return
      */
     public org.graphstream.graph.Node getOrigin() {
@@ -155,65 +229,6 @@ public class Request implements SCRAM.Node {
         return destinationPathLength;
     }
 
-    /**
-     *
-     * @param vehicleVacantTime
-     * @param source
-     * @param speed
-     */
-    public void setUp(int vehicleVacantTime, org.graphstream.graph.Node source, int speed) {
-        // when does this request start being serviced
-        // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
-        startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
-
-        originPathLength = Utility.getDist(source, origin);
-        destinationPathLength = Utility.getDist(origin, destination);
-
-        // when is origin and destination reached?
-        originTime = (origin == source) ? startTime : startTime + (int) Math.ceil(originPathLength / (double) speed) -1; //-1 because we also drive within the starttime-timestep
-        destinationTime = startTime + (int) Math.ceil((originPathLength + destinationPathLength) / (double) speed) -1; //-1 because we also drive within the starttime-timestep
-
-        // WAITtotal = WAITmatching + WAITtravel, min-cost-matching p. 4
-        waitTime = originTime - generationTime;
-
-        if (AmodSimulator.IS_VISUAL) {
-            pathToOrigin = TripPlanner.getPath(source, origin);
-            pathToDestination = TripPlanner.getPath(origin, destination);
-        }
-
-        if (PRINT) System.out.println("Request " + id + ": Start " + source.getId() + ", Origin " + origin.getId() + ", Dest " + destination.getId() + ", Time " + startTime + " to " + destinationTime);
-    }
-
-    /**
-     * This is called from SCRAM, and is used to set the weight of the edge between the Vehicle- and Request node
-     * in the bipartite matching graph.
-     *
-     * @param node
-     * @param timeStep
-     * @return
-     */
-    @Override
-    public int getDistance(Node node, int timeStep) {
-        if (node instanceof Vehicle) {
-            // TODO : is this actually called on requests also?
-            int distanceUntilVacant = 0;
-
-            // for extension 1, if the vehicle is not vacant now, we add the distance that is left until the vehicle is vacant
-            if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
-                if (timeStep <= ((Vehicle) node).getVacantTime()) distanceUntilVacant = ((Vehicle) node).getDistanceUntilVacant(timeStep);
-            }
-            return distanceUntilVacant + (int) origin.getAttribute("distTo" + ((Vehicle) node).getLocation().getId());
-        }
-        if (node instanceof DummyNode) return 0;
-        try {
-            throw new Exception("Request.getDistance() called with a Request as parameter");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        return 0;
-    }
-
     @Override
     public void setVisited(boolean visited) {
         this.visited = visited;
@@ -242,21 +257,5 @@ public class Request implements SCRAM.Node {
     @Override
     public Node getType() {
         return null;
-    }
-
-    /**
-     * Used for canceling requests
-     */
-    public void incrementWaitCounter() {
-        ticksWaitingToBeAssigned++;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getTicksWaitingToBeAssigned() {
-        assert ticksWaitingToBeAssigned <= 6;
-        return ticksWaitingToBeAssigned;
     }
 }
