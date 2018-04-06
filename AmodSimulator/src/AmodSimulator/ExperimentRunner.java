@@ -72,6 +72,8 @@ public class ExperimentRunner {
             double totalWaitVariance = 0.0;
             List<Double> unoccupiedPercentageList = new ArrayList<>();
             Map<Integer, Double> totalWaitMap = new TreeMap<>();
+            Map<Integer, Integer> newTotalWaitMap = new TreeMap<>();
+            for (int j = 0; j < 21; j++) newTotalWaitMap.put(j, 0);
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -90,7 +92,7 @@ public class ExperimentRunner {
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
-                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i);
+                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, newTotalWaitMap);
 
                 ////////// collecting results for the i'th trial //////////
                 int unoccupied = simulator.getUnoccupiedKmDriven();
@@ -139,7 +141,7 @@ public class ExperimentRunner {
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
-            // collectTotals(props);
+            collectTotals(props, trials, newTotalWaitMap, graphType);
 
             // todo : check the double-int-division of totalAvgWait and trials
             // after i trials, get the average
@@ -156,6 +158,7 @@ public class ExperimentRunner {
                 totalWaitMap.put(num, avg);
                 waitingTimes.append("(").append(num*5).append(",").append(avg).append(")");
             }
+
             props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
             props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(Utility.calculateStandardDeviation(unoccupiedPercentageList, totalUnoccupiedPercentage / (double) trials)));
         }
@@ -165,14 +168,14 @@ public class ExperimentRunner {
 
     /**
      * Collects result for the i'th trial
-     *
-     * @param simulator
+     *  @param simulator
      * @param props
      * @param graphType
      * @param numVehicles
      * @param i
+     * @param totalWaitMap
      */
-    private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i) {
+    private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i, Map<Integer, Integer> totalWaitMap) {
         double avgWait = (double) simulator.getWaitingTime() / (double) simulator.getAssignedRequests().size();
         double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed;
 
@@ -186,11 +189,62 @@ public class ExperimentRunner {
         props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
         props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
 
-        // fixme:
-//        for (Integer num : waitMap.keySet()) {
-//            double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
-//            totalWaitMap.put(num, newNumber);
-//        }
+        for (Request r : simulator.getAssignedRequests()) {
+            if (totalWaitMap.containsKey(r.getWaitTime())) {
+                int number = totalWaitMap.get(r.getWaitTime()) + 1;
+                totalWaitMap.put(r.getWaitTime(), number)  ;
+            }
+            else totalWaitMap.put(r.getWaitTime(), 1);
+        }
+    }
+
+    /**
+     *
+     * @param props
+     * @param trials
+     * @param totalWaitMap
+     * @param graphType
+     */
+    private static void collectTotals(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType) {
+        getTotalOfProp(props, graphType, "waitVariance");
+        double totalUnoccupiedPercentage = getTotalOfProp(props, graphType, "unoccupiedPercentage");
+
+        props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(getTotalOfProp(props, graphType, "unoccupied")));
+        props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(getTotalOfProp(props, graphType, "avgUnoccupied") / (double) trials));
+        props.setProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage", String.valueOf(totalUnoccupiedPercentage / (double) trials));
+        props.setProperty("TOTAL_" + graphType + "_wait", String.valueOf(getTotalOfProp(props, graphType, "wait")));
+        props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(getTotalOfProp(props, graphType, "avgWait") / (double) trials));
+        props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(getTotalOfProp(props, graphType, "avgIdleVehicles") / (double) trials));
+        props.setProperty("TOTAL_" + graphType + "_avgWaitVariance", String.valueOf(getTotalOfProp(props, graphType, "waitVariance") / (double) trials));
+        StringBuilder waitingTimes = new StringBuilder();
+        for (Integer num : totalWaitMap.keySet()) {
+            double avg = totalWaitMap.get(num) / trials;
+//            totalWaitMap.put(num, avg);
+            waitingTimes.append("(").append(num*5).append(",").append(avg).append(")");
+        }
+
+        double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
+        double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
+
+        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
+        props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
+    }
+
+    /**
+     * Adds up the results for a given property from all the trials and returns the total
+     *
+     * @param props
+     * @param graphType
+     * @param property
+     * @return
+     */
+    private static double getTotalOfProp(Properties props, String graphType, String property) {
+        double total = 0.0;
+        for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
+            String key = graphType + "_" + i + "_" + property;
+            total += Double.valueOf(props.getProperty(key));
+        }
+        return total;
     }
 
     /**

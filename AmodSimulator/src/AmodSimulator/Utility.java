@@ -204,6 +204,7 @@ public class Utility {
         }
     }
 
+    @Deprecated // todo : replace w. Math.sqrt(calculateVarianceOfProp())
     /**
      *
      * @param unoccupiedPercentageList
@@ -218,5 +219,29 @@ public class Utility {
         }
         variance = variance / (double) unoccupiedPercentageList.size();
         return Math.sqrt(variance);
+    }
+
+    /**
+     * Calculates the variance of a property
+     *
+     * @param props
+     * @param graphType
+     * @param property
+     * @param avg
+     */
+    public static double calculateVarianceOfProp(Properties props, String graphType, String property, double avg) {
+        List<Double> list = new ArrayList<>();
+
+        for (int i = 0; i < Integer.valueOf(props.getProperty("trials")); i++) {
+            String key = graphType + "_" + i + "_" + property;
+            list.add(Double.valueOf(props.getProperty(key)));
+        }
+
+        double variance = 0.0;
+        for (Double d : list) {
+            double difference = d - avg;
+            variance += difference * difference;
+        }
+        return variance / (double) list.size();
     }
 }
