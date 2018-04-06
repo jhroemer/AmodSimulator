@@ -52,6 +52,7 @@ public class ExperimentRunner {
         int trials = Integer.parseInt(props.getProperty("trials"));
         int timeSteps = Integer.parseInt(props.getProperty("timeSteps"));
         double lambda = Double.parseDouble(props.getProperty("requestsPerDay")) / 288.0; // there are 288 5min intervals per day
+        int vehicleSpeed = Integer.parseInt(props.getProperty("vehicleSpeed"));
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
@@ -89,6 +90,7 @@ public class ExperimentRunner {
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
+                collectResults(simulator, props, graphType, numVehicles, vehicleSpeed, i);
 
                 ////////// collecting results for the i'th trial //////////
                 int unoccupied = simulator.getUnoccupiedKmDriven();
@@ -137,6 +139,8 @@ public class ExperimentRunner {
 
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
 
+            // collectTotals(props);
+
             // todo : check the double-int-division of totalAvgWait and trials
             // after i trials, get the average
             props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(totalUnoccupied));
@@ -157,6 +161,35 @@ public class ExperimentRunner {
         }
 
         Utility.saveResultsAsFile(props);
+    }
+
+    /**
+     * Collects result for the i'th trial
+     * @param simulator
+     * @param props
+     * @param graphType
+     * @param numVehicles
+     * @param i
+     */
+    private static void collectResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i) {
+        double avgWait = (double) simulator.getWaitingTime() / (double) simulator.getAssignedRequests().size();
+        double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed;
+
+        props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
+        props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf((double) simulator.getUnoccupiedKmDriven() / (double) numVehicles));
+        props.setProperty(graphType + "_" + i + "_unoccupiedPercentage", String.valueOf(simulator.getAvgUnoccupiedPercentage()));
+        props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
+        props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
+        props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles())); // FIXME : will not work in extensions
+        props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getUnservedRequests().size()));
+        props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
+        props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
+
+        // fixme:
+//        for (Integer num : waitMap.keySet()) {
+//            double newNumber = totalWaitMap.getOrDefault(num, 0.0) + (double) waitMap.get(num);
+//            totalWaitMap.put(num, newNumber);
+//        }
     }
 
     /**
