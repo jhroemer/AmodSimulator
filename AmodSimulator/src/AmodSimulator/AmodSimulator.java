@@ -80,6 +80,7 @@ public class AmodSimulator {
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         idleVehicles = vehicles;
+        activeVehicles = new ArrayList<>();
         requests = new ArrayList<>();
         predefinedRequestsMap = requestMap;
 
