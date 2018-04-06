@@ -269,6 +269,16 @@ public class Utility {
         return map;
     }
 
+    /**
+     * 
+     * @param props
+     */
+    public static void updatePlots(Properties props) {
+        // TODO:
+        // Update all latex plots based on the properties:
+        // 1. update waiting times plots in chapter 1 - this needs the total averages + the std. dev. per time interval
+    }
+
     public static void main(String[] args) {
         Properties props = loadProps("data/experimentResults/chapter3.properties");
         Map<Integer, Integer> map = parsePropsMap(props, "BANANATREE", 2);

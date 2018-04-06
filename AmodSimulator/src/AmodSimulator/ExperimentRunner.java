@@ -92,6 +92,8 @@ public class ExperimentRunner {
         }
 
         Utility.saveResultsAsFile(props);
+
+        Utility.updatePlots(props);
     }
 
     /**
