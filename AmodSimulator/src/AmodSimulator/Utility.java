@@ -1,10 +1,6 @@
 package AmodSimulator;
 
-import SCRAM.SCRAM;
-import SCRAM.DummyNode;
-import SCRAM.Edge;
-import SCRAM.IndexBasedSCRAM;
-import SCRAM.Node;
+import SCRAM.*;
 import org.graphstream.graph.Graph;
 
 import java.io.*;
@@ -262,16 +258,20 @@ public class Utility {
     /**
      * todo: currently hardcoded to waitingTimes
      *
-     * @param props
-     * @return
      */
-    public static Map<Integer, Integer> parsePropsMap(Properties props) {
+    public static Map<Integer, Integer> parsePropsMap(Properties props, String name, int no) {
         Map<Integer, Integer> map = new HashMap<>();
-        String[] values = props.getProperty("LOBSTER" + "_" + 0 + "_waitingTimes").split(",");
+        String[] values = props.getProperty(name + "_" + no + "_waitingTimes").split(",");
         for (String s : values) {
             String[] splitValues = s.split("=");
             map.put(Integer.valueOf(splitValues[0]), Integer.valueOf(splitValues[1]));
         }
         return map;
+    }
+
+    public static void main(String[] args) {
+        Properties props = loadProps("data/experimentResults/chapter3.properties");
+        Map<Integer, Integer> map = parsePropsMap(props, "BANANATREE", 2);
+        System.out.println(map);
     }
 }

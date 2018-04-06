@@ -140,7 +140,7 @@ public class ExperimentRunner {
 
         System.out.println("TO STRING OF WAITMAP: " + waitMap);
         props.setProperty(graphType + "_" + i + "_waitingTimes", Utility.formatMap(waitMap));
-//        Utility.parsePropsMap(props);
+//        Utility.parsePropsMap(props, i);
     }
 
     /**
