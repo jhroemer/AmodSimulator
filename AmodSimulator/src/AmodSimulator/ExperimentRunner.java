@@ -90,7 +90,7 @@ public class ExperimentRunner {
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
-                collectResults(simulator, props, graphType, numVehicles, vehicleSpeed, i);
+                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i);
 
                 ////////// collecting results for the i'th trial //////////
                 int unoccupied = simulator.getUnoccupiedKmDriven();
@@ -165,13 +165,14 @@ public class ExperimentRunner {
 
     /**
      * Collects result for the i'th trial
+     *
      * @param simulator
      * @param props
      * @param graphType
      * @param numVehicles
      * @param i
      */
-    private static void collectResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i) {
+    private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i) {
         double avgWait = (double) simulator.getWaitingTime() / (double) simulator.getAssignedRequests().size();
         double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed;
 
