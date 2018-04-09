@@ -88,14 +88,11 @@ public class ExperimentRunner {
 
                 collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, totalWaitMap);
             }
-
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
-
             collectTotalResults(props, trials, totalWaitMap, graphType, vehicleSpeed);
         }
 
         Utility.saveResultsAsFile(props);
-
         Utility.updatePlots(props, graphTypes); // todo: add a path to the properties file
     }
 
