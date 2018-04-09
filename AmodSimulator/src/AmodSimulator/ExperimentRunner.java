@@ -173,13 +173,6 @@ public class ExperimentRunner {
             avgWaitingTimes.put(num, avg);
         }
 
-        // old string representation of avg. waiting times, is redundant now
-//        StringBuilder waitingTimes = new StringBuilder();
-//        for (Integer num : totalWaitMap.keySet()) {
-//            double avg = totalWaitMap.get(num) / trials;
-//            waitingTimes.append("(").append(num * vehicleSpeed).append(",").append(avg).append(")");
-//        }
-
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
         double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
 
@@ -202,6 +195,7 @@ public class ExperimentRunner {
         Map<Integer, Double> avgWaitingTimes = new HashMap<>();
         String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
         for (String s : values) {
+            // FIXME: if I save TotalWaitMap.toString() I have to change the parsing also
             String[] splitValues = s.split("=");
             avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
         }
@@ -227,6 +221,8 @@ public class ExperimentRunner {
             variance = variance / (double) trials;
             stdDevMap.put(interval, Math.sqrt(variance));
         }
+
+        // FIXME: save as pure Map.toString()?
         props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", formatDoubleMap(stdDevMap));
     }
 

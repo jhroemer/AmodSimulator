@@ -269,6 +269,7 @@ public class Utility {
      *
      */
     public static Map<Integer, Integer> parsePropsMap(Properties props, String name, int no) {
+        // FIXME: parse normal Map.toString() instead of own format?
         Map<Integer, Integer> map = new HashMap<>();
         String[] values = props.getProperty(name + "_" + no + "_waitingTimes").split(",");
         for (String s : values) {
@@ -337,6 +338,7 @@ public class Utility {
                     "\\end{tikzpicture}");
 
             String chapter = props.getProperty("name");
+            // todo: get path from properties file
             String path = "../../../ThesisDocuments/writings/thaRealzThesis/figures/" + chapter + "/" + graphType + "WaitingTimes.tex";
 
             BufferedWriter writer = null;
@@ -359,6 +361,13 @@ public class Utility {
     }
 
     public static void main(String[] args) {
+        Map<Integer, Double> map = new TreeMap<>();
+        map.put(1, 1.0);
+        map.put(2, 2.0);
+        System.out.println(map);
+        System.exit(1);
+
+
         Properties props = loadProps("data/experimentResults/chapter4.properties");
 //        Map<Integer, Integer> map = parsePropsMap(props, "BANANATREE", 2);
 //        System.out.println(map);
