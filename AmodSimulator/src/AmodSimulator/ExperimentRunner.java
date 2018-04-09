@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static AmodSimulator.Utility.parsePropsMap;
+
 /**
  * Class used to run experiments.
  * Uses java Properties files.
@@ -129,7 +131,6 @@ public class ExperimentRunner {
             else totalWaitMap.put(r.getWaitTime(), 1);
         }
 
-
         Map<Integer, Integer> waitMap = new HashMap<>();
         for (int j = 0; j < 21; j++) waitMap.put(j, 0);
         for (Request r : simulator.getAssignedRequests()) {
@@ -165,20 +166,69 @@ public class ExperimentRunner {
         props.setProperty("TOTAL_" + graphType + "_avgWait", String.valueOf(getTotalOfProp(props, graphType, "avgWait") / (double) trials));
         props.setProperty("TOTAL_" + graphType + "_avgIdleVehicles", String.valueOf(getTotalOfProp(props, graphType, "avgIdleVehicles") / (double) trials));
         props.setProperty("TOTAL_" + graphType + "_avgWaitVariance", String.valueOf(getTotalOfProp(props, graphType, "waitVariance") / (double) trials));
-        StringBuilder waitingTimes = new StringBuilder();
+
+        // get averages of waiting times
+        Map<Integer, Double> avgWaitingTimes = new HashMap<>();
         for (Integer num : totalWaitMap.keySet()) {
             double avg = totalWaitMap.get(num) / trials;
-            waitingTimes.append("(").append(num * vehicleSpeed).append(",").append(avg).append(")"); // todo : use vehicleSpeed instead of 5
+            avgWaitingTimes.put(num, avg);
         }
+        calcWaitingTimesStdDev(props, trials, graphType, vehicleSpeed);
+
+        // old string representation of avg. waiting times, is redundant now
+//        StringBuilder waitingTimes = new StringBuilder();
+//        for (Integer num : totalWaitMap.keySet()) {
+//            double avg = totalWaitMap.get(num) / trials;
+//            waitingTimes.append("(").append(num * vehicleSpeed).append(",").append(avg).append(")");
+//        }
 
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
         double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
 
-        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
+        // props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
+        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(avgWaitingTimes));
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
 
-        // todo: make total waiting times by looping over: graphType + "_" + i + "_waitingTimes" + calculate std. dev. per interval
-        // getTotalWaitingTimes();
+    }
+
+    /**
+     *
+     * @param props
+     * @param trials
+     * @param graphType
+     * @param vehicleSpeed
+     */
+    private static void calcWaitingTimesStdDev(Properties props, int trials, String graphType, int vehicleSpeed) {
+        // get the map w. the averages
+        Map<Integer, Double> avgWaitingTimes = new HashMap<>();
+        String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
+        for (String s : values) {
+            String[] splitValues = s.split("=");
+            avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
+        }
+
+        // get the maps w. the trial results
+        List<Map<Integer, Integer>> mapList = new ArrayList<>();
+        for (int i = 0; i < trials; i++) {
+            mapList.add(parsePropsMap(props, graphType, i));
+        }
+
+        // map to hold std. dev. values per time interval
+        Map<Integer, Double> stdDevMap = new HashMap<>();
+
+        // for each waiting interval, calc. std. dev.
+        for (Integer interval : avgWaitingTimes.keySet()) {
+            // this should loop over the 5-minute intervals - 0, 5, 10, 15.. etc.
+            double variance = 0.0;
+            for (Map<Integer, Integer> map : mapList) {
+                // find difference from avg.
+                double difference = (double) map.get(interval) - avgWaitingTimes.get(interval);
+                variance += difference * difference;
+            }
+            variance = variance / (double) trials;
+            stdDevMap.put(interval, Math.sqrt(variance));
+        }
+        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", String.valueOf(stdDevMap));
     }
 
     /**
@@ -323,8 +373,5 @@ public class ExperimentRunner {
         try { Thread.sleep(duration); } catch (Exception e) {}
     }
 
-//        //todo: test if we can save a lookup-table like this:
-//        Map<Node, Map<Node, Integer>> lookupTable = new HashMap<>();
-//        graph.setAttribute("lookupTable", lookupTable);
 
 }
