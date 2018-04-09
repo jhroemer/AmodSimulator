@@ -279,36 +279,37 @@ public class Utility {
     }
 
     /**
+     * Parses experiment results (from props) and formats and outputs the latex-avgWaitingTimes-plots for the report.
      *
      * @param props
+     * @param graphTypes
      */
     public static void updatePlots(Properties props, String[] graphTypes) {
-        // TODO:
-        // Update all latex plots based on the properties:
-        // 1. update waiting times plots in chapter 1 - this needs the total averages + the std. dev. per time interval
         for (String graphType : graphTypes) {
 
-            Map<Integer, Double> avgWaitingTimes = new HashMap<>();
+            Map<Integer, Double> avgWaitingTimes = new TreeMap<>();
             String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
             for (String s : values) {
                 String[] splitValues = s.split("=");
-                avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
+                // TODO: find out if we save as ticks or minutes
+                if (Integer.valueOf(splitValues[0]) * 5 > 60) continue; // TODO: fix differently
+                avgWaitingTimes.put(Integer.valueOf(splitValues[0]) * 5, Double.valueOf(splitValues[1]));
             }
 
-            Map<Integer, Double> stdDeviationMap = new HashMap<>();
+            Map<Integer, Double> stdDeviationMap = new TreeMap<>();
             String[] devValues = props.getProperty("TOTAL_" + graphType + "_waitingTimeStdDev").split(",");
             for (String s : devValues) {
-                System.out.println(s);
                 if (s.contains("{")) s = s.replace("{", "");
                 if (s.contains("}")) s = s.replace("}", "");
-                System.out.println(s);
 
-                String[] splitValues = s.split("=");
-                stdDeviationMap.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
+                String[] splitValues = s.trim().split("=");
+                // TODO: ticks vs minutes problem
+                if (Integer.valueOf(splitValues[0]) * 5 > 60) continue; // TODO: fix differently
+                stdDeviationMap.put(Integer.valueOf(splitValues[0]) * 5, Double.valueOf(splitValues[1]));
             }
 
             StringBuilder s = new StringBuilder();
-            s.append("\uFEFF\\begin{tikzpicture}\n" +
+            s.append("\\begin{tikzpicture}\n" +
                     "\\begin{axis}[\n" +
                     "    ybar,\n" +
                     "    ylabel={\\# Passengers Waiting},\n" +
@@ -322,16 +323,16 @@ public class Utility {
                     "    %width=0.5\\textwidth,\n" +
                     "    scale only axis,\n" +
                     "    ]\n" +
-                    "\\addplot coordinates {");
+                    "\\addplot[draw=blue, pattern=horizontal lines light blue, error bars/.cd, y dir=both, y explicit] coordinates {");
 
 
             for (Integer interval : avgWaitingTimes.keySet()) {
                 // The avg. waiting time for interval, e.g: (5, 2835.6)
-                s.append("(").append(avgWaitingTimes).append(",").append(avgWaitingTimes.get(interval)).append(")");
+                s.append("(").append(interval).append(",").append(avgWaitingTimes.get(interval)).append(")");
                 // The std. dev. for that interval, e.g: +- (0.3515,0.3515)
-                s.append("+- ").append(stdDeviationMap.get(interval)).append(",").append(stdDeviationMap.get(interval));
+                s.append(" +- (").append(stdDeviationMap.get(interval)).append(",").append(stdDeviationMap.get(interval)).append(") ");
             }
-            s.append("\uFEFF};\n" +
+            s.append("};\n" +
                     "\\end{axis}\n" +
                     "\\end{tikzpicture}");
 
@@ -340,7 +341,7 @@ public class Utility {
 
             BufferedWriter writer = null;
             try {
-                writer = new BufferedWriter(new FileWriter(path));
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

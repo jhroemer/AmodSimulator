@@ -69,7 +69,7 @@ public class ExperimentRunner {
             System.out.println("starting trials on graph type: " + graphType);
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
-            for (int j = 0; j < 21; j++) totalWaitMap.put(j, 0);
+            for (int j = 0; j < 14; j++) totalWaitMap.put(j, 0);
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -96,7 +96,7 @@ public class ExperimentRunner {
 
         Utility.saveResultsAsFile(props);
 
-        Utility.updatePlots(props, graphTypes); // todo
+        Utility.updatePlots(props, graphTypes); // todo: add a path to the properties file
     }
 
     /**
@@ -123,8 +123,18 @@ public class ExperimentRunner {
         props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
         props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
 
-        // TODO: has this become redundant?
+        Map<Integer, Integer> waitMap = new HashMap<>();
+        for (int j = 0; j < 14; j++) waitMap.put(j, 0); // zero-entries have to be included
+
         for (Request r : simulator.getAssignedRequests()) {
+            // waiting times for i´h trial
+            if (waitMap.containsKey(r.getWaitTime())) {
+                int number = waitMap.get(r.getWaitTime()) + 1;
+                waitMap.put(r.getWaitTime(), number); // TODO: save as ticks or minutes?
+            }
+            else waitMap.put(r.getWaitTime(), 1);
+
+            // waiting times in total
             if (totalWaitMap.containsKey(r.getWaitTime())) {
                 int number = totalWaitMap.get(r.getWaitTime()) + 1;
                 totalWaitMap.put(r.getWaitTime(), number);
@@ -132,18 +142,7 @@ public class ExperimentRunner {
             else totalWaitMap.put(r.getWaitTime(), 1);
         }
 
-        Map<Integer, Integer> waitMap = new HashMap<>();
-        for (int j = 0; j < 21; j++) waitMap.put(j, 0);
-        for (Request r : simulator.getAssignedRequests()) {
-            if (waitMap.containsKey(r.getWaitTime())) {
-                int number = waitMap.get(r.getWaitTime()) + 1;
-                waitMap.put(r.getWaitTime(), number)  ;
-            }
-            else waitMap.put(r.getWaitTime(), 1);
-        }
-
         props.setProperty(graphType + "_" + i + "_waitingTimes", Utility.formatMap(waitMap));
-//        Utility.parsePropsMap(props, i);
     }
 
     /**
@@ -170,7 +169,7 @@ public class ExperimentRunner {
         // get averages of waiting times
         Map<Integer, Double> avgWaitingTimes = new HashMap<>();
         for (Integer num : totalWaitMap.keySet()) {
-            double avg = totalWaitMap.get(num) / trials;
+            double avg = totalWaitMap.get(num) / trials; // TODO: save as ticks or minutes?
             avgWaitingTimes.put(num, avg);
         }
 
