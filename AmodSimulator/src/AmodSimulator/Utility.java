@@ -288,16 +288,21 @@ public class Utility {
         // 1. update waiting times plots in chapter 1 - this needs the total averages + the std. dev. per time interval
         for (String graphType : graphTypes) {
 
-            Map<Integer, Integer> avgWaitingTimes = new HashMap<>();
+            Map<Integer, Double> avgWaitingTimes = new HashMap<>();
             String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
             for (String s : values) {
                 String[] splitValues = s.split("=");
-                avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Integer.valueOf(splitValues[1]));
+                avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
             }
 
             Map<Integer, Double> stdDeviationMap = new HashMap<>();
             String[] devValues = props.getProperty("TOTAL_" + graphType + "_waitingTimeStdDev").split(",");
             for (String s : devValues) {
+                System.out.println(s);
+                if (s.contains("{")) s = s.replace("{", "");
+                if (s.contains("}")) s = s.replace("}", "");
+                System.out.println(s);
+
                 String[] splitValues = s.split("=");
                 stdDeviationMap.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
             }

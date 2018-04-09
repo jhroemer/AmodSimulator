@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static AmodSimulator.Utility.formatDoubleMap;
 import static AmodSimulator.Utility.parsePropsMap;
 
 /**
@@ -227,7 +228,7 @@ public class ExperimentRunner {
             variance = variance / (double) trials;
             stdDevMap.put(interval, Math.sqrt(variance));
         }
-        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", String.valueOf(stdDevMap));
+        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", formatDoubleMap(stdDevMap));
     }
 
     /**
