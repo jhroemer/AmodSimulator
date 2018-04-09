@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 
 import static AmodSimulator.AmodSimulator.PRINT;
+import static AmodSimulator.ExperimentRunner.getGraphTypes;
 
 public class Utility {
 
@@ -254,6 +255,14 @@ public class Utility {
         s.deleteCharAt(s.length()-1); // delete the last comma
         return s.toString();
     }
+    public static String formatDoubleMap(Map<Integer, Double> waitMap) { // fixme: find better solution
+        StringBuilder s = new StringBuilder();
+        for (Integer i : waitMap.keySet()) {
+            s.append(i).append("=").append(waitMap.get(i)).append(",");
+        }
+        s.deleteCharAt(s.length()-1); // delete the last comma
+        return s.toString();
+    }
 
     /**
      * todo: currently hardcoded to waitingTimes
@@ -273,15 +282,81 @@ public class Utility {
      *
      * @param props
      */
-    public static void updatePlots(Properties props) {
+    public static void updatePlots(Properties props, String[] graphTypes) {
         // TODO:
         // Update all latex plots based on the properties:
         // 1. update waiting times plots in chapter 1 - this needs the total averages + the std. dev. per time interval
+        for (String graphType : graphTypes) {
+
+            Map<Integer, Integer> avgWaitingTimes = new HashMap<>();
+            String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
+            for (String s : values) {
+                String[] splitValues = s.split("=");
+                avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Integer.valueOf(splitValues[1]));
+            }
+
+            Map<Integer, Double> stdDeviationMap = new HashMap<>();
+            String[] devValues = props.getProperty("TOTAL_" + graphType + "_waitingTimeStdDev").split(",");
+            for (String s : devValues) {
+                String[] splitValues = s.split("=");
+                stdDeviationMap.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
+            }
+
+            StringBuilder s = new StringBuilder();
+            s.append("\uFEFF\\begin{tikzpicture}\n" +
+                    "\\begin{axis}[\n" +
+                    "    ybar,\n" +
+                    "    ylabel={\\# Passengers Waiting},\n" +
+                    "    xlabel={Minutes waiting},\n" +
+                    "    symbolic x coords={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80},\n" +
+                    "    xtick=data,\n" +
+                    "    ymin=0,\n" +
+                    "    xmin=0,\n" +
+                    "    enlarge x limits=0.04,\n" +
+                    "    bar width=7pt,\n" +
+                    "    %width=0.5\\textwidth,\n" +
+                    "    scale only axis,\n" +
+                    "    ]\n" +
+                    "\\addplot coordinates {");
+
+
+            for (Integer interval : avgWaitingTimes.keySet()) {
+                // The avg. waiting time for interval, e.g: (5, 2835.6)
+                s.append("(").append(avgWaitingTimes).append(",").append(avgWaitingTimes.get(interval)).append(")");
+                // The std. dev. for that interval, e.g: +- (0.3515,0.3515)
+                s.append("+- ").append(stdDeviationMap.get(interval)).append(",").append(stdDeviationMap.get(interval));
+            }
+            s.append("\uFEFF};\n" +
+                    "\\end{axis}\n" +
+                    "\\end{tikzpicture}");
+
+            String chapter = props.getProperty("name");
+            String path = "../../../ThesisDocuments/writings/thaRealzThesis/figures/" + chapter + "/" + graphType + "WaitingTimes.tex";
+
+            BufferedWriter writer = null;
+            try {
+                writer = new BufferedWriter(new FileWriter(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                writer.write(s.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
-        Properties props = loadProps("data/experimentResults/chapter3.properties");
-        Map<Integer, Integer> map = parsePropsMap(props, "BANANATREE", 2);
-        System.out.println(map);
+        Properties props = loadProps("data/experimentResults/chapter4.properties");
+//        Map<Integer, Integer> map = parsePropsMap(props, "BANANATREE", 2);
+//        System.out.println(map);
+        String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
+        updatePlots(props, graphTypes);
     }
 }

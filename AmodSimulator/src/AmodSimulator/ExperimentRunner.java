@@ -95,7 +95,7 @@ public class ExperimentRunner {
 
         Utility.saveResultsAsFile(props);
 
-        Utility.updatePlots(props); // todo
+        Utility.updatePlots(props, graphTypes); // todo
     }
 
     /**
@@ -141,7 +141,6 @@ public class ExperimentRunner {
             else waitMap.put(r.getWaitTime(), 1);
         }
 
-        System.out.println("TO STRING OF WAITMAP: " + waitMap);
         props.setProperty(graphType + "_" + i + "_waitingTimes", Utility.formatMap(waitMap));
 //        Utility.parsePropsMap(props, i);
     }
@@ -173,7 +172,6 @@ public class ExperimentRunner {
             double avg = totalWaitMap.get(num) / trials;
             avgWaitingTimes.put(num, avg);
         }
-        calcWaitingTimesStdDev(props, trials, graphType, vehicleSpeed);
 
         // old string representation of avg. waiting times, is redundant now
 //        StringBuilder waitingTimes = new StringBuilder();
@@ -186,9 +184,10 @@ public class ExperimentRunner {
         double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
 
         // props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
-        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(avgWaitingTimes));
+        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", Utility.formatDoubleMap(avgWaitingTimes)); // fixme: formatDoubleMap is a temp. solution
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
 
+        calcWaitingTimesStdDev(props, trials, graphType, vehicleSpeed);
     }
 
     /**
