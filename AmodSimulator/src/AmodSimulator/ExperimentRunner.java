@@ -13,8 +13,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static AmodSimulator.Utility.formatDoubleMap;
-import static AmodSimulator.Utility.parsePropsMap;
+import static AmodSimulator.Utility.parseIntIntMap;
 
 /**
  * Class used to run experiments.
@@ -69,7 +68,7 @@ public class ExperimentRunner {
             System.out.println("starting trials on graph type: " + graphType);
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
-            for (int j = 0; j < 14; j++) totalWaitMap.put(j, 0);
+            for (int j = 0; j < 14; j++) totalWaitMap.put(j * vehicleSpeed, 0);
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -93,7 +92,7 @@ public class ExperimentRunner {
         }
 
         Utility.saveResultsAsFile(props);
-        Utility.updatePlots(props, graphTypes); // todo: add a path to the properties file
+        Utility.updatePlots(props, graphTypes, vehicleSpeed); // todo: add a path to the properties file
     }
 
     /**
@@ -121,25 +120,25 @@ public class ExperimentRunner {
         props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
 
         Map<Integer, Integer> waitMap = new HashMap<>();
-        for (int j = 0; j < 14; j++) waitMap.put(j, 0); // zero-entries have to be included
+        for (int j = 0; j < 14; j++) waitMap.put(j * vehicleSpeed, 0); // zero-entries have to be included
 
         for (Request r : simulator.getAssignedRequests()) {
             // waiting times for i´h trial
-            if (waitMap.containsKey(r.getWaitTime())) {
-                int number = waitMap.get(r.getWaitTime()) + 1;
-                waitMap.put(r.getWaitTime(), number); // TODO: save as ticks or minutes?
+            if (waitMap.containsKey(r.getWaitTime() * vehicleSpeed)) {
+                int number = waitMap.get(r.getWaitTime() * vehicleSpeed) + 1;
+                waitMap.put(r.getWaitTime() * vehicleSpeed, number);
             }
-            else waitMap.put(r.getWaitTime(), 1);
+            else waitMap.put(r.getWaitTime() * vehicleSpeed, 1);
 
             // waiting times in total
-            if (totalWaitMap.containsKey(r.getWaitTime())) {
-                int number = totalWaitMap.get(r.getWaitTime()) + 1;
-                totalWaitMap.put(r.getWaitTime(), number);
+            if (totalWaitMap.containsKey(r.getWaitTime() * vehicleSpeed)) {
+                int number = totalWaitMap.get(r.getWaitTime() * vehicleSpeed) + 1;
+                totalWaitMap.put(r.getWaitTime() * vehicleSpeed, number);
             }
-            else totalWaitMap.put(r.getWaitTime(), 1);
+            else totalWaitMap.put(r.getWaitTime() * vehicleSpeed, 1);
         }
 
-        props.setProperty(graphType + "_" + i + "_waitingTimes", Utility.formatMap(waitMap));
+        props.setProperty(graphType + "_" + i + "_waitingTimes", String.valueOf(waitMap));
     }
 
     /**
@@ -174,7 +173,7 @@ public class ExperimentRunner {
         double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
 
         // props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(waitingTimes));
-        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", Utility.formatDoubleMap(avgWaitingTimes)); // fixme: formatDoubleMap is a temp. solution
+        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(avgWaitingTimes));
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
 
         calcWaitingTimesStdDev(props, trials, graphType, vehicleSpeed);
@@ -189,22 +188,17 @@ public class ExperimentRunner {
      */
     private static void calcWaitingTimesStdDev(Properties props, int trials, String graphType, int vehicleSpeed) {
         // get the map w. the averages
-        Map<Integer, Double> avgWaitingTimes = new HashMap<>();
-        String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
-        for (String s : values) {
-            // FIXME: if I save TotalWaitMap.toString() I have to change the parsing also
-            String[] splitValues = s.split("=");
-            avgWaitingTimes.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
-        }
+        String propsKey = "TOTAL_" + graphType + "_avgWaitingTimes";
+        Map<Integer, Double> avgWaitingTimes = Utility.parseIntDoubleMap(props, propsKey);
 
         // get the maps w. the trial results
         List<Map<Integer, Integer>> mapList = new ArrayList<>();
         for (int i = 0; i < trials; i++) {
-            mapList.add(parsePropsMap(props, graphType, i));
+            mapList.add(parseIntIntMap(props, graphType + "_" + i + "_waitingTimes"));
         }
 
         // map to hold std. dev. values per time interval
-        Map<Integer, Double> stdDevMap = new HashMap<>();
+        Map<Integer, Double> stdDevMap = new TreeMap<>();
 
         // for each waiting interval, calc. std. dev.
         for (Integer interval : avgWaitingTimes.keySet()) {
@@ -220,7 +214,7 @@ public class ExperimentRunner {
         }
 
         // FIXME: save as pure Map.toString()?
-        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", formatDoubleMap(stdDevMap));
+        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", String.valueOf(stdDevMap));
     }
 
     /**

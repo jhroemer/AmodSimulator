@@ -242,36 +242,37 @@ public class Utility {
         return variance / (double) list.size();
     }
 
-    /**
-     *
-     * @param waitMap
-     * @return
-     */
-    public static String formatMap(Map<Integer, Integer> waitMap) {
-        StringBuilder s = new StringBuilder();
-        for (Integer i : waitMap.keySet()) {
-            s.append(i).append("=").append(waitMap.get(i)).append(",");
-        }
-        s.deleteCharAt(s.length()-1); // delete the last comma
-        return s.toString();
-    }
-    public static String formatDoubleMap(Map<Integer, Double> waitMap) { // fixme: find better solution
-        StringBuilder s = new StringBuilder();
-        for (Integer i : waitMap.keySet()) {
-            s.append(i).append("=").append(waitMap.get(i)).append(",");
-        }
-        s.deleteCharAt(s.length()-1); // delete the last comma
-        return s.toString();
-    }
+//    /**
+//     *
+//     * @param waitMap
+//     * @return
+//     */
+//    public static String formatMap(Map<Integer, Integer> waitMap) {
+//        StringBuilder s = new StringBuilder();
+//        for (Integer i : waitMap.keySet()) {
+//            s.append(i).append("=").append(waitMap.get(i)).append(",");
+//        }
+//        s.deleteCharAt(s.length()-1); // delete the last comma
+//        return s.toString();
+//    }
+//    public static String formatDoubleMap(Map<Integer, Double> waitMap) { // fixme: find better solution
+//        StringBuilder s = new StringBuilder();
+//        for (Integer i : waitMap.keySet()) {
+//            s.append(i).append("=").append(waitMap.get(i)).append(",");
+//        }
+//        s.deleteCharAt(s.length()-1); // delete the last comma
+//        return s.toString();
+//    }
 
     /**
      * todo: currently hardcoded to waitingTimes
      *
      */
-    public static Map<Integer, Integer> parsePropsMap(Properties props, String name, int no) {
+    public static Map<Integer, Integer> parseIntIntMap(Properties props, String propsKey) {
         // FIXME: parse normal Map.toString() instead of own format?
-        Map<Integer, Integer> map = new HashMap<>();
-        String[] values = props.getProperty(name + "_" + no + "_waitingTimes").split(",");
+        Map<Integer, Integer> map = new TreeMap<>();
+        // String[] values = props.getProperty(name + "_" + no + "_waitingTimes").split(",");
+        String[] values = props.getProperty(propsKey).replaceAll("\\{", "").replaceAll("}", "").replaceAll(" ", "").split(",");
         for (String s : values) {
             String[] splitValues = s.split("=");
             map.put(Integer.valueOf(splitValues[0]), Integer.valueOf(splitValues[1]));
@@ -280,34 +281,42 @@ public class Utility {
     }
 
     /**
-     * Parses experiment results (from props) and formats and outputs the latex-avgWaitingTimes-plots for the report.
      *
      * @param props
-     * @param graphTypes
+     * @param propsKey
+     * @return
      */
-    public static void updatePlots(Properties props, String[] graphTypes) {
+    public static Map<Integer,Double> parseIntDoubleMap(Properties props, String propsKey) {
+        Map<Integer, Double> map = new TreeMap<>();
+        String[] values = props.getProperty(propsKey).replaceAll("\\{", "").replaceAll("}", "").replaceAll(" ", "").split(",");
+        for (String s : values) {
+            String[] splitValues = s.split("=");
+            map.put(Integer.valueOf(splitValues[0]), Double.valueOf(splitValues[1]));
+        }
+        return map;
+    }
+
+    /**
+     * Parses experiment results (from props) and formats and outputs the latex-avgWaitingTimes-plots for the report.
+     *  @param props
+     * @param graphTypes
+     * @param vehicleSpeed
+     */
+    public static void updatePlots(Properties props, String[] graphTypes, int vehicleSpeed) {
         for (String graphType : graphTypes) {
 
-            Map<Integer, Double> avgWaitingTimes = new TreeMap<>();
-            String[] values = props.getProperty("TOTAL_" + graphType + "_avgWaitingTimes").split(",");
-            for (String s : values) {
-                String[] splitValues = s.split("=");
-                // TODO: find out if we save as ticks or minutes
-                if (Integer.valueOf(splitValues[0]) * 5 > 60) continue; // TODO: fix differently
-                avgWaitingTimes.put(Integer.valueOf(splitValues[0]) * 5, Double.valueOf(splitValues[1]));
-            }
-
-            Map<Integer, Double> stdDeviationMap = new TreeMap<>();
-            String[] devValues = props.getProperty("TOTAL_" + graphType + "_waitingTimeStdDev").split(",");
-            for (String s : devValues) {
-                if (s.contains("{")) s = s.replace("{", "");
-                if (s.contains("}")) s = s.replace("}", "");
-
-                String[] splitValues = s.trim().split("=");
-                // TODO: ticks vs minutes problem
-                if (Integer.valueOf(splitValues[0]) * 5 > 60) continue; // TODO: fix differently
-                stdDeviationMap.put(Integer.valueOf(splitValues[0]) * 5, Double.valueOf(splitValues[1]));
-            }
+            Map<Integer, Double> avgWaitingTimes = parseIntDoubleMap(props, "TOTAL_" + graphType + "_avgWaitingTimes");
+            Map<Integer, Double> stdDeviationMap = parseIntDoubleMap(props, "TOTAL_" + graphType + "_waitingTimeStdDev");
+//            String[] devValues = props.getProperty("TOTAL_" + graphType + "_waitingTimeStdDev").split(",");
+//            for (String s : devValues) {
+//                if (s.contains("{")) s = s.replace("{", "");
+//                if (s.contains("}")) s = s.replace("}", "");
+//
+//                String[] splitValues = s.trim().split("=");
+//                // TODO: ticks vs minutes problem
+//                if (Integer.valueOf(splitValues[0]) * vehicleSpeed > 60) continue; // TODO: fix differently
+//                stdDeviationMap.put(Integer.valueOf(splitValues[0]) * vehicleSpeed, Double.valueOf(splitValues[1]));
+//            }
 
             StringBuilder s = new StringBuilder();
             s.append("\\begin{tikzpicture}\n" +
@@ -369,9 +378,10 @@ public class Utility {
 
 
         Properties props = loadProps("data/experimentResults/chapter4.properties");
-//        Map<Integer, Integer> map = parsePropsMap(props, "BANANATREE", 2);
+//        Map<Integer, Integer> map = parseIntIntMap(props, "BANANATREE", 2);
 //        System.out.println(map);
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
-        updatePlots(props, graphTypes);
+        int vehicleSpeed = Integer.valueOf(props.getProperty("vehicleSpeed"));
+        updatePlots(props, graphTypes, vehicleSpeed);
     }
 }
