@@ -346,9 +346,8 @@ public class Utility {
                     "\\end{axis}\n" +
                     "\\end{tikzpicture}");
 
-            String chapter = props.getProperty("name");
-            // todo: get path from properties file
-            String path = "../../../ThesisDocuments/writings/thaRealzThesis/figures/" + chapter + "/" + graphType + "WaitingTimes.tex";
+            String chapter = props.getProperty("figuresFolder");
+            String path = chapter + "/" + graphType + "WaitingTimes.tex";
 
             BufferedWriter writer = null;
             try {
