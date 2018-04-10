@@ -165,7 +165,7 @@ public class ExperimentRunner {
         // get averages of waiting times
         Map<Integer, Double> avgWaitingTimes = new HashMap<>();
         for (Integer num : totalWaitMap.keySet()) {
-            double avg = totalWaitMap.get(num) / trials; // TODO: save as ticks or minutes?
+            double avg = totalWaitMap.get(num) / (double) trials;
             avgWaitingTimes.put(num, avg);
         }
 
@@ -206,7 +206,7 @@ public class ExperimentRunner {
             double variance = 0.0;
             for (Map<Integer, Integer> map : mapList) {
                 // find difference from avg.
-                double difference = (double) map.get(interval) - avgWaitingTimes.get(interval);
+                double difference = (double) map.getOrDefault(interval, 0) - avgWaitingTimes.get(interval);
                 variance += difference * difference;
             }
             variance = variance / (double) trials;

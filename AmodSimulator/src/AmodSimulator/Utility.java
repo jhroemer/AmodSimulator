@@ -370,11 +370,13 @@ public class Utility {
     }
 
     public static void main(String[] args) {
-        Map<Integer, Double> map = new TreeMap<>();
-        map.put(1, 1.0);
-        map.put(2, 2.0);
-        System.out.println(map);
-        System.exit(1);
+//        Map<Integer, Double> map = new TreeMap<>();
+//        map.put(1, 1.0);
+//        map.put(2, 2.0);
+//        System.out.println(map);
+//        String[] values = map.toString().replaceAll("\\{", "").replaceAll("}", "").replaceAll(" ", "").split(",");
+//        System.out.println(values);
+//        System.exit(1);
 
 
         Properties props = loadProps("data/experimentResults/chapter4.properties");
