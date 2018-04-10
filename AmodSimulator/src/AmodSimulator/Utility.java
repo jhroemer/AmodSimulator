@@ -278,23 +278,12 @@ public class Utility {
      * Parses experiment results (from props) and formats and outputs the latex-avgWaitingTimes-plots for the report.
      *  @param props
      * @param graphTypes
-     * @param vehicleSpeed
      */
-    public static void updatePlots(Properties props, String[] graphTypes, int vehicleSpeed) {
+    public static void updatePlots(Properties props, String[] graphTypes) {
         for (String graphType : graphTypes) {
 
             Map<Integer, Double> avgWaitingTimes = parseIntDoubleMap(props, "TOTAL_" + graphType + "_avgWaitingTimes");
             Map<Integer, Double> stdDeviationMap = parseIntDoubleMap(props, "TOTAL_" + graphType + "_waitingTimeStdDev");
-//            String[] devValues = props.getProperty("TOTAL_" + graphType + "_waitingTimeStdDev").split(",");
-//            for (String s : devValues) {
-//                if (s.contains("{")) s = s.replace("{", "");
-//                if (s.contains("}")) s = s.replace("}", "");
-//
-//                String[] splitValues = s.trim().split("=");
-//                // TODO: ticks vs minutes problem
-//                if (Integer.valueOf(splitValues[0]) * vehicleSpeed > 60) continue; // TODO: fix differently
-//                stdDeviationMap.put(Integer.valueOf(splitValues[0]) * vehicleSpeed, Double.valueOf(splitValues[1]));
-//            }
 
             StringBuilder s = new StringBuilder();
             s.append("\\begin{tikzpicture}\n" +
@@ -361,6 +350,6 @@ public class Utility {
 //        System.out.println(map);
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         int vehicleSpeed = Integer.valueOf(props.getProperty("vehicleSpeed"));
-        updatePlots(props, graphTypes, vehicleSpeed);
+        updatePlots(props, graphTypes);
     }
 }

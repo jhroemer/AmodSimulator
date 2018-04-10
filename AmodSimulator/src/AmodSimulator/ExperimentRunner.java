@@ -92,7 +92,7 @@ public class ExperimentRunner {
         }
 
         Utility.saveResultsAsFile(props);
-        Utility.updatePlots(props, graphTypes, vehicleSpeed); // todo: add a path to the properties file
+        Utility.updatePlots(props, graphTypes); // todo: add a path to the properties file
     }
 
     /**
