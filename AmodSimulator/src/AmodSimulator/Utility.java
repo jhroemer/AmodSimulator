@@ -8,6 +8,8 @@ import java.util.*;
 
 import static AmodSimulator.AmodSimulator.PRINT;
 import static AmodSimulator.ExperimentRunner.getGraphTypes;
+import static AmodSimulator.ExtensionType.EXTENSION1;
+import static AmodSimulator.ExtensionType.EXTENSION1PLUS2;
 
 public class Utility {
 
@@ -54,8 +56,18 @@ public class Utility {
     static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests, int timeStep) {
 
         // done to avoid major and annoying generic refactoring in AmodSimulator - adds some (linear) running time
-        List<Node> vehicleNodeList = new ArrayList<>(vehicles);
         List<Node> requestNodeList = new ArrayList<>(requests);
+        List<Node> vehicleNodeList;
+        // If we're on extension 1, we want to use a timeframe-cutoff. Vehicles that aren't vacant within the timeframe aren't considered when matching
+        if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+            vehicleNodeList = new ArrayList<>();
+            for (Vehicle v : vehicles) {
+                // add vehicle to assignment-list if vehicle is vacant, or vacant within the next hour (9*5min-tick = 45min)
+                if (v.getVacantTime() <= timeStep) vehicleNodeList.add(v);
+                else if (v.getVacantTime() - timeStep <= 9) vehicleNodeList.add(v); // todo: set cutoff dynamically?
+            }
+        }
+        else vehicleNodeList = new ArrayList<>(vehicles);
 
         switch (type) {
             case SCHWACHSINN:
