@@ -242,36 +242,14 @@ public class Utility {
         return variance / (double) list.size();
     }
 
-//    /**
-//     *
-//     * @param waitMap
-//     * @return
-//     */
-//    public static String formatMap(Map<Integer, Integer> waitMap) {
-//        StringBuilder s = new StringBuilder();
-//        for (Integer i : waitMap.keySet()) {
-//            s.append(i).append("=").append(waitMap.get(i)).append(",");
-//        }
-//        s.deleteCharAt(s.length()-1); // delete the last comma
-//        return s.toString();
-//    }
-//    public static String formatDoubleMap(Map<Integer, Double> waitMap) { // fixme: find better solution
-//        StringBuilder s = new StringBuilder();
-//        for (Integer i : waitMap.keySet()) {
-//            s.append(i).append("=").append(waitMap.get(i)).append(",");
-//        }
-//        s.deleteCharAt(s.length()-1); // delete the last comma
-//        return s.toString();
-//    }
-
     /**
-     * todo: currently hardcoded to waitingTimes
      *
+     * @param props
+     * @param propsKey
+     * @return
      */
     public static Map<Integer, Integer> parseIntIntMap(Properties props, String propsKey) {
-        // FIXME: parse normal Map.toString() instead of own format?
         Map<Integer, Integer> map = new TreeMap<>();
-        // String[] values = props.getProperty(name + "_" + no + "_waitingTimes").split(",");
         String[] values = props.getProperty(propsKey).replaceAll("\\{", "").replaceAll("}", "").replaceAll(" ", "").split(",");
         for (String s : values) {
             String[] splitValues = s.split("=");
