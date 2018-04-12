@@ -122,7 +122,7 @@ public class RandomGraphGenerator {
                 return createGridGraph(seedInt, name, 15);
             case INCOMPLETEGRID:
                 return createManualIncompleteGridGraph(seedInt, name, 16);
-            case LOBSTER:   // TODO : lobster and barabasi are quite alike, lobster seems to perform worse than barabasi
+            case LOBSTER:
                 return createLobsterGraph(seedInt, name, 255);
             case BARABASI:
                 return createBarabasiGraph(type, seedInt, name, 256);
