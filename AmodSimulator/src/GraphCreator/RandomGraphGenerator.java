@@ -11,8 +11,10 @@ import org.graphstream.stream.file.FileSinkImages;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
+import static AmodSimulator.ExperimentRunner.getPropertiesFromFolder;
 import static GraphCreator.GraphType.*;
 
 public class RandomGraphGenerator {
@@ -21,7 +23,14 @@ public class RandomGraphGenerator {
 
     public static void main(String[] args) {
 
-        generateExperimentGraphs("chapter5");
+        List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
+
+        for (Properties props : propertiesList) {
+            System.out.println("Creating graphs for: " + props.getProperty("name"));
+            String graphDir = props.getProperty("graphDir");
+            GraphSize graphSize = GraphSize.valueOf(props.getProperty("GraphSize"));
+            generateExperimentGraphs(graphDir, graphSize);
+        }
 
         /*
         Graph lob = createLobsterGraph(10, "lobster", 120);
@@ -72,9 +81,10 @@ public class RandomGraphGenerator {
 
     /**
      *
-     * @param chapter
+     * @param graphDir
+     * @param size
      */
-    private static void generateExperimentGraphs(String chapter) {
+    private static void generateExperimentGraphs(String graphDir, GraphSize size) {
         List<GraphType> types = new ArrayList<>();
         types.add(GRID);
         types.add(INCOMPLETEGRID);
@@ -94,7 +104,8 @@ public class RandomGraphGenerator {
                 System.out.println("creating graph no. " + i + " of type: " + type);
 //                Graph graph = generateRandomGraph(type, seedInt, 5, 20, type + "_" + i);
 
-                Graph graph = generateGraph(type, seedInt, type + "_" + i);
+                Graph graph = generateGraph(type, seedInt, type + "_" + i, size);
+
                 int totalLength = 0;
 
                 assert graph != null;
@@ -102,7 +113,7 @@ public class RandomGraphGenerator {
                 System.out.println(type + " had: " + graph.getNodeCount() + " nodes" + " and total length of: " + totalLength);
 
                 Utility.setDistances(graph);
-                Utility.saveCompleteGraph(graph.getId(), "data/graphs/" + chapter + "/" + type + "/", graph);
+                Utility.saveCompleteGraph(graph.getId(), graphDir + "/" + type + "/", graph);
                 System.out.println("TOOK: " + (System.currentTimeMillis() - start) + "ms to create graph");
             }
         }
@@ -113,15 +124,16 @@ public class RandomGraphGenerator {
      * @param type
      * @param seedInt
      * @param name
+     * @param size
      * @return
      */
-    private static Graph generateGraph(GraphType type, int seedInt, String name) {
+    private static Graph generateGraph(GraphType type, int seedInt, String name, GraphSize size) {
 
         switch (type) {
             case GRID:
-                return createGridGraph(seedInt, name, 15);
+                return createGridGraph(seedInt, name, size);
             case INCOMPLETEGRID:
-                return createManualIncompleteGridGraph(seedInt, name, 16);
+                return createManualIncompleteGridGraph(seedInt, name, size);
             case LOBSTER:
                 return createLobsterGraph(seedInt, name, 255);
             case BARABASI:
@@ -147,10 +159,19 @@ public class RandomGraphGenerator {
      *
      * @param seedInt
      * @param name
-     * @param size
+     * @param graphSize
      * @return
      */
-    private static Graph createGridGraph(int seedInt, String name, int size) {
+    private static Graph createGridGraph(int seedInt, String name, GraphSize graphSize) {
+        int size = 0;
+        switch (graphSize) {
+            case EXTRA_SMALL: size = 8; break;
+            case SMALL: size = 12; break;
+            case MEDIUM: size = 15; break;
+            case LARGE: size = 17; break; // todo: do I even incude large and extra large?
+            case EXTRA_LARGE: size = 20; break;
+        }
+
         Graph graph = new SingleGraph(name);
         BaseGenerator gen = new GridGenerator();
         gen.setRandomSeed(seedInt);
@@ -172,9 +193,18 @@ public class RandomGraphGenerator {
      * @param size
      * @return
      */
-    private static Graph createManualIncompleteGridGraph(int seedInt, String name, int size) {
-        boolean hasOnlyOneCC = false;
+    private static Graph createManualIncompleteGridGraph(int seedInt, String name, GraphSize graphSize) {
+        int size = 0;
+        switch (graphSize) {
+            case EXTRA_SMALL: size = 10; break;
+            case SMALL: size = 13; break;
+            case MEDIUM: size = 16; break; // <- my normal size
+            case LARGE: size = 18; break; // todo: do I even incude large and extra large?
+            case EXTRA_LARGE: size = 21; break;
+        }
 
+        boolean hasOnlyOneCC = false;
+        
         Random rand = new Random();
         rand.setSeed(seedInt);
         Graph graph = null;
@@ -188,7 +218,7 @@ public class RandomGraphGenerator {
             for (int i = 0; i < size; i++) gen.nextEvents();
             gen.end();
 
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 40; i++) { // todo should the param 40 also change when I change sizes?
                 Node node = graph.removeNode(rand.nextInt(graph.getNodeCount()));
                 for (Edge e : graph.getEdgeSet())
                     if (e.getSourceNode() == node || e.getTargetNode() == node) graph.removeEdge(e);

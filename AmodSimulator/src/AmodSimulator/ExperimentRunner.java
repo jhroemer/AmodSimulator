@@ -38,7 +38,7 @@ public class ExperimentRunner {
         }
 
         List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
-
+        System.out.println(propertiesList);
         for (Properties props : propertiesList) {
             System.out.println("running experiment: " + props.getProperty("name"));
             runExperiment(props);
@@ -316,7 +316,7 @@ public class ExperimentRunner {
      * @param folderPath
      * @return
      */
-    private static List<Properties> getPropertiesFromFolder(String folderPath) {
+    public static List<Properties> getPropertiesFromFolder(String folderPath) {
         List<Properties> propertiesList = new ArrayList<>();
         try (Stream<Path> paths = Files.walk(Paths.get(folderPath))) {
             paths
