@@ -190,7 +190,7 @@ public class RandomGraphGenerator {
      *
      * @param seedInt
      * @param name
-     * @param size
+     * @param graphSize
      * @return
      */
     private static Graph createManualIncompleteGridGraph(int seedInt, String name, GraphSize graphSize) {
@@ -204,7 +204,7 @@ public class RandomGraphGenerator {
         }
 
         boolean hasOnlyOneCC = false;
-        
+
         Random rand = new Random();
         rand.setSeed(seedInt);
         Graph graph = null;
