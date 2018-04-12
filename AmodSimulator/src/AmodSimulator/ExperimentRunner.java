@@ -213,7 +213,6 @@ public class ExperimentRunner {
             stdDevMap.put(interval, Math.sqrt(variance));
         }
 
-        // FIXME: save as pure Map.toString()?
         props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", String.valueOf(stdDevMap));
     }
 

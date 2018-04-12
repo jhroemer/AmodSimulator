@@ -292,6 +292,59 @@ public class Utility {
      * @param graphTypes
      */
     public static void updatePlots(Properties props, String[] graphTypes) {
+        updateWaitingTimePlots(props, graphTypes);
+        updateAvgUnoccupiedPlot(props, graphTypes);
+    }
+
+    /**
+     *
+     * @param props
+     * @param graphTypes
+     */
+    private static void updateAvgUnoccupiedPlot(Properties props, String[] graphTypes) {
+        StringBuilder s = new StringBuilder();
+        s.append("\\begin{tikzpicture}\n" +
+                "\\begin{axis}\n" +
+                "[\n" +
+                "    axis lines*=left,\n" +
+                "    xbar,\n" +
+                "    %width=8cm,\n" +
+                "    %height=5cm,\n" +
+                "    xlabel={},\n" +
+                "    symbolic y coords={Grid, Incomplete Grid, Bananatree, Lobster},\n" +
+                "    ytick=data,\n" +
+                "    xmin=0,\n" +
+                "    xmax=0.5, \n" +
+                "    point meta={x*100},\n" +
+                "    nodes near coords={\\pgfmathprintnumber\\pgfplotspointmeta\\%},\n" +
+                "    every node near coord/.append style={xshift=-45pt,anchor=east,font=\\footnotesize}\n" +
+                "    ]\n" +
+                "  \\addplot[draw=blue, pattern=horizontal lines light blue, error bars/.cd, x dir=both, x explicit] \n" +
+                "coordinates\n" +
+                "     {");
+
+        for (String graphType : graphTypes) {
+            String name = "";
+            if (graphType.equals("BANANATREE")) name = "Bananatree";
+            else if (graphType.equals("GRID")) name = "Grid";
+            else if (graphType.equals("INCOMPLETEGRID")) name = "Incomplete Grid";
+            else if (graphType.equals("LOBSTER")) name = "Lobster";
+
+            double avgUnoccupied = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage"));
+            double stdDev = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_stdDevUnoccupied"));
+            s.append("(").append(avgUnoccupied).append(") +- (").append(stdDev).append(",").append(stdDev).append(")").append("\n");
+        }
+
+        s.append("};\n" +
+                "\\end{axis}\n" +
+                "\\end{tikzpicture}");
+
+        String chapter = props.getProperty("figuresFolder");
+        String path = chapter + "/AvgUnoccupied.tex";
+        writePlotToFile(props, path, s);
+    }
+
+    private static void updateWaitingTimePlots(Properties props, String[] graphTypes) {
         for (String graphType : graphTypes) {
 
             Map<Integer, Double> avgWaitingTimes = parseIntDoubleMap(props, "TOTAL_" + graphType + "_avgWaitingTimes");
@@ -327,23 +380,32 @@ public class Utility {
 
             String chapter = props.getProperty("figuresFolder");
             String path = chapter + "/" + graphType + "WaitingTimes.tex";
+            writePlotToFile(props, path, s);
+        }
+    }
 
-            BufferedWriter writer = null;
-            try {
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                writer.write(s.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    /**
+     *
+     * @param props
+     * @param path
+     * @param s
+     */
+    private static void writePlotToFile(Properties props, String path, StringBuilder s) {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writer.write(s.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

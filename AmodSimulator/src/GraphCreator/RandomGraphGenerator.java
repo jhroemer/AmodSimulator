@@ -22,62 +22,47 @@ public class RandomGraphGenerator {
     public static void main(String[] args) {
 
         generateExperimentGraphs("chapter5");
-//        Random rand = new Random();
-//        Graph graph = new SingleGraph("t");
-//        BaseGenerator gen = new IncompleteGridGenerator(false, 0.7f, 4, 3);
-//        gen.setRandomSeed(rand.nextInt(200));
-//
-//        gen.addSink(graph);
-//        gen.begin();
-//        for (int i = 0; i < 16; i++) gen.nextEvents();
-//        gen.end();
-//        System.out.println("Grid: " + graph.getNodeCount());
-//        System.out.println("grid density: " + Toolkit.density(graph));
-//        System.out.println("grid diameter " + Toolkit.diameter(graph));
-////        graph.display(false);
-//
-//
-//        Graph graphy = createManualIncompleteGridGraph(102, "test", 16);
-//        graphy.display(false);
-//        System.out.println("graphy: " + graphy.getNodeCount());
-//        System.out.println("graphy density: " + Toolkit.density(graphy));
-//        System.out.println("graphy diameter " + Toolkit.diameter(graphy));
 
         /*
-        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
-        Graph grid = createGridGraph(GRID, 10, "grid", 15);
-        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 16);
-        System.out.println("grid: " + grid.getNodeCount());
-        System.out.println("grid diameter " + Toolkit.diameter(grid));
-        System.out.println("grid density: " + Toolkit.density(grid));
-        System.out.println("grid distance: " + grid.getEdgeSet().size());
-        System.out.println("lob: " + lob.getNodeCount());
-        System.out.println("lob diameter " + Toolkit.diameter(lob));
-        System.out.println("lob density: " + Toolkit.density(lob));
-        System.out.println("lob distance: " + lob.getEdgeSet().size());
-        System.out.println("ban: " + ban.getNodeCount());
-        System.out.println("ban diameter " + Toolkit.diameter(ban, "layout.weight", false));
-        System.out.println("ban density: " + Toolkit.density(ban));
-        int total = 0;
-        for (Edge e : ban.getEdgeSet()) total += (int) e.getAttribute("layout.weight");
-        System.out.println("ban distance: " + total);
-        lob.display(true);
-        */
+        Graph lob = createLobsterGraph(10, "lobster", 120);
+        Graph grid = createGridGraph(10, "grid", 10);
+        Graph incomplete = createManualIncompleteGridGraph(10, "incomplete", 12);
+        Graph ban = createBananatreeGraph(10, "banana", 11, 11, 10);
 
-        /*
-        Graph lob = createLobsterGraph(LOBSTER, 10, "lobster", 255);
-        Graph grid = createGridGraph(GRID, 10, "grid", 9);
-//        grid.display(false);
-        Graph ban = createBananatreeGraph(BANANATREE, 10, "banana", 16);
         System.out.println("banana: " + ban.getNodeCount());
         System.out.println("ban diameter " + Toolkit.diameter(ban, "layout.weight", false));
         System.out.println("ban density: " + Toolkit.density(ban));
-        System.out.println("grid: " + grid.getNodeCount());
+        int banLength = 0;
+        for (Edge e : ban.getEdgeSet()) banLength += (int) e.getAttribute("layout.weight");
+        System.out.println("ban length: " + banLength);
+
+        System.out.println("grid diameter " + Toolkit.diameter(grid, "layout.weight", false));
+        System.out.println("grid density: " + Toolkit.density(grid));
+        int gridLength = 0;
+        for (Edge e : grid.getEdgeSet()) gridLength += (int) e.getAttribute("layout.weight");
+        System.out.println("grid length: " + gridLength);
+
+        System.out.println("incomplete: " + incomplete.getNodeCount());
+        System.out.println("incomplete diameter " + Toolkit.diameter(incomplete, "layout.weight", false));
+        System.out.println("incomplete density: " + Toolkit.density(incomplete));
+        int incompleteLength = 0;
+        for (Edge e : incomplete.getEdgeSet()) incompleteLength += (int) e.getAttribute("layout.weight");
+        System.out.println("incomplete length: " + incompleteLength);
+
         System.out.println("lob nodecount: " + lob.getNodeCount());
         System.out.println("lob diameter " + Toolkit.diameter(lob));
         System.out.println("lob density: " + Toolkit.density(lob));
         System.out.println("lob distance: " + lob.getEdgeSet().size());
+        int lobLength = 0;
+        for (Edge e : lob.getEdgeSet()) lobLength += (int) e.getAttribute("layout.weight");
+        System.out.println("lob length: " + lobLength);
+
+        grid.display(false);
         ban.display();
+        lob.display();
+        incomplete.display(false);
+        */
+
         /*
         saveGraphAsPicture(lob);
         saveGraphAsPicture(grid);
@@ -144,7 +129,7 @@ public class RandomGraphGenerator {
             case DOROGOVTSEV:
                 return createDorogovtsevGraph(type, seedInt, name, 256);
             case BANANATREE:
-                return createBananatreeGraph(seedInt, name, 16);
+                return createBananatreeGraph(seedInt, name, 16, 16, 15);
             case COUNTRYSIDE:
                 return createCountrysideGraph(type, seedInt, name);
         }
@@ -327,22 +312,23 @@ public class RandomGraphGenerator {
      *
      * @param seedInt
      * @param name
-     * @param size
+     * @param n
+     * @param k
      * @return
      */
-    private static Graph createBananatreeGraph(int seedInt, String name, int size) {
+    private static Graph createBananatreeGraph(int seedInt, String name, int n, int k, int lengthOfLongRoads) {
         Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new BananaTreeGenerator(16);
+        BaseGenerator gen = new BananaTreeGenerator(k);
         gen.setRandomSeed(seedInt);
 
         gen.addSink(graph);
         gen.begin();
-        for (int i = 0; i < size; i++) gen.nextEvents();
+        for (int i = 0; i < n; i++) gen.nextEvents();
         gen.end();
 
         for (Edge e : graph.getEdgeSet()) {
             if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
-                e.setAttribute("layout.weight", 15);
+                e.setAttribute("layout.weight", lengthOfLongRoads);
             }
             else e.setAttribute("layout.weight", 1);
         }
