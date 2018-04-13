@@ -24,6 +24,7 @@ public class RandomGraphGenerator {
     private static boolean DEBUG = false;
 
     public static void main(String[] args) {
+        // nodecounts: 81 169 256 324 441
         List<GraphSize> list = new ArrayList<>();
         list.add(EXTRA_SMALL);
         list.add(SMALL);
