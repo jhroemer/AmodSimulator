@@ -398,9 +398,10 @@ public class Utility {
             s.append("\\begin{tikzpicture}\n" +
                     "\\begin{axis}[\n" +
                     "    ybar,\n" +
-                    "    ylabel={\\# Passengers Waiting},\n" +
-                    "    xlabel={Minutes waiting},\n" +
+                    "    %ylabel={\\# Passengers Waiting},\n" +
+                    "    %xlabel={Minutes waiting},\n" +
                     "    xtick=data,\n" +
+                    "    xtick={0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160},\n" +
                     "    ymin=0,\n" +
                     "    xmin=0,\n" +
                     "    enlarge x limits=0.04,\n" +
