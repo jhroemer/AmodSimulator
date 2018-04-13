@@ -24,22 +24,23 @@ public class RandomGraphGenerator {
     private static boolean DEBUG = false;
 
     public static void main(String[] args) {
-        // nodecounts: 81 169 256 324 441
-        List<GraphSize> list = new ArrayList<>();
-        list.add(EXTRA_SMALL);
-        list.add(SMALL);
-        list.add(MEDIUM);
-        list.add(LARGE);
-        list.add(EXTRA_LARGE);
-        for (GraphSize s : list) {
-            Graph grid = generateGraph(GRID, 20, "test", s);
-            Graph lobster = generateGraph(LOBSTER, 20, "test", s);
-            Graph banana = generateGraph(BANANATREE, 20, "test", s);
-            System.out.println("GRAPHSIZE: " + s + ": grid size: " + grid.getNodeCount() + " lobster size: " + lobster.getNodeCount());
-            System.out.println("Banana size: " + banana.getNodeCount());
-
-        }
-        System.exit(1);
+//        // nodecounts:  81      169     256     361     529
+//        // vehicles:    31      66      100     141     206
+//        List<GraphSize> list = new ArrayList<>();
+//        list.add(EXTRA_SMALL);
+//        list.add(SMALL);
+//        list.add(MEDIUM);
+//        list.add(LARGE);
+//        list.add(EXTRA_LARGE);
+//        for (GraphSize s : list) {
+//            Graph grid = generateGraph(GRID, 20, "test", s);
+//            Graph lobster = generateGraph(LOBSTER, 20, "test", s);
+//            Graph banana = generateGraph(BANANATREE, 20, "test", s);
+//            System.out.println("GRAPHSIZE: " + s + ": grid size: " + grid.getNodeCount() + " lobster size: " + lobster.getNodeCount());
+//            System.out.println("Banana size: " + banana.getNodeCount());
+//
+//        }
+//        System.exit(1);
 
         List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
 
@@ -192,8 +193,8 @@ public class RandomGraphGenerator {
             case EXTRA_SMALL: size = 8; break;
             case SMALL: size = 12; break;
             case MEDIUM: size = 15; break; // <- normal size
-            case LARGE: size = 17; break; // todo: do I even incude large and extra large?
-            case EXTRA_LARGE: size = 20; break;
+            case LARGE: size = 18; break;
+            case EXTRA_LARGE: size = 22; break;
         }
 
         Graph graph = new SingleGraph(name);
@@ -272,8 +273,8 @@ public class RandomGraphGenerator {
             case EXTRA_SMALL: n = 9; k = 9; break;
             case SMALL: n = 13; k = 13; break;
             case MEDIUM: n = 16; k = 16; break; // <- my normal size
-            case LARGE: n = 18; k = 18; break; // todo: do I even incude large and extra large?
-            case EXTRA_LARGE: n = 21; k = 21; break;
+            case LARGE: n = 19; k = 19; break; // todo: do I even incude large and extra large?
+            case EXTRA_LARGE: n = 23; k = 23; break;
         }
 
         Graph graph = new SingleGraph(name);
@@ -308,8 +309,8 @@ public class RandomGraphGenerator {
             case EXTRA_SMALL: size = 80; break;
             case SMALL: size = 168; break;
             case MEDIUM: size = 255; break; // <- my normal size
-            case LARGE: size = 323; break; // todo: do I even incude large and extra large?
-            case EXTRA_LARGE: size = 440; break;
+            case LARGE: size = 360; break; // todo: do I even incude large and extra large?
+            case EXTRA_LARGE: size = 528; break;
         }
 
         Graph graph = new SingleGraph(name);
