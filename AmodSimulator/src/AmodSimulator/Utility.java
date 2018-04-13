@@ -294,6 +294,7 @@ public class Utility {
     public static void updatePlots(Properties props, String[] graphTypes) {
         updateWaitingTimePlots(props, graphTypes);
         updateAvgUnoccupiedPlot(props, graphTypes);
+        // TODO: add an updateWaitVariancePlot(props, graphTypes);
     }
 
     /**
@@ -349,6 +350,8 @@ public class Utility {
 
             Map<Integer, Double> avgWaitingTimes = parseIntDoubleMap(props, "TOTAL_" + graphType + "_avgWaitingTimes");
             Map<Integer, Double> stdDeviationMap = parseIntDoubleMap(props, "TOTAL_" + graphType + "_waitingTimeStdDev");
+
+            // normalize to percentage
 
             StringBuilder s = new StringBuilder();
             s.append("\\begin{tikzpicture}\n" +

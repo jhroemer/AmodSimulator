@@ -69,6 +69,8 @@ public class ExperimentRunner {
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
             for (int j = 0; j < 14; j++) totalWaitMap.put(j * vehicleSpeed, 0);
+            Map<Integer, Double> totalWaitPercentageMap = new TreeMap<>();
+            for (int j = 0; j < 14; j++) totalWaitPercentageMap.put(j * vehicleSpeed, 0.0);
 
             long start = System.currentTimeMillis();
             for (int i = 0; i < trials; i++) {
@@ -85,10 +87,10 @@ public class ExperimentRunner {
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
-                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, totalWaitMap);
+                collectTrialResults(simulator, props, graphType, numVehicles, vehicleSpeed, i, totalWaitMap, totalWaitPercentageMap);
             }
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
-            collectTotalResults(props, trials, totalWaitMap, graphType, vehicleSpeed);
+            collectTotalResults(props, trials, totalWaitMap, graphType, vehicleSpeed, totalWaitPercentageMap);
         }
 
         Utility.saveResultsAsFile(props);
@@ -97,15 +99,15 @@ public class ExperimentRunner {
 
     /**
      * Collects result for the i'th trial
-     *
-     * @param simulator
+     *  @param simulator
      * @param props
      * @param graphType
      * @param numVehicles
      * @param i
      * @param totalWaitMap
+     * @param totalWaitPercentageMap
      */
-    private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i, Map<Integer, Integer> totalWaitMap) {
+    private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i, Map<Integer, Integer> totalWaitMap, Map<Integer, Double> totalWaitPercentageMap) {
         double avgWait = (double) simulator.getWaitingTime() / (double) simulator.getAssignedRequests().size();
         double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed; // todo: use the Utility method instead?
 
@@ -119,11 +121,12 @@ public class ExperimentRunner {
         props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
         props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
 
-        Map<Integer, Integer> waitMap = new HashMap<>();
+        Map<Integer, Integer> waitMap = new TreeMap<>();
+
         for (int j = 0; j < 14; j++) waitMap.put(j * vehicleSpeed, 0); // zero-entries have to be included
 
         for (Request r : simulator.getAssignedRequests()) {
-            // waiting times for i´h trial
+            // waiting times for i´th trial
             if (waitMap.containsKey(r.getWaitTime() * vehicleSpeed)) {
                 int number = waitMap.get(r.getWaitTime() * vehicleSpeed) + 1;
                 waitMap.put(r.getWaitTime() * vehicleSpeed, number);
@@ -138,19 +141,31 @@ public class ExperimentRunner {
             else totalWaitMap.put(r.getWaitTime() * vehicleSpeed, 1);
         }
 
+        // find out the percentage-wise distribution of requests within the different intervals
+        Map<Integer, Double> waitPercentageMap = new TreeMap<>();
+        for (Integer interval : waitMap.keySet()) {
+            int numRequests = waitMap.getOrDefault(interval, 0);
+            double inPercentage = ((double) numRequests / (double) simulator.getAssignedRequests().size()) * 100;
+            waitPercentageMap.put(interval, inPercentage);
+
+            // adding to the totals
+            double total = totalWaitPercentageMap.getOrDefault(interval, 0.0);
+            totalWaitPercentageMap.put(interval, total += inPercentage);
+        }
+        props.setProperty(graphType + "_" + i + "_waitingTimesPercentage", String.valueOf(waitPercentageMap));
         props.setProperty(graphType + "_" + i + "_waitingTimes", String.valueOf(waitMap));
     }
 
     /**
      *
-     *
-     * @param props
+     *  @param props
      * @param trials
      * @param totalWaitMap
      * @param graphType
      * @param vehicleSpeed
+     * @param totalWaitPercentageMap
      */
-    private static void collectTotalResults(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType, int vehicleSpeed) {
+    private static void collectTotalResults(Properties props, int trials, Map<Integer, Integer> totalWaitMap, String graphType, int vehicleSpeed, Map<Integer, Double> totalWaitPercentageMap) {
 //        getTotalOfProp(props, graphType, "waitVariance");
         double totalUnoccupiedPercentage = getTotalOfProp(props, graphType, "unoccupiedPercentage");
 
@@ -163,11 +178,21 @@ public class ExperimentRunner {
         props.setProperty("TOTAL_" + graphType + "_avgWaitVariance", String.valueOf(getTotalOfProp(props, graphType, "waitVariance") / (double) trials));
 
         // get averages of waiting times
-        Map<Integer, Double> avgWaitingTimes = new HashMap<>();
+        Map<Integer, Double> avgWaitingTimes = new TreeMap<>();
         for (Integer num : totalWaitMap.keySet()) {
-            double avg = totalWaitMap.get(num) / (double) trials;
-            avgWaitingTimes.put(num, avg);
+            double avgOverTrials = totalWaitMap.get(num) / (double) trials;
+            avgWaitingTimes.put(num, avgOverTrials);
         }
+
+        // fixme: normalizing the added total values to percentage
+        for (Integer interval : totalWaitPercentageMap.keySet()) {
+            double avgOverTrials = totalWaitPercentageMap.get(interval) / (double) trials;
+            totalWaitPercentageMap.put(interval, avgOverTrials);
+        }
+        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimesPercentage", String.valueOf(totalWaitPercentageMap));
+
+
+
 
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
         double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
@@ -176,7 +201,8 @@ public class ExperimentRunner {
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(avgWaitingTimes));
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
 
-        calcWaitingTimesStdDev(props, trials, graphType, vehicleSpeed);
+        // todo: I need a calcWaitingTimesStdDev for the percentage thingy
+        calcWaitingTimesStdDev(props, trials, graphType);
     }
 
     /**
@@ -184,9 +210,8 @@ public class ExperimentRunner {
      * @param props
      * @param trials
      * @param graphType
-     * @param vehicleSpeed
      */
-    private static void calcWaitingTimesStdDev(Properties props, int trials, String graphType, int vehicleSpeed) {
+    private static void calcWaitingTimesStdDev(Properties props, int trials, String graphType) {
         // get the map w. the averages
         String propsKey = "TOTAL_" + graphType + "_avgWaitingTimes";
         Map<Integer, Double> avgWaitingTimes = Utility.parseIntDoubleMap(props, propsKey);
