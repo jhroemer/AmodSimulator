@@ -293,6 +293,7 @@ public class Utility {
      */
     public static void updatePlots(Properties props, String[] graphTypes) {
         updateWaitingTimePlots(props, graphTypes);
+        updateWaitingTimePercentagePlots(props, graphTypes);
         updateAvgUnoccupiedPlot(props, graphTypes);
         // TODO: add an updateWaitVariancePlot(props, graphTypes);
     }
@@ -387,6 +388,45 @@ public class Utility {
         }
     }
 
+    private static void updateWaitingTimePercentagePlots(Properties props, String[] graphTypes) {
+        for (String graphType : graphTypes) {
+
+            Map<Integer, Double> avgWaitingTimes = parseIntDoubleMap(props, "TOTAL_" + graphType + "_avgWaitingTimesPercentage");
+            Map<Integer, Double> stdDeviationMap = parseIntDoubleMap(props, "TOTAL_" + graphType + "_waitingTimeStdDevPercentage");
+
+            StringBuilder s = new StringBuilder();
+            s.append("\\begin{tikzpicture}\n" +
+                    "\\begin{axis}[\n" +
+                    "    ybar,\n" +
+                    "    ylabel={\\# Passengers Waiting},\n" +
+                    "    xlabel={Minutes waiting},\n" +
+                    "    xtick=data,\n" +
+                    "    ymin=0,\n" +
+                    "    xmin=0,\n" +
+                    "    enlarge x limits=0.04,\n" +
+                    "    bar width=7pt,\n" +
+                    "    %width=0.5\\textwidth,\n" +
+                    "    scale only axis,\n" +
+                    "    ]\n" +
+                    "\\addplot[draw=blue, pattern=horizontal lines light blue, error bars/.cd, y dir=both, y explicit] coordinates {");
+
+
+            for (Integer interval : avgWaitingTimes.keySet()) {
+                // The avg. waiting time for interval, e.g: (5, 2835.6)
+                s.append("(").append(interval).append(",").append(avgWaitingTimes.get(interval)).append(")");
+                // The std. dev. for that interval, e.g: +- (0.3515,0.3515)
+                s.append(" +- (").append(stdDeviationMap.get(interval)).append(",").append(stdDeviationMap.get(interval)).append(") ");
+            }
+            s.append("};\n" +
+                    "\\end{axis}\n" +
+                    "\\end{tikzpicture}");
+
+            String chapter = props.getProperty("figuresFolder");
+            String path = chapter + "/" + graphType + "WaitingTimesPercentage.tex";
+            writePlotToFile(props, path, s);
+        }
+    }
+
     /**
      *
      * @param props
@@ -422,7 +462,7 @@ public class Utility {
 //        System.exit(1);
 
 
-        Properties props = loadProps("data/experimentResults/chapter4.properties");
+        Properties props = loadProps("data/experimentResults/chapter4-1.properties");
 //        Map<Integer, Integer> map = parseIntIntMap(props, "BANANATREE", 2);
 //        System.out.println(map);
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
