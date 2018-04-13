@@ -1,6 +1,7 @@
 package GraphCreator;
 
 import org.graphstream.algorithm.ConnectedComponents;
+import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.*;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -15,6 +16,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import static AmodSimulator.ExperimentRunner.getPropertiesFromFolder;
+import static GraphCreator.GraphSize.*;
 import static GraphCreator.GraphType.*;
 
 public class RandomGraphGenerator {
@@ -22,6 +24,21 @@ public class RandomGraphGenerator {
     private static boolean DEBUG = false;
 
     public static void main(String[] args) {
+        List<GraphSize> list = new ArrayList<>();
+        list.add(EXTRA_SMALL);
+        list.add(SMALL);
+        list.add(MEDIUM);
+        list.add(LARGE);
+        list.add(EXTRA_LARGE);
+        for (GraphSize s : list) {
+            Graph grid = generateGraph(GRID, 20, "test", s);
+            Graph lobster = generateGraph(LOBSTER, 20, "test", s);
+            Graph banana = generateGraph(BANANATREE, 20, "test", s);
+            System.out.println("GRAPHSIZE: " + s + ": grid size: " + grid.getNodeCount() + " lobster size: " + lobster.getNodeCount());
+            System.out.println("Banana size: " + banana.getNodeCount());
+
+        }
+        System.exit(1);
 
         List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
 
@@ -86,13 +103,19 @@ public class RandomGraphGenerator {
      */
     private static void generateExperimentGraphs(String graphDir, GraphSize size) {
         List<GraphType> types = new ArrayList<>();
-        types.add(GRID);
-        types.add(INCOMPLETEGRID);
-        types.add(LOBSTER);
-        // types.add(BARABASI);
-        // types.add(DOROGOVTSEV);
-        // types.add(COUNTRYSIDE);
-        types.add(BANANATREE);
+
+        if (size != MEDIUM) { // for section 4.2, where two graphs are tested in different sizes
+            types.add(LOBSTER);
+            types.add(GRID);
+        } else {
+            types.add(GRID);
+            types.add(INCOMPLETEGRID);
+            types.add(LOBSTER);
+            // types.add(BARABASI);
+            // types.add(DOROGOVTSEV);
+            // types.add(COUNTRYSIDE);
+            types.add(BANANATREE);
+        }
 
         for (int i = 1; i < 6; i++) {
             String seedString = i + "0";
@@ -110,7 +133,7 @@ public class RandomGraphGenerator {
 
                 assert graph != null;
                 for (Edge e : graph.getEdgeSet()) totalLength += (int) e.getAttribute("layout.weight");
-                System.out.println(type + " had: " + graph.getNodeCount() + " nodes" + " and total length of: " + totalLength);
+                System.out.println(type + " had: " + graph.getNodeCount() + " nodes" + " and total length of: " + totalLength + " and a diameter of " + Toolkit.diameter(graph));
 
                 Utility.setDistances(graph);
                 Utility.saveCompleteGraph(graph.getId(), graphDir + "/" + type + "/", graph);
@@ -135,13 +158,13 @@ public class RandomGraphGenerator {
             case INCOMPLETEGRID:
                 return createManualIncompleteGridGraph(seedInt, name, size);
             case LOBSTER:
-                return createLobsterGraph(seedInt, name, 255);
+                return createLobsterGraph(seedInt, name, size);
             case BARABASI:
                 return createBarabasiGraph(type, seedInt, name, 256);
             case DOROGOVTSEV:
                 return createDorogovtsevGraph(type, seedInt, name, 256);
             case BANANATREE:
-                return createBananatreeGraph(seedInt, name, 16, 16, 15);
+                return createBananatreeGraph(seedInt, name, size, 15);
             case COUNTRYSIDE:
                 return createCountrysideGraph(type, seedInt, name);
         }
@@ -167,7 +190,7 @@ public class RandomGraphGenerator {
         switch (graphSize) {
             case EXTRA_SMALL: size = 8; break;
             case SMALL: size = 12; break;
-            case MEDIUM: size = 15; break;
+            case MEDIUM: size = 15; break; // <- normal size
             case LARGE: size = 17; break; // todo: do I even incude large and extra large?
             case EXTRA_LARGE: size = 20; break;
         }
@@ -235,6 +258,75 @@ public class RandomGraphGenerator {
     }
 
     /**
+     *
+     * @param seedInt
+     * @param name
+     * @param graphSize
+     * @param lengthOfLongRoads
+     * @return
+     */
+    private static Graph createBananatreeGraph(int seedInt, String name, GraphSize graphSize, int lengthOfLongRoads) {
+        int n = 0; int k = 0;
+        switch (graphSize) {
+            case EXTRA_SMALL: n = 9; k = 9; break;
+            case SMALL: n = 13; k = 13; break;
+            case MEDIUM: n = 16; k = 16; break; // <- my normal size
+            case LARGE: n = 18; k = 18; break; // todo: do I even incude large and extra large?
+            case EXTRA_LARGE: n = 21; k = 21; break;
+        }
+
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new BananaTreeGenerator(k);
+        gen.setRandomSeed(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < n; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) {
+            if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
+                e.setAttribute("layout.weight", lengthOfLongRoads);
+            }
+            else e.setAttribute("layout.weight", 1);
+        }
+
+        return graph;
+    }
+
+    /**
+     *
+     * @param seedInt
+     * @param name
+     * @param graphSize
+     * @return
+     */
+    private static Graph createLobsterGraph(int seedInt, String name, GraphSize graphSize) {
+        int size = 0;
+        switch (graphSize) {
+            case EXTRA_SMALL: size = 80; break;
+            case SMALL: size = 168; break;
+            case MEDIUM: size = 255; break; // <- my normal size
+            case LARGE: size = 323; break; // todo: do I even incude large and extra large?
+            case EXTRA_LARGE: size = 440; break;
+        }
+
+        Graph graph = new SingleGraph(name);
+        BaseGenerator gen = new LobsterGenerator(2, 3);
+        gen.setRandomSeed(seedInt);
+
+        gen.addSink(graph);
+        gen.begin();
+        for (int i = 0; i < size; i++) gen.nextEvents();
+        gen.end();
+
+        for (Edge e : graph.getEdgeSet()) {
+            e.setAttribute("layout.weight", 1);
+        }
+        return graph;
+    }
+
+    /**
      * Creates an incomplete grid graph
      *
      * @param seedInt
@@ -253,30 +345,6 @@ public class RandomGraphGenerator {
         gen.end();
 
         for (Edge e : graph.getEdgeSet()) e.setAttribute("layout.weight", 1);
-
-        return graph;
-    }
-
-    /**
-     *
-     * @param seedInt
-     * @param name
-     * @param size
-     * @return
-     */
-    private static Graph createLobsterGraph(int seedInt, String name, int size) {
-        Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new LobsterGenerator(2, 3);
-        gen.setRandomSeed(seedInt);
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int i = 0; i < size; i++) gen.nextEvents();
-        gen.end();
-
-        for (Edge e : graph.getEdgeSet()) {
-            e.setAttribute("layout.weight", 1);
-        }
 
         return graph;
     }
@@ -334,34 +402,6 @@ public class RandomGraphGenerator {
 //        for (Edge e : graph.getEdgeSet()) {
 //            e.setAttribute("layout.weight", rand.nextInt((upperBound-lowerBound) + lowerBound));
 //        }
-
-        return graph;
-    }
-
-    /**
-     *
-     * @param seedInt
-     * @param name
-     * @param n
-     * @param k
-     * @return
-     */
-    private static Graph createBananatreeGraph(int seedInt, String name, int n, int k, int lengthOfLongRoads) {
-        Graph graph = new SingleGraph(name);
-        BaseGenerator gen = new BananaTreeGenerator(k);
-        gen.setRandomSeed(seedInt);
-
-        gen.addSink(graph);
-        gen.begin();
-        for (int i = 0; i < n; i++) gen.nextEvents();
-        gen.end();
-
-        for (Edge e : graph.getEdgeSet()) {
-            if (e.getSourceNode().getId().equals("root") || e.getTargetNode().getId().equals("root")) {
-                e.setAttribute("layout.weight", lengthOfLongRoads);
-            }
-            else e.setAttribute("layout.weight", 1);
-        }
 
         return graph;
     }
