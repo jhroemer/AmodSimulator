@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static AmodSimulator.Utility.parseIntDoubleMap;
 import static AmodSimulator.Utility.parseIntIntMap;
 
 /**
@@ -192,8 +193,6 @@ public class ExperimentRunner {
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimesPercentage", String.valueOf(totalWaitPercentageMap));
 
 
-
-
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
         double unoccupiedStdDev = Math.sqrt(unOccupiedVariance);
 
@@ -202,28 +201,31 @@ public class ExperimentRunner {
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
 
         // todo: I need a calcWaitingTimesStdDev for the percentage thingy
-        calcWaitingTimesStdDev(props, trials, graphType);
+        calcWaitingTimesStdDev(props, trials, graphType, totalWaitPercentageMap);
     }
 
     /**
-     *
-     * @param props
+     *  @param props
      * @param trials
      * @param graphType
+     * @param totalWaitPercentageMap
      */
-    private static void calcWaitingTimesStdDev(Properties props, int trials, String graphType) {
-        // get the map w. the averages
+    private static void calcWaitingTimesStdDev(Properties props, int trials, String graphType, Map<Integer, Double> totalWaitPercentageMap) {
+        // get the map w. the averages FIXME: shouldn't this also just be given as param from outside the method?
         String propsKey = "TOTAL_" + graphType + "_avgWaitingTimes";
         Map<Integer, Double> avgWaitingTimes = Utility.parseIntDoubleMap(props, propsKey);
 
         // get the maps w. the trial results
         List<Map<Integer, Integer>> mapList = new ArrayList<>();
+        List<Map<Integer, Double>> mapListPercentage = new ArrayList<>();
         for (int i = 0; i < trials; i++) {
             mapList.add(parseIntIntMap(props, graphType + "_" + i + "_waitingTimes"));
+            mapListPercentage.add(parseIntDoubleMap(props, graphType + "_" + i + "_waitingTimesPercentage"));
         }
 
         // map to hold std. dev. values per time interval
         Map<Integer, Double> stdDevMap = new TreeMap<>();
+        Map<Integer, Double> stdDevMapPercentage = new TreeMap<>();
 
         // for each waiting interval, calc. std. dev.
         for (Integer interval : avgWaitingTimes.keySet()) {
@@ -238,7 +240,19 @@ public class ExperimentRunner {
             stdDevMap.put(interval, Math.sqrt(variance));
         }
 
+        // fixme: for the new percentage-thingy
+        for (Integer interval : totalWaitPercentageMap.keySet()) {
+            double variance = 0.0;
+            for (Map<Integer, Double> map : mapListPercentage) {
+                double difference = (double) map.getOrDefault(interval, 0.0) - totalWaitPercentageMap.get(interval);
+                variance += difference * difference;
+            }
+            variance = variance / (double) trials;
+            stdDevMapPercentage.put(interval, Math.sqrt(variance));
+        }
+
         props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", String.valueOf(stdDevMap));
+        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDevPercentage", String.valueOf(stdDevMapPercentage));
     }
 
     /**
