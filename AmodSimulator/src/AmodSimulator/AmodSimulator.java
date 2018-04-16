@@ -503,20 +503,23 @@ public class AmodSimulator {
      *
      *
      * @param avgWait
+     * @param intervalSizeMinutes
      * @return
      */
-    public double getWaitVariance(double avgWait) {
+    public double getWaitVariance(double avgWait, int intervalSizeMinutes) {
         double waitVariance = 0.0;
         for (Request r : assignedRequests) {
-            double difference = ((double) r.getWaitTime() / 5) - avgWait;
-            // System.out.println("Wait time: " + r.getWaitTime() + " is different from mean: " + avgWait + " by:" + difference);
+            // multiply by the interval-size to get values in minutes instead of ticks
+            double waitTimeInMinutes = (double) r.getWaitTime() * (double) intervalSizeMinutes;
+            double difference = waitTimeInMinutes - avgWait;
+            System.out.println("Wait time: " + waitTimeInMinutes + " is different from mean: " + avgWait + " by:" + difference);
             waitVariance += difference * difference;
         }
 
-        // System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
+        System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
 
-        waitVariance = waitVariance / ((double) assignedRequests.size());
-        // System.out.println("return wait variance of: " + waitVariance + " ticks");
+        waitVariance = waitVariance / (double) assignedRequests.size();
+        System.out.println("return wait variance of: " + waitVariance + " minutes");
         return waitVariance;
     }
 }

@@ -310,11 +310,11 @@ public class Utility {
                 "    ybar,\n" +
                 "    ylabel={Minutes},\n" +
                 "    enlargelimits=0.15,\n" +
-                "    symbolic x coords={grid,incomplete,banana,lobster},\n" +
+                "    symbolic x coords={Grid,Incomplete Grid,Bananatree,Lobster},\n" +
                 "    xtick=data,\n" +
                 "    x tick label style={rotate=45,anchor=east},\n" +
-                "    nodes near coords,\n" +
-                "    nodes near coords align={vertical}\n" +
+                "    %nodes near coords,\n" +
+                "    %nodes near coords align={vertical}\n" +
                 "    ]\n" +
                 "\\addplot [fill=blue] coordinates {");
 
@@ -366,7 +366,7 @@ public class Utility {
 
             double avgUnoccupied = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage"));
             double stdDev = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_stdDevUnoccupied"));
-            s.append("(").append(avgUnoccupied).append(") +- (").append(stdDev).append(",").append(stdDev).append(")").append("\n");
+            s.append("(").append(avgUnoccupied).append(",").append(name).append(") +- (").append(stdDev).append(",").append(stdDev).append(")").append("\n");
         }
 
         s.append("};\n" +
@@ -374,7 +374,7 @@ public class Utility {
                 "\\end{tikzpicture}");
 
         String chapter = props.getProperty("figuresFolder");
-        String path = chapter + "/AvgUnoccupied.tex";
+        String path = chapter + "/AvgUnoccupied.tex"; // todo: change name to percentage?
         writePlotToFile(props, path, s);
     }
 
@@ -426,10 +426,13 @@ public class Utility {
             Map<Integer, Double> avgWaitingTimes = parseIntDoubleMap(props, "TOTAL_" + graphType + "_avgWaitingTimesPercentage");
             Map<Integer, Double> stdDeviationMap = parseIntDoubleMap(props, "TOTAL_" + graphType + "_waitingTimeStdDevPercentage");
 
+            // add: ﻿xtick={0,10,20,30,40,50,60,70}, if there are too many values
+
             StringBuilder s = new StringBuilder();
             s.append("\\begin{tikzpicture}\n" +
                     "\\begin{axis}[\n" +
                     "    ybar,\n" +
+                    "    yticklabel={\\pgfmathparse{\\tick}\\pgfmathprintnumber{\\pgfmathresult}\\%}," +
                     "    %ylabel={\\# Passengers Waiting},\n" +
                     "    %xlabel={Minutes waiting},\n" +
                     "    xtick=data,\n" +
