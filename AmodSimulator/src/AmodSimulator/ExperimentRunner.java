@@ -95,7 +95,7 @@ public class ExperimentRunner {
         }
 
         Utility.saveResultsAsFile(props);
-        Utility.updatePlots(props, graphTypes); // todo: add a path to the properties file
+        Utility.updatePlots(props, graphTypes);
     }
 
     /**
@@ -109,7 +109,8 @@ public class ExperimentRunner {
      * @param totalWaitPercentageMap
      */
     private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int vehicleSpeed, int i, Map<Integer, Integer> totalWaitMap, Map<Integer, Double> totalWaitPercentageMap) {
-        double avgWait = (double) simulator.getWaitingTime() / (double) simulator.getAssignedRequests().size();
+        // waiting time returns no. of 5 min-interval ticks - divide by five to get minutes
+        double avgWait = ((double) simulator.getWaitingTime() / 5) / (double) simulator.getAssignedRequests().size();
         double waitVariance = simulator.getWaitVariance(avgWait) * vehicleSpeed; // todo: use the Utility method instead?
 
         props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
@@ -200,7 +201,6 @@ public class ExperimentRunner {
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimes", String.valueOf(avgWaitingTimes));
         props.setProperty("TOTAL_" + graphType + "_stdDevUnoccupied", String.valueOf(unoccupiedStdDev));
 
-        // todo: I need a calcWaitingTimesStdDev for the percentage thingy
         calcWaitingTimesStdDev(props, trials, graphType, totalWaitPercentageMap);
     }
 

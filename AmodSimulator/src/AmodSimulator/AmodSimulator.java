@@ -501,13 +501,14 @@ public class AmodSimulator {
     /**
      * Calculates the variance in waiting time
      *
+     *
      * @param avgWait
      * @return
      */
     public double getWaitVariance(double avgWait) {
         double waitVariance = 0.0;
         for (Request r : assignedRequests) {
-            double difference = ((double) r.getWaitTime()) - avgWait;
+            double difference = ((double) r.getWaitTime() / 5) - avgWait;
             // System.out.println("Wait time: " + r.getWaitTime() + " is different from mean: " + avgWait + " by:" + difference);
             waitVariance += difference * difference;
         }

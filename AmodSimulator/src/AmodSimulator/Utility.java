@@ -295,7 +295,43 @@ public class Utility {
         updateWaitingTimePlots(props, graphTypes);
         updateWaitingTimePercentagePlots(props, graphTypes);
         updateAvgUnoccupiedPlot(props, graphTypes);
-        // TODO: add an updateWaitVariancePlot(props, graphTypes);
+        updateWaitVariancePlot(props, graphTypes);
+    }
+
+    /**
+     *
+     * @param props
+     * @param graphTypes
+     */
+    private static void updateWaitVariancePlot(Properties props, String[] graphTypes) {
+        StringBuilder s = new StringBuilder();
+        s.append("\\begin{tikzpicture}\n" +
+                "\\begin{axis}[\n" +
+                "    ybar,\n" +
+                "    ylabel={Minutes},\n" +
+                "    enlargelimits=0.15,\n" +
+                "    symbolic x coords={grid,incomplete,banana,lobster},\n" +
+                "    xtick=data,\n" +
+                "    x tick label style={rotate=45,anchor=east},\n" +
+                "    nodes near coords,\n" +
+                "    nodes near coords align={vertical}\n" +
+                "    ]\n" +
+                "\\addplot [fill=blue] coordinates {");
+
+        for (String graphType : graphTypes) {
+            String name = findGraphName(graphType);
+
+            double variance = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_avgWaitVariance"));
+            s.append("(").append(name).append(",").append(variance).append(") ");
+        }
+
+        s.append("};\n" +
+                "\\end{axis}\n" +
+                "\\end{tikzpicture}");
+
+        String chapter = props.getProperty("figuresFolder");
+        String path = chapter + "/" + "AvgWaitVariance.tex";
+        writePlotToFile(props, path, s);
     }
 
     /**
@@ -326,11 +362,7 @@ public class Utility {
                 "     {");
 
         for (String graphType : graphTypes) {
-            String name = "";
-            if (graphType.equals("BANANATREE")) name = "Bananatree";
-            else if (graphType.equals("GRID")) name = "Grid";
-            else if (graphType.equals("INCOMPLETEGRID")) name = "Incomplete Grid";
-            else if (graphType.equals("LOBSTER")) name = "Lobster";
+            String name = findGraphName(graphType);
 
             double avgUnoccupied = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage"));
             double stdDev = Double.valueOf(props.getProperty("TOTAL_" + graphType + "_stdDevUnoccupied"));
@@ -452,6 +484,21 @@ public class Utility {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param graphType
+     * @return
+     */
+    private static String findGraphName(String graphType) {
+        String name = "";
+        if (graphType.equals("BANANATREE")) name = "Bananatree";
+        else if (graphType.equals("GRID")) name = "Grid";
+        else if (graphType.equals("INCOMPLETEGRID")) name = "Incomplete Grid";
+        else if (graphType.equals("LOBSTER")) name = "Lobster";
+        return name;
+    }
+
 
     public static void main(String[] args) {
 //        Map<Integer, Double> map = new TreeMap<>();
