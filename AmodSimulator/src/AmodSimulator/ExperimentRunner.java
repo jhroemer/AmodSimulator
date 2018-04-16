@@ -113,7 +113,7 @@ public class ExperimentRunner {
     private static void collectTrialResults(AmodSimulator simulator, Properties props, String graphType, int numVehicles, int i, Map<Integer, Integer> totalWaitMap, Map<Integer, Double> totalWaitPercentageMap, int intervalSizeMinutes) {
         // waiting time returns no. of 5 min-interval ticks - divide by five to get minutes
         double avgWait = ((double) simulator.getWaitingTime() * intervalSizeMinutes) / (double) simulator.getAssignedRequests().size();
-        double waitVariance = simulator.getWaitVariance(avgWait, intervalSizeMinutes);
+        double waitVariance = Math.sqrt(simulator.getWaitVariance(avgWait, intervalSizeMinutes)); // FIXME: is actually std. dev. now - but otherwise the numbers don't make sense!
 
         props.setProperty(graphType + "_" + i + "_unoccupied", String.valueOf(simulator.getUnoccupiedKmDriven()));
         props.setProperty(graphType + "_" + i + "_avgUnoccupied", String.valueOf((double) simulator.getUnoccupiedKmDriven() / (double) numVehicles));
@@ -131,6 +131,13 @@ public class ExperimentRunner {
         for (int j = 0; j < 14; j++) waitMap.put(j * intervalSizeMinutes, 0);
 
         for (Request r : simulator.getAssignedRequests()) {
+            // FIXME:
+            if (r.getWaitTime() > 40) {
+                System.out.println("something weird happened, a request waited for more than 40 ticks, which is more than three hours");
+                System.out.println("wait time in ticks was: " + r.getWaitTime());
+                // is this because the set of vehicles available for assignment are all very far away, and therefore the high waiting time ends up being allowed?
+            }
+
             // waiting times for i´th trial
             if (waitMap.containsKey(r.getWaitTime() * intervalSizeMinutes)) {
                 int number = waitMap.get(r.getWaitTime() * intervalSizeMinutes) + 1;

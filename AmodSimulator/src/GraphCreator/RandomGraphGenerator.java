@@ -107,8 +107,8 @@ public class RandomGraphGenerator {
         List<GraphType> types = new ArrayList<>();
 
         if (size != MEDIUM) { // for section 4.2, where two graphs are tested in different sizes
-//            types.add(LOBSTER);
-//            types.add(GRID);
+            types.add(LOBSTER);
+            types.add(GRID);
             types.add(BANANATREE);
         } else {
             types.add(GRID);

@@ -385,6 +385,7 @@ public class Utility {
             Map<Integer, Double> stdDeviationMap = parseIntDoubleMap(props, "TOTAL_" + graphType + "_waitingTimeStdDev");
 
             // normalize to percentage
+            // FIXME: for extension 1 there are (very few) requests waiting for up to 800minutes - this completely ruins the diagram
 
             StringBuilder s = new StringBuilder();
             s.append("\\begin{tikzpicture}\n" +
@@ -392,7 +393,7 @@ public class Utility {
                     "    ybar,\n" +
                     "    ylabel={\\# Passengers Waiting},\n" +
                     "    xlabel={Minutes waiting},\n" +
-                    "    symbolic x coords={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80},\n" +
+                    "    %symbolic x coords={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90},\n" +
                     "    xtick=data,\n" +
                     "    ymin=0,\n" +
                     "    xmin=0,\n" +

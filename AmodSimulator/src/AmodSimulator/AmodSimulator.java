@@ -512,14 +512,17 @@ public class AmodSimulator {
             // multiply by the interval-size to get values in minutes instead of ticks
             double waitTimeInMinutes = (double) r.getWaitTime() * (double) intervalSizeMinutes;
             double difference = waitTimeInMinutes - avgWait;
-            System.out.println("Wait time: " + waitTimeInMinutes + " is different from mean: " + avgWait + " by:" + difference);
-            waitVariance += difference * difference;
+            // System.out.println("Wait time: " + waitTimeInMinutes + " is different from mean: " + avgWait + " by:" + difference);
+            double squaredDifference = difference * difference;
+            // System.out.println("squared difference is: " + squaredDifference);
+            waitVariance += squaredDifference;
         }
 
-        System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
+        // System.out.println("IM AVERAGING : " + waitVariance + " OVER " + assignedRequests.size() + " NUMBER OF REQUESTS");
 
         waitVariance = waitVariance / (double) assignedRequests.size();
-        System.out.println("return wait variance of: " + waitVariance + " minutes");
+        // System.out.println("return wait variance of: " + waitVariance + " minutes");
+        // System.out.println("If I square it, then the value is: " + Math.sqrt(waitVariance));
         return waitVariance;
     }
 }
