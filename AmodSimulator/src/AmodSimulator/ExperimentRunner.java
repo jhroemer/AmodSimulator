@@ -62,12 +62,14 @@ public class ExperimentRunner {
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
 
         // TODO: perform warm-up to figure out correct vehicle-request relationship?
+        // numVehicles = findCorrectNumberByWarmup(props, graphTypes, numVehicles, extensionType, lambda, timeSteps);
 
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
         for (String graphType : graphTypes) {
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
             System.out.println();
             System.out.println("starting trials on graph type: " + graphType);
+//            if (!graphType.equals("GRID")) continue;
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
             for (int j = 0; j < 14; j++) totalWaitMap.put(j * intervalSizeMinutes, 0);
@@ -131,7 +133,9 @@ public class ExperimentRunner {
         props.setProperty(graphType + "_" + i + "_wait", String.valueOf(simulator.getWaitingTime()));
         props.setProperty(graphType + "_" + i + "_avgWait", String.valueOf(avgWait));
         props.setProperty(graphType + "_" + i + "_avgIdleVehicles", String.valueOf(simulator.getAverageIdleVehicles())); // FIXME : will not work in extensions
-        props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getUnservedRequests().size()));
+        props.setProperty(graphType + "_" + i + "_assignedRequests", String.valueOf(simulator.getAssignedRequests().size()));
+        props.setProperty(graphType + "_" + i + "_unservedRequests", String.valueOf(simulator.getCancelledRequests().size()));
+        props.setProperty(graphType + "_" + i + "_requestsTotal", String.valueOf(simulator.getAssignedRequests().size() + simulator.getCancelledRequests().size()));
         props.setProperty(graphType + "_" + i + "_waitVariance", String.valueOf(waitVariance));
         props.setProperty(graphType + "_" + i + "_waitStdDev", String.valueOf(Math.sqrt(waitVariance)));
 
@@ -191,6 +195,10 @@ public class ExperimentRunner {
 //        getTotalOfProp(props, graphType, "waitVariance");
         double totalUnoccupiedPercentage = getTotalOfProp(props, graphType, "unoccupiedPercentage");
 
+        props.setProperty("TOTAL_" + graphType + "_unservedRequestsAvg", String.valueOf(getTotalOfProp(props, graphType, "unservedRequests") / (double) trials));
+        props.setProperty("TOTAL_" + graphType + "_assignedRequestsAvg", String.valueOf(getTotalOfProp(props, graphType, "assignedRequests") / (double) trials));
+        props.setProperty("TOTAL_" + graphType + "_requestsTotalAvg", String.valueOf(getTotalOfProp(props, graphType, "requestsTotal") / (double) trials));
+
         props.setProperty("TOTAL_" + graphType + "_unoccupied", String.valueOf(getTotalOfProp(props, graphType, "unoccupied")));
         props.setProperty("TOTAL_" + graphType + "_avgUnoccupied", String.valueOf(getTotalOfProp(props, graphType, "avgUnoccupied") / (double) trials));
         props.setProperty("TOTAL_" + graphType + "_avgUnoccupiedPercentage", String.valueOf(totalUnoccupiedPercentage / (double) trials));
@@ -211,7 +219,7 @@ public class ExperimentRunner {
         Map<Integer, Double> avgWaitingTimesPercentage = new TreeMap<>();
         for (Integer num : avgWaitingTimes.keySet()) {
             double percentage = avgWaitingTimes.get(num) / total;
-            avgWaitingTimesPercentage.put(num, percentage);
+            avgWaitingTimesPercentage.put(num, percentage * 100);
         }
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimesPercentageSecondTry", String.valueOf(avgWaitingTimesPercentage));
         // TODO: still needs standard deviation
@@ -289,6 +297,7 @@ public class ExperimentRunner {
         }
 
         props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDev", String.valueOf(stdDevMap));
+        props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDevSecondTry", String.valueOf(stdDevMapPercentageSecondTry));
         props.setProperty("TOTAL_" + graphType + "_waitingTimeStdDevPercentage", String.valueOf(stdDevMapPercentage));
     }
 
@@ -425,6 +434,55 @@ public class ExperimentRunner {
         }
 
         return graph;
+    }
+
+    /**
+     *
+     * @param props
+     * @param graphTypes
+     * @param numVehicles
+     * @param extensionType
+     * @param lambda
+     * @param timeSteps
+     * @return
+     */
+    private static int findCorrectNumberByWarmup(Properties props, String[] graphTypes, int numVehicles, ExtensionType extensionType, double lambda, int timeSteps) {
+        int numVehiclesUpdated = numVehicles;
+        List<String> finishedGraphTypes = new ArrayList<>();
+
+        outer:
+        while (true) {
+            for (String graphType : graphTypes) {
+                if (finishedGraphTypes.contains(graphType)) continue;
+
+                List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
+                System.out.println();
+                System.out.println("warmup on graph type: " + graphType);
+
+                System.out.println("starting warmup");
+                Graph graph = getCorrectGraph(0, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
+
+                ////////// running the simulation //////////
+                AmodSimulator simulator = new AmodSimulator(graph, false, numVehiclesUpdated, extensionType, lambda);
+                for (int j = 0; j < timeSteps; j++) {
+                    simulator.tick(graph, j);
+                }
+
+                // if there were cancelled requests, we increase the number and start over again w. the first graph type
+                if (simulator.getCancelledRequests().size() != 0) {
+                    numVehiclesUpdated += 5;
+                    System.out.println("numvehicles updated to: " + numVehiclesUpdated);
+                    continue outer;
+                }
+                System.out.println(graphType + " ran simulation with 0 cancelled requests, no of vehicles set to: " + numVehiclesUpdated);
+                finishedGraphTypes.add(graphType);
+            }
+            break;
+        }
+
+        System.out.println("numvehicles was increased to: " + numVehiclesUpdated);
+
+        return numVehiclesUpdated;
     }
 
     /**

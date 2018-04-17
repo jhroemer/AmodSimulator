@@ -20,7 +20,7 @@ public class AmodSimulator {
     private List<Request> requests;
     private Map<Integer, List<Vehicle>> vacancyMap = new HashMap<>();
     private List<Request> assignedRequests = new ArrayList<>();
-    private List<Request> unservedRequests = new ArrayList<>();
+    private List<Request> cancelledRequests = new ArrayList<>();
     private Map<Integer, List<Request>> predefinedRequestsMap;
     private double lambda = 0.1;
     private int ticksDone;
@@ -44,7 +44,7 @@ public class AmodSimulator {
      */
     public AmodSimulator(Graph graph, boolean visual, int numVehicles, ExtensionType extensionType, double lambda) {
         this.assignmentType = IndexSCRAM;
-        this.extensionType = extensionType;
+        AmodSimulator.extensionType = extensionType;
         IS_VISUAL = visual;
         TripPlanner.init(graph);
         this.lambda = lambda;
@@ -224,7 +224,7 @@ public class AmodSimulator {
             r.incrementWaitCounter();
             if (r.getTicksWaitingToBeAssigned() >= 6) { // todo: only if we're not on extension 2
                 requestIterator.remove();
-                unservedRequests.add(r);
+                cancelledRequests.add(r);
             }
         }
     }
@@ -276,11 +276,28 @@ public class AmodSimulator {
         graph.addAttribute("ui.stylesheet", styleSheet);
 
         int num = 0;
-        for (Vehicle veh : allVehicles) {
-            num++;
-            Sprite s = sman.addSprite(String.valueOf(num));
-            s.setAttribute("ui.class", "idle");
-            s.attachToNode(veh.getLocation().getId());
+
+        if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+            for (Vehicle veh : allVehicles) {
+                num++;
+                Sprite s = sman.addSprite(String.valueOf(num));
+                s.setAttribute("ui.class", "idle");
+                s.attachToNode(veh.getLocation().getId());
+            }
+        }
+        else {
+            for (Vehicle veh : idleVehicles) {
+                num++;
+                Sprite s = sman.addSprite(String.valueOf(num));
+                s.setAttribute("ui.class", "idle");
+                s.attachToNode(veh.getLocation().getId());
+            }
+            for (Vehicle veh : activeVehicles) {
+                num++;
+                Sprite s = sman.addSprite(String.valueOf(num));
+                s.setAttribute("ui.class", "idle");
+                s.attachToNode(veh.getLocation().getId());
+            }
         }
     }
 
@@ -514,7 +531,6 @@ public class AmodSimulator {
                     numVehicles--;
                     continue;
                 }
-                System.out.println();
                 result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
             }
             for (Vehicle v : activeVehicles) {
@@ -536,8 +552,8 @@ public class AmodSimulator {
         return result / (double) numVehicles;
     }
 
-    public List<Request> getUnservedRequests() {
-        return unservedRequests;
+    public List<Request> getCancelledRequests() {
+        return cancelledRequests;
     }
 
     /**
