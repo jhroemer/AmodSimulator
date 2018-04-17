@@ -86,7 +86,7 @@ public class ExperimentRunner {
                     simulator.tick(graph, j);
                     if (visual) sleep(50);
                 }
-                
+
 //                simulator.drawSpritesDebug(graph);
 //                graph.display();
 //                try {
