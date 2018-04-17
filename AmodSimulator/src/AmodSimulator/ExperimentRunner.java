@@ -94,8 +94,8 @@ public class ExperimentRunner {
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
+//                System.exit(1);
 
-                System.exit(1);
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
