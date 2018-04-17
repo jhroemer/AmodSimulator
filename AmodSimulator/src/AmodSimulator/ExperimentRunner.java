@@ -217,7 +217,6 @@ public class ExperimentRunner {
         // TODO: still needs standard deviation
 
 
-
         // fixme: normalizing the added total values to percentage
         ///////// FIXME: THIS MAYBE GOES OUT
         for (Integer interval : totalWaitPercentageMap.keySet()) {
@@ -226,7 +225,6 @@ public class ExperimentRunner {
         }
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimesPercentage", String.valueOf(totalWaitPercentageMap));
         /////////////////
-
 
 
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
@@ -260,6 +258,7 @@ public class ExperimentRunner {
 
         // map to hold std. dev. values per time interval
         Map<Integer, Double> stdDevMap = new TreeMap<>();
+        Map<Integer, Double> stdDevMapPercentageSecondTry = new TreeMap<>();
         Map<Integer, Double> stdDevMapPercentage = new TreeMap<>();
 
         // for each waiting interval, calc. std. dev.
@@ -273,6 +272,8 @@ public class ExperimentRunner {
             }
             variance = variance / (double) trials;
             // todo: can I just divide the std. dev. by total, in order to get percentage?
+            double stdDevPercentage = Math.sqrt(variance) / avgWaitingTimes.get(interval);
+            stdDevMapPercentageSecondTry.put(interval, stdDevPercentage);
             stdDevMap.put(interval, Math.sqrt(variance));
         }
 
