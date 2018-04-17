@@ -266,6 +266,7 @@ public class AmodSimulator {
     }
 
     /**
+     * Debugging method that visualizes the position of vehicles in the graph
      *
      * @param graph
      */

@@ -164,6 +164,7 @@ public class ExperimentRunner {
         }
 
         // find out the percentage-wise distribution of requests within the different intervals
+        // todo: maybe goes out again
         Map<Integer, Double> waitPercentageMap = new TreeMap<>();
         for (Integer interval : waitMap.keySet()) {
             int numRequests = waitMap.getOrDefault(interval, 0);
@@ -200,17 +201,32 @@ public class ExperimentRunner {
 
         // get averages of waiting times
         Map<Integer, Double> avgWaitingTimes = new TreeMap<>();
+        double total = 0.0;
         for (Integer num : totalWaitMap.keySet()) {
             double avgOverTrials = totalWaitMap.get(num) / (double) trials;
+            total += avgOverTrials;
             avgWaitingTimes.put(num, avgOverTrials);
         }
+        // fixme: here I should consider converting avgWaitingTimes into percentage
+        Map<Integer, Double> avgWaitingTimesPercentage = new TreeMap<>();
+        for (Integer num : avgWaitingTimes.keySet()) {
+            double percentage = avgWaitingTimes.get(num) / total;
+            avgWaitingTimesPercentage.put(num, percentage);
+        }
+        props.setProperty("TOTAL_" + graphType + "_avgWaitingTimesPercentageSecondTry", String.valueOf(avgWaitingTimesPercentage));
+        // TODO: still needs standard deviation
+
+
 
         // fixme: normalizing the added total values to percentage
+        ///////// FIXME: THIS MAYBE GOES OUT
         for (Integer interval : totalWaitPercentageMap.keySet()) {
             double avgOverTrials = totalWaitPercentageMap.get(interval) / (double) trials;
             totalWaitPercentageMap.put(interval, avgOverTrials);
         }
         props.setProperty("TOTAL_" + graphType + "_avgWaitingTimesPercentage", String.valueOf(totalWaitPercentageMap));
+        /////////////////
+
 
 
         double unOccupiedVariance = Utility.calculateVarianceOfProp(props, graphType, "unoccupiedPercentage", totalUnoccupiedPercentage / (double) trials);
@@ -256,6 +272,7 @@ public class ExperimentRunner {
                 variance += difference * difference;
             }
             variance = variance / (double) trials;
+            // todo: can I just divide the std. dev. by total, in order to get percentage?
             stdDevMap.put(interval, Math.sqrt(variance));
         }
 
