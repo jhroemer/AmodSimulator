@@ -62,7 +62,7 @@ public class ExperimentRunner {
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
 
         // TODO: perform warm-up to figure out correct vehicle-request relationship?
-        // numVehicles = findCorrectNumberByWarmup(props, graphTypes, numVehicles, extensionType, lambda, timeSteps);
+        numVehicles = findCorrectNumberByWarmup(props, graphTypes, numVehicles, extensionType, lambda, timeSteps);
 
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
         for (String graphType : graphTypes) {
