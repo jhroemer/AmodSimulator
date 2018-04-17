@@ -465,33 +465,56 @@ public class AmodSimulator {
      * @return
      */
     public double getAvgUnoccupiedPercentage() {
-        int number = 0;
+        int numVehicles;
         double result = 0.0;
+        boolean debug = false;
 
         if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
+            numVehicles = allVehicles.size();
             for (Vehicle v : allVehicles) {
-                number++;          // no. of empty km               <<<<<<<<<<<<<<<<<<<<<<<<<<   total km driven      >>>>>>>>>>>>>>>>>>>>>>>>>>
+                if (debug) {
+                    System.out.println("v.getEmpty: " + (double) v.getEmptyKilometersDriven() + " v.getOccupied: " + (double) v.getOccupiedKilometersDriven());
+                    System.out.println("percentage: " + (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven()));
+                }
+
+                // if the vehicle didn't drive at all, it is not counted
+                if (v.getEmptyKilometersDriven() == 0 && v.getOccupiedKilometersDriven() == 0) {
+                    numVehicles--;
+                    continue;
+                }
+                                   // no. of empty km               <<<<<<<<<<<<<<<<<<<<<<<<<<   total km driven      >>>>>>>>>>>>>>>>>>>>>>>>>>
                 result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
+                System.out.println("and result: " + result);
             }
         }
         else {
+            numVehicles = idleVehicles.size() + activeVehicles.size();
+
             for (Vehicle v : idleVehicles) {
-                number++;
+                if (v.getEmptyKilometersDriven() == 0 && v.getOccupiedKilometersDriven() == 0) {
+                    numVehicles--;
+                    continue;
+                }
+                System.out.println();
                 result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
             }
             for (Vehicle v : activeVehicles) {
-                number++;
+                if (v.getEmptyKilometersDriven() == 0 && v.getOccupiedKilometersDriven() == 0) {
+                    numVehicles--;
+                    continue;
+                }
                 result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
             }
         }
+        if (debug) System.out.println("numvehicles is: " + numVehicles);
 
-        // checking for NaN issues
-        boolean isNan = Double.isNaN(result);
-        assert !isNan;
-        boolean isNan3 = Double.isNaN(result / number);
-        assert !isNan3;
+        if (numVehicles == 0.0 || Double.isNaN((double) numVehicles) || Double.isNaN(result) || Double.isNaN(result / (double) numVehicles)) {
+            double test = result / (double) numVehicles;
+            System.out.println("numVehicles: " + numVehicles + " result: " + result + " percentage: " + test);
+            throw new RuntimeException("something went wrong w. getAvgUnoccupiedPercentage");
+        }
 
-        return result / (double) number;
+        return result / (double) numVehicles;
     }
 
     public List<Request> getUnservedRequests() {

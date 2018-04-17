@@ -19,9 +19,9 @@ public class Vehicle implements SCRAM.Node {
     private int vacantTime;
 
     //summed info of vehicle
-    private int emptyKilometersDriven;
-    private int occupiedKilometersDriven;
-    private int numRequestServiced;
+    private int emptyKilometersDriven = 0;
+    private int occupiedKilometersDriven = 0;
+    private int numRequestServiced = 0;
     private boolean visited;
     private Node previous;
 
