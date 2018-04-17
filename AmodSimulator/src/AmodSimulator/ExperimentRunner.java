@@ -86,6 +86,16 @@ public class ExperimentRunner {
                     simulator.tick(graph, j);
                     if (visual) sleep(50);
                 }
+                
+//                simulator.drawSpritesDebug(graph);
+//                graph.display();
+//                try {
+//                    Thread.sleep(120000000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+                System.exit(1);
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 

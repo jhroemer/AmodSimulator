@@ -267,6 +267,24 @@ public class AmodSimulator {
 
     /**
      *
+     * @param graph
+     */
+    public void drawSpritesDebug(Graph graph) {
+        sman = new SpriteManager(graph);
+        String styleSheet = Utility.parseStylesheet(styleSheetPath);
+        graph.addAttribute("ui.stylesheet", styleSheet);
+
+        int num = 0;
+        for (Vehicle veh : allVehicles) {
+            num++;
+            Sprite s = sman.addSprite(String.valueOf(num));
+            s.setAttribute("ui.class", "idle");
+            s.attachToNode(veh.getLocation().getId());
+        }
+    }
+
+    /**
+     *
      * @param timeStep
      */
     private void drawSprites(int timeStep) {
