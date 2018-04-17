@@ -63,7 +63,7 @@ public class ExperimentRunner {
         for (String graphType : graphTypes) {
             System.out.println("\nstarting trials on graph type: " + graphType);
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
-            int updatedNumVehicles = findCorrectNumberByWarmup(graphList, numVehicles, extensionType, lambda, timeSteps);
+            int updatedNumVehicles = findCorrectNumberByWarmup(graphList.get(0), numVehicles, extensionType, lambda, timeSteps);
             props.setProperty("TOTAL_" + graphType + "_updatedNumVehicles", String.valueOf(updatedNumVehicles));
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
@@ -427,30 +427,27 @@ public class ExperimentRunner {
 
     /**
      *
-     * @param graphList
+     * @param graph
      * @param numVehicles
      * @param extensionType
      * @param lambda
      * @param timeSteps
      * @return
      */
-    private static int findCorrectNumberByWarmup(List<Graph> graphList, int numVehicles, ExtensionType extensionType, double lambda, int timeSteps) {
+    private static int findCorrectNumberByWarmup(Graph graph, int numVehicles, ExtensionType extensionType, double lambda, int timeSteps) {
         int numVehiclesUpdated = numVehicles;
 
-        outer:
         while (true) {
-            for (Graph graph : graphList) {
-                AmodSimulator simulator = new AmodSimulator(graph, false, numVehiclesUpdated, extensionType, lambda);
-                for (int j = 0; j < timeSteps; j++) {
-                    simulator.tick(graph, j);
-                }
+            AmodSimulator simulator = new AmodSimulator(graph, false, numVehiclesUpdated, extensionType, lambda);
+            for (int j = 0; j < timeSteps; j++) {
+                simulator.tick(graph, j);
+            }
 
-                // if there were cancelled requests, we increase the number and start over again w. the first graph type
-                if (simulator.getCancelledRequests().size() != 0) {
-                    numVehiclesUpdated += 5;
-                    System.out.println("numvehicles updated to: " + numVehiclesUpdated);
-                    continue outer; // we start over again if there was not sufficient vehicles
-                }
+            // if there were cancelled requests, we increase the number and start over again w. the first graph type
+            if (simulator.getCancelledRequests().size() != 0) {
+                numVehiclesUpdated += 5;
+                System.out.println("numvehicles updated to: " + numVehiclesUpdated);
+                continue; // we start over again if there was not sufficient vehicles
             }
             break; // if we get here, there were no cancelled requests and correct numVehicles value has been found
         }
