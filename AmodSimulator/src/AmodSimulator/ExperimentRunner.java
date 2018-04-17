@@ -23,7 +23,6 @@ import static AmodSimulator.Utility.parseIntIntMap;
 public class ExperimentRunner {
 
     /**
-     *
      * @param args should be a path to a folder containing properties for experiments
      */
     public static void main(String[] args) {
@@ -46,8 +45,7 @@ public class ExperimentRunner {
         }
     }
 
-  /**
-     *
+    /**
      * @param props the properties object that holds all the info the experiment needs
      */
     private static void runExperiment(Properties props) {
@@ -61,15 +59,12 @@ public class ExperimentRunner {
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
 
-        // TODO: perform warm-up to figure out correct vehicle-request relationship?
-        numVehicles = findCorrectNumberByWarmup(props, graphTypes, numVehicles, extensionType, lambda, timeSteps);
-
         // for each graph-type, do 50 trials on 5 random instances of the graph-type
         for (String graphType : graphTypes) {
+            System.out.println("\nstarting trials on graph type: " + graphType);
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
-            System.out.println();
-            System.out.println("starting trials on graph type: " + graphType);
-//            if (!graphType.equals("GRID")) continue;
+            int updatedNumVehicles = findCorrectNumberByWarmup(graphList, numVehicles, extensionType, lambda, timeSteps);
+            props.setProperty("TOTAL_" + graphType + "_updatedNumVehicles", String.valueOf(updatedNumVehicles));
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
             for (int j = 0; j < 14; j++) totalWaitMap.put(j * intervalSizeMinutes, 0);
@@ -82,7 +77,7 @@ public class ExperimentRunner {
                 Graph graph = getCorrectGraph(i, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
 
                 ////////// running the simulation //////////
-                AmodSimulator simulator = new AmodSimulator(graph, visual, numVehicles, extensionType, lambda);
+                AmodSimulator simulator = new AmodSimulator(graph, visual, updatedNumVehicles, extensionType, lambda);
                 if (visual) sleep(2500); //Makes the simulation start after the graph is drawn.
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
@@ -101,7 +96,7 @@ public class ExperimentRunner {
                 System.out.println("Unassigned: " + simulator.getRequests().size());
                 ////////// simulation done //////////
 
-                collectTrialResults(simulator, props, graphType, numVehicles, i, totalWaitMap, totalWaitPercentageMap, intervalSizeMinutes);
+                collectTrialResults(simulator, props, graphType, updatedNumVehicles, i, totalWaitMap, totalWaitPercentageMap, intervalSizeMinutes);
             }
             System.out.println("one graph took: " + (System.currentTimeMillis() - start) + " ms");
             collectTotalResults(props, trials, totalWaitMap, graphType, totalWaitPercentageMap);
@@ -113,6 +108,7 @@ public class ExperimentRunner {
 
     /**
      * Collects result for the i'th trial
+     *
      * @param simulator
      * @param props
      * @param graphType
@@ -156,15 +152,13 @@ public class ExperimentRunner {
             if (waitMap.containsKey(r.getWaitTime() * intervalSizeMinutes)) {
                 int number = waitMap.get(r.getWaitTime() * intervalSizeMinutes) + 1;
                 waitMap.put(r.getWaitTime() * intervalSizeMinutes, number);
-            }
-            else waitMap.put(r.getWaitTime() * intervalSizeMinutes, 1);
+            } else waitMap.put(r.getWaitTime() * intervalSizeMinutes, 1);
 
             // waiting times in total
             if (totalWaitMap.containsKey(r.getWaitTime() * intervalSizeMinutes)) {
                 int number = totalWaitMap.get(r.getWaitTime() * intervalSizeMinutes) + 1;
                 totalWaitMap.put(r.getWaitTime() * intervalSizeMinutes, number);
-            }
-            else totalWaitMap.put(r.getWaitTime() * intervalSizeMinutes, 1);
+            } else totalWaitMap.put(r.getWaitTime() * intervalSizeMinutes, 1);
         }
 
         // find out the percentage-wise distribution of requests within the different intervals
@@ -184,8 +178,7 @@ public class ExperimentRunner {
     }
 
     /**
-     *
-     *  @param props
+     * @param props
      * @param trials
      * @param totalWaitMap
      * @param graphType
@@ -246,7 +239,7 @@ public class ExperimentRunner {
     }
 
     /**
-     *  @param props
+     * @param props
      * @param trials
      * @param graphType
      * @param totalWaitPercentageMap
@@ -319,7 +312,6 @@ public class ExperimentRunner {
     }
 
     /**
-     *
      * @param i
      * @param graphList
      * @return
@@ -338,7 +330,6 @@ public class ExperimentRunner {
     }
 
     /**
-     *
      * @param graph
      * @param timesteps
      * @param visual
@@ -350,12 +341,12 @@ public class ExperimentRunner {
         vehicles.add(new Vehicle("v2", graph.getNode("F")));
 
         List<Request> requests = new ArrayList<Request>();
-        requests.add(new Request(1, graph.getNode("F"), graph.getNode("B"),0));
-        requests.add(new Request(2, graph.getNode("A"), graph.getNode("E"),0));
-        requests.add(new Request(3, graph.getNode("F"), graph.getNode("D"),0));
-        requests.add(new Request(4, graph.getNode("A"), graph.getNode("B"),0));
-        requests.add(new Request(5, graph.getNode("C"), graph.getNode("D"),0));
-        requests.add(new Request(6, graph.getNode("D"), graph.getNode("C"),0));
+        requests.add(new Request(1, graph.getNode("F"), graph.getNode("B"), 0));
+        requests.add(new Request(2, graph.getNode("A"), graph.getNode("E"), 0));
+        requests.add(new Request(3, graph.getNode("F"), graph.getNode("D"), 0));
+        requests.add(new Request(4, graph.getNode("A"), graph.getNode("B"), 0));
+        requests.add(new Request(5, graph.getNode("C"), graph.getNode("D"), 0));
+        requests.add(new Request(6, graph.getNode("D"), graph.getNode("C"), 0));
         Map<Integer, List<Request>> requestMap = new HashMap<>();
         requestMap.put(0, requests);
 
@@ -370,7 +361,6 @@ public class ExperimentRunner {
     }
 
     /**
-     *
      * @param folderPath
      * @return
      */
@@ -379,7 +369,7 @@ public class ExperimentRunner {
         try (Stream<Path> paths = Files.walk(Paths.get(folderPath))) {
             paths
                     .filter(Files::isRegularFile)
-                    .forEach(path -> graphList.add(parseGraph("G" + String.valueOf(graphList.size()+1), path.toString())));
+                    .forEach(path -> graphList.add(parseGraph("G" + String.valueOf(graphList.size() + 1), path.toString())));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -387,7 +377,6 @@ public class ExperimentRunner {
     }
 
     /**
-     *
      * @param folderPath
      * @return
      */
@@ -397,7 +386,6 @@ public class ExperimentRunner {
     }
 
     /**
-     *
      * @param folderPath
      * @return
      */
@@ -415,8 +403,9 @@ public class ExperimentRunner {
 
     /**
      * Constructs a <Code>Graph</Code> from an dgs-file
-     * @param fileId    Id to give the graph
-     * @param filePath  Path to a file containing a graph in dgs-format
+     *
+     * @param fileId   Id to give the graph
+     * @param filePath Path to a file containing a graph in dgs-format
      * @return
      */
     public static Graph parseGraph(String fileId, String filePath) {
@@ -428,7 +417,7 @@ public class ExperimentRunner {
 
         try {
             fs.readAll(filePath);
-        } catch( IOException e) {
+        } catch (IOException e) {
         } finally {
             fs.removeSink(graph);
         }
@@ -438,31 +427,19 @@ public class ExperimentRunner {
 
     /**
      *
-     * @param props
-     * @param graphTypes
+     * @param graphList
      * @param numVehicles
      * @param extensionType
      * @param lambda
      * @param timeSteps
      * @return
      */
-    private static int findCorrectNumberByWarmup(Properties props, String[] graphTypes, int numVehicles, ExtensionType extensionType, double lambda, int timeSteps) {
+    private static int findCorrectNumberByWarmup(List<Graph> graphList, int numVehicles, ExtensionType extensionType, double lambda, int timeSteps) {
         int numVehiclesUpdated = numVehicles;
-        List<String> finishedGraphTypes = new ArrayList<>();
 
         outer:
         while (true) {
-            for (String graphType : graphTypes) {
-                if (finishedGraphTypes.contains(graphType)) continue;
-
-                List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
-                System.out.println();
-                System.out.println("warmup on graph type: " + graphType);
-
-                System.out.println("starting warmup");
-                Graph graph = getCorrectGraph(0, graphList); // 10 trials per graph, 0-9 graph 1, 10-19 graph2 etc..
-
-                ////////// running the simulation //////////
+            for (Graph graph : graphList) {
                 AmodSimulator simulator = new AmodSimulator(graph, false, numVehiclesUpdated, extensionType, lambda);
                 for (int j = 0; j < timeSteps; j++) {
                     simulator.tick(graph, j);
@@ -472,12 +449,10 @@ public class ExperimentRunner {
                 if (simulator.getCancelledRequests().size() != 0) {
                     numVehiclesUpdated += 5;
                     System.out.println("numvehicles updated to: " + numVehiclesUpdated);
-                    continue outer;
+                    continue outer; // we start over again if there was not sufficient vehicles
                 }
-                System.out.println(graphType + " ran simulation with 0 cancelled requests, no of vehicles set to: " + numVehiclesUpdated);
-                finishedGraphTypes.add(graphType);
             }
-            break;
+            break; // if we get here, there were no cancelled requests and correct numVehicles value has been found
         }
 
         System.out.println("numvehicles was increased to: " + numVehiclesUpdated);
@@ -489,7 +464,10 @@ public class ExperimentRunner {
      * Makes thread sleep
      */
     protected static void sleep(int duration) {
-        try { Thread.sleep(duration); } catch (Exception e) {}
+        try {
+            Thread.sleep(duration);
+        } catch (Exception e) {
+        }
     }
 
 
