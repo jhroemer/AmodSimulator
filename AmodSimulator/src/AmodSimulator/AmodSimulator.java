@@ -134,7 +134,6 @@ public class AmodSimulator {
                 tickExt1Plus2(graph, timeStep);
                 break;
         }
-
         if (PRINT) printVacancyMap();
         if (IS_VISUAL) drawSprites(timeStep);
 
@@ -186,7 +185,6 @@ public class AmodSimulator {
      */
     private void tickExt1(Graph graph, int timeStep) {
         vacancyMap.remove(timeStep);
-
         // assigning allVehicles to requests
         List<Edge> assignments = Utility.assign(assignmentType, allVehicles, requests, timeStep);
 
@@ -194,8 +192,10 @@ public class AmodSimulator {
         for (Edge e : assignments) {
             // indexbased check for dummynode
             // if the nodeindex is larger than the size of it's original list, then it was added = is a dummynode
+            // fixme: this doesn't work for extension 1
+            if (e.getWeight() < 0) continue;
             if (e.getStartIndex() >= allVehicles.size() || e.getEndIndex() >= requests.size()) continue;
-            Vehicle veh = allVehicles.get(e.getStartIndex());
+            Vehicle veh = allVehicles.get(e.getStartIndex()); // todo: is this problematic..? Allvehicles goes to
             Request req = requests.get(e.getEndIndex());
 
             int oldVacancyTime = veh.getVacantTime();
@@ -520,7 +520,7 @@ public class AmodSimulator {
                 }
                                    // no. of empty km               <<<<<<<<<<<<<<<<<<<<<<<<<<   total km driven      >>>>>>>>>>>>>>>>>>>>>>>>>>
                 result += (double) v.getEmptyKilometersDriven() / ((double) v.getEmptyKilometersDriven() + (double) v.getOccupiedKilometersDriven());
-                System.out.println("and result: " + result);
+//                System.out.println("and result: " + result);
             }
         }
         else {
