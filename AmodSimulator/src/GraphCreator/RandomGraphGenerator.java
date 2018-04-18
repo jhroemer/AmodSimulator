@@ -108,8 +108,8 @@ public class RandomGraphGenerator {
 
         if (size != MEDIUM) { // for section 4.2, where two graphs are tested in different sizes
             types.add(LOBSTER);
-            // types.add(GRID);
-            types.add(BANANATREE);
+            types.add(GRID);
+            // types.add(BANANATREE);
         } else {
             types.add(GRID);
             types.add(INCOMPLETEGRID);
