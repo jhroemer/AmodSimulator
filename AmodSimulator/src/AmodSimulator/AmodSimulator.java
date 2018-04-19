@@ -119,7 +119,6 @@ public class AmodSimulator {
         if (TEST) requests.addAll(predefinedRequestsMap.getOrDefault(timeStep, new ArrayList<>())); // TODO ALL
         else requests.addAll(RequestGenerator.generateRequests(graph, lambda, timeStep));
 
-
         switch (AmodSimulator.extensionType) {
             case BASIC:
                 tickBasic(graph, timeStep);
@@ -163,7 +162,7 @@ public class AmodSimulator {
             Vehicle veh = idleVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
 
-            veh.serviceRequest(req);
+            veh.serviceRequest(req, timeStep);
             addToVacancyMap(veh, 0, timeStep);
 
             makeActive(veh);
@@ -173,7 +172,7 @@ public class AmodSimulator {
         }
 
         // tracking that a request waited
-        trackRequestsWaiting();
+        trackRequestsWaiting(timeStep);
 
         idleVehiclesCounter += idleVehicles.size();
     }
@@ -184,7 +183,9 @@ public class AmodSimulator {
      * @param timeStep
      */
     private void tickExt1(Graph graph, int timeStep) {
-        vacancyMap.remove(timeStep);
+        // todo: print timestep + vacant times for vehicles + maybe vacancymap
+
+        vacancyMap.remove(timeStep); // todo: is the vacancymap needed at all for ext 1?
         // assigning allVehicles to requests
         List<Edge> assignments = Utility.assign(assignmentType, allVehicles, requests, timeStep);
 
@@ -193,22 +194,23 @@ public class AmodSimulator {
             // indexbased check for dummynode
             // if the nodeindex is larger than the size of it's original list, then it was added = is a dummynode
             // fixme: this doesn't work for extension 1
-            if (e.getWeight() < 0) continue;
+            if (e.getHasDummy()) continue;
+
             if (e.getStartIndex() >= allVehicles.size() || e.getEndIndex() >= requests.size()) continue;
             Vehicle veh = allVehicles.get(e.getStartIndex()); // todo: is this problematic..? Allvehicles goes to
             Request req = requests.get(e.getEndIndex());
 
             int oldVacancyTime = veh.getVacantTime();
-            veh.serviceRequest(req);
+            veh.serviceRequest(req, timeStep);
             addToVacancyMap(veh, oldVacancyTime, timeStep);
 
             assignedRequests.add(req);
             requests.remove(req);
-            if (IS_VISUAL) veh.addRequest(req);
+            // if (IS_VISUAL) veh.addRequest(req);
         }
 
         // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
-        trackRequestsWaiting();
+        trackRequestsWaiting(timeStep);
 
         // todo : do I still wan't to check idlevehicles?
         // idleVehiclesCounter += idleVehicles.size();
@@ -216,8 +218,9 @@ public class AmodSimulator {
 
     /**
      *
+     * @param timeStep
      */
-    private void trackRequestsWaiting() {
+    private void trackRequestsWaiting(int timeStep) {
         ListIterator<Request> requestIterator = requests.listIterator();
         while (requestIterator.hasNext()) {
             Request r = requestIterator.next();

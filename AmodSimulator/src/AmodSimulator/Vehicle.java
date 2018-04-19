@@ -34,21 +34,25 @@ public class Vehicle implements SCRAM.Node {
     }
 
     
-    public void serviceRequest(Request request) {
+    public void serviceRequest(Request request, int timeStep) {
         if (!requests.isEmpty()) try {
             throw new Exception("Request added to a vehicle that already had a request!");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        request.setUp(vacantTime, location, speed);
+        // fixme: a vehicle had a vacanttime that was lower than timestep
+        // somehow it ended up with a new vacant time that was lower than timestep, which shouldn't happen
+
+//        System.out.println("vehicle " + id + " serviced request " + request.getId() + " w. previous vacant time: " + vacantTime);
+        request.setUp(timeStep, vacantTime, location, speed);
 
         location = request.getDestination();
         vacantTime = request.getDestinationTime()+1;
 
         emptyKilometersDriven += request.getOriginPathLength();
         occupiedKilometersDriven += request.getDestinationPathLength();
-
+//        System.out.println("new vacant time for vehicle is: " + vacantTime + " after driving a path of length: " + (request.getOriginPathLength() + request.getDestinationPathLength()));
         numRequestServiced++;
     }
 
@@ -182,7 +186,9 @@ public class Vehicle implements SCRAM.Node {
         if (node instanceof Request) {
             int distanceUntilVacant = 0;
             if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
-                if (timeStep <= vacantTime) distanceUntilVacant = getDistanceUntilVacant(timeStep);
+                if (timeStep < vacantTime) {
+                    distanceUntilVacant = getDistanceUntilVacant(timeStep);
+                }
             }
             return distanceUntilVacant + (int) location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
         }
