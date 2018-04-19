@@ -342,7 +342,7 @@ public class Utility {
                 "    xmax=0.5, \n" +
                 "    point meta={x*100},\n" +
                 "    nodes near coords={\\pgfmathprintnumber\\pgfplotspointmeta\\%},\n" +
-                "    every node near coord/.append style={xshift=-45pt,anchor=east,font=\\footnotesize}\n" +
+                "    every node near coord/.append style={yshift=10pt,anchor=east,font=\\footnotesize}\n" +
                 "    ]\n" +
                 "  \\addplot[draw=blue, pattern=horizontal lines light blue, error bars/.cd, x dir=both, x explicit] \n" +
                 "coordinates\n" +
@@ -388,6 +388,7 @@ public class Utility {
                     "    bar width=7pt,\n" +
                     "    %width=0.5\\textwidth,\n" +
                     "    scale only axis,\n" +
+                    "    scaled y ticks=false,\n" +
                     "    ]\n" +
                     "\\addplot[draw=blue, pattern=horizontal lines light blue, error bars/.cd, y dir=both, y explicit] coordinates {");
 

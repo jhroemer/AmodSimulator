@@ -69,7 +69,7 @@ public class Request implements SCRAM.Node {
         // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
 //        startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
 
-        if (startTime != timeStep) {
+        if (startTime < timeStep) {
             // todo: how can this happen?
             // seems like both generationtime and vehiclevacanttime were lower than timestep, but why weren't they matched earlier then?
             System.out.println("hey");
