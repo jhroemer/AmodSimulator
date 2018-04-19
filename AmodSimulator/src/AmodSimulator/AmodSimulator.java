@@ -150,26 +150,41 @@ public class AmodSimulator {
             makeIdle(veh); // TODO ONLY BASIC AND EXT 2
         }
 
+        int numVehiclesMatching = idleVehicles.size();
+        int numRequestsMatching = requests.size();
+
         vacancyMap.remove(timeStep);
 
         // assigning allVehicles to requests
         List<Edge> assignments = Utility.assign(assignmentType, idleVehicles, requests, timeStep);
 
+        List<Request> tempReqList = new ArrayList<>();
+        List<Vehicle> tempVehList = new ArrayList<>();
+
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
             // indexbased check for dummynode // TODO DIFFERENT BETWEEN EXTENSIONS
-            if (e.getStartIndex() >= idleVehicles.size() || e.getEndIndex() >= requests.size()) continue;
-            Vehicle veh = idleVehicles.get(e.getStartIndex());
+            if (e.getStartIndex() >= numVehiclesMatching || e.getEndIndex() >= numRequestsMatching) continue;
+
+            Vehicle veh = idleVehicles.get(e.getStartIndex()); // index out of bounds
             Request req = requests.get(e.getEndIndex());
 
             veh.serviceRequest(req, timeStep);
             addToVacancyMap(veh, 0, timeStep);
 
-            makeActive(veh);
+//            makeActive(veh);
+            tempVehList.add(veh);
             assignedRequests.add(req);
-            requests.remove(req);
+            tempReqList.add(req);
+//            requests.remove(req);
             if (IS_VISUAL) veh.addRequest(req);
         }
+
+        // Moving assigned requests and vehicles to assigned and active
+        for (Vehicle v : tempVehList) {
+            makeActive(v);
+        }
+        requests.removeAll(tempReqList);
 
         // tracking that a request waited
         trackRequestsWaiting(timeStep);
@@ -191,6 +206,11 @@ public class AmodSimulator {
             else if (v.getVacantTime() - timeStep <= 3) testVehicles.add(v);
         }
 
+        int numVehiclesMatching = testVehicles.size();
+        int numRequestsMatching = requests.size();
+        List<Request> tempReqList = new ArrayList<>();
+        List<Vehicle> tempVehList = new ArrayList<>();
+
         // assigning allVehicles to requests
         List<Edge> assignments = Utility.assign(assignmentType, testVehicles, requests, timeStep);
 
@@ -198,11 +218,9 @@ public class AmodSimulator {
         for (Edge e : assignments) {
             // indexbased check for dummynode
             // if the nodeindex is larger than the size of it's original list, then it was added = is a dummynode
-            // fixme: this doesn't work for extension 1
-//            if (e.getHasDummy()) continue;
 
-            if (e.getStartIndex() >= testVehicles.size() || e.getEndIndex() >= requests.size()) continue;
-            Vehicle veh = testVehicles.get(e.getStartIndex()); // todo: is this problematic..? Allvehicles goes to
+            if (e.getStartIndex() >= numVehiclesMatching || e.getEndIndex() >= numRequestsMatching) continue;
+            Vehicle veh = testVehicles.get(e.getStartIndex());
             Request req = requests.get(e.getEndIndex());
 
             int oldVacancyTime = veh.getVacantTime();
@@ -210,9 +228,11 @@ public class AmodSimulator {
             addToVacancyMap(veh, oldVacancyTime, timeStep);
 
             assignedRequests.add(req);
-            requests.remove(req);
+//            requests.remove(req);
+            tempReqList.add(req);
             // if (IS_VISUAL) veh.addRequest(req);
         }
+        requests.removeAll(tempReqList);
 
         // tracking that a request waited TODO: for extension 2 we probably don't wan't to throw out requests anymore
         trackRequestsWaiting(timeStep);

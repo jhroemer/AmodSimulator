@@ -59,19 +59,16 @@ public class Request implements SCRAM.Node {
      * @param speed
      */
     public void setUp(int timeStep, int vehicleVacantTime, org.graphstream.graph.Node source, int speed) {
-        // todo: this doesn't work. starttime is set wrongly if a vehicle has been vacant for some time, and has a vacant time lower than timestep
+
         // 1. if vehicleVacantTime is lower than timestep, then the vehicle is idle and startTime should be set to timestep
         // 2. if that is not the case, then the vehicle is occupied - which means the startTime should equal vehicleVacantTime
-//        if (vehicleVacantTime < timeStep) {
-//            System.out.println("hey");
-//        }
-//        startTime = (vehicleVacantTime < timeStep) ? timeStep : vehicleVacantTime;
-//        System.out.println("HEY: timestep: " + timeStep + " vehicleVacantTime: " + vehicleVacantTime + " startTime set to: " + startTime);
+        startTime = (vehicleVacantTime < timeStep) ? timeStep : vehicleVacantTime;
 
         // TODO: old way of doing it, should go it when I can confirm the new fix works
         // when does this request start being serviced
         // if vehicle has been vacant for some timesteps then it's generation time, otherwise (if vehicle has several requests) its vehicle vacant time
-        startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
+//        startTime = Math.max(generationTime, vehicleVacantTime);   // math.max because of when finish time is lower than generationtime
+
         if (startTime != timeStep) {
             // todo: how can this happen?
             // seems like both generationtime and vehiclevacanttime were lower than timestep, but why weren't they matched earlier then?
