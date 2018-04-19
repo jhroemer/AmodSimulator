@@ -6,7 +6,7 @@ public class DummyNode implements Node {
 
     @Override
     public int getDistance(Node node, int timeStep) {
-        return -1;
+        return 0;
     }
 
     @Override

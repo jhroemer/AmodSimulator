@@ -184,20 +184,25 @@ public class AmodSimulator {
      */
     private void tickExt1(Graph graph, int timeStep) {
         // todo: print timestep + vacant times for vehicles + maybe vacancymap
-
         vacancyMap.remove(timeStep); // todo: is the vacancymap needed at all for ext 1?
+        List<Vehicle> testVehicles = new ArrayList<>();
+        for (Vehicle v : allVehicles) {
+            if (v.getVacantTime() <= timeStep) testVehicles.add(v);
+            else if (v.getVacantTime() - timeStep <= 3) testVehicles.add(v);
+        }
+
         // assigning allVehicles to requests
-        List<Edge> assignments = Utility.assign(assignmentType, allVehicles, requests, timeStep);
+        List<Edge> assignments = Utility.assign(assignmentType, testVehicles, requests, timeStep);
 
         // make allVehicles serve the requests they are assigned
         for (Edge e : assignments) {
             // indexbased check for dummynode
             // if the nodeindex is larger than the size of it's original list, then it was added = is a dummynode
             // fixme: this doesn't work for extension 1
-            if (e.getHasDummy()) continue;
+//            if (e.getHasDummy()) continue;
 
-            if (e.getStartIndex() >= allVehicles.size() || e.getEndIndex() >= requests.size()) continue;
-            Vehicle veh = allVehicles.get(e.getStartIndex()); // todo: is this problematic..? Allvehicles goes to
+            if (e.getStartIndex() >= testVehicles.size() || e.getEndIndex() >= requests.size()) continue;
+            Vehicle veh = testVehicles.get(e.getStartIndex()); // todo: is this problematic..? Allvehicles goes to
             Request req = requests.get(e.getEndIndex());
 
             int oldVacancyTime = veh.getVacantTime();

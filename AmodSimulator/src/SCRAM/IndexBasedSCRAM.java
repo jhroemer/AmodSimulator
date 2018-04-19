@@ -63,7 +63,8 @@ public class IndexBasedSCRAM {
             for (int j = 0; j < n; j++) {
                 //int weight = vehicles.get(i).getLocation().getAttribute("distTo" + requests.get(j).getOrigin().getId());
                 int weight = vehicles.get(i).getDistance(requests.get(j), timeStep);
-                edges.add(new Edge(i, j, weight)); // todo: consider if the other SCRAM.Edge-constructor should be used
+                Edge e = new Edge(i, j, weight);
+                edges.add(e); // todo: consider if the other SCRAM.Edge-constructor should be used
             }
         }
 

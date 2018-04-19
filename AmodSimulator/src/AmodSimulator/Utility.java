@@ -8,8 +8,6 @@ import java.util.*;
 
 import static AmodSimulator.AmodSimulator.PRINT;
 import static AmodSimulator.ExperimentRunner.getGraphTypes;
-import static AmodSimulator.ExtensionType.EXTENSION1;
-import static AmodSimulator.ExtensionType.EXTENSION1PLUS2;
 
 public class Utility {
 
@@ -56,26 +54,7 @@ public class Utility {
     static List<Edge> assign(AssignmentType type, List<Vehicle> vehicles, List<Request> requests, int timeStep) {
         // done to avoid major and annoying generic refactoring in AmodSimulator - adds some (linear) running time
         List<Node> requestNodeList = new ArrayList<>(requests);
-        List<Node> vehicleNodeList;
-        // If we're on extension 1, we want to use a timeframe-cutoff. Vehicles that aren't vacant within the timeframe aren't considered when matching
-
-        // FIXME: this does not work. We use the index from allvehicles to identify the vehicle
-        // if a vehicle is not added to vehiclenodelist then the consecutive vehicles get an index which is lower than in allvehicles
-        // that means if a request was actually matched to a vehicle with index 6 in allvehicles, if vehicle 5 was not considered vehicle 6 actually had index 5
-        // hence, the request will wrongly be assigned to the vehicle coming after vehicle 6, which can cause huge waiting times
-        if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
-            vehicleNodeList = new ArrayList<>();
-            for (Vehicle v : vehicles) {
-                // add vehicle to assignment-list if vehicle is vacant, or vacant within the next hour (6*5min-tick = 30min)
-                // alse a dummy is added, this is important otherwise the indices don't 'align' and the assignment will be wrong later on
-                if (v.getVacantTime() <= timeStep) vehicleNodeList.add(v);
-                else if (v.getVacantTime() - timeStep <= 6) vehicleNodeList.add(v);
-                else {
-                    vehicleNodeList.add(new DummyNode()); // todo: this should be a working fix?
-                }
-            }
-        }
-        else vehicleNodeList = new ArrayList<>(vehicles);
+        List<Node> vehicleNodeList = new ArrayList<>(vehicles);
 
         switch (type) {
             case SCHWACHSINN:

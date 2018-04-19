@@ -10,6 +10,7 @@ public class Edge implements Comparable<Edge> {
     // for MacAlpine IndexBasedSCRAM implementation
     int startIndex;
     int endIndex;
+    private boolean hasDummy = false;
 
     /**
      *
@@ -90,6 +91,14 @@ public class Edge implements Comparable<Edge> {
         return startNode;
     }
 
+    public void setHasDummy(boolean hasDummy) {
+        this.hasDummy = hasDummy;
+    }
+
+    public boolean getHasDummy() {
+        return hasDummy;
+    }
+
     /**
      *
      * @return
@@ -98,6 +107,7 @@ public class Edge implements Comparable<Edge> {
         return endNode;
     }
 
+    @Deprecated
     /**
      *
      * @return true if a node in the edge is a dummynode

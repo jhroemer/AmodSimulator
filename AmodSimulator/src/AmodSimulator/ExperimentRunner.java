@@ -436,6 +436,7 @@ public class ExperimentRunner {
      */
     private static int findCorrectNumberByWarmup(Graph graph, int numVehicles, ExtensionType extensionType, double lambda, int timeSteps) {
         int numVehiclesUpdated = numVehicles;
+        System.out.println("starting warmup to find correct number of vehicles");
 
         while (true) {
             AmodSimulator simulator = new AmodSimulator(graph, false, numVehiclesUpdated, extensionType, lambda);
@@ -445,6 +446,7 @@ public class ExperimentRunner {
 
             // if there were cancelled requests, we increase the number and start over again w. the first graph type
             if (simulator.getCancelledRequests().size() != 0) {
+                System.out.println(simulator.getCancelledRequests().size() + " requests were cancelled");
                 numVehiclesUpdated += 5;
                 System.out.println("numvehicles updated to: " + numVehiclesUpdated);
                 continue; // we start over again if there was not sufficient vehicles
