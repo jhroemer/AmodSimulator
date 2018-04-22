@@ -70,8 +70,14 @@ public class ExperimentRunner {
             System.out.println("\nstarting trials on graph type: " + graphType);
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
             int updatedNumVehicles;
-            if (useWarmup) updatedNumVehicles = findCorrectNumberByWarmup(graphList.get(0), numVehicles, extensionType, lambda, timeSteps);
-            else updatedNumVehicles = findNumVehiclesFromPreviousExperiment(graphType);
+            if (useWarmup) {
+                updatedNumVehicles = findCorrectNumberByWarmup(graphList.get(0), numVehicles, extensionType, lambda, timeSteps);
+                System.out.println("used out to establish numVehicles: " + updatedNumVehicles);
+            }
+            else {
+                updatedNumVehicles = findNumVehiclesFromPreviousExperiment(graphType);
+                System.out.println("used previous experimentresults to establish numVehicles: " + updatedNumVehicles);
+            }
 
             props.setProperty("TOTAL_" + graphType + "_updatedNumVehicles", String.valueOf(updatedNumVehicles));
 
@@ -474,7 +480,7 @@ public class ExperimentRunner {
      * @return
      */
     private static int findNumVehiclesFromPreviousExperiment(String graphType) {
-        List<Properties> propertiesList = getPropertiesFromFolder("data/experimentProperties/chapter4.properties");
+        List<Properties> propertiesList = getPropertiesFromFolder("data/experimentResults/chapter4.properties");
         if (propertiesList.size() != 1) throw new RuntimeException("something is wrong w. findNumVehiclesFromPreviousExperiment");
         Properties props = propertiesList.get(0);
         return Integer.parseInt(props.getProperty("TOTAL_" + graphType + "_updatedNumVehicles"));
