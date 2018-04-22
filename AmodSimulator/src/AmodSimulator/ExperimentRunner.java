@@ -38,7 +38,12 @@ public class ExperimentRunner {
         }
 
         List<Properties> propertiesList = getPropertiesFromFolder(args[0]);
-        System.out.println(propertiesList);
+        propertiesList.sort((o1, o2) -> {
+            if (o1.getProperty("name").compareTo(o2.getProperty("name")) < 0) return -1;
+            else if (o1.getProperty("name").compareTo(o2.getProperty("name")) == 0) return 0;
+            else return 1;
+        });
+
         for (Properties props : propertiesList) {
             System.out.println("running experiment: " + props.getProperty("name"));
             runExperiment(props);
