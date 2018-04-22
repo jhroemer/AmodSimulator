@@ -55,6 +55,7 @@ public class ExperimentRunner {
         double lambda = Double.parseDouble(props.getProperty("requestsPerDay")) / 288.0; // there are 288 5min intervals per day
         int vehicleSpeed = Integer.parseInt(props.getProperty("vehicleSpeed")); // todo: safe delete?
         boolean visual = Boolean.parseBoolean(props.getProperty("isVisual"));
+        boolean useWarmup = Boolean.parseBoolean(props.getProperty("useWarmup"));
         int intervalSizeMinutes = Integer.valueOf(props.getProperty("intervalSizeMinutes"));
         String[] graphTypes = getGraphTypes(props.getProperty("graphDir"));
         ExtensionType extensionType = ExtensionType.valueOf(props.getProperty("extension"));
@@ -63,7 +64,10 @@ public class ExperimentRunner {
         for (String graphType : graphTypes) {
             System.out.println("\nstarting trials on graph type: " + graphType);
             List<Graph> graphList = getGraphsFromFolder(props.getProperty("graphDir") + "/" + graphType);
-            int updatedNumVehicles = findCorrectNumberByWarmup(graphList.get(0), numVehicles, extensionType, lambda, timeSteps);
+            int updatedNumVehicles;
+            if (useWarmup) updatedNumVehicles = findCorrectNumberByWarmup(graphList.get(0), numVehicles, extensionType, lambda, timeSteps);
+            else updatedNumVehicles = findNumVehiclesFromPreviousExperiment(graphType);
+
             props.setProperty("TOTAL_" + graphType + "_updatedNumVehicles", String.valueOf(updatedNumVehicles));
 
             Map<Integer, Integer> totalWaitMap = new TreeMap<>();
@@ -457,6 +461,18 @@ public class ExperimentRunner {
         System.out.println("numvehicles was increased to: " + numVehiclesUpdated);
 
         return numVehiclesUpdated;
+    }
+
+    /**
+     *
+     * @param graphType
+     * @return
+     */
+    private static int findNumVehiclesFromPreviousExperiment(String graphType) {
+        List<Properties> propertiesList = getPropertiesFromFolder("data/experimentProperties/chapter4.properties");
+        if (propertiesList.size() != 1) throw new RuntimeException("something is wrong w. findNumVehiclesFromPreviousExperiment");
+        Properties props = propertiesList.get(0);
+        return Integer.parseInt(props.getProperty("TOTAL_" + graphType + "_updatedNumVehicles"));
     }
 
     /**
