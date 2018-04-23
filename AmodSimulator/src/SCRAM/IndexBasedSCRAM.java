@@ -44,7 +44,7 @@ public class IndexBasedSCRAM {
     public IndexBasedSCRAM(List<Node> vehicles, List<Node> requests, int timeStep) {
         // corner-case in which there are neither vehicles nor requests - which would lead to a very rare index-out-of-bounds
         if (vehicles.isEmpty() && requests.isEmpty()) {
-            System.out.println("BOTH LISTS WERE EMPTY!!!");
+            // System.out.println("BOTH LISTS WERE EMPTY!!!");
             assignments = new ArrayList<Edge>();
             return;
         }

@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import static AmodSimulator.ExtensionType.EXTENSION1;
 import static AmodSimulator.ExtensionType.EXTENSION1PLUS2;
+import static AmodSimulator.ExtensionType.EXTENSION2;
 
 public class Vehicle implements SCRAM.Node {
     private String id;
@@ -185,12 +186,22 @@ public class Vehicle implements SCRAM.Node {
     public int getDistance(Node node, int timeStep) {
         if (node instanceof Request) {
             int distanceUntilVacant = 0;
+            double discountFactor = 1.0;
+
             if (AmodSimulator.extensionType == EXTENSION1 || AmodSimulator.extensionType == EXTENSION1PLUS2) {
                 if (timeStep < vacantTime) {
                     distanceUntilVacant = getDistanceUntilVacant(timeStep);
                 }
             }
-            return distanceUntilVacant + (int) location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
+            else if (AmodSimulator.extensionType == EXTENSION2) {
+                int numTicks = ((Request) node).getTicksWaitingToBeAssigned();
+                discountFactor = discountFactor - (numTicks * 0.15); //
+            }
+            int withoutDistount = distanceUntilVacant + (int) location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
+            int withDiscount = (int) Math.round(discountFactor * (double) withoutDistount);
+
+            return withDiscount;
+            // return distanceUntilVacant + (int) location.getAttribute("distTo" + ((Request) node).getOrigin().getId());
         }
         if (node instanceof DummyNode) return 0;
         try {

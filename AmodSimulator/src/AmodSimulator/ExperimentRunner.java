@@ -99,6 +99,7 @@ public class ExperimentRunner {
                     if (visual) sleep(50);
                 }
 
+                // todo: maybe do this when a lot of requests have been cancelled
 //                simulator.drawSpritesDebug(graph);
 //                graph.display();
 //                try {
@@ -462,7 +463,7 @@ public class ExperimentRunner {
             // if there were cancelled requests, we increase the number and start over again w. the first graph type
             if (simulator.getCancelledRequests().size() != 0) {
                 System.out.println(simulator.getCancelledRequests().size() + " requests were cancelled");
-                numVehiclesUpdated += 5;
+                numVehiclesUpdated += 2;
                 System.out.println("numvehicles updated to: " + numVehiclesUpdated);
                 continue; // we start over again if there was not sufficient vehicles
             }

@@ -127,7 +127,7 @@ public class AmodSimulator {
                 tickExt1(graph, timeStep);
                 break;
             case EXTENSION2:
-                tickExt2(graph, timeStep);
+                tickBasic(graph, timeStep); // todo: does ext2 even need its own tick?
                 break;
             case EXTENSION1PLUS2:
                 tickExt1Plus2(graph, timeStep);
@@ -243,6 +243,16 @@ public class AmodSimulator {
 
     /**
      *
+     * @param graph
+     * @param timeStep
+     */
+    private void tickExt2(Graph graph, int timeStep) {
+        throw new RuntimeException("tickExt2() method not implemented yet!");
+
+    }
+
+    /**
+     *
      * @param timeStep
      */
     private void trackRequestsWaiting(int timeStep) {
@@ -255,15 +265,6 @@ public class AmodSimulator {
                 cancelledRequests.add(r);
             }
         }
-    }
-
-    /**
-     *
-     * @param graph
-     * @param timeStep
-     */
-    private void tickExt2(Graph graph, int timeStep) {
-        throw new RuntimeException("tickExt2() method not implemented yet!");
     }
 
     /**

@@ -283,6 +283,18 @@ public class Utility {
         updateWaitingTimePercentagePlots(props, graphTypes);
         updateAvgUnoccupiedPlot(props, graphTypes);
         updateWaitVariancePlot(props, graphTypes);
+        updateNumVehicles(props, graphTypes);
+    }
+
+    private static void updateNumVehicles(Properties props, String[] graphTypes) {
+        for (String graphType : graphTypes) {
+            int numVehicles = Integer.parseInt(props.getProperty("TOTAL_" + graphType + "_updatedNumVehicles"));
+            StringBuilder s = new StringBuilder();
+            s.append(numVehicles);
+            String chapter = props.getProperty("figuresFolder");
+            String path = chapter + "/" + graphType + "updatedNumVehicles";
+            writeToFile(path, s);
+        }
     }
 
     /**
@@ -318,7 +330,7 @@ public class Utility {
 
         String chapter = props.getProperty("figuresFolder");
         String path = chapter + "/" + "AvgWaitVariance.tex";
-        writePlotToFile(props, path, s);
+        writeToFile(path, s);
     }
 
     /**
@@ -362,7 +374,7 @@ public class Utility {
 
         String chapter = props.getProperty("figuresFolder");
         String path = chapter + "/AvgUnoccupied.tex"; // todo: change name to percentage?
-        writePlotToFile(props, path, s);
+        writeToFile(path, s);
     }
 
     private static void updateWaitingTimePlots(Properties props, String[] graphTypes) {
@@ -405,7 +417,7 @@ public class Utility {
 
             String chapter = props.getProperty("figuresFolder");
             String path = chapter + "/" + graphType + "WaitingTimes.tex";
-            writePlotToFile(props, path, s);
+            writeToFile(path, s);
         }
     }
 
@@ -448,17 +460,16 @@ public class Utility {
 
             String chapter = props.getProperty("figuresFolder");
             String path = chapter + "/" + graphType + "WaitingTimesPercentage.tex";
-            writePlotToFile(props, path, s);
+            writeToFile(path, s);
         }
     }
 
     /**
      *
-     * @param props
      * @param path
      * @param s
      */
-    private static void writePlotToFile(Properties props, String path, StringBuilder s) {
+    private static void writeToFile(String path, StringBuilder s) {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
