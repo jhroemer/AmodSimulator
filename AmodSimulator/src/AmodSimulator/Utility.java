@@ -312,8 +312,8 @@ public class Utility {
                 "    symbolic x coords={Grid,Incomplete Grid,Bananatree,Lobster},\n" +
                 "    xtick=data,\n" +
                 "    x tick label style={rotate=45,anchor=east},\n" +
-                "    %nodes near coords,\n" +
-                "    %nodes near coords align={vertical}\n" +
+                "    nodes near coords,\n" +
+                "    nodes near coords align={vertical}\n" +
                 "    ]\n" +
                 "\\addplot [fill=blue] coordinates {");
 
