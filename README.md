@@ -15,8 +15,6 @@ We use JUnit for testing. The tests can be found in AmodSimulator/tests and can 
 * **Astrid Neumann** - *Initial work* - [Linkedin](https://www.linkedin.com/in/astrid-neumann-46693224/)
 * **Jens Rømer** - *Initial work* - [Linkedin](...)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
